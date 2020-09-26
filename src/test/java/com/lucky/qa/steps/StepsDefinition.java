@@ -12,8 +12,7 @@ import org.openqa.selenium.WebDriver;
 
 public class StepsDefinition {
 
-
-    protected WebDriver driver = Hook.getDriver();
+    public WebDriver driver = Hook.setupClass();
 
     @Given("open browser")
     public void openBrowser() throws Exception {
@@ -45,6 +44,6 @@ public class StepsDefinition {
 
     @Then("verify the login")
     public void verifyTheLogin() throws Exception {
-        //PageGenerator.getInstance(HomePage.class,driver).
+        PageGenerator.getInstance(HomePage.class,driver).appearSucces();
     }
 }

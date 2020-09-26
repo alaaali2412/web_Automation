@@ -1,9 +1,12 @@
 package com.lucky.qa.pages;
 
 import com.lucky.qa.commons.BasePage;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -38,6 +41,9 @@ public class LoginPage extends BasePage {
     @FindBy(className = "py-3")
     private WebElement  buttonLogin;
 
+    @FindBy(className = "modal-open")
+    private WebElement  modal;
+
 
     public void clickOnGoogleLogin(){
      listItems.get(0).click();
@@ -53,14 +59,21 @@ public class LoginPage extends BasePage {
     }
 
     public void closePopUpRegister() {
-        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+        waitToAppearPopUp();
         driver.findElement(className("close")).click();
     }
 
     public void login() {
+        WebElement element = (new WebDriverWait(driver, 15))
+                .until(ExpectedConditions.elementToBeClickable(inputEmail));
         writeText(inputEmail, "qa@thelucky.app");
         writeText(inputPassword, "Qa1234567&");
         click(buttonLogin);
+    }
+
+    public void waitToAppearPopUp() {
+        WebElement element = (new WebDriverWait(driver, 20))
+                .until(ExpectedConditions.elementToBeClickable(modal));
     }
 
 
