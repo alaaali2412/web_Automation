@@ -6,15 +6,22 @@
     import org.openqa.selenium.WebElement;
     import org.openqa.selenium.support.FindBy;
     import org.openqa.selenium.support.PageFactory;
+    import org.testng.Assert;
 
     import static org.openqa.selenium.By.className;
 
 
     public class HomePage extends BasePage {
 
+        private String baseURL = "https://wcb.staging.thelucky.io/Home";
 
         @FindBy(className = "react-toast-notifications")
         private WebElement  toastSuccesMessage;
+
+        @FindBy(xpath = "//*[@id=\"responsive-navbar-nav\"]/div/div[4]/a")
+
+
+        private WebElement inStoreOffers;
 
         public HomePage(WebDriver driver) {
             super(driver);
@@ -22,11 +29,7 @@
         }
 
         public HomePage goToThePage() {
-                  try {
-                      driver.get("https://wcb.staging.thelucky.io/Home");
-                  } catch (Exception e) {
-                      e.printStackTrace();
-                  }
+                  driver.get(baseURL);
                   return this;
               }
 
@@ -38,14 +41,14 @@
             driver.findElement(className("dropdown-item")).click();
         }
 
-        public boolean appearSucces() {
-            try {
-                toastSuccesMessage.isDisplayed();
-                return true;
-            } catch(NoSuchElementException e) {
-                return false;
-            }
-
+        public void appearSuccess() {
+            Assert.assertTrue(toastSuccesMessage.isDisplayed());
+            System.out.println("Toast message success");
         }
+
+       public void clickInStoreOffers(){
+            click(inStoreOffers);
+       }
+
 
     }

@@ -7,12 +7,11 @@ import com.lucky.qa.pages.PageGenerator;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.openqa.selenium.WebDriver;
-
+import org.openqa.selenium.*;
 
 public class StepsDefinition {
 
-    public WebDriver driver = Hook.setupClass();
+    public WebDriver driver = Hook.getDriver();
 
     @Given("open browser")
     public void openBrowser() throws Exception {
@@ -36,14 +35,15 @@ public class StepsDefinition {
         PageGenerator.getInstance(LoginPage.class, driver).setEmail();
     }
 
-    @When("login with email registered")
-    public void loginWithEmailRegistered() throws Exception {
-        PageGenerator.getInstance(LoginPage.class,driver).login();
+    @When("login with {string} and {string} registered")
+    public void loginWithEmailRegistered(String email, String password ) throws Exception {
+        PageGenerator.getInstance(LoginPage.class,driver).login(email,password);
 
     }
 
     @Then("verify the login")
     public void verifyTheLogin() throws Exception {
-        PageGenerator.getInstance(HomePage.class,driver).appearSucces();
+        PageGenerator.getInstance(HomePage.class,driver).appearSuccess();
     }
+
 }

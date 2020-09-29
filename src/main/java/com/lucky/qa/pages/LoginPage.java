@@ -63,11 +63,11 @@ public class LoginPage extends BasePage {
         driver.findElement(className("close")).click();
     }
 
-    public void login() {
+    public void login(String email, String password) {
         WebElement element = (new WebDriverWait(driver, 15))
                 .until(ExpectedConditions.elementToBeClickable(inputEmail));
-        writeText(inputEmail, "qa@thelucky.app");
-        writeText(inputPassword, "Qa1234567&");
+        writeText(inputEmail, email);
+        writeText(inputPassword, password);
         click(buttonLogin);
     }
 
