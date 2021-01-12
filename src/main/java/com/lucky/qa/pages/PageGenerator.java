@@ -8,13 +8,24 @@ import org.openqa.selenium.support.PageFactory;
 
 public class PageGenerator {
 
+    public static WebDriver driver;
+    //Constructor
+    public PageGenerator(WebDriver driver){
+        this.driver = driver;
 
-    public static  <TPage extends BasePage> TPage getInstance (Class<TPage> pageClass , WebDriver driver ) throws Exception {
+    }
+
+    public static <TPage extends BasePage> TPage getInstance(Class<TPage> pageClass,WebDriver driver) {
         try {
-            return PageFactory.initElements(driver,  pageClass);
+            return PageFactory.initElements(driver, pageClass);
         } catch (Exception e) {
             e.printStackTrace();
             throw e;
         }
     }
+
+
+
+
+
 }

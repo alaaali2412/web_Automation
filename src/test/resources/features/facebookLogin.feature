@@ -1,12 +1,12 @@
 @facebookLogin
+Feature: Login with user facebook account
 
-  Feature: first test
+  Scenario Outline: User try to login via facebook
+    Given browser open,navigate to portal URl
+    When close the pop up click login with facebook
+    And in the opened popup add facebook "<email>" and "<pass>", click login
+    Then verify that user login can login via facebook
 
-    Scenario: Enter home and change language
-      Given open browser
-      When I enter the home, I close the registration pop up
-      Then go to change language and select English
-      Then login with facebook
-
-
-
+    Examples:
+      | email           | pass   |
+      | zpvdsusnjohdgixdpe@gmail.com | AYla@2412 |

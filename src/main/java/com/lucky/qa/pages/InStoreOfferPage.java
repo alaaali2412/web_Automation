@@ -5,29 +5,38 @@ import com.lucky.qa.commons.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
+
+import java.util.List;
 
 public class InStoreOfferPage extends BasePage {
 
     @FindBy(className = "InstoreOffer")
-    WebElement card;
+    private WebElement card;
 
     @FindBy(className = "btn-primary")
-    WebElement  getOfferButton;
+    private WebElement  getOfferButton;
 
     @FindBy(className = "modal-content")
-    WebElement modalOffers;
+    private WebElement modalOffers;
+
+    @FindBy(xpath = "//*/div/div[2]/div/div[3]/div[1]")
+    private List <WebElement> inStoreItems;
+
+    @FindBy(xpath = "//div[2]/button")
+    private WebElement getOfferBtn;
 
     public InStoreOfferPage(WebDriver driver) {
         super(driver);
     }
 
     public void selectCard(){
-        click(card);
+        clickButton(card);
     }
 
     public void getOffer(){
-        click(getOfferButton);
+        clickButton(getOfferButton);
     }
 
     public void checkModalOffer(){
@@ -35,4 +44,11 @@ public class InStoreOfferPage extends BasePage {
         System.out.println("Modal appear");
     }
 
+    public void selectInStoreItem() throws InterruptedException {
+        for (WebElement item : inStoreItems){
+            Thread.sleep(3000);
+            clickButton(item);
+            break;
+        }
+    }
 }
