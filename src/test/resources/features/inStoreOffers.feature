@@ -1,19 +1,14 @@
 @inStoreOffers
+Feature: Get in store offers
 
-Feature: Enter to home and login
-
-   Scenario Outline: : Enter home and change language
-    Given open browser
-    When I enter the home, I close the registration pop up
-    When go to change language and select English
-    When login with "<email>" and "<password>" registered
-    And go to in store offers
-    And select one offer
-    And click in get offer
-    Then verify modal to download app appear
-
-  Examples:
-  |email           | password    |
-  |qa@thelucky.app | Qa1234567&  |
+  Scenario Outline: User try to get in store offers
+    Given browser open,open portal, user login "<email>" , "<pass>"
+    When click on instore offers
+    And select an offer and click it
+    And click get offer
+    Then popup displayed that userf should download lucky app
 
 
+    Examples:
+      | email           | pass   |
+      | zpvdsusnjohdgixdpe@gmail.com | AYla@2412 |

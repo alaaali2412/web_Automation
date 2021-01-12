@@ -4,17 +4,17 @@ import com.lucky.qa.commons.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
+import java.util.Set;
 
 import static org.openqa.selenium.By.className;
 
 public class LoginPage extends BasePage {
-
 
     public LoginPage(WebDriver driver) {
         super(driver);
@@ -32,19 +32,35 @@ public class LoginPage extends BasePage {
     @FindBy(id = "pass")
     private WebElement  inputPassWordFb;
 
+    @FindBy(xpath = "//*[@id=\"u_0_0\"]")
+    private WebElement  loginBtnFb;
+
+    @FindBy(xpath = "//*[@id=\"u_0_4\"]/div[2]/div[2]/div[1]/button")
+    private WebElement  continueBtnFb;
+
     @FindBy(id = "formEmail")
     private WebElement  inputEmail;
 
     @FindBy(id = "formPassword")
     private WebElement  inputPassword;
 
-    @FindBy(className = "py-3")
-    private WebElement  buttonLogin;
+    @FindBy(xpath = "//div[3]/button")
+    private WebElement loginBtn;
+
+    @FindBy(id = "identifierId")
+    private WebElement googleEmail;
+
+    @FindBy(id = "password")
+    private WebElement googlePassword;
+
+    @FindBy(id = "identifierNext")
+    private WebElement nextGoogleBtn;
 
     @FindBy(className = "modal-open")
     private WebElement  modal;
 
-
+    @FindBy(id = "passwordNext")
+    private WebElement nextGoogleBtn2;
     public void clickOnGoogleLogin(){
      listItems.get(0).click();
     }
@@ -53,22 +69,70 @@ public class LoginPage extends BasePage {
         listItems.get(1).click();
     }
 
-    public void setEmail(){
-       writeText(inputEmailFb, "qa@thelucky.app");
-       writeText(inputPassWordFb,"Qa1234567");
-    }
+
 
     public void closePopUpRegister() {
         waitToAppearPopUp();
         driver.findElement(className("close")).click();
     }
 
-    public void login(String email, String password) {
-        WebElement element = (new WebDriverWait(driver, 15))
-                .until(ExpectedConditions.elementToBeClickable(inputEmail));
-        writeText(inputEmail, email);
-        writeText(inputPassword, password);
-        click(buttonLogin);
+    public String login(String email, String password) throws InterruptedException {
+       // WebElement element = (new WebDriverWait(driver, 15)).until(ExpectedConditions.elementToBeClickable(inputEmail));
+        clearField(inputEmail);
+        addText(inputEmail, email);
+        clearField(inputPassword);
+        addText(inputPassword, password);
+        clickButton(loginBtn);
+        Thread.sleep(5000);
+        return email;
+    }
+
+
+    public void loginFB(String email, String password) throws InterruptedException {
+
+        String parentWindow = driver.getWindowHandle();
+        Set<String> allWindow = driver.getWindowHandles();
+        for(String child:allWindow)
+        {
+            if(!parentWindow.equalsIgnoreCase(child))
+            {
+                driver.switchTo().window(child);
+                clearField(inputEmailFb);
+                addText(inputEmailFb, email);
+                clearField(inputPassWordFb);
+                addText(inputPassWordFb, password);
+                clickButton(loginBtnFb);
+                clickButton(continueBtnFb);
+                Thread.sleep(12000);
+            }
+        }
+        driver.switchTo().window(parentWindow);
+
+
+    }
+
+    public void loginGoogle(String email, String password) throws InterruptedException {
+        actions = new Actions(driver);
+        String parentWindow = driver.getWindowHandle();
+        Set<String> allWindow = driver.getWindowHandles();
+        for(String child : allWindow)
+        {
+            if(!parentWindow.equalsIgnoreCase(child))
+            {
+                driver.switchTo().window(child);
+                actions.moveToElement(googleEmail).sendKeys(email).build().perform();
+                clickButton(nextGoogleBtn);
+                waitVisibilityOfElement(20,googlePassword);
+                actions.moveToElement(googlePassword).sendKeys(password).build().perform();
+                clickButton(nextGoogleBtn2);
+                Thread.sleep(120000);
+            }
+        }
+        driver.switchTo().window(parentWindow);
+
+
+
+
     }
 
     public void waitToAppearPopUp() {
@@ -76,6 +140,9 @@ public class LoginPage extends BasePage {
                 .until(ExpectedConditions.elementToBeClickable(modal));
     }
 
-
+    public void ClickLoginBtn() throws InterruptedException {
+        clickButton(loginBtn);
+        Thread.sleep(3000);
+}
 
 }

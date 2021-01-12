@@ -1,17 +1,15 @@
 @emailLogin
+  Feature: Login with Email, password
 
-  Feature: Enter to home and login
-
-    Scenario Outline: Enter home and change language
-      Given open browser
-      When I enter the home, I close the registration pop up
-      When go to change language and select English
-      When login with "<email>" and "<password>" registered
+    Scenario Outline: User try to login via Emial,Password
+      Given browser open,navigate to portal
+      When close the pop up click on login button
+      And login with valid "<email>" and "<pass>"
       Then verify the login
 
       Examples:
-        | email           | password   |
-        | qa@thelucky.app | Qa1234567& |
+      | email           | pass   |
+      | zpvdsusnjohdgixdpe@gmail.com | AYla@2412 |
 
 
 
