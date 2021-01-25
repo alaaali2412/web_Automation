@@ -5,10 +5,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import static org.openqa.selenium.By.className;
 import static org.openqa.selenium.By.xpath;
@@ -51,8 +53,13 @@ public class HomePage extends BasePage {
     private WebElement loggedInEmail;
 
     @FindBy(xpath = "//*[@id='basic-nav-dropdown'][text()='Online Cashbacks']")
+    private WebElement onlineCashbackBtn;
+
+    @FindBy(xpath = "//nav/div/div[1]/div/div/a")
     private List<WebElement> onlineCashbackList;
 
+    @FindBy(className = "//header/div[1]/nav//div/span")
+    private WebElement logoBtn;
 
     public void dropDownLanguage() {
         driver.findElement(className("dropdown-toggle")).click();
@@ -68,55 +75,57 @@ public class HomePage extends BasePage {
     }
 
 
-
-    public boolean checkIfPortalOPens() {
-        if (driver.findElement(xpath("/html/body/div[4]/div/div/div")).isDisplayed()){
-            return true;
-        }
-       else return false ;
-
-    }
-
-    public void closePopUp()  {
+    public void closePopUp() {
         clickButton(closeBtn);
 
     }
-    public void clickSignInBtn() throws InterruptedException {
+
+    public void clickSignInBtn()  {
         clickButton(signInBtn);
-        Thread.sleep(5000);
+
     }
 
-    public boolean checkIfUserLggedIn(){
-      Boolean login = isElementPresent(By.xpath ("//div/header/div[1]/nav/div/div[7]/a")  );
-      return login;
+    public boolean checkIfUserLggedIn() {
+        return isElementPresent(By.xpath("//div/header/div[1]/nav/div/div[7]/a"));
     }
 
 
-    public void facebookLogin()  {
+    public void facebookLogin() {
         clickButton(FacebookBtn);
     }
 
-    public void clkInStoreBtn()   {
+    public void clkInStoreBtn() {
         waitVisibilityOfElement(20, inStoreBtn);
         clickButton(inStoreBtn);
     }
 
-    public void googleLogin()   {
+    public void googleLogin() {
         clickButton(GoogleBtn);
     }
 
-    public String checkUserLogin(){
-        waitUntilPageLoaded(30);
+    public void openProfilePage() {
+        waitForElements(30);
         clickButton(profileDropdown);
         clickButton(profileBtn);
-        return loggedInEmail.getAttribute("value");
-
     }
 
-    public void clickOnlinCashback(){
-       for ( WebElement category : onlineCashbackList){
-           System.out.println(category.getText());
-       }
-
+    public void clickLogoButton() {
+        clickButton(logoBtn);
     }
+
+    public String clickOnlinCashback(String categorySelected) throws InterruptedException {
+      Thread.sleep(2000);
+        clickButton(onlineCashbackBtn);
+        for (WebElement category : onlineCashbackList) {
+            if (category.getText().equals(categorySelected)) {
+                clickButton(category);
+                break;
+            }
+
+
+        }
+
+        return categorySelected;
+    }
+
 }
