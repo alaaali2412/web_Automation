@@ -30,17 +30,19 @@ public class OnlineCashbacksPage extends BasePage {
         waitVisibilityOfElement(20, onlineCashbackTitle);
         for (WebElement category : filterList) {
             WebElement selectedCheckbox = category.findElement(By.tagName("input"));
-            Assert.assertTrue(selectedCheckbox.isSelected());
-            Assert.assertEquals(category.getText(),selected);
+            if (selectedCheckbox.isSelected() == true) {
+                Assert.assertEquals(category.getText(), selected);
 
+            }
 
+            break;
         }
 
     }
 
-    public int getMerchantFilteredList() {
+    public int getMerchantFilteredList() throws InterruptedException {
         scrollToEndOfScreen();
-        waitForElements(10);
+        Thread.sleep(1000);
         List<WebElement> merchnatCount = new ArrayList<>();
         for (WebElement merchant : merchants) {
             merchnatCount.add(merchant);

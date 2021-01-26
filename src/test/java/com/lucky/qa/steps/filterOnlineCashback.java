@@ -40,9 +40,9 @@ public class filterOnlineCashback {
     }
 
     @Then("verify that user can filter")
-    public void verify_that_user_can_filter()  {
+    public void verify_that_user_can_filter() throws InterruptedException {
         int numberOfMerchant = PageGenerator.getInstance(OnlineCashbacksPage.class, driver).getMerchantFilteredList();
-        Assert.assertEquals(numberOfMerchant, numberOfMerchant);
+        Assert.assertEquals(numberOfMerchant, APIresult);
 
     }
 
