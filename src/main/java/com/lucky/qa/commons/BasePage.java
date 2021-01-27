@@ -9,15 +9,15 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.concurrent.TimeUnit;
+
 public class BasePage extends PageGenerator {
 
     protected WebDriverWait wait;
     public Actions actions;
 
 
-
-    public BasePage(WebDriver driver)
-    {
+    public BasePage(WebDriver driver) {
         super(driver);
 
         PageFactory.initElements(driver, this);
@@ -31,6 +31,7 @@ public class BasePage extends PageGenerator {
     protected void addText(WebElement element, String word) {
         element.sendKeys(word);
     }
+
     protected static void clearField(WebElement button) {
         button.clear();
     }
@@ -41,28 +42,27 @@ public class BasePage extends PageGenerator {
         return null;
     }
 
-    protected boolean isElementPresent(By by){
-        try{
+    protected boolean isElementPresent(By by) {
+        try {
             driver.findElement(by);
             return true;
-        }
-        catch(NoSuchElementException e){
+        } catch (NoSuchElementException e) {
             return false;
         }
     }
-    protected void waitVisibilityOfElement (int seconds, WebElement element){
-        wait = new WebDriverWait(driver,seconds);
-        wait.until(ExpectedConditions.visibilityOf(element));
-}
 
-public void waitUntilPageLoaded(int seconds){
-    wait = new WebDriverWait(driver, 30);
-    wait.until(new ExpectedCondition<Boolean>() {
-        public Boolean apply(WebDriver wdriver) {
-            return ((JavascriptExecutor) driver).executeScript(
-                    "return document.readyState"
-            ).equals("complete");
-        }
-    });
-}
+    protected void waitVisibilityOfElement(int seconds, WebElement element) {
+        wait = new WebDriverWait(driver, seconds);
+        wait.until(ExpectedConditions.visibilityOf(element));
+    }
+
+
+    public void waitForElements(int TimeOut) {
+
+        driver.manage().timeouts().implicitlyWait(TimeOut, TimeUnit.SECONDS);
+    }
+
+    public void scrollToEndOfScreen() {
+        ((JavascriptExecutor) driver).executeScript("window.scrollTo(0, document.body.scrollHeight)");
+    }
 }

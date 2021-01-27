@@ -1,4 +1,4 @@
-package utilities;
+package com.lucky.qa.utilities;
 
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;

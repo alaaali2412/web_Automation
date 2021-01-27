@@ -35,7 +35,7 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//*[@id=\"u_0_0\"]")
     private WebElement  loginBtnFb;
 
-    @FindBy(xpath = "//*[@id=\"u_0_4\"]/div[2]/div[2]/div[1]/button")
+    @FindBy(xpath = "//*[@id='buttons']")
     private WebElement  continueBtnFb;
 
     @FindBy(id = "formEmail")
@@ -77,13 +77,14 @@ public class LoginPage extends BasePage {
     }
 
     public String login(String email, String password) throws InterruptedException {
-       // WebElement element = (new WebDriverWait(driver, 15)).until(ExpectedConditions.elementToBeClickable(inputEmail));
+        waitVisibilityOfElement(20, loginBtn);
         clearField(inputEmail);
         addText(inputEmail, email);
         clearField(inputPassword);
         addText(inputPassword, password);
+        waitForElements(10);
         clickButton(loginBtn);
-        Thread.sleep(5000);
+        Thread.sleep(2000);
         return email;
     }
 
@@ -102,8 +103,7 @@ public class LoginPage extends BasePage {
                 clearField(inputPassWordFb);
                 addText(inputPassWordFb, password);
                 clickButton(loginBtnFb);
-                clickButton(continueBtnFb);
-                Thread.sleep(12000);
+                Thread.sleep(3000);
             }
         }
         driver.switchTo().window(parentWindow);
