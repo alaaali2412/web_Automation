@@ -8,7 +8,7 @@ Feature: perform Cashout Request By Bank Account
     And click request Cashout and choose Bank Account
     And add all the mandatory fields and click continue
     And user get that the Cashout done successfully
-    Then vrify that cashout amount deducted from user balance and cashback
+    Then verify that cashout amount deducted from user balance and cashback
 
     Examples:
       | email           | pass   |

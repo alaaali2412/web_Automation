@@ -32,7 +32,7 @@ public class performCashoutRequestByBankAccount {
 
     }
 
-    @Then("vrify that cashout amount deducted from user balance and cashback")
+    @Then("verify that cashout amount deducted from user balance and cashback")
     public void vrify_that_cashout_amount_deducted_from_user_balance_and_cashback() {
 
     }

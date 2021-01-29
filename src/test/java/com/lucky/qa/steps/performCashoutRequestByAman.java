@@ -19,10 +19,11 @@ public class performCashoutRequestByAman {
 
     }
 
-    @When("open tha wallet and make sure that he has more than {int} EGP in his cashback balance")
-    public void open_tha_wallet_and_make_sure_that_he_has_more_than_egp_in_his_cashback_balance(Integer int1) {
+    @When("in wallet page make sure cashback balance >= {int} EGP")
+    public void in_wallet_page_make_sure_cashback_balance_egp(Integer int1) {
 
     }
+
 
     @When("click request Cashout and choose Aman")
     public void click_request_cashout_and_choose_aman() {
@@ -39,7 +40,7 @@ public class performCashoutRequestByAman {
 
     }
 
-    @Then("vrify that cashout deducted from user balance and cashback")
+    @Then("verify that cashout deducted from user balance and cashback")
     public void vrify_that_cashout_deducted_from_user_balance_and_cashback() {
 
     }

@@ -99,7 +99,9 @@ public class HomePage extends BasePage {
         clickButton(inStoreBtn);
     }
 
-    public void googleLogin() {
+    public void googleLogin() throws InterruptedException {
+        waitVisibilityOfElement(20, GoogleBtn);
+        //Thread.sleep(3000);
         clickButton(GoogleBtn);
     }
 

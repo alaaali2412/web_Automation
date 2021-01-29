@@ -111,7 +111,7 @@ public class LoginPage extends BasePage {
 
     }
 
-    public void loginGoogle(String email, String password) throws InterruptedException {
+    public String loginGoogle(String email, String password) throws InterruptedException {
         actions = new Actions(driver);
         String parentWindow = driver.getWindowHandle();
         Set<String> allWindow = driver.getWindowHandles();
@@ -125,13 +125,11 @@ public class LoginPage extends BasePage {
                 waitVisibilityOfElement(20,googlePassword);
                 actions.moveToElement(googlePassword).sendKeys(password).build().perform();
                 clickButton(nextGoogleBtn2);
-                Thread.sleep(120000);
+                Thread.sleep(9000);
             }
         }
         driver.switchTo().window(parentWindow);
-
-
-
+        return email;
 
     }
 

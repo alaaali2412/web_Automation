@@ -26,7 +26,7 @@ public class OnlineCashbacksPage extends BasePage {
     @FindBy(xpath = "//div/div[2]/div/div[2]/div[1]/div")
     private List<WebElement> merchants;
 
-    public void checkOnlineCashbacksPageOpens(String selected) {
+    public void checkOnlineCashbackPageOpens(String selected) {
         waitVisibilityOfElement(20, onlineCashbackTitle);
         for (WebElement category : filterList) {
             WebElement selectedCheckbox = category.findElement(By.tagName("input"));
@@ -43,10 +43,10 @@ public class OnlineCashbacksPage extends BasePage {
     public int getMerchantFilteredList() throws InterruptedException {
         scrollToEndOfScreen();
         Thread.sleep(1000);
-        List<WebElement> merchnatCount = new ArrayList<>();
+        List<WebElement> merchantCount = new ArrayList<>();
         for (WebElement merchant : merchants) {
-            merchnatCount.add(merchant);
+            merchantCount.add(merchant);
         }
-        return merchnatCount.size();
+        return merchantCount.size();
     }
 }

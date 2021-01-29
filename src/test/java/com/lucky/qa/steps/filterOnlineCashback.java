@@ -33,7 +33,7 @@ public class filterOnlineCashback {
     public void user_click_online_cashback_and_select(String category) throws InterruptedException {
         implementMethodsObject = new ImplementMethods();
         categorySelected = PageGenerator.getInstance(HomePage.class, driver).clickOnlinCashback(category);
-        PageGenerator.getInstance(OnlineCashbacksPage.class, driver).checkOnlineCashbacksPageOpens(categorySelected);
+        PageGenerator.getInstance(OnlineCashbacksPage.class, driver).checkOnlineCashbackPageOpens(categorySelected);
          APIresult = implementMethodsObject.getAffiliateMerchantsByCategory(category);
 
 

@@ -8,4 +8,4 @@ Feature: filter In_store offers by it`s categories
 
     Examples:
       |mainCategory| mainSubCategory |subCategory|
-      | Food | Mexican ||
+      | Food | Fast Food |Pizza|
