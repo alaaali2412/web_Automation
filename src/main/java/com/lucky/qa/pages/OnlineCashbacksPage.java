@@ -1,7 +1,6 @@
 package com.lucky.qa.pages;
 
 import com.lucky.qa.commons.BasePage;
-import io.cucumber.java.sl.In;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,8 +8,8 @@ import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
+
 
 public class OnlineCashbacksPage extends BasePage {
     public OnlineCashbacksPage(WebDriver driver) {

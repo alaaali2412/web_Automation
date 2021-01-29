@@ -30,10 +30,6 @@ public class APIsActions {
         return null;
     }
 
-    public enum RequestType {
-        POST, GET, DELETE, PUT
-    }
-
 
     public RequestSpecBuilder initializeBuilder(String baseUri, ContentType contentType) {
         RequestSpecBuilder builder = new RequestSpecBuilder();
@@ -69,5 +65,9 @@ public class APIsActions {
         JsonPath path = response.jsonPath();
         return path.get(ValueToValidate);
 
+    }
+
+    public enum RequestType {
+        POST, GET, PATCH, DELETE, PUT
     }
 }
