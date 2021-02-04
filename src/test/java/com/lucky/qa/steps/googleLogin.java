@@ -25,7 +25,7 @@ public class googleLogin {
     }
 
     @When("in the opened popup add {string} and {string}, click login")
-    public void in_the_opened_popup_add_and_click_login(String gmail, String pass) {
+    public void in_the_opened_popup_add_and_click_login(String gmail, String pass) throws InterruptedException {
       loggedEmail =   PageGenerator.getInstance(LoginPage.class,driver).loginGoogle(gmail,pass);
 
     }

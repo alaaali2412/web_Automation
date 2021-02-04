@@ -79,7 +79,7 @@ public class LoginPage extends BasePage {
     }
 
 
-    public void loginFacebook(String email, String password)  {
+    public void loginFacebook(String email, String password) {
 
         String parentWindow = driver.getWindowHandle();
         Set<String> allWindow = driver.getWindowHandles();
@@ -99,7 +99,7 @@ public class LoginPage extends BasePage {
         waitVisibilityOfElement(signInBtn);
     }
 
-    public String loginGoogle(String email, String password) {
+    public String loginGoogle(String email, String password) throws InterruptedException {
         actions = new Actions(driver);
         String parentWindow = driver.getWindowHandle();
         Set<String> allWindow = driver.getWindowHandles();
@@ -111,10 +111,11 @@ public class LoginPage extends BasePage {
                 waitVisibilityOfElement(googlePassword);
                 actions.moveToElement(googlePassword).sendKeys(password).build().perform();
                 clickButton(nextGoogleBtn2);
-                driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
             }
         }
         driver.switchTo().window(parentWindow);
+        Thread.sleep(3000);
+        driver.navigate().refresh();
         return email;
 
     }

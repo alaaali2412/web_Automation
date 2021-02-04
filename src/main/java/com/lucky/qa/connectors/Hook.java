@@ -5,16 +5,15 @@ import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
-
-import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 
 public class Hook {
 
-    Helper helper = new Helper();
     public static WebDriver driver;
     private static String baseURL = "https://wcb.staging.thelucky.io/Home";
 
@@ -29,8 +28,11 @@ public class Hook {
     }
 
 
+
+
     @Before
     public static WebDriver startDriver()  {
+
         System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/Driver/chromedriver");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
