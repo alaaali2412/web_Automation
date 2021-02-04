@@ -10,3 +10,4 @@ Feature: filter Online Cashback offers by category
     Examples:
       | email           | pass   | category |
       | zpvdsusnjohdgixdpe@gmail.com | AYla@2412 | Beauty / Health / Cosmetics |
+      | zpvdsusnjohdgixdpe@gmail.com | AYla@2412 | Fashion |

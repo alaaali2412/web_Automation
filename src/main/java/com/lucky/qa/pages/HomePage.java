@@ -1,19 +1,11 @@
 package com.lucky.qa.pages;
 
-import com.lucky.qa.commons.BasePage;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
+import com.lucky.qa.base.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-import org.testng.Assert;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import static org.openqa.selenium.By.className;
-import static org.openqa.selenium.By.xpath;
 
 
 public class HomePage extends BasePage {
@@ -22,14 +14,6 @@ public class HomePage extends BasePage {
         super(driver);
     }
 
-    @FindBy(xpath = "/html/body/div[4]/div/div/div")
-    private WebElement popUp;
-
-    @FindBy(className = "react-toast-notifications")
-    private WebElement toastSuccesMessage;
-
-    @FindBy(xpath = "//div[6]/div/div/div/section[1]/button")
-    private WebElement closeBtn;
 
     @FindBy(xpath = "//div/header/div[1]/nav/div/div[7]/a")
     private WebElement signInBtn;
@@ -61,32 +45,15 @@ public class HomePage extends BasePage {
     @FindBy(className = "//header/div[1]/nav//div/span")
     private WebElement logoBtn;
 
-    public void dropDownLanguage() {
-        driver.findElement(className("dropdown-toggle")).click();
-    }
+    @FindBy(xpath = "//nav/div/div[3]/a")
+    private WebElement walletBtn;
 
-    public void selectItemLanguage() {
-        driver.findElement(className("dropdown-item")).click();
-    }
+    @FindBy(className = "wallet-body")
+    private WebElement transactionSection;
 
-    public void appearSuccess() {
-        Assert.assertTrue(toastSuccesMessage.isDisplayed());
-        System.out.println("Toast message success");
-    }
-
-
-    public void closePopUp() {
-        clickButton(closeBtn);
-
-    }
-
-    public void clickSignInBtn()  {
+    public void clickSignInBtn() {
         clickButton(signInBtn);
 
-    }
-
-    public boolean checkIfUserLggedIn() {
-        return isElementPresent(By.xpath("//div/header/div[1]/nav/div/div[7]/a"));
     }
 
 
@@ -95,39 +62,36 @@ public class HomePage extends BasePage {
     }
 
     public void clkInStoreBtn() {
-        waitVisibilityOfElement(20, inStoreBtn);
+        waitVisibilityOfElement(inStoreBtn);
         clickButton(inStoreBtn);
     }
 
-    public void googleLogin() throws InterruptedException {
-        waitVisibilityOfElement(20, GoogleBtn);
-        //Thread.sleep(3000);
+    public void googleLogin() {
+        waitVisibilityOfElement(GoogleBtn);
         clickButton(GoogleBtn);
     }
 
     public void openProfilePage() {
-        waitForElements(30);
+        waitVisibilityOfElement(profileDropdown);
         clickButton(profileDropdown);
         clickButton(profileBtn);
     }
 
-    public void clickLogoButton() {
-        clickButton(logoBtn);
-    }
-
-    public String clickOnlinCashback(String categorySelected) throws InterruptedException {
-      Thread.sleep(2000);
+    public String clickOnlineCashback(String categorySelected) {
         clickButton(onlineCashbackBtn);
         for (WebElement category : onlineCashbackList) {
-            if (category.getText().equals(categorySelected)) {
+            if (getText(category).equals(categorySelected)) {
                 clickButton(category);
                 break;
             }
-
-
         }
-
         return categorySelected;
     }
+
+    public void clickWallet() {
+        clickButton(walletBtn);
+        waitVisibilityOfElement(transactionSection);
+    }
+
 
 }

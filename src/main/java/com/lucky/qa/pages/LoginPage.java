@@ -1,17 +1,15 @@
 package com.lucky.qa.pages;
 
-import com.lucky.qa.commons.BasePage;
+import com.lucky.qa.base.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.*;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
-import static org.openqa.selenium.By.className;
 
 public class LoginPage extends BasePage {
 
@@ -26,22 +24,22 @@ public class LoginPage extends BasePage {
     private WebElement facebookButton;
 
     @FindBy(id = "email")
-    private WebElement  inputEmailFb;
+    private WebElement inputEmailFb;
 
     @FindBy(id = "pass")
-    private WebElement  inputPassWordFb;
+    private WebElement inputPasswordFb;
 
-    @FindBy(xpath = "//*[@id=\"u_0_0\"]")
-    private WebElement  loginBtnFb;
+    @FindBy(xpath = "//*[@id='u_0_0']")
+    private WebElement loginBtnFb;
 
     @FindBy(xpath = "//*[@id='buttons']")
-    private WebElement  continueBtnFb;
+    private WebElement continueBtnFb;
 
     @FindBy(id = "formEmail")
-    private WebElement  inputEmail;
+    private WebElement inputEmail;
 
     @FindBy(id = "formPassword")
-    private WebElement  inputPassword;
+    private WebElement inputPassword;
 
     @FindBy(xpath = "//div[3]/button")
     private WebElement loginBtn;
@@ -56,75 +54,64 @@ public class LoginPage extends BasePage {
     private WebElement nextGoogleBtn;
 
     @FindBy(className = "modal-open")
-    private WebElement  modal;
+    private WebElement modal;
 
     @FindBy(id = "passwordNext")
     private WebElement nextGoogleBtn2;
-    public void clickOnGoogleLogin(){
-     listItems.get(0).click();
-    }
 
-    public void clickOnFacebookLogin(){
-        listItems.get(1).click();
-    }
+    @FindBy(className = "carousel-inner")
+    private WebElement homeBanner;
 
+    @FindBy(xpath = "//div/header/div[1]/nav/div/div[7]/a")
+    private WebElement signInBtn;
 
 
-    public void closePopUpRegister() {
-        waitToAppearPopUp();
-        driver.findElement(className("close")).click();
-    }
-
-    public String login(String email, String password) throws InterruptedException {
-        waitVisibilityOfElement(20, loginBtn);
+    public String login(String email, String password) {
+        waitVisibilityOfElement(inputPassword);
         clearField(inputEmail);
         addText(inputEmail, email);
         clearField(inputPassword);
         addText(inputPassword, password);
-        waitForElements(10);
         clickButton(loginBtn);
-        Thread.sleep(2000);
+        waitVisibilityOfElement(homeBanner);
+        driver.navigate().refresh();
         return email;
     }
 
 
-    public void loginFB(String email, String password) throws InterruptedException {
+    public void loginFacebook(String email, String password)  {
 
         String parentWindow = driver.getWindowHandle();
         Set<String> allWindow = driver.getWindowHandles();
-        for(String child:allWindow)
-        {
-            if(!parentWindow.equalsIgnoreCase(child))
-            {
+        for (String child : allWindow) {
+            if (!parentWindow.equalsIgnoreCase(child)) {
                 driver.switchTo().window(child);
                 clearField(inputEmailFb);
                 addText(inputEmailFb, email);
-                clearField(inputPassWordFb);
-                addText(inputPassWordFb, password);
+                clearField(inputPasswordFb);
+                addText(inputPasswordFb, password);
+                waitVisibilityOfElement(loginBtn);
                 clickButton(loginBtnFb);
-                Thread.sleep(3000);
+
             }
         }
         driver.switchTo().window(parentWindow);
-
-
+        waitVisibilityOfElement(signInBtn);
     }
 
-    public String loginGoogle(String email, String password) throws InterruptedException {
+    public String loginGoogle(String email, String password) {
         actions = new Actions(driver);
         String parentWindow = driver.getWindowHandle();
         Set<String> allWindow = driver.getWindowHandles();
-        for(String child : allWindow)
-        {
-            if(!parentWindow.equalsIgnoreCase(child))
-            {
+        for (String child : allWindow) {
+            if (!parentWindow.equalsIgnoreCase(child)) {
                 driver.switchTo().window(child);
                 actions.moveToElement(googleEmail).sendKeys(email).build().perform();
                 clickButton(nextGoogleBtn);
-                waitVisibilityOfElement(20,googlePassword);
+                waitVisibilityOfElement(googlePassword);
                 actions.moveToElement(googlePassword).sendKeys(password).build().perform();
                 clickButton(nextGoogleBtn2);
-                Thread.sleep(9000);
+                driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
             }
         }
         driver.switchTo().window(parentWindow);
@@ -132,14 +119,5 @@ public class LoginPage extends BasePage {
 
     }
 
-    public void waitToAppearPopUp() {
-        WebElement element = (new WebDriverWait(driver, 20))
-                .until(ExpectedConditions.elementToBeClickable(modal));
-    }
-
-    public void ClickLoginBtn() throws InterruptedException {
-        clickButton(loginBtn);
-        Thread.sleep(3000);
-}
 
 }

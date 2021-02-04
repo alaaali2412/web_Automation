@@ -13,7 +13,7 @@ public class getinStoreOffers {
 
 
     @Given("browser open,open portal, user login {string} , {string}")
-    public void browser_open_open_portal_user_login(String email, String password) throws InterruptedException {
+    public void browser_open_open_portal_user_login(String email, String password) {
         PageGenerator.getInstance(HomePage.class,driver).clickSignInBtn();
         PageGenerator.getInstance(LoginPage.class, driver).login(email,password);
     }
@@ -34,13 +34,13 @@ public class getinStoreOffers {
 
     @When("click get offer")
     public void click_get_offer() {
-        PageGenerator.getInstance(OfferDetialsPage.class,driver).clickGetOffer();
+        PageGenerator.getInstance(OfferDetailsPage.class,driver).clickGetOffer();
 
     }
 
     @Then("popup displayed that userf should download lucky app")
     public void popup_displayed_that_userf_should_download_lucky_app() {
-        PageGenerator.getInstance(OfferDetialsPage.class,driver).clsoePopUP();
+        PageGenerator.getInstance(OfferDetailsPage.class,driver).closePopUP();
 
     }
 

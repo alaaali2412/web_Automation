@@ -1,48 +1,59 @@
 package com.lucky.qa.steps;
 
 import com.lucky.qa.connectors.Hook;
+import com.lucky.qa.pages.HomePage;
+import com.lucky.qa.pages.LoginPage;
+import com.lucky.qa.pages.PageGenerator;
+import com.lucky.qa.pages.WalletPage;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 
 public class performCashoutRequestByAman {
     WebDriver driver = Hook.getDriver();
+    Double CashoutAmount;
+    Double balance;
 
-    @Given("browser, portal open")
-    public void browser_portal_open() {
-
-    }
-
-    @When("user login {string} and {string}")
-    public void user_login_and(String string, String string2) {
-
-    }
-
-    @When("in wallet page make sure cashback balance >= {int} EGP")
-    public void in_wallet_page_make_sure_cashback_balance_egp(Integer int1) {
+    @Given("portal is opend and user loged in {string}, {string}")
+    public void portalIsOpendAndUserLogedIn(String email, String pass) {
+        PageGenerator.getInstance(HomePage.class, driver).clickSignInBtn();
+        PageGenerator.getInstance(LoginPage.class, driver).login(email, pass);
 
     }
 
+    @When("wallet page opens")
+    public void walletPageOpens() throws InterruptedException {
+        PageGenerator.getInstance(HomePage.class, driver).clickWallet();
+        balance = PageGenerator.getInstance(WalletPage.class, driver).getUserTotalBalance();
+    }
 
-    @When("click request Cashout and choose Aman")
-    public void click_request_cashout_and_choose_aman() {
+    @When("if cashabck >= {double} EGP click cashback request else print not enough balance")
+    public void if_cashabck_egp_click_cashback_request_else_print_not_enough_balance(Double amount) {
+        PageGenerator.getInstance(WalletPage.class, driver).getUserCashbackBalance(amount);
 
     }
 
-    @When("add the amount and click continue")
-    public void add_the_amount_and_click_continue() {
+    @And("click aman add an {string} click continue")
+    public void clickAmanAddAnClickContinue(String cashoutAmount) {
 
+        PageGenerator.getInstance(WalletPage.class, driver).clickAman();
+        CashoutAmount = PageGenerator.getInstance(WalletPage.class, driver).addAmountToCashoutByAman(cashoutAmount);
+        PageGenerator.getInstance(WalletPage.class, driver).clickContinueBtn();
     }
 
-    @When("user get that Cashout successful")
-    public void user_get_that_cashout_successful() {
-
+    @And("user gets that the Cashout done successfully")
+    public void userGetsThatTheCashoutDoneSuccessfully() {
+        PageGenerator.getInstance(WalletPage.class, driver).checkCashoutSuccessMessage();
     }
 
-    @Then("verify that cashout deducted from user balance and cashback")
-    public void vrify_that_cashout_deducted_from_user_balance_and_cashback() {
+    @Then("verify that cashout amount deducted from balance and cashback")
+    public void verifyThatCashoutAmountDeductedFromBalanceAndCashback() throws InterruptedException {
+        PageGenerator.getInstance(HomePage.class, driver).clickWallet();
+        Double balanceAfter = balance - CashoutAmount;
+        Assert.assertEquals(balanceAfter, PageGenerator.getInstance(WalletPage.class, driver).getUserTotalBalance());
 
     }
-
 }

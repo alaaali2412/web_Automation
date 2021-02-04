@@ -5,6 +5,7 @@ import com.lucky.qa.pages.LoginPage;
 import com.lucky.qa.pages.PageGenerator;
 import com.lucky.qa.connectors.Hook;
 import com.lucky.qa.pages.ProfilePage;
+import com.lucky.qa.utilities.Helper;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -16,9 +17,9 @@ public class emailLogin {
     WebDriver driver = Hook.getDriver();
     public String loggedEmail;
 
+
     @Given("browser open,navigate to portal")
     public void browser_open_navigate_to_portal() {
-
     }
 
     @When("close the pop up click on login button")
@@ -28,7 +29,7 @@ public class emailLogin {
     }
 
     @When("login with valid {string} and {string}")
-    public void login_with_valid_and(String email, String password) throws Exception {
+    public void login_with_valid_and(String email, String password) {
         loggedEmail = PageGenerator.getInstance(LoginPage.class, driver).login(email, password);
 
     }
