@@ -9,6 +9,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
+
 import java.util.concurrent.TimeUnit;
 
 
@@ -28,10 +29,8 @@ public class Hook {
     }
 
 
-
-
     @Before
-    public static WebDriver startDriver()  {
+    public static WebDriver startDriver() {
 
         System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/Driver/chromedriver");
         driver = new ChromeDriver();

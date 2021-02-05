@@ -114,7 +114,7 @@ public class LoginPage extends BasePage {
             }
         }
         driver.switchTo().window(parentWindow);
-        Thread.sleep(3000);
+        Thread.sleep(5000);
         driver.navigate().refresh();
         return email;
 
