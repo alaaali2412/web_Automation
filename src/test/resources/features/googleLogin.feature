@@ -10,4 +10,4 @@
 
       Examples:
         | gmail           | pass   |
-        | QATestlucky2021@gmail.com | LUcky@2123 |
+        | qatestlucky2021@gmail.com | LUcky@2123 |

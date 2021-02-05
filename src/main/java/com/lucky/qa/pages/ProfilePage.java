@@ -1,6 +1,6 @@
 package com.lucky.qa.pages;
 
-import com.lucky.qa.commons.BasePage;
+import com.lucky.qa.base.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;

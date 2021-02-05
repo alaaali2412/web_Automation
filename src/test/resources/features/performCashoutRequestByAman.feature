@@ -1,15 +1,14 @@
 @performCashoutRequestByAman
-Feature: perform Cashout Request By Aman
+Feature: perfoem cahback out request by Aman
 
-  Scenario Outline: the logged in user should be able to Cashout his cashback if it more than 100 EGP
-    Given browser, portal open
-    When user login "<email>" and "<pass>"
-    And open tha wallet and make sure that he has more than 100 EGP in his cashback balance
-    And click request Cashout and choose Aman
-    And add the amount and click continue
-    And user get that Cashout successful
-    Then vrify that cashout deducted from user balance and cashback
+  Scenario Outline: loggedin user should be able to Cashout if cashback > 100 EGP
+    Given portal is opend and user loged in "<email>", "<pass>"
+    When wallet page opens
+    When if cashabck >= 100.00 EGP click cashback request else print not enough balance
+    And click aman add an "<cashoutAmount>" click continue
+    And user gets that the Cashout done successfully
+    Then verify that cashout amount deducted from balance and cashback
 
     Examples:
-      | email           | pass   |
-      | zpvdsusnjohdgixdpe@gmail.com | AYla@2412 |
+      | email                 | pass      | cashoutAmount |
+      | alaa.ali@thelucky.app | AYla@2412 | 30            |

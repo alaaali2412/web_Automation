@@ -1,21 +1,28 @@
 package com.lucky.qa.APIs;
 
-public class ServiceNames {
-    public String baseURI() {
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
-        return "http://luckypluscommanapi.dsquares.com/api";
+public enum ServiceNames {
 
+
+    affiliateCategory_GetCategories("/AffiliateCategory/get-categories"),
+    affiliateCategory_GetAffiliateMerchantsByCategory("AffiliateCategory/get-affiliate-merchants-by-category"),
+    Merchant_POSTMerchantGetAffiliateMerchants("/merchant/get-affiliate-merchants");
+
+    protected String serviceName;
+
+
+    ServiceNames(String serviceName) {
+        this.serviceName = serviceName;
     }
 
-    public String affiliateCategoryGetCategories() {
-        return "/AffiliateCategory/get-categories";
-
-
+    protected String getServiceName() {
+        return serviceName;
     }
 
-    public String affiliateCategoryGetAffiliateMerchantsByCategory() {
-        return "/AffiliateCategory/get-affiliate-merchants-by-category";
 
-
-    }
 }
+

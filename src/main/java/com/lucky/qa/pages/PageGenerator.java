@@ -1,7 +1,7 @@
 package com.lucky.qa.pages;
 
 
-import com.lucky.qa.commons.BasePage;
+import com.lucky.qa.base.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
@@ -11,7 +11,7 @@ public class PageGenerator {
     public static WebDriver driver;
     //Constructor
     public PageGenerator(WebDriver driver){
-        this.driver = driver;
+        PageGenerator.driver = driver;
 
     }
 

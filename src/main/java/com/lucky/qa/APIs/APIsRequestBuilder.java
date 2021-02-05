@@ -1,5 +1,8 @@
 package com.lucky.qa.APIs;
 
+
+import com.lucky.qa.APIs_payloads.Merchant_getAffiliateMerchants;
+import com.lucky.qa.utilities.Helper;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.path.json.JsonPath;
@@ -9,14 +12,16 @@ import java.util.NoSuchElementException;
 
 public class APIsRequestBuilder extends APIsActions {
 
-    public String getParamInJsonArray(JsonPath path, String ValueTovalidate, String list) {
+    Helper helper = new Helper();
+    public String getParamInJsonArray(JsonPath path, String ValueToValidate, String list) {
+
         List<HashMap<String, Object>> data = path.getList(list);
         for (HashMap<String, Object> singleObject : data) {
-            if (singleObject.containsValue(ValueTovalidate)) {
+            if (singleObject.containsValue(ValueToValidate)) {
                 return singleObject.toString();
             }
         }
-        throw new NoSuchElementException(String.format("Can't find param "));
+        throw new NoSuchElementException("Can't find param ");
     }
 
 
@@ -24,23 +29,33 @@ public class APIsRequestBuilder extends APIsActions {
         String[] parts = arrayToSplit.split(firstIndex);
         String[] part = parts[0].split(secondIndex);
         return Integer.parseInt(part[1]);
+
     }
 
 
-    public Response affiliateCategoryGetCategories(String baseUri, String servcieName,
+    public Response affiliateCategoryGetCategories(String serviceName,
                                                    String key, Integer value, String key2, Integer value2) {
-        return sendRequest(APIsActions.RequestType.GET, servcieName, prepareRequestSpecs(baseUri,
-                ContentType.JSON, setQueryParams(key, value, key2, value2)));
+        helper.setPropertiesFileName("URIs.properties");
+        return sendRequest(RequestType.GET, serviceName,
+                prepareRequestSpecs(helper.getValuesFromPropertiesFile("Couponz.Lucky.Api.Staging"),
+                        ContentType.JSON, setQueryParams(key, value, key2, value2)));
 
     }
 
-    public Response getAffiliateMerchantsByCategory(String baseUri, String servcieName,
+    public Response getAffiliateMerchantsByCategory(String serviceName,
                                                     String key, Integer value, String key2, Integer value2, String key3, Integer value3) {
-
-        return sendRequest(APIsActions.RequestType.GET, servcieName, prepareRequestSpecs(baseUri,
-                ContentType.JSON, setQueryParams(key, value, key2, value2, key3, value3)));
+        helper.setPropertiesFileName("URIs.properties");
+        return sendRequest(RequestType.GET, serviceName,
+                prepareRequestSpecs(helper.getValuesFromPropertiesFile("Couponz.Lucky.Api.Staging"),
+                        ContentType.JSON, setQueryParams(key, value, key2, value2, key3, value3)));
 
     }
 
-
+    public Response getAffiliateMerchants(String serviceName, String keyword) {
+        Merchant_getAffiliateMerchants getAffiliateMerchants = new Merchant_getAffiliateMerchants();
+        getAffiliateMerchants.setSearchKey(keyword);
+        helper.setPropertiesFileName("URIs.properties");
+        return sendRequest(RequestType.POST, serviceName,
+                prepareRequestSpecs(helper.getValuesFromPropertiesFile("Couponz.Lucky.Api.Staging"), ContentType.JSON, getAffiliateMerchants));
+    }
 }

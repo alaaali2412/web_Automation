@@ -1,21 +1,17 @@
 package com.lucky.qa.pages;
 
 
-import com.lucky.qa.commons.BasePage;
+import com.lucky.qa.base.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
 import java.util.List;
 
 public class InStoreOfferPage extends BasePage {
-
-    @FindBy(className = "InstoreOffer")
-    private WebElement card;
 
     @FindBy(className = "btn-primary")
     private WebElement getOfferButton;
@@ -54,9 +50,6 @@ public class InStoreOfferPage extends BasePage {
         super(driver);
     }
 
-    public void selectCard() {
-        clickButton(card);
-    }
 
     public void getOffer() {
         clickButton(getOfferButton);
@@ -77,7 +70,7 @@ public class InStoreOfferPage extends BasePage {
 
     public void filterByLocation(String filterLocation)  {
         for (WebElement location : locations) {
-            if (location.getText().equals(filterLocation)) {
+            if (getText(location).equals(filterLocation)) {
                 clickButton(location);
                 break;
             }
@@ -86,11 +79,11 @@ public class InStoreOfferPage extends BasePage {
 
     }
 
-    public void selectSubLocation(String FiltersubLocation)  {
+    public void selectSubLocation(String FilterSubLocation)  {
         actions = new Actions(driver);
         for (WebElement subLocation : subLocations) {
-            System.out.println(subLocation.getText());
-            if (subLocation.getText().equals(FiltersubLocation)) {
+            System.out.println(getText(subLocation));
+            if (getText(subLocation).equals(FilterSubLocation)) {
                 WebElement element = subLocation.findElement(By.tagName("input"));
                 actions.moveToElement(element).click(element).build().perform();
                 clickButton(applyBtn);
@@ -106,17 +99,16 @@ public class InStoreOfferPage extends BasePage {
     public void filterByCategory(String filterCategory, String filterMainSubCategory, String filterSubCategory) throws InterruptedException {
         actions = new Actions(driver);
         for (WebElement mainCategory : mainCategories) {
-            if (mainCategory.getAttribute("class").equals("accordion") && mainCategory.getText().equals(filterCategory)) {
+            if (mainCategory.getAttribute("class").equals("accordion") && getText(mainCategory).equals(filterCategory)) {
                 clickButton(mainCategory);
                 Thread.sleep(3000);
                 for (WebElement mainSubCategory : mainSubCategories) {
-                    //  System.out.println("categry =" + mainSubCategory.getText());
                     if (mainSubCategory.getAttribute("class").equals("accordion")
-                            && mainSubCategory.getText().equals(filterMainSubCategory)) {
+                            && getText(mainSubCategory).equals(filterMainSubCategory)) {
                         clickButton(mainSubCategory);
                         Thread.sleep(3000);
                         for (WebElement subCategory : subCategories) {
-                            if (subCategory.getText().equals(filterSubCategory)) {
+                            if (getText(subCategory).equals(filterSubCategory)) {
                                 actions.moveToElement(subCategory).click(subCategory).build().perform();
                                 clickButton(applyBtn);
                                 break;
@@ -124,7 +116,7 @@ public class InStoreOfferPage extends BasePage {
                         }
                     } else {
                         for (WebElement mainSubCategory2 : mainSubCategories2) {
-                            if (mainSubCategory2.getText().equals(filterMainSubCategory)) {
+                            if (getText(mainSubCategory2).equals(filterMainSubCategory)) {
                                 actions.moveToElement(mainSubCategory2).click(mainSubCategory2).build().perform();
                                 clickButton(applyBtn);
                                 break;
@@ -135,7 +127,7 @@ public class InStoreOfferPage extends BasePage {
                 }
 
                 break;
-            } else if (mainCategory.getText().equals(filterCategory)) {
+            } else if (getText(mainCategory).equals(filterCategory)) {
                 WebElement cat = mainCategory.findElement(By.tagName("div"));
                 actions.moveToElement(cat).doubleClick(cat).build().perform();
                 Thread.sleep(5000);

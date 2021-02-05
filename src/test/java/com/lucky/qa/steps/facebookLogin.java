@@ -26,8 +26,8 @@ public class facebookLogin {
     }
 
     @When("in the opened popup add facebook {string} and {string}, click login")
-    public void in_the_opened_popup_add_facebook_and_click_login(String email, String pass) throws InterruptedException {
-        PageGenerator.getInstance(LoginPage.class,driver).loginFB(email,pass);
+    public void in_the_opened_popup_add_facebook_and_click_login(String email, String pass)  {
+        PageGenerator.getInstance(LoginPage.class,driver).loginFacebook(email,pass);
 
     }
 

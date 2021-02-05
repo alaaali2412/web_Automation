@@ -9,4 +9,4 @@ Feature: Login with user facebook account
 
     Examples:
       | email           | pass   |
-      | zpvdsusnjohdgixdpe@gmail.com | AYla@2412 |
+      | qatestluckyfb2021@gmail.com | LUcky@2123 |
