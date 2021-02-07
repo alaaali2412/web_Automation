@@ -51,13 +51,13 @@ public class LoginPage extends BasePage {
     private WebElement googlePassword;
 
     @FindBy(id = "identifierNext")
-    private WebElement nextGoogleBtn;
+    private WebElement emailGoogleBtn;
 
     @FindBy(className = "modal-open")
     private WebElement modal;
 
     @FindBy(id = "passwordNext")
-    private WebElement nextGoogleBtn2;
+    private WebElement passGoogleBtn;
 
     @FindBy(className = "carousel-inner")
     private WebElement homeBanner;
@@ -107,14 +107,14 @@ public class LoginPage extends BasePage {
             if (!parentWindow.equalsIgnoreCase(child)) {
                 driver.switchTo().window(child);
                 actions.moveToElement(googleEmail).sendKeys(email).build().perform();
-                clickButton(nextGoogleBtn);
+                clickButton(emailGoogleBtn);
                 waitVisibilityOfElement(googlePassword);
                 actions.moveToElement(googlePassword).sendKeys(password).build().perform();
-                clickButton(nextGoogleBtn2);
+                clickButton(passGoogleBtn);
             }
         }
         driver.switchTo().window(parentWindow);
-        Thread.sleep(5000);
+        Thread.sleep(7000);
         driver.navigate().refresh();
         return email;
 
