@@ -21,11 +21,12 @@ public class filterInStoreOffersByCategoroies {
     public void user_choose_specfic_from_right_menu_choose_if_required(String mainCategory, String mainSubCategory, String subCategory)  {
         PageGenerator.getInstance(InStoreOfferPage.class, driver).designPattern(InStoreOfferPage.CategoryType.SubCategory,
                 mainCategory, mainSubCategory, subCategory);
-        PageGenerator.getInstance(InStoreOfferPage.class, driver).clickApplyBtn();
+
     }
 
     @Then("in-Store offers filtered according to the selected category")
     public void in_store_offers_filtered_according_to_the_selected_category() {
+        PageGenerator.getInstance(InStoreOfferPage.class, driver).clickApplyBtn();
 
     }
 
