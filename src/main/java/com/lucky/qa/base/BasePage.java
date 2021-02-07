@@ -8,6 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.*;
 
 import java.time.Duration;
+import java.util.List;
 
 public class BasePage extends PageGenerator {
 
@@ -52,7 +53,18 @@ public class BasePage extends PageGenerator {
 
     }
 
+    protected void waitVisibilityOfAllElements(List <WebElement> elements) {
+        Wait<WebDriver> wait = new FluentWait<>(driver).withTimeout(Duration.ofSeconds(30))
+                .pollingEvery(Duration.ofSeconds(3))
+                .ignoring(Exception.class);
+        wait.until(ExpectedConditions.visibilityOfAllElements(elements));
 
+    }
+
+    public void forceClickElement(WebElement element) {
+        Actions actions = new Actions(driver);
+        actions.moveToElement(element).click(element).build().perform();
+    }
 
 /*
     public void waitForLoad() {
