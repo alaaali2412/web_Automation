@@ -1,6 +1,7 @@
 package com.lucky.qa.pages;
 
 import com.lucky.qa.base.BasePage;
+import com.lucky.qa.utilities.Helper;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -16,6 +17,7 @@ public class LoginPage extends BasePage {
     public LoginPage(WebDriver driver) {
         super(driver);
     }
+    Helper helper = new Helper();
 
     @FindBy(className = "btn-icon")
     private List<WebElement> listItems;
@@ -66,16 +68,16 @@ public class LoginPage extends BasePage {
     private WebElement signInBtn;
 
 
-    public String login(String email, String password) {
+    public String login() {
+        helper.setPropertiesFileName("LoginData.properties");
         waitVisibilityOfElement(inputPassword);
         clearField(inputEmail);
-        addText(inputEmail, email);
+        addText(inputEmail, helper.getValuesFromPropertiesFile("Email"));
         clearField(inputPassword);
-        addText(inputPassword, password);
+        addText(inputPassword, helper.getValuesFromPropertiesFile("password"));
         clickButton(loginBtn);
         waitVisibilityOfElement(homeBanner);
-        driver.navigate().refresh();
-        return email;
+        return helper.getValuesFromPropertiesFile("Email");
     }
 
 

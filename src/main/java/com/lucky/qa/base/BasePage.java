@@ -53,6 +53,14 @@ public class BasePage extends PageGenerator {
     }
 
 
+    protected void waitfElementToBeEnabled(WebElement element) {
+        Wait<WebDriver> wait = new FluentWait<>(driver).withTimeout(Duration.ofSeconds(30))
+                .pollingEvery(Duration.ofSeconds(3))
+                .ignoring(Exception.class);
+        wait.until(ExpectedConditions.elementToBeClickable(element));
+
+    }
+
 
 /*
     public void waitForLoad() {
