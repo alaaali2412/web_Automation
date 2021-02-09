@@ -7,17 +7,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-import org.testng.Assert;
 
 import java.util.List;
 
+
 public class InStoreOfferPage extends BasePage {
-
-    @FindBy(className = "btn-primary")
-    private WebElement getOfferButton;
-
-    @FindBy(className = "modal-content")
-    private WebElement modalOffers;
 
     @FindBy(xpath = "//*/div/div[2]/div/div[3]/div[1]")
     private List<WebElement> inStoreItems;
@@ -35,40 +29,40 @@ public class InStoreOfferPage extends BasePage {
     private List<WebElement> mainCategories;
 
     @FindBy(xpath = "//div[1]/div[2]/div/div/div/div/form/div/div")
-    private List<WebElement> mainSubCategories;
+    private List<WebElement> mainSubCategoriesList;
 
     @FindBy(xpath = "//div[1]/div[1]/div[2]/div/div/div[2]/div/form/div/div/div/label")
-    private List<WebElement> mainSubCategories2;
+    private List<WebElement> mainSubCategories;
 
-    @FindBy(xpath = "//form/div/div/div/div/div/form/div/div/div/label")
+    @FindBy(xpath = "//form/div/div/div/label")
+    private List<WebElement> categoriesCheckbox;
+
+    @FindBy(xpath = "//*[@class = 'collapse show']//label")
     private List<WebElement> subCategories;
 
     @FindBy(xpath = "//div[1]/div[3]/button[2]")
     private WebElement applyBtn;
 
+    @FindBy(xpath = "//div[1]/div[3]/button[1]")
+    private WebElement clearBtn;
+
+    @FindBy(xpath = "//div[1]/div[1]/div[2]/div/div/div[2]")
+    private WebElement expandedMenu;
+
     public InStoreOfferPage(WebDriver driver) {
         super(driver);
     }
 
-
-    public void getOffer() {
-        clickButton(getOfferButton);
-    }
-
-    public void checkModalOffer() {
-        Assert.assertTrue(modalOffers.isDisplayed());
-        System.out.println("Modal appear");
-    }
-
-    public void selectInStoreItem() throws InterruptedException {
+    public void selectInStoreItem()  {
+        waitVisibilityOfAllElements(inStoreItems);
         for (WebElement item : inStoreItems) {
-            Thread.sleep(3000);
             clickButton(item);
             break;
         }
     }
 
-    public void filterByLocation(String filterLocation)  {
+    public void filterByLocation(String filterLocation) {
+        waitVisibilityOfAllElements(locations);
         for (WebElement location : locations) {
             if (getText(location).equals(filterLocation)) {
                 clickButton(location);
@@ -79,14 +73,11 @@ public class InStoreOfferPage extends BasePage {
 
     }
 
-    public void selectSubLocation(String FilterSubLocation)  {
-        actions = new Actions(driver);
+    public void selectSubLocation(String FilterSubLocation) {
         for (WebElement subLocation : subLocations) {
-            System.out.println(getText(subLocation));
             if (getText(subLocation).equals(FilterSubLocation)) {
                 WebElement element = subLocation.findElement(By.tagName("input"));
-                actions.moveToElement(element).click(element).build().perform();
-                clickButton(applyBtn);
+                forceClickElement(element);
                 break;
             }
 
@@ -95,47 +86,75 @@ public class InStoreOfferPage extends BasePage {
 
     }
 
-
-    public void filterByCategory(String filterCategory, String filterMainSubCategory, String filterSubCategory) throws InterruptedException {
-        actions = new Actions(driver);
+    public void clickCategory(String Category) {
+        waitVisibilityOfAllElements(inStoreItems);
+        waitVisibilityOfAllElements(mainCategories);
         for (WebElement mainCategory : mainCategories) {
-            if (mainCategory.getAttribute("class").equals("accordion") && getText(mainCategory).equals(filterCategory)) {
+            if (getText(mainCategory).equals(Category)) {
                 clickButton(mainCategory);
-                Thread.sleep(3000);
-                for (WebElement mainSubCategory : mainSubCategories) {
-                    if (mainSubCategory.getAttribute("class").equals("accordion")
-                            && getText(mainSubCategory).equals(filterMainSubCategory)) {
-                        clickButton(mainSubCategory);
-                        Thread.sleep(3000);
-                        for (WebElement subCategory : subCategories) {
-                            if (getText(subCategory).equals(filterSubCategory)) {
-                                actions.moveToElement(subCategory).click(subCategory).build().perform();
-                                clickButton(applyBtn);
-                                break;
-                            }
-                        }
-                    } else {
-                        for (WebElement mainSubCategory2 : mainSubCategories2) {
-                            if (getText(mainSubCategory2).equals(filterMainSubCategory)) {
-                                actions.moveToElement(mainSubCategory2).click(mainSubCategory2).build().perform();
-                                clickButton(applyBtn);
-                                break;
-                            }
-                        }
-
-                    }
-                }
-
-                break;
-            } else if (getText(mainCategory).equals(filterCategory)) {
-                WebElement cat = mainCategory.findElement(By.tagName("div"));
-                actions.moveToElement(cat).doubleClick(cat).build().perform();
-                Thread.sleep(5000);
-                clickButton(applyBtn);
                 break;
             }
+        }
+    }
 
+    public void clickMainSubCategoryList(String Category) {
+        for (WebElement mainSubCategory : mainSubCategoriesList) {
+            if (getText(mainSubCategory).equals(Category)) {
+                clickButton(mainSubCategory);
+                break;
+            }
+        }
+    }
+
+    public void clickMainSubCategory(String Category) {
+        for (WebElement mainSubCategory : categoriesCheckbox) {
+            if (getText(mainSubCategory).equals(Category)) {
+                forceClickElement(mainSubCategory);
+                break;
+            }
+        }
+    }
+
+    public void clickSubCategory(String Category) {
+        for (WebElement subCategory : categoriesCheckbox) {
+            if (getText(subCategory).equals(Category)) {
+                forceClickElement(subCategory);
+                break;
+            }
+        }
+    }
+
+    public void designPattern(CategoryType categoryType, String mainCategory,
+                              String mainSubCategory, String SubCategory)  {
+
+        switch (categoryType) {
+
+            case mainSubCategory:
+                clickCategory(mainCategory);
+                clickMainSubCategory(mainSubCategory);
+                break;
+            case SubCategory:
+                clickCategory(mainCategory);
+                clickMainSubCategoryList(mainSubCategory);
+                clickSubCategory(SubCategory);
+                break;
+            default:
+                break;
         }
 
+
     }
+
+    public void clickApplyBtn() {
+        clickButton(applyBtn);
+    }
+
+    public void clickClearBtn() {
+        clickButton(clearBtn);
+    }
+
+    public enum CategoryType {
+        mainSubCategory, SubCategory
+    }
+
 }

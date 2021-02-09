@@ -27,6 +27,7 @@ public class filterInStoreOffersByLocation {
     @When("select {string} if required")
     public void select_if_required(String subLocation)  {
         PageGenerator.getInstance(InStoreOfferPage.class,driver).selectSubLocation(subLocation);
+        PageGenerator.getInstance(InStoreOfferPage.class,driver).clickApplyBtn();
     }
 
     @Then("in-Store offers filtered according to the selected location")
