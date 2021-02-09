@@ -13,7 +13,7 @@ import io.cucumber.java.en.When;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
-
+import java.io.IOException;
 
 public class filterOnlineCashback {
     WebDriver driver = Hook.getDriver();
@@ -26,12 +26,11 @@ public class filterOnlineCashback {
 
     }
 
-    @When("user logged in")
-    public void user_logged_in() {
+    @When("user logged in {string} and {string}")
+    public void user_logged_in_and(String email, String password) {
         PageGenerator.getInstance(HomePage.class, driver).clickSignInBtn();
-        PageGenerator.getInstance(LoginPage.class, driver).login();
+        PageGenerator.getInstance(LoginPage.class, driver).login(email, password);
     }
-
 
     @When("user click OnlineCashback and select {string}")
     public void user_click_online_cashback_and_select(String category) {
