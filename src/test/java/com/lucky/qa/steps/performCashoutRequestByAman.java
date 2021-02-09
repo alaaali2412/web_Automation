@@ -17,12 +17,12 @@ public class performCashoutRequestByAman {
     Double CashoutAmount;
     Double balance;
 
-    @Given("portal is opend and user loged in {string}, {string}")
-    public void portalIsOpendAndUserLogedIn(String email, String pass) {
+    @Given("portal is opend and user login")
+    public void portal_is_opend_and_user_login() {
         PageGenerator.getInstance(HomePage.class, driver).clickSignInBtn();
-        PageGenerator.getInstance(LoginPage.class, driver).login(email, pass);
-
+        PageGenerator.getInstance(LoginPage.class, driver).login();
     }
+
 
     @When("wallet page opens")
     public void walletPageOpens() throws InterruptedException {
