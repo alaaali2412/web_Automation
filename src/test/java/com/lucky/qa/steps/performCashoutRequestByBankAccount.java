@@ -12,16 +12,18 @@ import io.cucumber.java.en.When;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
+import java.io.IOException;
 
 public class performCashoutRequestByBankAccount {
     WebDriver driver = Hook.getDriver();
     Double cashoutAmount;
     Double balance;
 
-    @Given("browser, portal opened,user login")
-    public void browser_portal_openeduser_login() {
+    @Given("browser, portal opened,user login {string} and {string}")
+    public void browserPortalOpenedUserLoginAnd(String email, String pass) {
         PageGenerator.getInstance(HomePage.class, driver).clickSignInBtn();
-        PageGenerator.getInstance(LoginPage.class, driver).login();
+        PageGenerator.getInstance(LoginPage.class, driver).login(email, pass);
+
     }
 
     @When("wallet opens and cashback balance >= {double} EGP")
@@ -38,7 +40,7 @@ public class performCashoutRequestByBankAccount {
     }
 
     @And("add all the mandatory fields and click continue")
-    public void addAllTheMandatoryFieldsAndClickContinue() {
+    public void addAllTheMandatoryFieldsAndClickContinue()  {
         PageGenerator.getInstance(WalletPage.class, driver).addBankAccountFields();
         PageGenerator.getInstance(WalletPage.class, driver).clickContinueBtn();
     }
