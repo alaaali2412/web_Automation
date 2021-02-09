@@ -20,13 +20,11 @@ public class OfferDetailsPage extends BasePage {
     private WebElement popupCloseBtn;
 
     public void clickGetOffer(){
-        waitVisibilityOfElement(getOfferBtn);
         clickButton(getOfferBtn);
 
     }
 
     public void closePopUP(){
-        waitVisibilityOfElement(popupHeader);
         Assert.assertEquals(getText(popupHeader), "Download Lucky App to enjoy in-store and delivery discounts!" );
         clickButton(popupCloseBtn);
 

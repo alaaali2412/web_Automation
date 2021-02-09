@@ -28,10 +28,11 @@ public class emailLogin {
         PageGenerator.getInstance(HomePage.class, driver).clickSignInBtn();
     }
 
-    @When("^login with valid email and pass$")
-    public void login_with_valid_email_and_pass()  {
-        loggedEmail = PageGenerator.getInstance(LoginPage.class, driver).login();
-}
+    @When("login with valid {string} and {string}")
+    public void login_with_valid_and(String email, String password) {
+        loggedEmail = PageGenerator.getInstance(LoginPage.class, driver).login(email, password);
+
+    }
 
     @Then("verify the login")
     public void verify_the_login() {

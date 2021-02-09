@@ -51,8 +51,8 @@ public class HomePage extends BasePage {
     @FindBy(className = "wallet-body")
     private WebElement transactionSection;
 
-    @FindBy(xpath = "//div[2]//div/div/div/form")
-    private WebElement profileView;
+    @FindBy(className = "carousel-inner")
+    private WebElement homeBanner;
 
     public void clickSignInBtn() {
         clickButton(signInBtn);
@@ -65,7 +65,7 @@ public class HomePage extends BasePage {
     }
 
     public void clkInStoreBtn() {
-        waitVisibilityOfElement(inStoreBtn);
+       waitVisibilityOfElement(inStoreBtn);
         clickButton(inStoreBtn);
     }
 
