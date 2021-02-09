@@ -10,6 +10,8 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 
@@ -28,12 +30,22 @@ public class Hook {
         Hook.driver = driver;
     }
 
+    public static ChromeOptions chromeOption() {
+
+
+        ChromeOptions options = new ChromeOptions();
+        Map<String, Object> chromePrefs = new HashMap<>();
+        chromePrefs.put("profile.managed_default_content_settings.ads", 1);
+        options.setExperimentalOption("prefs", chromePrefs);
+
+        return options;
+    }
 
     @Before
     public static WebDriver startDriver() {
 
         System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/Driver/chromedriver");
-        driver = new ChromeDriver();
+        driver = new ChromeDriver(chromeOption());
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
         driver.navigate().to(baseURL);

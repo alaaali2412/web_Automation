@@ -3,7 +3,7 @@
 Feature: perform Cashout Request By Bank Account
 
   Scenario Outline: the loggedin user should be able to Cashout if cashback > 100 EGP
-    Given browser, portal opened,user login "<email>" and "<pass>"
+    Given browser, portal opened,user login
     When wallet opens and cashback balance >= 100.00 EGP
     And click request Cashout and choose Bank Account add "<CashoutAmount>"
     And add all the mandatory fields and click continue
@@ -11,5 +11,5 @@ Feature: perform Cashout Request By Bank Account
     Then verify that cashout amount deducted from user balance and cashback
 
     Examples:
-      | email                 | pass      | CashoutAmount |
-      | alaa.ali@thelucky.app | AYla@2412 | 20            |
+      | CashoutAmount |
+      | 20            |

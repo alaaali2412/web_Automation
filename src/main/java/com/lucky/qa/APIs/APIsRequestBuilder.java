@@ -35,7 +35,7 @@ public class APIsRequestBuilder extends APIsActions {
 
     public Response affiliateCategoryGetCategories(String serviceName,
                                                    String key, Integer value, String key2, Integer value2) {
-        helper.setPropertiesFileName("URIs.properties");
+        helper.setPropertiesFileName("APIsLinks.properties");
         return sendRequest(RequestType.GET, serviceName,
                 prepareRequestSpecs(helper.getValuesFromPropertiesFile("Couponz.Lucky.Api.Staging"),
                         ContentType.JSON, setQueryParams(key, value, key2, value2)));
@@ -44,7 +44,7 @@ public class APIsRequestBuilder extends APIsActions {
 
     public Response getAffiliateMerchantsByCategory(String serviceName,
                                                     String key, Integer value, String key2, Integer value2, String key3, Integer value3) {
-        helper.setPropertiesFileName("URIs.properties");
+        helper.setPropertiesFileName("APIsLinks.properties");
         return sendRequest(RequestType.GET, serviceName,
                 prepareRequestSpecs(helper.getValuesFromPropertiesFile("Couponz.Lucky.Api.Staging"),
                         ContentType.JSON, setQueryParams(key, value, key2, value2, key3, value3)));
@@ -54,7 +54,7 @@ public class APIsRequestBuilder extends APIsActions {
     public Response getAffiliateMerchants(String serviceName, String keyword) {
         Merchant_getAffiliateMerchants getAffiliateMerchants = new Merchant_getAffiliateMerchants();
         getAffiliateMerchants.setSearchKey(keyword);
-        helper.setPropertiesFileName("URIs.properties");
+        helper.setPropertiesFileName("APIsLinks.properties");
         return sendRequest(RequestType.POST, serviceName,
                 prepareRequestSpecs(helper.getValuesFromPropertiesFile("Couponz.Lucky.Api.Staging"), ContentType.JSON, getAffiliateMerchants));
     }
