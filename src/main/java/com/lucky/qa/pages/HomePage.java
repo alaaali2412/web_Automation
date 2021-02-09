@@ -51,6 +51,9 @@ public class HomePage extends BasePage {
     @FindBy(className = "wallet-body")
     private WebElement transactionSection;
 
+    @FindBy(xpath = "//div[2]//div/div/div/form")
+    private WebElement profileView;
+
     public void clickSignInBtn() {
         clickButton(signInBtn);
 

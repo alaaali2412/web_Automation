@@ -7,5 +7,5 @@ Feature: filter In_store offers by it`s categories
     Then in-Store offers filtered according to the selected category
 
     Examples:
-      |mainCategory| mainSubCategory |subCategory|
-      | Food | Fast Food |Pizza|
+      | mainCategory | mainSubCategory | subCategory |
+      | Food         | Fast Food       | Pizza       |
