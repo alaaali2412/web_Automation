@@ -1,6 +1,6 @@
 package com.lucky.qa.steps;
 
-import com.lucky.qa.connectors.Hook;
+import com.lucky.qa.connectors.SharedDriver;
 import com.lucky.qa.pages.HomePage;
 import com.lucky.qa.pages.LoginPage;
 import com.lucky.qa.pages.PageGenerator;
@@ -9,51 +9,53 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
 
-public class performCashoutRequestByBankAccount {
-    WebDriver driver = Hook.getDriver();
+public class performCashoutRequestByBankAccountTest {
+    public performCashoutRequestByBankAccountTest(SharedDriver driver){
+
+    }
+
     Double cashoutAmount;
     Double balance;
 
     @Given("browser, portal opened,user login")
     public void browser_portal_openeduser_login() {
-        PageGenerator.getInstance(HomePage.class, driver).clickSignInBtn();
-        PageGenerator.getInstance(LoginPage.class, driver).login();
+        PageGenerator.getInstance(HomePage.class).clickSignInBtn();
+        PageGenerator.getInstance(LoginPage.class).login();
     }
 
     @When("wallet opens and cashback balance >= {double} EGP")
     public void wallet_opens_and_cashback_balance_egp(Double amount) throws InterruptedException {
-        PageGenerator.getInstance(HomePage.class, driver).clickWallet();
-        balance = PageGenerator.getInstance(WalletPage.class, driver).getUserTotalBalance();
-        PageGenerator.getInstance(WalletPage.class, driver).getUserCashbackBalance(amount);
+        PageGenerator.getInstance(HomePage.class).clickWallet();
+        balance = PageGenerator.getInstance(WalletPage.class).getUserTotalBalance();
+        PageGenerator.getInstance(WalletPage.class).getUserCashbackBalance(amount);
     }
 
     @And("click request Cashout and choose Bank Account add {string}")
     public void clickRequestCashoutAndChooseBankAccountAdd(String CashoutAmount) {
-        cashoutAmount = PageGenerator.getInstance(WalletPage.class, driver).addAmountToCashoutByBankAccount(CashoutAmount);
+        cashoutAmount = PageGenerator.getInstance(WalletPage.class).addAmountToCashoutByBankAccount(CashoutAmount);
 
     }
 
     @And("add all the mandatory fields and click continue")
     public void addAllTheMandatoryFieldsAndClickContinue() {
-        PageGenerator.getInstance(WalletPage.class, driver).addBankAccountFields();
-        PageGenerator.getInstance(WalletPage.class, driver).clickContinueBtn();
+        PageGenerator.getInstance(WalletPage.class).addBankAccountFields();
+        PageGenerator.getInstance(WalletPage.class).clickContinueBtn();
     }
 
     @And("user get that the Cashout done successfully")
     public void userGetThatTheCashoutDoneSuccessfully() {
-        PageGenerator.getInstance(WalletPage.class, driver).checkCashoutSuccessMessage();
+        PageGenerator.getInstance(WalletPage.class).checkCashoutSuccessMessage();
     }
 
     @Then("verify that cashout amount deducted from user balance and cashback")
     public void verifyThatCashoutAmountDeductedFromUserBalanceAndCashback() throws InterruptedException {
 
-        PageGenerator.getInstance(HomePage.class, driver).clickWallet();
+        PageGenerator.getInstance(HomePage.class).clickWallet();
         Double balanceAfter = balance - cashoutAmount;
-        Assert.assertEquals(PageGenerator.getInstance(WalletPage.class, driver).getUserTotalBalance(), balanceAfter);
+        Assert.assertEquals(PageGenerator.getInstance(WalletPage.class).getUserTotalBalance(), balanceAfter);
 
 
     }

@@ -13,7 +13,7 @@ import java.util.List;
 
 public class InStoreOfferPage extends BasePage {
 
-    @FindBy(xpath = "//*/div/div[2]/div/div[3]/div[1]")
+    @FindBy(xpath = "//*/div/div[2]/div/div[3]/div[1]/div")
     private List<WebElement> inStoreItems;
 
     @FindBy(xpath = "//div[2]/button")
@@ -34,7 +34,7 @@ public class InStoreOfferPage extends BasePage {
     @FindBy(xpath = "//div[1]/div[1]/div[2]/div/div/div[2]/div/form/div/div/div/label")
     private List<WebElement> mainSubCategories;
 
-    @FindBy(xpath = "//form/div/div/div/label")
+    @FindBy(xpath = "//*[@class = 'collapse show']//form/div/div/div/label")
     private List<WebElement> categoriesCheckbox;
 
     @FindBy(xpath = "//*[@class = 'collapse show']//label")
@@ -46,7 +46,7 @@ public class InStoreOfferPage extends BasePage {
     @FindBy(xpath = "//div[1]/div[3]/button[1]")
     private WebElement clearBtn;
 
-    @FindBy(xpath = "//div[1]/div[1]/div[2]/div/div/div[2]")
+    @FindBy(xpath = "//*[@class = 'collapse show']")
     private WebElement expandedMenu;
 
     public InStoreOfferPage(WebDriver driver) {
@@ -62,7 +62,7 @@ public class InStoreOfferPage extends BasePage {
     }
 
     public void filterByLocation(String filterLocation) {
-        waitVisibilityOfAllElements(locations);
+        //waitVisibilityOfElement(expandedMenu);
         for (WebElement location : locations) {
             if (getText(location).equals(filterLocation)) {
                 clickButton(location);
@@ -74,6 +74,7 @@ public class InStoreOfferPage extends BasePage {
     }
 
     public void selectSubLocation(String FilterSubLocation) {
+        waitVisibilityOfElement(expandedMenu);
         for (WebElement subLocation : subLocations) {
             if (getText(subLocation).equals(FilterSubLocation)) {
                 WebElement element = subLocation.findElement(By.tagName("input"));

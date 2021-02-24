@@ -7,19 +7,20 @@ import org.testng.annotations.DataProvider;
 
 @CucumberOptions(
         features = {"src/test/resources/features"},
-        glue = {"com.lucky.qa.steps", "com.lucky.qa.connectors"},
+        glue = {"com.lucky.qa.steps"},
         plugin = {"pretty", "html:target/site/cucumber-pretty"},
-        tags = "@filterInStoreOffersByCombinedFilters",
-        monochrome = true
-        // publish = true
+        tags = "not @ignore",
+        monochrome = true,
+        publish = true
 )
 
-public class Runner extends AbstractTestNGCucumberTests {
-
+public class RunCucumberIT extends AbstractTestNGCucumberTests {
     @Override
     @DataProvider(parallel = true)
     public Object[][] scenarios() {
 
         return super.scenarios();
     }
+
+
 }

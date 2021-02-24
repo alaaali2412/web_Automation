@@ -1,17 +1,20 @@
 package com.lucky.qa.steps;
 
 import com.lucky.qa.APIs.ImplementAPIsMethods;
-import com.lucky.qa.connectors.Hook;
+import com.lucky.qa.connectors.SharedDriver;
 import com.lucky.qa.pages.OnlineCashbackPage;
 import com.lucky.qa.pages.PageGenerator;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
-public class searchOnlineCashbackOffers {
-    WebDriver driver = Hook.getDriver();
+public class searchOnlineCashbackOffersTest {
+    public searchOnlineCashbackOffersTest(SharedDriver driver) {
+
+    }
+
+
     ImplementAPIsMethods implementAPIsMethods;
     int APIresult;
 
@@ -21,8 +24,8 @@ public class searchOnlineCashbackOffers {
     }
 
     @When("add {string} in search field and click enter")
-    public void add_in_search_field_and_click_enter(String keyword) throws InterruptedException {
-        PageGenerator.getInstance(OnlineCashbackPage.class, driver).searchOnlineCashabckOffers(keyword);
+    public void add_in_search_field_and_click_enter(String keyword)  {
+        PageGenerator.getInstance(OnlineCashbackPage.class).searchOnlineCashabckOffers(keyword);
         implementAPIsMethods = new ImplementAPIsMethods();
         APIresult = implementAPIsMethods.getCountOfAffiliateMerchants(keyword);
 
@@ -30,7 +33,7 @@ public class searchOnlineCashbackOffers {
 
     @Then("verify the search result with the backend")
     public void verify_the_search_result_with_the_backend() throws InterruptedException {
-        Assert.assertEquals(APIresult, PageGenerator.getInstance(OnlineCashbackPage.class, driver).getMerchantFilteredList());
+        Assert.assertEquals(APIresult, PageGenerator.getInstance(OnlineCashbackPage.class).getMerchantFilteredList());
     }
 
 }

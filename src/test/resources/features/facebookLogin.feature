@@ -1,6 +1,7 @@
 @facebookLogin
-Feature: Login with user facebook account
 
+Feature: Login with user facebook account
+  @ignore
   Scenario Outline: User try to login via facebook
     Given browser open,navigate to portal URl
     When close the pop up click login with facebook
