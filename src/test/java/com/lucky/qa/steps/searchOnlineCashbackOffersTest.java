@@ -28,7 +28,6 @@ public class searchOnlineCashbackOffersTest {
         PageGenerator.getInstance(OnlineCashbackPage.class).searchOnlineCashabckOffers(keyword);
         implementAPIsMethods = new ImplementAPIsMethods();
         APIresult = implementAPIsMethods.getCountOfAffiliateMerchants(keyword);
-
     }
 
     @Then("verify the search result with the backend")
