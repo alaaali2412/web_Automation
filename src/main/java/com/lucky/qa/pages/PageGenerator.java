@@ -10,8 +10,9 @@ import org.openqa.selenium.support.PageFactory;
 public class PageGenerator {
 
     public WebDriver driver;
+
     //Constructor
-    public PageGenerator(WebDriver driver){
+    public PageGenerator(WebDriver driver) {
         this.driver = driver;
 
     }
@@ -24,9 +25,6 @@ public class PageGenerator {
             throw e;
         }
     }
-
-
-
 
 
 }

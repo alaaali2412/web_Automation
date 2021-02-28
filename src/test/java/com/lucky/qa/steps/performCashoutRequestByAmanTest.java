@@ -1,6 +1,5 @@
 package com.lucky.qa.steps;
 
-import com.lucky.qa.connectors.SharedDriver;
 import com.lucky.qa.pages.HomePage;
 import com.lucky.qa.pages.LoginPage;
 import com.lucky.qa.pages.PageGenerator;
@@ -12,9 +11,6 @@ import io.cucumber.java.en.When;
 import org.testng.Assert;
 
 public class performCashoutRequestByAmanTest {
-    public performCashoutRequestByAmanTest(SharedDriver driver){
-
-    }
 
     Double CashoutAmount;
     Double balance;

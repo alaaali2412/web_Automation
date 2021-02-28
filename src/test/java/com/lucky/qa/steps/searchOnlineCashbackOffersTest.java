@@ -1,7 +1,6 @@
 package com.lucky.qa.steps;
 
 import com.lucky.qa.APIs.ImplementAPIsMethods;
-import com.lucky.qa.connectors.SharedDriver;
 import com.lucky.qa.pages.OnlineCashbackPage;
 import com.lucky.qa.pages.PageGenerator;
 import io.cucumber.java.en.Given;
@@ -10,11 +9,6 @@ import io.cucumber.java.en.When;
 import org.testng.Assert;
 
 public class searchOnlineCashbackOffersTest {
-    public searchOnlineCashbackOffersTest(SharedDriver driver) {
-
-    }
-
-
     ImplementAPIsMethods implementAPIsMethods;
     int APIresult;
 
@@ -24,7 +18,7 @@ public class searchOnlineCashbackOffersTest {
     }
 
     @When("add {string} in search field and click enter")
-    public void add_in_search_field_and_click_enter(String keyword)  {
+    public void add_in_search_field_and_click_enter(String keyword) {
         PageGenerator.getInstance(OnlineCashbackPage.class).searchOnlineCashabckOffers(keyword);
         implementAPIsMethods = new ImplementAPIsMethods();
         APIresult = implementAPIsMethods.getCountOfAffiliateMerchants(keyword);

@@ -6,7 +6,8 @@ import com.lucky.qa.utilities.Helper;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import java.util.*;
+
+import java.util.List;
 import java.util.Set;
 
 
@@ -107,7 +108,7 @@ public class LoginPage extends BasePage {
                 forceAddText(googleEmail, email);
                 clickButton(emailNextBtn);
                 waitVisibilityOfElement(googlePassword);
-                forceAddText(googlePassword,password);
+                forceAddText(googlePassword, password);
                 clickButton(passNextBtn);
             }
         }

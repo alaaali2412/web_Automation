@@ -10,6 +10,7 @@ public class OfferDetailsPage extends BasePage {
     public OfferDetailsPage(WebDriver driver) {
         super(driver);
     }
+
     @FindBy(xpath = "//div[2]/button")
     private WebElement getOfferBtn;
 
@@ -19,15 +20,15 @@ public class OfferDetailsPage extends BasePage {
     @FindBy(xpath = "//*[@type = 'button']")
     private WebElement popupCloseBtn;
 
-    public void clickGetOffer(){
+    public void clickGetOffer() {
         waitVisibilityOfElement(getOfferBtn);
         clickButton(getOfferBtn);
 
     }
 
-    public void closePopUP(){
+    public void closePopUP() {
         waitVisibilityOfElement(popupHeader);
-        Assert.assertEquals(getText(popupHeader), "Download Lucky App to enjoy in-store and delivery discounts!" );
+        Assert.assertEquals(getText(popupHeader), "Download Lucky App to enjoy in-store and delivery discounts!");
         clickButton(popupCloseBtn);
 
 

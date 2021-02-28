@@ -5,7 +5,6 @@ import com.lucky.qa.base.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
@@ -53,7 +52,7 @@ public class InStoreOfferPage extends BasePage {
         super(driver);
     }
 
-    public void selectInStoreItem()  {
+    public void selectInStoreItem() {
         waitVisibilityOfAllElements(inStoreItems);
         for (WebElement item : inStoreItems) {
             clickButton(item);
@@ -126,7 +125,7 @@ public class InStoreOfferPage extends BasePage {
     }
 
     public void designPattern(CategoryType categoryType, String mainCategory,
-                              String mainSubCategory, String SubCategory)  {
+                              String mainSubCategory, String SubCategory) {
 
         switch (categoryType) {
 

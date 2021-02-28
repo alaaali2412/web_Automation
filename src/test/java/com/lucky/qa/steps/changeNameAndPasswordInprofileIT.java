@@ -1,7 +1,6 @@
 package com.lucky.qa.steps;
 
 
-import com.lucky.qa.connectors.SharedDriver;
 import com.lucky.qa.pages.HomePage;
 import com.lucky.qa.pages.LoginPage;
 import com.lucky.qa.pages.PageGenerator;
@@ -14,9 +13,6 @@ import org.testng.Assert;
 public class changeNameAndPasswordInprofileIT {
 
     String loggedInEmail;
-    public changeNameAndPasswordInprofileIT(SharedDriver driver){
-
-    }
     @Given("portal and browser open, user login")
     public void portal_and_browser_open_user_login() {
         PageGenerator.getInstance(HomePage.class).clickSignInBtn();

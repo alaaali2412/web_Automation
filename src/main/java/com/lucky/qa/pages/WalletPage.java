@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
-import java.io.IOException;
+
 import java.text.DecimalFormat;
 import java.util.List;
 
@@ -88,7 +88,7 @@ public class WalletPage extends BasePage {
 
     }
 
-    public void addBankAccountFields()  {
+    public void addBankAccountFields() {
         helper.setPropertiesFileName("BankAccountData.properties");
         inputFields.get(0).sendKeys(helper.getValuesFromPropertiesFile("FullName"));
         inputFields.get(1).sendKeys(helper.getValuesFromPropertiesFile("BankName"));

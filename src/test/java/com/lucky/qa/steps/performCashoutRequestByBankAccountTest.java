@@ -1,6 +1,5 @@
 package com.lucky.qa.steps;
 
-import com.lucky.qa.connectors.SharedDriver;
 import com.lucky.qa.pages.HomePage;
 import com.lucky.qa.pages.LoginPage;
 import com.lucky.qa.pages.PageGenerator;
@@ -13,10 +12,6 @@ import org.testng.Assert;
 
 
 public class performCashoutRequestByBankAccountTest {
-    public performCashoutRequestByBankAccountTest(SharedDriver driver){
-
-    }
-
     Double cashoutAmount;
     Double balance;
 
