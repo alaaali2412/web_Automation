@@ -50,7 +50,9 @@ public class ProfilePage extends BasePage {
     private WebElement newPassHeader;
 
     public String getLoggedInEmail() {
+        System.out.println(loggedInEmail.getAttribute("value"));
         return loggedInEmail.getAttribute("value");
+
     }
 
     public void changeName() {

@@ -10,4 +10,4 @@ Feature: filter In_store offers by it`s categories & Locations
     Examples:
       | mainCategory | mainSubCategory | subCategory             | Location   | subLocation |
 
-      | Fashion      | Women           | Jewellery & Accessories | Alexandria | Saba Basha  |
+      | Fashion      | Women           | Jewellery & Accessories | Alexandria | San Stefano  |

@@ -1,15 +1,14 @@
 package com.lucky.qa.pages;
 
 import com.lucky.qa.base.BasePage;
+import com.lucky.qa.connectors.DriverFactory;
 import com.lucky.qa.utilities.Helper;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.*;
+import java.util.List;
 import java.util.Set;
-import java.util.concurrent.TimeUnit;
 
 
 public class LoginPage extends BasePage {
@@ -77,13 +76,11 @@ public class LoginPage extends BasePage {
         addText(inputPassword, helper.getValuesFromPropertiesFile("password"));
         clickButton(loginBtn);
         waitVisibilityOfElement(homeBanner);
-        driver.navigate().refresh();
         return helper.getValuesFromPropertiesFile("Email");
     }
 
 
     public void loginFacebook(String email, String password) {
-
         String parentWindow = driver.getWindowHandle();
         Set<String> allWindow = driver.getWindowHandles();
         for (String child : allWindow) {
@@ -98,27 +95,26 @@ public class LoginPage extends BasePage {
 
             }
         }
-        driver.switchTo().window(parentWindow);
+        DriverFactory.getDriver().switchTo().window(parentWindow);
         waitVisibilityOfElement(signInBtn);
     }
 
     public String loginGoogle(String email, String password) throws InterruptedException {
-        actions = new Actions(driver);
         String parentWindow = driver.getWindowHandle();
         Set<String> allWindow = driver.getWindowHandles();
         for (String child : allWindow) {
             if (!parentWindow.equalsIgnoreCase(child)) {
                 driver.switchTo().window(child);
-                actions.moveToElement(googleEmail).sendKeys(email).build().perform();
+                forceAddText(googleEmail, email);
                 clickButton(emailNextBtn);
                 waitVisibilityOfElement(googlePassword);
-                actions.moveToElement(googlePassword).sendKeys(password).build().perform();
+                forceAddText(googlePassword, password);
                 clickButton(passNextBtn);
             }
         }
         driver.switchTo().window(parentWindow);
-        Thread.sleep(7000);
-        driver.navigate().refresh();
+        Thread.sleep(9000);
+        DriverFactory.getDriver().navigate().refresh();
         return email;
 
     }

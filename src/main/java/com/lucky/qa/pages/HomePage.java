@@ -9,7 +9,6 @@ import java.util.List;
 
 
 public class HomePage extends BasePage {
-
     public HomePage(WebDriver driver) {
         super(driver);
     }
@@ -51,10 +50,11 @@ public class HomePage extends BasePage {
     @FindBy(className = "wallet-body")
     private WebElement transactionSection;
 
-    @FindBy(className = "carousel-inner")
+    @FindBy(className = "hero-banner")
     private WebElement homeBanner;
 
     public void clickSignInBtn() {
+        waitVisibilityOfElement(signInBtn);
         clickButton(signInBtn);
 
     }
@@ -65,7 +65,7 @@ public class HomePage extends BasePage {
     }
 
     public void clkInStoreBtn() {
-       waitVisibilityOfElement(inStoreBtn);
+        // waitVisibilityOfElement(inStoreBtn);
         clickButton(inStoreBtn);
     }
 
@@ -75,7 +75,7 @@ public class HomePage extends BasePage {
     }
 
     public void openProfilePage() {
-        waitVisibilityOfElement(profileDropdown);
+        //waitVisibilityOfElement(profileDropdown);
         clickButton(profileDropdown);
         clickButton(profileBtn);
     }

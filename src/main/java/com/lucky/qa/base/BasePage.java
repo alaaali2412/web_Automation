@@ -1,26 +1,21 @@
 package com.lucky.qa.base;
 
 
+import com.lucky.qa.connectors.DriverFactory;
 import com.lucky.qa.pages.PageGenerator;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.*;
 
 import java.time.Duration;
 import java.util.List;
 
 public class BasePage extends PageGenerator {
-
-    protected Actions actions;
-
-
     public BasePage(WebDriver driver) {
         super(driver);
-
-        PageFactory.initElements(driver, this);
     }
 
+    protected Actions actions;
 
     protected void clickButton(WebElement element) {
         element.click();
@@ -41,20 +36,20 @@ public class BasePage extends PageGenerator {
 
 
     public void scrollToEndOfScreen() {
-        ((JavascriptExecutor) driver).executeScript("window.scrollTo(0, document.body.scrollHeight)");
+        ((JavascriptExecutor) DriverFactory.getDriver()).executeScript("window.scrollTo(0, document.body.scrollHeight)");
     }
 
 
     protected void waitVisibilityOfElement(WebElement element) {
-        Wait<WebDriver> wait = new FluentWait<>(driver).withTimeout(Duration.ofSeconds(30))
+        Wait<WebDriver> wait = new FluentWait<>(DriverFactory.getDriver()).withTimeout(Duration.ofSeconds(30))
                 .pollingEvery(Duration.ofSeconds(3))
                 .ignoring(Exception.class);
         wait.until(ExpectedConditions.visibilityOf(element));
 
     }
 
-    protected void waitVisibilityOfAllElements(List <WebElement> elements) {
-        Wait<WebDriver> wait = new FluentWait<>(driver).withTimeout(Duration.ofSeconds(30))
+    protected void waitVisibilityOfAllElements(List<WebElement> elements) {
+        Wait<WebDriver> wait = new FluentWait<>(DriverFactory.getDriver()).withTimeout(Duration.ofSeconds(30))
                 .pollingEvery(Duration.ofSeconds(3))
                 .ignoring(Exception.class);
         wait.until(ExpectedConditions.visibilityOfAllElements(elements));
@@ -62,8 +57,13 @@ public class BasePage extends PageGenerator {
     }
 
     public void forceClickElement(WebElement element) {
-        Actions actions = new Actions(driver);
+        Actions actions = new Actions(DriverFactory.getDriver());
         actions.moveToElement(element).click(element).build().perform();
+    }
+
+    public void forceAddText(WebElement element, String value) {
+        actions = new Actions(DriverFactory.getDriver());
+        actions.moveToElement(element).sendKeys(value).build().perform();
     }
 
 /*

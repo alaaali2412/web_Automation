@@ -5,7 +5,6 @@ import com.lucky.qa.base.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
@@ -13,7 +12,7 @@ import java.util.List;
 
 public class InStoreOfferPage extends BasePage {
 
-    @FindBy(xpath = "//*/div/div[2]/div/div[3]/div[1]")
+    @FindBy(xpath = "//*/div/div[2]/div/div[3]/div[1]/div")
     private List<WebElement> inStoreItems;
 
     @FindBy(xpath = "//div[2]/button")
@@ -34,7 +33,7 @@ public class InStoreOfferPage extends BasePage {
     @FindBy(xpath = "//div[1]/div[1]/div[2]/div/div/div[2]/div/form/div/div/div/label")
     private List<WebElement> mainSubCategories;
 
-    @FindBy(xpath = "//form/div/div/div/label")
+    @FindBy(xpath = "//*[@class = 'collapse show']//form/div/div/div/label")
     private List<WebElement> categoriesCheckbox;
 
     @FindBy(xpath = "//*[@class = 'collapse show']//label")
@@ -46,14 +45,14 @@ public class InStoreOfferPage extends BasePage {
     @FindBy(xpath = "//div[1]/div[3]/button[1]")
     private WebElement clearBtn;
 
-    @FindBy(xpath = "//div[1]/div[1]/div[2]/div/div/div[2]")
+    @FindBy(xpath = "//*[@class = 'collapse show']")
     private WebElement expandedMenu;
 
     public InStoreOfferPage(WebDriver driver) {
         super(driver);
     }
 
-    public void selectInStoreItem()  {
+    public void selectInStoreItem() {
         waitVisibilityOfAllElements(inStoreItems);
         for (WebElement item : inStoreItems) {
             clickButton(item);
@@ -62,7 +61,7 @@ public class InStoreOfferPage extends BasePage {
     }
 
     public void filterByLocation(String filterLocation) {
-        waitVisibilityOfAllElements(locations);
+        //waitVisibilityOfElement(expandedMenu);
         for (WebElement location : locations) {
             if (getText(location).equals(filterLocation)) {
                 clickButton(location);
@@ -74,6 +73,7 @@ public class InStoreOfferPage extends BasePage {
     }
 
     public void selectSubLocation(String FilterSubLocation) {
+        waitVisibilityOfElement(expandedMenu);
         for (WebElement subLocation : subLocations) {
             if (getText(subLocation).equals(FilterSubLocation)) {
                 WebElement element = subLocation.findElement(By.tagName("input"));
@@ -125,7 +125,7 @@ public class InStoreOfferPage extends BasePage {
     }
 
     public void designPattern(CategoryType categoryType, String mainCategory,
-                              String mainSubCategory, String SubCategory)  {
+                              String mainSubCategory, String SubCategory) {
 
         switch (categoryType) {
 

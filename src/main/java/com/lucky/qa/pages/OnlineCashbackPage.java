@@ -49,11 +49,11 @@ public class OnlineCashbackPage extends BasePage {
         return new ArrayList<>(merchants).size();
     }
 
-    public void searchOnlineCashabckOffers(String StoreName) throws InterruptedException {
+    public void searchOnlineCashabckOffers(String StoreName) {
+        waitVisibilityOfElement(searchField);
         clearField(searchField);
         addText(searchField, StoreName);
         searchField.sendKeys(Keys.ENTER);
         waitVisibilityOfElement(onlineCashbackTitle);
-        Thread.sleep(10000);
     }
 }
