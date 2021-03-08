@@ -11,7 +11,6 @@ import io.cucumber.java.en.When;
 import org.testng.Assert;
 
 public class changeNameAndPasswordInprofileIT {
-
     String loggedInEmail;
     @Given("portal and browser open, user login")
     public void portal_and_browser_open_user_login() {

@@ -64,18 +64,17 @@ public class ProfilePage extends BasePage {
     }
 
     public void changePassword() {
-        String newPassword = helper.generateRandomPassword(9);
+        String newPassword = Helper.generateRandomPassword(9);
         clickButton(passwordField);
         waitVisibilityOfElement(newPassHeader);
         helper.setPropertiesFileName("LoginData.properties");
         addText(oldPassField, helper.getValuesFromPropertiesFile("password"));
         addText(newPassField, newPassword);
         addText(newConfirmPassField, newPassword);
-        helper.updateValueInPropertiesFile("password", newPassword);
-
         clickButton(saveChangesBtn);
-
         waitVisibilityOfElement(toastMessage);
+        helper.updateValueInPropertiesFile("password", newPassword);
+        System.out.println("profile page" + newPassword);
     }
 
     public void clickLogout() {

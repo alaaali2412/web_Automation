@@ -14,7 +14,7 @@ public class HomePage extends BasePage {
     }
 
 
-    @FindBy(xpath = "//div/header/div[1]/nav/div/div[7]/a")
+    @FindBy(xpath = "//*[@class ='px-xl-3 px-lg-2 nav-link-item'][4]")
     private WebElement signInBtn;
 
     @FindBy(xpath = "//button/*[text()='Facebook']")
