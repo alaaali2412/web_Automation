@@ -1,4 +1,4 @@
-@performCashoutRequestByBankAccount
+@PerformCashoutRequestByBankAccount
 
 Feature: perform Cashout Request By Bank Account
 

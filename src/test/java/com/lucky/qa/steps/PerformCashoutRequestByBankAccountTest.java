@@ -11,14 +11,15 @@ import io.cucumber.java.en.When;
 import org.testng.Assert;
 
 
-public class performCashoutRequestByBankAccountTest {
+public class PerformCashoutRequestByBankAccountTest {
     Double cashoutAmount;
     Double balance;
 
     @Given("browser, portal opened,user login")
     public void browser_portal_openeduser_login() {
         PageGenerator.getInstance(HomePage.class).clickSignInBtn();
-        PageGenerator.getInstance(LoginPage.class).login();
+        PageGenerator.getInstance(LoginPage.class).login("LoginData.properties",
+                "Email", "password");
     }
 
     @When("wallet opens and cashback balance >= {double} EGP")
@@ -51,7 +52,5 @@ public class performCashoutRequestByBankAccountTest {
         PageGenerator.getInstance(HomePage.class).clickWallet();
         Double balanceAfter = balance - cashoutAmount;
         Assert.assertEquals(PageGenerator.getInstance(WalletPage.class).getUserTotalBalance(), balanceAfter);
-
-
     }
 }

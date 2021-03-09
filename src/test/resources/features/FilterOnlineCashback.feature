@@ -1,4 +1,4 @@
-@filterOnlineCashback
+@FilterOnlineCashback
 Feature: filter Online Cashback offers by category
 
   Scenario Outline: user should be able to filter Online Cashback offers

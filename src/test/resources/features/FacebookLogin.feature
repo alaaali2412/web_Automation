@@ -1,4 +1,4 @@
-@facebookLogin
+@FacebookLogin
 
 Feature: Login with user facebook account
   @ignore

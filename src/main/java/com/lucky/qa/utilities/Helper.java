@@ -1,5 +1,6 @@
 package com.lucky.qa.utilities;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -47,7 +48,6 @@ public class Helper {
             sb.append(c);
         }
         return sb.toString();
-
     }
 
     public String updateValueInPropertiesFile(String key, String value) {
@@ -64,22 +64,17 @@ public class Helper {
 
             System.out.println("Exception while taking screenshot" + e.getMessage());
             throw new RuntimeException("Could not read properties from file: [" + getPropertiesFileName() + "].", e);
-
         }
         return properties.getProperty(value);
     }
 
     //Method to generate random Number.
     public static String generateRandomPassword(int length) {
-        char[] chars = "0123456789&@abcdefghijklmnopqrstuvwxyz".toCharArray();
-        StringBuilder sb = new StringBuilder();
-        Random random = new Random();
-        for (int i = 0; i < length; i++) {
-            char c = chars[random.nextInt(chars.length)];
-            sb.append(c);
-        }
-        return sb.toString();
-
+        String uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        String lowerCase = "abcdefghijklmnopqrstuvwxyz";
+        String numbers = "0123456789";
+        String character = "!@#$%^&*";
+        return RandomStringUtils.random(length, uppercase + character + numbers);
     }
 
     //Method to take screenshot the test case fail

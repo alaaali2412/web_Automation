@@ -1,4 +1,4 @@
-@filterInStoreOffersByCombinedFilters
+@FilterInStoreOffersByCombinedFilters
 Feature: filter In_store offers by it`s categories & Locations
 
   Scenario Outline: filtering In Store offers by location and category at the same time

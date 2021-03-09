@@ -1,4 +1,4 @@
-@filterInStoreOffersByLocation
+@FilterInStoreOffersByLocation
 Feature: filter In_store offers by it`s Location
 
   Scenario Outline: User should be able to filter In_store offers by it`s location

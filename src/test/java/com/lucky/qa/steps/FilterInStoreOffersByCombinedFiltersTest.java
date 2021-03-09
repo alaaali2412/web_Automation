@@ -6,13 +6,14 @@ import com.lucky.qa.pages.PageGenerator;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 
-public class filterInStoreOffersByCombinedFiltersTest {
+public class FilterInStoreOffersByCombinedFiltersTest {
 
     @Given("browser & portal opened,  open In_store offer screen")
     public void browser_portal_opened_open_in_store_offer_screen() {
         PageGenerator.getInstance(HomePage.class).clkInStoreBtn();
 
     }
+
     @When("user filter by location location {string}, {string}")
     public void user_filter_by_location_location(String Location, String subLocation) {
         PageGenerator.getInstance(InStoreOfferPage.class).filterByLocation(Location);

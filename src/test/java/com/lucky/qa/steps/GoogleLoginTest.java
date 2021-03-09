@@ -9,7 +9,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 
-public class googleLoginTest {
+public class GoogleLoginTest {
 
     String loggedEmail;
 

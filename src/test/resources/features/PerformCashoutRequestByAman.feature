@@ -1,4 +1,4 @@
-@performCashoutRequestByAman
+@PerformCashoutRequestByAman
 Feature: perfoem cahback out request by Aman
 
   Scenario Outline: loggedin user should be able to Cashout if cashback > 100 EGP

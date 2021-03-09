@@ -10,12 +10,14 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
 
-public class changeNameAndPasswordInprofileIT {
+public class ChangeNameAndPasswordInProfileTest {
     String loggedInEmail;
+
     @Given("portal and browser open, user login")
     public void portal_and_browser_open_user_login() {
         PageGenerator.getInstance(HomePage.class).clickSignInBtn();
-        PageGenerator.getInstance(LoginPage.class).login();
+        PageGenerator.getInstance(LoginPage.class).login("LoginData.properties",
+                "Email", "password");
     }
 
 
@@ -38,7 +40,8 @@ public class changeNameAndPasswordInprofileIT {
     public void user_log_out_and_login_again() {
         PageGenerator.getInstance(ProfilePage.class).clickLogout();
         PageGenerator.getInstance(HomePage.class).clickSignInBtn();
-        loggedInEmail = PageGenerator.getInstance(LoginPage.class).login();
+        PageGenerator.getInstance(LoginPage.class).login("LoginData.properties",
+                "Email", "password");
     }
 
     @Then("verify that data changed")

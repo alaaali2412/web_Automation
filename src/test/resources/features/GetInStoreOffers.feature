@@ -1,4 +1,4 @@
-@inStoreOffers
+@GetInStoreOffers
 Feature: Get in store offers
 
   Scenario: User try to get in store offers

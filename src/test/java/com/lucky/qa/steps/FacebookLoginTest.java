@@ -7,7 +7,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-public class facebookLoginTest {
+public class FacebookLoginTest {
 
     @Given("browser open,navigate to portal URl")
     public void browser_open_navigate_to_portal_u_rl() {
