@@ -13,18 +13,21 @@ import org.testng.Assert;
 
 
 
-public class filterOnlineCashbackTest {
+public class FilterOnlineCashbackTest {
 
     public String categorySelected;
     ImplementAPIsMethods implementMethodsObject;
     int APIresult;
+
     @Given("browser opened,portal opened")
     public void browser_opened_portal_opened() {
     }
+
     @When("user logged in")
     public void user_logged_in() {
         PageGenerator.getInstance(HomePage.class).clickSignInBtn();
-        PageGenerator.getInstance(LoginPage.class).login();
+        PageGenerator.getInstance(LoginPage.class).login("LoginData.properties",
+                "Email", "password");
     }
     @When("user click OnlineCashback and select {string}")
     public void user_click_online_cashback_and_select(String category) {

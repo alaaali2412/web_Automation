@@ -1,4 +1,4 @@
-@forgetPassword
+@ForgetPassword
 Feature: User can login with wrong credentials, so he will reset his password
 
   Background:

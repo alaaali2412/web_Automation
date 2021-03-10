@@ -1,4 +1,4 @@
-@changeNameAndPasswordInprofile
+@ChangeNameAndPasswordInprofile
 Feature: Change in user profile date
 
   Scenario: changing name and password in user profile

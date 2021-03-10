@@ -18,10 +18,13 @@ public class HomePage extends BasePage {
     private WebElement signInBtn;
 
     @FindBy(xpath = "//button/*[text()='Facebook']")
-    private WebElement FacebookBtn;
+    private WebElement facebookBtn;
 
     @FindBy(xpath = "//button/*[text()='Google']")
-    private WebElement GoogleBtn;
+    private WebElement googleBtn;
+
+    @FindBy(xpath = "//a/*[text()='E-mail']")
+    private WebElement emailBtn;
 
     @FindBy(xpath = "//div[1]/nav/div/div[2]")
     private WebElement inStoreBtn;
@@ -56,26 +59,27 @@ public class HomePage extends BasePage {
     public void clickSignInBtn() {
         waitVisibilityOfElement(signInBtn);
         clickButton(signInBtn);
-
     }
-
 
     public void facebookLogin() {
-        clickButton(FacebookBtn);
-    }
-
-    public void clkInStoreBtn() {
-        // waitVisibilityOfElement(inStoreBtn);
-        clickButton(inStoreBtn);
+        clickButton(facebookBtn);
     }
 
     public void googleLogin() {
-        waitVisibilityOfElement(GoogleBtn);
-        clickButton(GoogleBtn);
+        waitVisibilityOfElement(googleBtn);
+        clickButton(googleBtn);
+    }
+
+    public void clickSignupBtn() {
+        clickButton(emailBtn);
+    }
+
+    public void clkInStoreBtn() {
+        clickButton(inStoreBtn);
     }
 
     public void openProfilePage() {
-        //waitVisibilityOfElement(profileDropdown);
+        waitVisibilityOfElement(profileDropdown);
         clickButton(profileDropdown);
         clickButton(profileBtn);
     }
@@ -95,6 +99,4 @@ public class HomePage extends BasePage {
         clickButton(walletBtn);
         waitVisibilityOfElement(transactionSection);
     }
-
-
 }

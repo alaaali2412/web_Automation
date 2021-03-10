@@ -7,7 +7,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-public class forgetPassword {
+public class ForgetPasswordTest {
 
     @Given("browser and portal open")
     public void browser_and_portal_open() {
@@ -52,7 +52,8 @@ public class forgetPassword {
 
     @Then("user can log with the new password")
     public void user_can_log_with_the_new_password() {
-        PageGenerator.getInstance(LoginPage.class).verifyLogin();
+        PageGenerator.getInstance(LoginPage.class).login("LoginData.properties",
+                "GoogleEmail", "NewPassword");
 
     }
 

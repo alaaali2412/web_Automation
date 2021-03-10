@@ -9,7 +9,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
 
-public class emailLoginTest {
+public class EmailLoginTest {
     public String loggedEmail;
 
     @Given("browser open,navigate to portal")
@@ -24,7 +24,8 @@ public class emailLoginTest {
 
     @When("^login with valid email and pass$")
     public void login_with_valid_email_and_pass() {
-        loggedEmail = PageGenerator.getInstance(LoginPage.class).login();
+        loggedEmail = PageGenerator.getInstance(LoginPage.class).login("LoginData.properties"
+                , "Email", "password");
     }
 
     @Then("verify the login")

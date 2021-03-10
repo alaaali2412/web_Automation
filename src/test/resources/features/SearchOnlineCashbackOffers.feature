@@ -1,4 +1,4 @@
-@searchOnlineCashbackOffers
+@SearchOnlineCashbackOffers
 Feature: search Online Cashback Offers
 
   Scenario Outline: search Online Cashback Offers by store name

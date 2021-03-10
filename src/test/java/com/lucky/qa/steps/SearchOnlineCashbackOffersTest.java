@@ -8,7 +8,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
 
-public class searchOnlineCashbackOffersTest {
+public class SearchOnlineCashbackOffersTest {
     ImplementAPIsMethods implementAPIsMethods;
     int APIresult;
 

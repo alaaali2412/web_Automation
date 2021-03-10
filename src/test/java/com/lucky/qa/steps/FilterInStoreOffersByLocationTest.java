@@ -7,16 +7,18 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-public class filterInStoreOffersByLocationTest {
+public class FilterInStoreOffersByLocationTest {
 
     @Given("browser open,portal,open In_store offer")
     public void browser_open_portal_open_in_store_offer() {
         PageGenerator.getInstance(HomePage.class).clkInStoreBtn();
     }
+
     @When("user choose specfic {string} from the right menu")
-    public void user_choose_specfic_from_the_right_menu(String Location)  {
+    public void user_choose_specfic_from_the_right_menu(String Location) {
         PageGenerator.getInstance(InStoreOfferPage.class).filterByLocation(Location);
     }
+
     @When("select {string} if required")
     public void select_if_required(String subLocation)  {
         PageGenerator.getInstance(InStoreOfferPage.class).selectSubLocation(subLocation);

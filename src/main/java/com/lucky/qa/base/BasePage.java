@@ -12,14 +12,16 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 
 public class BasePage extends PageGenerator {
+    protected static ArrayList<String> tabs;
+    protected Actions actions;
+
     public BasePage(WebDriver driver) {
         super(driver);
     }
-
-    protected Actions actions;
 
     protected void clickButton(WebElement element) {
         element.click();
@@ -33,31 +35,26 @@ public class BasePage extends PageGenerator {
         button.clear();
     }
 
-
     protected String getText(WebElement element) {
         return element.getText();
     }
-
 
     public void scrollToEndOfScreen() {
         ((JavascriptExecutor) DriverFactory.getDriver()).executeScript("window.scrollTo(0, document.body.scrollHeight)");
     }
 
-
     protected void waitVisibilityOfElement(WebElement element) {
-        Wait<WebDriver> wait = new FluentWait<>(DriverFactory.getDriver()).withTimeout(Duration.ofSeconds(30))
+        Wait<WebDriver> wait = new FluentWait<>(DriverFactory.getDriver()).withTimeout(Duration.ofSeconds(60))
                 .pollingEvery(Duration.ofSeconds(3))
                 .ignoring(Exception.class);
         wait.until(ExpectedConditions.visibilityOf(element));
-
     }
 
     protected void waitVisibilityOfAllElements(List<WebElement> elements) {
-        Wait<WebDriver> wait = new FluentWait<>(DriverFactory.getDriver()).withTimeout(Duration.ofSeconds(30))
+        Wait<WebDriver> wait = new FluentWait<>(DriverFactory.getDriver()).withTimeout(Duration.ofSeconds(60))
                 .pollingEvery(Duration.ofSeconds(3))
                 .ignoring(Exception.class);
         wait.until(ExpectedConditions.visibilityOfAllElements(elements));
-
     }
 
     public void forceClickElement(WebElement element) {
@@ -68,6 +65,12 @@ public class BasePage extends PageGenerator {
     public void forceAddText(WebElement element, String value) {
         actions = new Actions(DriverFactory.getDriver());
         actions.moveToElement(element).click(element).sendKeys(value).build().perform();
+    }
+
+    public void openNewTab() {
+        ((JavascriptExecutor) driver).executeScript("window.open()");
+        tabs = new ArrayList<>(driver.getWindowHandles());
+        driver.switchTo().window(tabs.get(1));
     }
 
 /*

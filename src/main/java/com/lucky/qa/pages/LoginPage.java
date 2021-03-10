@@ -4,6 +4,7 @@ import com.lucky.qa.base.BasePage;
 import com.lucky.qa.connectors.DriverFactory;
 import com.lucky.qa.utilities.Helper;
 import org.junit.Assert;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -35,14 +36,23 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//*[@id='buttons']")
     private WebElement continueBtnFb;
 
+    @FindBy(id = "formName")
+    private WebElement nameField;
+
     @FindBy(id = "formEmail")
     private WebElement inputEmail;
 
     @FindBy(id = "formPassword")
     private WebElement inputPassword;
 
+    @FindBy(id = "formRepeatPassword")
+    private WebElement repeatPassField;
+
     @FindBy(xpath = "//div[3]/button")
     private WebElement loginBtn;
+
+    @FindBy(xpath = "//*[@Class='py-3']/button")
+    private WebElement registerBtn;
 
     @FindBy(id = "identifierId")
     private WebElement googleEmail;
@@ -104,20 +114,98 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//*[@class = 'react-toast-notifications__toast__content css-1ad3zal']")
     private WebElement toastMessage;
 
+    @FindBy(xpath = "//div[2]/div/div/input[2]")
+    private WebElement createEmailBtn;
+
+    @FindBy(id = "userTempMail")
+    private WebElement copyEmail;
+
+    @FindBy(xpath = "//h1")
+    private WebElement verificationHeader;
+
+    @FindBy(id = "divEmailList")
+    private WebElement emailList;
+
+    @FindBy(xpath = "//tbody//tbody/tr[2]/td/table/tbody//tbody/tr/td/a")
+    private WebElement verifyEmailLink;
+
+    @FindBy(xpath = "//section/div/div/div/a")
+    private WebElement loginBtnAfterMailVerification;
+
     public LoginPage(WebDriver driver) {
         super(driver);
     }
 
-    public String login() {
-        helper.setPropertiesFileName("LoginData.properties");
+    public void addRegistrationName() {
+        helper.setPropertiesFileName("RegistrationData.properties");
+        addText(nameField, helper.getValuesFromPropertiesFile("Name"));
+    }
+
+    public void addRegistrationEmail() throws InterruptedException {
+        helper.setPropertiesFileName("RegistrationData.properties");
+        //To Clear the copy
+        addText(inputEmail, " ");
+        inputEmail.sendKeys(Keys.COMMAND + "a");
+        inputEmail.sendKeys(Keys.COMMAND + "c");
+        openNewTab();
+        driver.get("http://www.20minutemail.com/");
+        clickButton(createEmailBtn);
+        clickButton(copyEmail);
+        driver.switchTo().window(tabs.get(0));
+        inputEmail.sendKeys(Keys.COMMAND + "v");
+        Thread.sleep(1000);
+        helper.updateValueInPropertiesFile("RegistrationEmail", inputEmail.getAttribute("value"));
+    }
+
+    public void addRegistrationPasswords() {
+        helper.setPropertiesFileName("RegistrationData.properties");
+        String newPassword = Helper.generateRandomPassword(12);
+        addText(inputPassword, newPassword);
+        addText(repeatPassField, newPassword);
+        helper.updateValueInPropertiesFile("RegistrationPassword", newPassword);
+        helper.updateValueInPropertiesFile("RepeatPassword", newPassword);
+    }
+
+    public void clickRegisterBtn() {
+        clickButton(registerBtn);
+        waitVisibilityOfElement(verificationHeader);
+    }
+
+    public void checkUnverifiedMailErrorMessage() throws InterruptedException {
+        Thread.sleep(1000);
+        Assert.assertEquals("Please verify your email", errorMessage.getText());
+    }
+
+    public void openVerificationMail() throws InterruptedException {
+        driver.switchTo().window(tabs.get(1));
+        while (!emailList.getText().contains("Email Confirmation")) {
+            Thread.sleep(5000);
+            driver.navigate().refresh();
+            if (emailList.getText().contains("Email Confirmation")) {
+                clickButton(emailList);
+                break;
+            }
+        }
+    }
+
+    public void verifyRegistrationEmail() {
+        scrollToEndOfScreen();
+        clickButton(verifyEmailLink);
+        tabs = new ArrayList<>(driver.getWindowHandles());
+        driver.switchTo().window(tabs.get(2));
+        waitVisibilityOfElement(verificationHeader);
+        clickButton(loginBtnAfterMailVerification);
+    }
+
+    public String login(String fileName, String email, String password) {
+        helper.setPropertiesFileName(fileName);
         waitVisibilityOfElement(inputPassword);
         clearField(inputEmail);
-        addText(inputEmail, helper.getValuesFromPropertiesFile("Email"));
+        addText(inputEmail, helper.getValuesFromPropertiesFile(email));
         clearField(inputPassword);
-        addText(inputPassword, helper.getValuesFromPropertiesFile("password"));
+        addText(inputPassword, helper.getValuesFromPropertiesFile(password));
         clickButton(loginBtn);
-        waitVisibilityOfElement(homeBanner);
-        return helper.getValuesFromPropertiesFile("Email");
+        return helper.getValuesFromPropertiesFile(email);
     }
 
     public void loginFacebook(String email, String password) {
@@ -219,17 +307,6 @@ public class LoginPage extends BasePage {
         clickButton(saveChangesBtn);
         waitVisibilityOfElement(toastMessage);
         helper.updateValueInPropertiesFile("NewPassword", newPassword);
-    }
-
-    public void verifyLogin() {
-        helper.setPropertiesFileName("LoginData.properties");
-        clearField(inputEmail);
-        addText(inputEmail, helper.getValuesFromPropertiesFile("GoogleEmail"));
-        clearField(inputPassword);
-        addText(inputPassword, helper.getValuesFromPropertiesFile("NewPassword"));
-        clickButton(loginBtn);
-        waitVisibilityOfElement(homeBanner);
-
     }
 }
 

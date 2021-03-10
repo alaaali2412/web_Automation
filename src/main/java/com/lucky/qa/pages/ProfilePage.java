@@ -23,7 +23,6 @@ public class ProfilePage extends BasePage {
     @FindBy(id = "formBasicPassword")
     private WebElement passwordField;
 
-
     @FindBy(xpath = "//button[text() ='Save Changes']")
     private WebElement saveChangesBtn;
 
@@ -39,7 +38,6 @@ public class ProfilePage extends BasePage {
     @FindBy(id = "formBasicPassword0")
     private WebElement oldPassField;
 
-
     @FindBy(id = "formBasicPassword1")
     private WebElement newPassField;
 
@@ -50,9 +48,8 @@ public class ProfilePage extends BasePage {
     private WebElement newPassHeader;
 
     public String getLoggedInEmail() {
-        System.out.println(loggedInEmail.getAttribute("value"));
+        waitVisibilityOfElement(loggedInEmail);
         return loggedInEmail.getAttribute("value");
-
     }
 
     public void changeName() {
@@ -64,7 +61,7 @@ public class ProfilePage extends BasePage {
     }
 
     public void changePassword() {
-        String newPassword = Helper.generateRandomPassword(9);
+        String newPassword = Helper.generateRandomPassword(12);
         clickButton(passwordField);
         waitVisibilityOfElement(newPassHeader);
         helper.setPropertiesFileName("LoginData.properties");
@@ -74,7 +71,6 @@ public class ProfilePage extends BasePage {
         clickButton(saveChangesBtn);
         waitVisibilityOfElement(toastMessage);
         helper.updateValueInPropertiesFile("password", newPassword);
-        System.out.println("profile page" + newPassword);
     }
 
     public void clickLogout() {

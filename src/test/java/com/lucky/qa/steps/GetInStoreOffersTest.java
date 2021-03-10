@@ -4,12 +4,13 @@ import com.lucky.qa.pages.*;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-public class getinStoreOffersTest {
+public class GetInStoreOffersTest {
 
     @When("browser open,open portal, user login")
     public void browser_openopen_portal_user_login() {
         PageGenerator.getInstance(HomePage.class).clickSignInBtn();
-        PageGenerator.getInstance(LoginPage.class).login();
+        PageGenerator.getInstance(LoginPage.class).login("LoginData.properties"
+                , "Email", "password");
     }
 
     @When("click on instore offers")
