@@ -40,7 +40,7 @@ public class ChangeNameAndPasswordInProfileTest {
     public void user_log_out_and_login_again() {
         PageGenerator.getInstance(ProfilePage.class).clickLogout();
         PageGenerator.getInstance(HomePage.class).clickSignInBtn();
-        PageGenerator.getInstance(LoginPage.class).login("LoginData.properties",
+        loggedInEmail = PageGenerator.getInstance(LoginPage.class).login("LoginData.properties",
                 "Email", "password");
     }
 

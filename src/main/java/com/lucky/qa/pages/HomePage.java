@@ -47,7 +47,7 @@ public class HomePage extends BasePage {
     @FindBy(className = "//header/div[1]/nav//div/span")
     private WebElement logoBtn;
 
-    @FindBy(xpath = "//nav/div/div[3]/a")
+    @FindBy(xpath = "//*[@class = 'container-md']//div[3]")
     private WebElement walletBtn;
 
     @FindBy(className = "wallet-body")
@@ -55,6 +55,13 @@ public class HomePage extends BasePage {
 
     @FindBy(className = "hero-banner")
     private WebElement homeBanner;
+
+    @FindBy(xpath = "//*[@class = 'container-md']/a")
+    private WebElement homeScreenBtn;
+
+    public void openHomeScreen() {
+        clickButton(homeScreenBtn);
+    }
 
     public void clickSignInBtn() {
         waitVisibilityOfElement(signInBtn);
@@ -96,6 +103,7 @@ public class HomePage extends BasePage {
     }
 
     public void clickWallet() {
+        waitVisibilityOfElement(profileDropdown);
         clickButton(walletBtn);
         waitVisibilityOfElement(transactionSection);
     }

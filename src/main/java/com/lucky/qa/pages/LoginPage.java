@@ -9,21 +9,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 
 public class LoginPage extends BasePage {
 
-    static String parentWindow;
     Helper helper = new Helper();
-    @FindBy(className = "btn-icon")
-    private List<WebElement> listItems;
-
-    @FindBy(className = "btn-inner--text")
-    private WebElement facebookButton;
-
     @FindBy(id = "email")
     private WebElement inputEmailFb;
 
@@ -32,9 +24,6 @@ public class LoginPage extends BasePage {
 
     @FindBy(xpath = "//*[@id='u_0_0']")
     private WebElement loginBtnFb;
-
-    @FindBy(xpath = "//*[@id='buttons']")
-    private WebElement continueBtnFb;
 
     @FindBy(id = "formName")
     private WebElement nameField;
@@ -51,7 +40,10 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//div[3]/button")
     private WebElement loginBtn;
 
-    @FindBy(xpath = "//*[@Class='py-3']/button")
+    @FindBy(xpath = "//p[1]/a")
+    private WebElement registerLink;
+
+    @FindBy(xpath = "//*[text() = 'Register']")
     private WebElement registerBtn;
 
     @FindBy(id = "identifierId")
@@ -63,14 +55,8 @@ public class LoginPage extends BasePage {
     @FindBy(id = "identifierNext")
     private WebElement emailNextBtn;
 
-    @FindBy(className = "modal-open")
-    private WebElement modal;
-
     @FindBy(id = "passwordNext")
     private WebElement passNextBtn;
-
-    @FindBy(className = "carousel-inner")
-    private WebElement homeBanner;
 
     @FindBy(xpath = "//div/header/div[1]/nav/div/div[7]/a")
     private WebElement signInBtn;
@@ -90,14 +76,14 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//div[4]/ul[2]/li[3]/a")
     private WebElement googleSignIn;
 
-    @FindBy(xpath = "//*[@class = 'F cf zt']/tbody/tr")
-    private List<WebElement> googleEmails;
+    @FindBy(xpath = "//*[@class='y6']//*[@class='bqe']")
+    private List<WebElement> unreadEmails;
 
     @FindBy(xpath = "//*[@class='bA4']//span[1]")
-    private WebElement emailHeader;
+    private WebElement emailTitle;
 
     @FindBy(xpath = "//*[@class='y6']//span[1]")
-    private WebElement emailTitle;
+    private WebElement emailSubject;
 
     @FindBy(xpath = "//table//table/tbody/tr[5]/td/a/table/tbody/tr/td")
     private WebElement resetPassLink;
@@ -114,23 +100,32 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//*[@class = 'react-toast-notifications__toast__content css-1ad3zal']")
     private WebElement toastMessage;
 
-    @FindBy(xpath = "//div[2]/div/div/input[2]")
-    private WebElement createEmailBtn;
-
-    @FindBy(id = "userTempMail")
+    @FindBy(xpath = "//form/div[2]/button")
     private WebElement copyEmail;
 
     @FindBy(xpath = "//h1")
     private WebElement verificationHeader;
 
-    @FindBy(id = "divEmailList")
+    @FindBy(xpath = "//*[@class='inbox-dataList']//li[2]")
     private WebElement emailList;
+
+    @FindBy(xpath = "//*[@class='inbox-dataList']//li[2]/div")
+    private WebElement emailLink;
 
     @FindBy(xpath = "//tbody//tbody/tr[2]/td/table/tbody//tbody/tr/td/a")
     private WebElement verifyEmailLink;
 
     @FindBy(xpath = "//section/div/div/div/a")
     private WebElement loginBtnAfterMailVerification;
+
+    @FindBy(xpath = "//*[@id= 'formEmail']/following-sibling::div")
+    private WebElement invalidEmailErrorMessage;
+
+    @FindBy(xpath = "//*[@id= 'formPassword']/following-sibling::div")
+    private WebElement invalidPassErrorMessage;
+
+    @FindBy(xpath = "//*[@class='ajV']//div")
+    private WebElement expandEmailBtn;
 
     public LoginPage(WebDriver driver) {
         super(driver);
@@ -141,6 +136,7 @@ public class LoginPage extends BasePage {
         addText(nameField, helper.getValuesFromPropertiesFile("Name"));
     }
 
+
     public void addRegistrationEmail() throws InterruptedException {
         helper.setPropertiesFileName("RegistrationData.properties");
         //To Clear the copy
@@ -148,10 +144,10 @@ public class LoginPage extends BasePage {
         inputEmail.sendKeys(Keys.COMMAND + "a");
         inputEmail.sendKeys(Keys.COMMAND + "c");
         openNewTab();
-        driver.get("http://www.20minutemail.com/");
-        clickButton(createEmailBtn);
+        moveToTab(1);
+        driver.get("https://10minemail.com/");
         clickButton(copyEmail);
-        driver.switchTo().window(tabs.get(0));
+        moveToTab(0);
         inputEmail.sendKeys(Keys.COMMAND + "v");
         Thread.sleep(1000);
         helper.updateValueInPropertiesFile("RegistrationEmail", inputEmail.getAttribute("value"));
@@ -177,22 +173,20 @@ public class LoginPage extends BasePage {
     }
 
     public void openVerificationMail() throws InterruptedException {
-        driver.switchTo().window(tabs.get(1));
+        moveToTab(1);
+        System.out.println("the text before " + emailList.getText());
         while (!emailList.getText().contains("Email Confirmation")) {
+            System.out.println("the text before " + emailList.getText());
             Thread.sleep(5000);
             driver.navigate().refresh();
-            if (emailList.getText().contains("Email Confirmation")) {
-                clickButton(emailList);
-                break;
-            }
         }
+        clickButton(emailLink);
     }
 
     public void verifyRegistrationEmail() {
         scrollToEndOfScreen();
         clickButton(verifyEmailLink);
-        tabs = new ArrayList<>(driver.getWindowHandles());
-        driver.switchTo().window(tabs.get(2));
+        moveToTab(2);
         waitVisibilityOfElement(verificationHeader);
         clickButton(loginBtnAfterMailVerification);
     }
@@ -226,26 +220,27 @@ public class LoginPage extends BasePage {
         waitVisibilityOfElement(signInBtn);
     }
 
-    public String loginGoogle(String email, String password) {
-        parentWindow = driver.getWindowHandle();
+    public void addGmailCredentials(String email, String password) {
+        forceAddText(googleEmail, email);
+        clickButton(emailNextBtn);
+        waitVisibilityOfElement(googlePassword);
+        forceAddText(googlePassword, password);
+        clickButton(passNextBtn);
+    }
+
+    public String loginGoogle(String email, String password) throws InterruptedException {
+        String parentWindow = driver.getWindowHandle();
         Set<String> allWindow = driver.getWindowHandles();
         for (String child : allWindow) {
             if (!parentWindow.equalsIgnoreCase(child)) {
                 driver.switchTo().window(child);
-                forceAddText(googleEmail, email);
-                clickButton(emailNextBtn);
-                waitVisibilityOfElement(googlePassword);
-                forceAddText(googlePassword, password);
-                clickButton(passNextBtn);
+                addGmailCredentials(email, password);
             }
         }
-        return email;
-    }
-
-    public void getBackToMainWindow() throws InterruptedException {
         driver.switchTo().window(parentWindow);
         Thread.sleep(9000);
         DriverFactory.getDriver().navigate().refresh();
+        return email;
     }
 
     public void loginWithInvalidPass() throws InterruptedException {
@@ -272,7 +267,6 @@ public class LoginPage extends BasePage {
         clearField(inputEmail);
         addText(inputEmail, helper.getValuesFromPropertiesFile("GoogleEmail"));
         clickButton(emailMeBtn);
-        System.out.println(mailVerificationText.isDisplayed());
         waitVisibilityOfElement(mailVerificationText);
     }
 
@@ -280,33 +274,71 @@ public class LoginPage extends BasePage {
         helper.setPropertiesFileName("LoginData.properties");
         driver.navigate().to("https://mail.google.com/");
         clickButton(googleSignIn);
-        loginGoogle(helper.getValuesFromPropertiesFile("GoogleEmail"),
+        moveToTab(1);
+        addGmailCredentials(helper.getValuesFromPropertiesFile("GoogleEmail"),
                 helper.getValuesFromPropertiesFile("GoogleEmailPassword"));
     }
 
-    public void openResetPassEmail() {
-        waitVisibilityOfAllElements(googleEmails);
-        for (WebElement email : googleEmails) {
-            if (emailHeader.getAttribute("name").equals("Lucky") &&
-                    emailTitle.getText().contains("Password Reset Link")) {
+    public void checkTheUnreadEmails() {
+        waitVisibilityOfAllElements(unreadEmails);
+        for (WebElement email : unreadEmails) {
+            if (emailTitle.getAttribute("name").equals("Lucky") &&
+                    emailSubject.getText().contains("Password Reset Link")) {
                 forceClickElement(email);
-                waitVisibilityOfElement(resetPassLink);
-                forceClickElement(resetPassLink);
                 break;
             }
+        }
+    }
+
+    public void openResetPassEmail() throws InterruptedException {
+        Thread.sleep(2000);
+        if (!resetPassLink.isDisplayed()) {
+            waitVisibilityOfElement(expandEmailBtn);
+            forceClickElement(expandEmailBtn);
+            waitVisibilityOfElement(resetPassLink);
+            forceClickElement(resetPassLink);
+        } else {
+            waitVisibilityOfElement(resetPassLink);
+            forceClickElement(resetPassLink);
         }
     }
 
     public void addNewPass() {
         helper.setPropertiesFileName("LoginData.properties");
         String newPassword = Helper.generateRandomPassword(9);
-        ArrayList<String> chromeTabs = new ArrayList<>(driver.getWindowHandles());
-        DriverFactory.getDriver().switchTo().window(chromeTabs.get(2));
+        moveToTab(2);
         forceAddText(newPassField, newPassword);
         forceAddText(confirmNewPassField, newPassword);
         clickButton(saveChangesBtn);
         waitVisibilityOfElement(toastMessage);
         helper.updateValueInPropertiesFile("NewPassword", newPassword);
     }
+
+    public void addInvalidEmailFormat() {
+        waitVisibilityOfElement(inputPassword);
+        addText(inputEmail, helper.generateRandomText(9) + "@.com");
+        clickButton(inputPassword);
+    }
+
+    public void checkInvalidEmailErrorMessage() {
+        Assert.assertEquals("Please enter a valid email", invalidEmailErrorMessage.getText());
+    }
+
+    public void clickRegisterLink() {
+        clickButton(registerLink);
+        waitVisibilityOfElement(repeatPassField);
+    }
+
+    public void registerWithInvalidPassFormat() throws InterruptedException {
+        addRegistrationEmail();
+        addText(inputPassword, helper.generateRandomText(6));
+        clickButton(repeatPassField);
+    }
+
+    public void checkInvalidPassErrorMessage() {
+        Assert.assertEquals("Password must contains a number or symbol", invalidPassErrorMessage.getText());
+
+    }
+
 }
 

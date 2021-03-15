@@ -39,7 +39,7 @@ public class Helper {
     }
 
     //Method to generate random Name.
-    public String generateRandomName(int length) {
+    public String generateRandomText(int length) {
         char[] chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
         StringBuilder sb = new StringBuilder();
         Random random = new Random();
