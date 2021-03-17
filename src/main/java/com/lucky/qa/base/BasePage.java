@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BasePage extends PageGenerator {
-    protected static ArrayList<String> tabs;
     protected Actions actions;
 
     public BasePage(WebDriver driver) {
@@ -69,8 +68,11 @@ public class BasePage extends PageGenerator {
 
     public void openNewTab() {
         ((JavascriptExecutor) driver).executeScript("window.open()");
-        tabs = new ArrayList<>(driver.getWindowHandles());
-        driver.switchTo().window(tabs.get(1));
+    }
+
+    public void moveToTab(int tab) {
+        ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
+        driver.switchTo().window(tabs.get(tab));
     }
 
 /*

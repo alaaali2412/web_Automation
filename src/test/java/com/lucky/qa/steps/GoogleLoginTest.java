@@ -15,7 +15,6 @@ public class GoogleLoginTest {
 
     @Given("browser open,navigate to the portal")
     public void browser_open_navigate_to_the_portal() {
-
     }
 
     @When("close the pop up click login with google")
@@ -26,8 +25,6 @@ public class GoogleLoginTest {
     @When("in the opened popup add {string} and {string}, click login")
     public void in_the_opened_popup_add_and_click_login(String gmail, String pass) throws InterruptedException {
         loggedEmail = PageGenerator.getInstance(LoginPage.class).loginGoogle(gmail, pass);
-        PageGenerator.getInstance(LoginPage.class).getBackToMainWindow();
-
     }
 
     @Then("verify that user login can login via google")

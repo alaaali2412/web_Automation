@@ -10,10 +10,6 @@ import io.cucumber.java.en.When;
 import org.testng.Assert;
 
 public class RegistrationTest {
-    @Given("browser, portal open")
-    public void browserPortalOpen() {
-    }
-
     @Given("user click signup button")
     public void userClickSignupButton() {
         PageGenerator.getInstance(HomePage.class).clickSignupBtn();
@@ -43,7 +39,7 @@ public class RegistrationTest {
         PageGenerator.getInstance(LoginPage.class).checkUnverifiedMailErrorMessage();
     }
 
-    @Given("user open his email account, open the received email from lucky")
+    @When("user open his email account, open the received email from lucky")
     public void userOpenHisEmailAccountOpenTheReceivedEmailFromLucky() throws InterruptedException {
         PageGenerator.getInstance(LoginPage.class).openVerificationMail();
     }

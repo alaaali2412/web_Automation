@@ -8,17 +8,12 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class ForgetPasswordTest {
-
-    @Given("browser and portal open")
-    public void browser_and_portal_open() {
-    }
-
-    @When("user click login")
+    @Given("user click login")
     public void user_click_login() {
         PageGenerator.getInstance(HomePage.class).clickSignInBtn();
     }
 
-    @Given("user add Email and wrong password and click login")
+    @When("user add Email and wrong password and click login")
     public void user_add_email_and_wrong_password_and_click_login() throws InterruptedException {
         PageGenerator.getInstance(LoginPage.class).loginWithInvalidPass();
     }
@@ -28,7 +23,7 @@ public class ForgetPasswordTest {
         PageGenerator.getInstance(LoginPage.class).checkErrorMessageIsDisplayed();
     }
 
-    @Given("click forget password")
+    @When("click forget password")
     public void click_forget_password() {
         PageGenerator.getInstance(LoginPage.class).clickForgetPasswordLink();
     }
@@ -39,22 +34,21 @@ public class ForgetPasswordTest {
     }
 
     @When("user will open his email account and open the received email")
-    public void user_will_open_his_email_account_and_open_the_received_email() {
+    public void user_will_open_his_email_account_and_open_the_received_email() throws InterruptedException {
         PageGenerator.getInstance(LoginPage.class).OpenGmail();
+        PageGenerator.getInstance(LoginPage.class).checkTheUnreadEmails();
         PageGenerator.getInstance(LoginPage.class).openResetPassEmail();
     }
 
     @When("user click reset password and add the new password and confirm password")
     public void user_click_reset_password_and_add_the_new_password_and_confirm_password() {
         PageGenerator.getInstance(LoginPage.class).addNewPass();
-
     }
 
     @Then("user can log with the new password")
     public void user_can_log_with_the_new_password() {
         PageGenerator.getInstance(LoginPage.class).login("LoginData.properties",
                 "GoogleEmail", "NewPassword");
-
     }
 
 }

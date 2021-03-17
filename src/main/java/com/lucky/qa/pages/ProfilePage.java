@@ -55,7 +55,7 @@ public class ProfilePage extends BasePage {
     public void changeName() {
         nameField.sendKeys(Keys.COMMAND + "a");
         nameField.sendKeys(Keys.DELETE);
-        addText(nameField, "QA " + helper.generateRandomName(5));
+        addText(nameField, "QA " + helper.generateRandomText(5));
         clickButton(saveChangesBtn);
         waitVisibilityOfElement(toastMessage);
     }
