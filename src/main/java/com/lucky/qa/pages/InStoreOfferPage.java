@@ -67,9 +67,7 @@ public class InStoreOfferPage extends BasePage {
                 clickButton(location);
                 break;
             }
-
         }
-
     }
 
     public void selectSubLocation(String FilterSubLocation) {
@@ -80,10 +78,7 @@ public class InStoreOfferPage extends BasePage {
                 forceClickElement(element);
                 break;
             }
-
-
         }
-
     }
 
     public void clickCategory(String Category) {
@@ -141,8 +136,6 @@ public class InStoreOfferPage extends BasePage {
             default:
                 break;
         }
-
-
     }
 
     public void clickApplyBtn() {
@@ -156,5 +149,4 @@ public class InStoreOfferPage extends BasePage {
     public enum CategoryType {
         mainSubCategory, SubCategory
     }
-
 }

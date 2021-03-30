@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class Hook {
-    private static final String baseURL = "https://wcb.staging.thelucky.io/Home";
+    private static final String baseURL = "https://ocb.staging.web.thelucky.io/en";
     private WebDriver driver;
 
     public static ChromeOptions chromeOption() {

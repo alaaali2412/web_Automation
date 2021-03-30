@@ -59,6 +59,13 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//*[@class = 'container-md']/a")
     private WebElement homeScreenBtn;
 
+    @FindBy(xpath = "//*/ul/li[2]/a")
+    private WebElement contactUsBtn;
+
+    public void clickContactUsBtn() {
+        clickButton(contactUsBtn);
+    }
+
     public void openHomeScreen() {
         clickButton(homeScreenBtn);
     }
