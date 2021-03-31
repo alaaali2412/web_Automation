@@ -339,6 +339,5 @@ public class LoginPage extends BasePage {
         Assert.assertEquals("Password must contains a number or symbol", invalidPassErrorMessage.getText());
 
     }
-
 }
 
