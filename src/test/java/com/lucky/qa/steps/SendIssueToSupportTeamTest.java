@@ -7,11 +7,25 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-public class ContactUsSendIssueTest {
+public class SendIssueToSupportTeamTest {
 
     @Given("user open contact us screen")
     public void user_open_contact_us_screen() {
         PageGenerator.getInstance(HomePage.class).clickContactUsBtn();
+    }
+
+    @When("Leave all the fields empty")
+    public void leaveAllTheFieldsEmpty() {
+    }
+
+    @When("Click send")
+    public void clickSend() {
+        PageGenerator.getInstance(ContactUsPage.class).clickSendBtn();
+    }
+
+    @Then("Validation messages displayed at the mandatory fields")
+    public void validationMessagesDisplayedAtTheMandatoryFields() {
+        PageGenerator.getInstance(ContactUsPage.class).validationMessages();
     }
 
     @When("fill all the mandatory fields {string} , {string}, {string}")
