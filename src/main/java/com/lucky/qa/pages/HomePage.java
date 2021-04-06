@@ -35,6 +35,9 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//div[7]/div/div/a[1]")
     private WebElement profileBtn;
 
+    @FindBy(xpath = "//div[7]/div/div/a[2]")
+    private WebElement logOutBtn;
+
     @FindBy(id = "exampleForm.ControlInput1")
     private WebElement loggedInEmail;
 
@@ -113,5 +116,10 @@ public class HomePage extends BasePage {
         waitVisibilityOfElement(profileDropdown);
         clickButton(walletBtn);
         waitVisibilityOfElement(transactionSection);
+    }
+
+    public void clickLogOut() {
+        clickButton(profileDropdown);
+        clickButton(logOutBtn);
     }
 }
