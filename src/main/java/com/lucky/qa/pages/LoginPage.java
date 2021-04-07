@@ -16,6 +16,12 @@ import java.util.Set;
 public class LoginPage extends BasePage {
 
     Helper helper = new Helper();
+    @FindBy(id = "formEmail")
+    private WebElement inputEmail;
+
+    @FindBy(id = "formPassword")
+    private WebElement inputPassword;
+
     @FindBy(id = "email")
     private WebElement inputEmailFb;
 
@@ -25,23 +31,8 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//*[@id='u_0_0']")
     private WebElement loginBtnFb;
 
-    @FindBy(id = "formName")
-    private WebElement nameField;
-
-    @FindBy(id = "formEmail")
-    private WebElement inputEmail;
-
-    @FindBy(id = "formPassword")
-    private WebElement inputPassword;
-
-    @FindBy(id = "formRepeatPassword")
-    private WebElement repeatPassField;
-
     @FindBy(xpath = "//div[3]/button")
     private WebElement loginBtn;
-
-    @FindBy(xpath = "//p[1]/a")
-    private WebElement registerLink;
 
     @FindBy(xpath = "//*[text() = 'Register']")
     private WebElement registerBtn;
@@ -85,6 +76,9 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//*[@class='y6']//span[1]")
     private WebElement emailSubject;
 
+    @FindBy(xpath = "//*[@class='ajV']//div")
+    private WebElement expandEmailBtn;
+
     @FindBy(xpath = "//table//table/tbody/tr[5]/td/a/table/tbody/tr/td")
     private WebElement resetPassLink;
 
@@ -100,95 +94,16 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//*[@class = 'react-toast-notifications__toast__content css-1ad3zal']")
     private WebElement toastMessage;
 
-    @FindBy(xpath = "//form/div[2]/button")
-    private WebElement copyEmail;
-
     @FindBy(xpath = "//h1")
     private WebElement verificationHeader;
-
-    @FindBy(xpath = "//*[@class='inbox-dataList']//li[2]")
-    private WebElement emailList;
-
-    @FindBy(xpath = "//*[@class='inbox-dataList']//li[2]/div")
-    private WebElement emailLink;
-
-    @FindBy(xpath = "//tbody//tbody/tr[2]/td/table/tbody//tbody/tr/td/a")
-    private WebElement verifyEmailLink;
-
-    @FindBy(xpath = "//section/div/div/div/a")
-    private WebElement loginBtnAfterMailVerification;
 
     @FindBy(xpath = "//*[@id= 'formEmail']/following-sibling::div")
     private WebElement invalidEmailErrorMessage;
 
-    @FindBy(xpath = "//*[@id= 'formPassword']/following-sibling::div")
-    private WebElement invalidPassErrorMessage;
 
-    @FindBy(xpath = "//*[@class='ajV']//div")
-    private WebElement expandEmailBtn;
 
     public LoginPage(WebDriver driver) {
         super(driver);
-    }
-
-    public void addRegistrationName() {
-        helper.setPropertiesFileName("RegistrationData.properties");
-        addText(nameField, helper.getValuesFromPropertiesFile("Name"));
-    }
-
-
-    public void addRegistrationEmail() throws InterruptedException {
-        helper.setPropertiesFileName("RegistrationData.properties");
-        //To Clear the copy
-        addText(inputEmail, " ");
-        inputEmail.sendKeys(Keys.COMMAND + "a");
-        inputEmail.sendKeys(Keys.COMMAND + "c");
-        openNewTab();
-        moveToTab(1);
-        driver.get("https://10minemail.com/");
-        clickButton(copyEmail);
-        moveToTab(0);
-        inputEmail.sendKeys(Keys.COMMAND + "v");
-        Thread.sleep(1000);
-        helper.updateValueInPropertiesFile("RegistrationEmail", inputEmail.getAttribute("value"));
-    }
-
-    public void addRegistrationPasswords() {
-        helper.setPropertiesFileName("RegistrationData.properties");
-        String newPassword = Helper.generateRandomPassword(12);
-        addText(inputPassword, newPassword);
-        addText(repeatPassField, newPassword);
-        helper.updateValueInPropertiesFile("RegistrationPassword", newPassword);
-        helper.updateValueInPropertiesFile("RepeatPassword", newPassword);
-    }
-
-    public void clickRegisterBtn() {
-        clickButton(registerBtn);
-        waitVisibilityOfElement(verificationHeader);
-    }
-
-    public void checkUnverifiedMailErrorMessage() throws InterruptedException {
-        Thread.sleep(1000);
-        Assert.assertEquals("Please verify your email", errorMessage.getText());
-    }
-
-    public void openVerificationMail() throws InterruptedException {
-        moveToTab(1);
-        System.out.println("the text before " + emailList.getText());
-        while (!emailList.getText().contains("Email Confirmation")) {
-            System.out.println("the text before " + emailList.getText());
-            Thread.sleep(5000);
-            driver.navigate().refresh();
-        }
-        clickButton(emailLink);
-    }
-
-    public void verifyRegistrationEmail() {
-        scrollToEndOfScreen();
-        clickButton(verifyEmailLink);
-        moveToTab(2);
-        waitVisibilityOfElement(verificationHeader);
-        clickButton(loginBtnAfterMailVerification);
     }
 
     public String login(String fileName, String email, String password) {
@@ -246,7 +161,8 @@ public class LoginPage extends BasePage {
     public void loginWithInvalidPass() throws InterruptedException {
         helper.setPropertiesFileName("LoginData.properties");
         waitVisibilityOfElement(inputPassword);
-        clearField(inputEmail);
+        inputEmail.sendKeys(Keys.COMMAND + "a");
+        inputEmail.sendKeys(Keys.DELETE);
         addText(inputEmail, helper.getValuesFromPropertiesFile("GoogleEmail"));
         clearField(inputPassword);
         addText(inputPassword, helper.getValuesFromPropertiesFile("WrongPassword"));
@@ -322,22 +238,6 @@ public class LoginPage extends BasePage {
 
     public void checkInvalidEmailErrorMessage() {
         Assert.assertEquals("Please enter a valid email", invalidEmailErrorMessage.getText());
-    }
-
-    public void clickRegisterLink() {
-        clickButton(registerLink);
-        waitVisibilityOfElement(repeatPassField);
-    }
-
-    public void registerWithInvalidPassFormat() throws InterruptedException {
-        addRegistrationEmail();
-        addText(inputPassword, helper.generateRandomText(6));
-        clickButton(repeatPassField);
-    }
-
-    public void checkInvalidPassErrorMessage() {
-        Assert.assertEquals("Password must contains a number or symbol", invalidPassErrorMessage.getText());
-
     }
 }
 

@@ -88,6 +88,7 @@ public class HomePage extends BasePage {
     }
 
     public void clickSignupBtn() {
+        waitVisibilityOfElement(emailBtn);
         clickButton(emailBtn);
     }
 

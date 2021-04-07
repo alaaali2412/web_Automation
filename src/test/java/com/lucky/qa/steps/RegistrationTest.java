@@ -1,9 +1,6 @@
 package com.lucky.qa.steps;
 
-import com.lucky.qa.pages.HomePage;
-import com.lucky.qa.pages.LoginPage;
-import com.lucky.qa.pages.PageGenerator;
-import com.lucky.qa.pages.ProfilePage;
+import com.lucky.qa.pages.*;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -17,14 +14,14 @@ public class RegistrationTest {
 
     @When("user add all the mandatory fields of Registration")
     public void userAddAllTheMandatoryFieldsOfRegistration() throws InterruptedException {
-        PageGenerator.getInstance(LoginPage.class).addRegistrationName();
-        PageGenerator.getInstance(LoginPage.class).addRegistrationEmail();
-        PageGenerator.getInstance(LoginPage.class).addRegistrationPasswords();
+        PageGenerator.getInstance(RegistrationPage.class).addRegistrationName();
+        PageGenerator.getInstance(RegistrationPage.class).addRegistrationEmail();
+        PageGenerator.getInstance(RegistrationPage.class).addRegistrationPasswords();
     }
 
     @When("click register button")
     public void clickRegisterButton() {
-        PageGenerator.getInstance(LoginPage.class).clickRegisterBtn();
+        PageGenerator.getInstance(RegistrationPage.class).clickRegisterBtn();
     }
 
     @When("try to login directly with same email and password")
@@ -36,17 +33,17 @@ public class RegistrationTest {
     public void userCanNotLoginWithoutVerifyingTheEmail() throws InterruptedException {
         PageGenerator.getInstance(LoginPage.class).login(
                 "RegistrationData.properties", "RegistrationEmail", "RegistrationPassword");
-        PageGenerator.getInstance(LoginPage.class).checkUnverifiedMailErrorMessage();
+        PageGenerator.getInstance(RegistrationPage.class).checkUnverifiedMailErrorMessage();
     }
 
     @When("user open his email account, open the received email from lucky")
     public void userOpenHisEmailAccountOpenTheReceivedEmailFromLucky() throws InterruptedException {
-        PageGenerator.getInstance(LoginPage.class).openVerificationMail();
+        PageGenerator.getInstance(RegistrationPage.class).openVerificationMail();
     }
 
     @When("verify the registered email")
     public void verifyTheRegisteredEmail() {
-        PageGenerator.getInstance(LoginPage.class).verifyRegistrationEmail();
+        PageGenerator.getInstance(RegistrationPage.class).verifyRegistrationEmail();
     }
 
     @Then("user can login with the new email")

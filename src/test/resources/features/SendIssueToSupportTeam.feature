@@ -1,6 +1,5 @@
 @SendIssueToSupportTeam
 Feature: user can send the issue he face to the support team
-
   Background:
     Given user open contact us screen
 
