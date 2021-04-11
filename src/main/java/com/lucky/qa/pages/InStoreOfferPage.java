@@ -1,7 +1,7 @@
 package com.lucky.qa.pages;
 
 
-import com.lucky.qa.base.BasePage;
+import com.lucky.qa.common.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

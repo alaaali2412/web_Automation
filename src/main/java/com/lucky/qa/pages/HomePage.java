@@ -1,6 +1,6 @@
 package com.lucky.qa.pages;
 
-import com.lucky.qa.base.BasePage;
+import com.lucky.qa.common.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -23,7 +23,7 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//button/*[text()='Google']")
     private WebElement googleBtn;
 
-    @FindBy(xpath = "//a/*[text()='E-mail']")
+    @FindBy(xpath = "//*[@class = 'box-body']/a")
     private WebElement emailBtn;
 
     @FindBy(xpath = "//div[1]/nav/div/div[2]")
@@ -103,6 +103,7 @@ public class HomePage extends BasePage {
     }
 
     public String clickOnlineCashback(String categorySelected) {
+        waitVisibilityOfElement(onlineCashbackBtn);
         clickButton(onlineCashbackBtn);
         for (WebElement category : onlineCashbackList) {
             if (getText(category).equals(categorySelected)) {
@@ -110,6 +111,7 @@ public class HomePage extends BasePage {
                 break;
             }
         }
+        waitForPageToLoad();
         return categorySelected;
     }
 

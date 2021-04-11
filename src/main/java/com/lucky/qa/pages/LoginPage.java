@@ -1,10 +1,9 @@
 package com.lucky.qa.pages;
 
-import com.lucky.qa.base.BasePage;
+import com.lucky.qa.common.BasePage;
 import com.lucky.qa.connectors.DriverFactory;
 import com.lucky.qa.utilities.Helper;
 import org.junit.Assert;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -100,7 +99,8 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//*[@id= 'formEmail']/following-sibling::div")
     private WebElement invalidEmailErrorMessage;
 
-
+    @FindBy(xpath = "//section[3]/div/div/div/div[1]/h2")
+    private WebElement newLetterheader;
 
     public LoginPage(WebDriver driver) {
         super(driver);
@@ -114,6 +114,7 @@ public class LoginPage extends BasePage {
         clearField(inputPassword);
         addText(inputPassword, helper.getValuesFromPropertiesFile(password));
         clickButton(loginBtn);
+        waitVisibilityOfElement(newLetterheader);
         return helper.getValuesFromPropertiesFile(email);
     }
 
@@ -129,6 +130,7 @@ public class LoginPage extends BasePage {
                 addText(inputPasswordFb, password);
                 waitVisibilityOfElement(loginBtn);
                 clickButton(loginBtnFb);
+                waitForPageToLoad();
             }
         }
         DriverFactory.getDriver().switchTo().window(parentWindow);
@@ -154,23 +156,22 @@ public class LoginPage extends BasePage {
         }
         driver.switchTo().window(parentWindow);
         Thread.sleep(9000);
-        DriverFactory.getDriver().navigate().refresh();
+        refreshCurrentPage();
         return email;
     }
 
-    public void loginWithInvalidPass() throws InterruptedException {
+    public void loginWithInvalidPass() {
         helper.setPropertiesFileName("LoginData.properties");
         waitVisibilityOfElement(inputPassword);
-        inputEmail.sendKeys(Keys.COMMAND + "a");
-        inputEmail.sendKeys(Keys.DELETE);
+        deleteTextInField(inputEmail);
         addText(inputEmail, helper.getValuesFromPropertiesFile("GoogleEmail"));
         clearField(inputPassword);
         addText(inputPassword, helper.getValuesFromPropertiesFile("WrongPassword"));
         clickButton(loginBtn);
-        Thread.sleep(2000);
     }
 
     public void checkErrorMessageIsDisplayed() {
+        waitForTextToBeVisible(errorMessage);
         Assert.assertEquals("Email or Password is incorrect", errorMessage.getText());
     }
 
@@ -189,10 +190,12 @@ public class LoginPage extends BasePage {
     public void OpenGmail() {
         helper.setPropertiesFileName("LoginData.properties");
         driver.navigate().to("https://mail.google.com/");
+        waitForPageToLoad();
         clickButton(googleSignIn);
         moveToTab(1);
         addGmailCredentials(helper.getValuesFromPropertiesFile("GoogleEmail"),
                 helper.getValuesFromPropertiesFile("GoogleEmailPassword"));
+        waitForPageToLoad();
     }
 
     public void checkTheUnreadEmails() {
@@ -206,8 +209,8 @@ public class LoginPage extends BasePage {
         }
     }
 
-    public void openResetPassEmail() throws InterruptedException {
-        Thread.sleep(2000);
+    public void openResetPassEmail() {
+        waitForPageToLoad();
         if (!resetPassLink.isDisplayed()) {
             waitVisibilityOfElement(expandEmailBtn);
             forceClickElement(expandEmailBtn);
@@ -237,6 +240,7 @@ public class LoginPage extends BasePage {
     }
 
     public void checkInvalidEmailErrorMessage() {
+        waitForTextToBeVisible(invalidEmailErrorMessage);
         Assert.assertEquals("Please enter a valid email", invalidEmailErrorMessage.getText());
     }
 }

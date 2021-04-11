@@ -1,9 +1,8 @@
 package com.lucky.qa.pages;
 
-import com.lucky.qa.base.BasePage;
+import com.lucky.qa.common.BasePage;
 import com.lucky.qa.utilities.Helper;
 import org.junit.Assert;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -12,36 +11,52 @@ public class RegistrationPage extends BasePage {
     Helper helper = new Helper();
     @FindBy(id = "formName")
     private WebElement nameField;
+
     @FindBy(id = "formEmail")
     private WebElement inputEmail;
+
     @FindBy(id = "formPassword")
     private WebElement inputPassword;
+
     @FindBy(id = "formRepeatPassword")
     private WebElement repeatPassField;
+
     @FindBy(xpath = "//form/div[2]/button")
     private WebElement copyEmail;
+
     @FindBy(xpath = "//*[text() = 'Register']")
     private WebElement registerBtn;
+
     @FindBy(xpath = "//h1")
     private WebElement verificationHeader;
+
     @FindBy(xpath = "//*[@class='py-3']/div")
     private WebElement errorMessage;
+
     @FindBy(xpath = "//tbody//tbody/tr[2]/td/table/tbody//tbody/tr/td/a")
     private WebElement verifyEmailLink;
+
     @FindBy(xpath = "//section/div/div/div/a")
     private WebElement loginBtnAfterMailVerification;
+
     @FindBy(xpath = "//*[@class='inbox-dataList']//li[2]")
     private WebElement emailList;
+
     @FindBy(xpath = "//*[@class='inbox-dataList']//li[2]/div")
     private WebElement emailLink;
+
     @FindBy(xpath = "//p[1]/a")
     private WebElement registerLink;
+
     @FindBy(xpath = "//*[@id= 'formEmail']/following-sibling::div")
     private WebElement invalidEmailErrorMessage;
+
     @FindBy(xpath = "//*[@id= 'formPassword']/following-sibling::div")
     private WebElement invalidPassErrorMessage;
+
     @FindBy(xpath = "//*[@id= 'formRepeatPassword']/following-sibling::div")
     private WebElement confirmPassErrorMessage;
+
     @FindBy(xpath = "//*[@id= 'formName']/following-sibling::div")
     private WebElement nameFieldErrorMessage;
 
@@ -54,19 +69,17 @@ public class RegistrationPage extends BasePage {
         addText(nameField, helper.getValuesFromPropertiesFile("Name"));
     }
 
-    public void addRegistrationEmail() throws InterruptedException {
+    public void addRegistrationEmail() {
         helper.setPropertiesFileName("RegistrationData.properties");
-        //To Clear the copy
-        addText(inputEmail, " ");
-        inputEmail.sendKeys(Keys.COMMAND + "a");
-        inputEmail.sendKeys(Keys.COMMAND + "c");
+        clearDefaultValueOfCopy(inputEmail);
         openNewTab();
         moveToTab(1);
         driver.get("https://10minemail.com/");
+        waitForPageToLoad();
         clickButton(copyEmail);
         moveToTab(0);
-        inputEmail.sendKeys(Keys.COMMAND + "v");
-        Thread.sleep(1000);
+        pasteTextInField(inputEmail);
+        waitForTextInAttributeToBeExist(inputEmail.getAttribute("value"));
         helper.updateValueInPropertiesFile("RegistrationEmail", inputEmail.getAttribute("value"));
     }
 
@@ -84,19 +97,16 @@ public class RegistrationPage extends BasePage {
         waitVisibilityOfElement(verificationHeader);
     }
 
-    public void checkUnverifiedMailErrorMessage() throws InterruptedException {
-        Thread.sleep(1000);
-        waitVisibilityOfElement(errorMessage);
+    public void checkUnverifiedMailErrorMessage() {
+        waitForTextToBeVisible(errorMessage);
         Assert.assertEquals("Please verify your email", errorMessage.getText());
     }
 
-    public void openVerificationMail() throws InterruptedException {
+    public void openVerificationMail() {
         moveToTab(1);
-        System.out.println("the text before " + emailList.getText());
         while (!emailList.getText().contains("Email Confirmation")) {
             System.out.println("the text before " + emailList.getText());
-            Thread.sleep(5000);
-            driver.navigate().refresh();
+            refreshCurrentPage();
         }
         clickButton(emailLink);
     }
@@ -111,8 +121,7 @@ public class RegistrationPage extends BasePage {
 
     public void addInvalidName() {
         addText(nameField, "aa");
-        nameField.sendKeys(Keys.COMMAND + "a");
-        nameField.sendKeys(Keys.DELETE);
+        deleteTextInField(nameField);
     }
 
     public void checkInvalidNameErrorMessage() {
@@ -148,6 +157,5 @@ public class RegistrationPage extends BasePage {
 
     public void checkRepeatPassErrorMessage() {
         Assert.assertEquals("Password confirm is required", confirmPassErrorMessage.getText());
-
     }
 }
