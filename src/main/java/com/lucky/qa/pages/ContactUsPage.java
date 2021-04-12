@@ -1,6 +1,6 @@
 package com.lucky.qa.pages;
 
-import com.lucky.qa.base.BasePage;
+import com.lucky.qa.common.BasePage;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -38,6 +38,9 @@ public class ContactUsPage extends BasePage {
     @FindBy(xpath = "//h2")
     private WebElement successMessage;
 
+    @FindBy(xpath = "//*[@class = 'success-img']")
+    private WebElement successImage;
+
     public ContactUsPage(WebDriver driver) {
         super(driver);
     }
@@ -60,13 +63,13 @@ public class ContactUsPage extends BasePage {
         clickButton(sendBtn);
     }
 
-    public void checkSuccessMessage() throws InterruptedException {
-        Thread.sleep(4000);
+    public void checkSuccessMessage() {
+        waitVisibilityOfElement(successImage);
         Assert.assertEquals("Your message was sent successfully", successMessage.getText());
     }
 
     public void validationMessages() {
-        waitVisibilityOfElement(nameFieldErrorMsg);
+        waitForTextToBeVisible(nameFieldErrorMsg);
         Assert.assertEquals(nameFieldErrorMsg.getText(), "Please enter a full name");
         Assert.assertEquals(mobileNumberFieldErrorMsg.getText(), "Please enter a valid number");
         Assert.assertEquals(subjectListErrorMsg.getText(), "Please enter a valid topic");

@@ -9,5 +9,4 @@ Feature: filter In_store offers by it`s categories & Locations
 
     Examples:
       | mainCategory | mainSubCategory | subCategory             | Location   | subLocation |
-
-      | Fashion      | Women           | Jewellery & Accessories | Alexandria | San Stefano  |
+      | Fashion      | Women           | Jewellery & Accessories | Alexandria | San Stefano |

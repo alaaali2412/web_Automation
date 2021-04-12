@@ -3,8 +3,6 @@ package com.lucky.qa.APIs;
 
 import io.restassured.response.Response;
 
-import java.io.IOException;
-
 public class ImplementAPIsMethods extends APIsRequestBuilder {
 
     public int getCategoryID(String category)  {
@@ -18,12 +16,9 @@ public class ImplementAPIsMethods extends APIsRequestBuilder {
 
 
     public int getAffiliateMerchantsByCategory(String category)  {
-
         Response response = getAffiliateMerchantsByCategory( ServiceNames.affiliateCategory_GetAffiliateMerchantsByCategory.getServiceName(),
                 "categoryId", getCategoryID(category), "pageSize", 20, "pageIndex", 0);
-
         return validateValueInResponse(response, "Data.TotalCount");
-
     }
 
     public int getCountOfAffiliateMerchants(String keyword) {
