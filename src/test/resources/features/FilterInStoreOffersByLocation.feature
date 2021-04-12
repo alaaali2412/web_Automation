@@ -9,7 +9,7 @@ Feature: filter In_store offers by it`s Location
 
     Examples:
       |Location|subLocation |
-      | Giza | Downtown |
+      | القاهرة  | مصر الجديدة |
 
 
 

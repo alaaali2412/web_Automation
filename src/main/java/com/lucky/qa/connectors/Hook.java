@@ -1,5 +1,6 @@
 package com.lucky.qa.connectors;
 
+import com.lucky.qa.utilities.Helper;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -12,7 +13,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class Hook {
-    private static final String baseURL = "https://ocb.staging.web.thelucky.io/en";
+    Helper helper = new Helper();
     private WebDriver driver;
 
     public static ChromeOptions chromeOption() {
@@ -25,6 +26,7 @@ public class Hook {
 
     @Before
     public void startDriver() {
+        helper.setPropertiesFileName("Languague.properties");
         if (DriverFactory.getDriver() == null) {
             //WebDriverManager download the chrome driver and run it,
             // no need to download the driver and set path for it
@@ -33,7 +35,7 @@ public class Hook {
             driver.manage().window().maximize();
             DriverFactory.addDriver(driver);
             driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
-            driver.navigate().to(baseURL);
+            driver.navigate().to(helper.getValuesFromPropertiesFile("PortalUrl"));
 
         }
     }

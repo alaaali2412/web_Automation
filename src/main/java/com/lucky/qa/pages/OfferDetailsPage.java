@@ -26,9 +26,9 @@ public class OfferDetailsPage extends BasePage {
 
     }
 
-    public void closePopUP() {
+    public void closePopUP(String headerText) {
         waitVisibilityOfElement(popupHeader);
-        Assert.assertEquals(getText(popupHeader), "Download Lucky App to enjoy in-store and delivery discounts!");
+        Assert.assertEquals(getText(popupHeader), headerText);
         clickButton(popupCloseBtn);
 
 
