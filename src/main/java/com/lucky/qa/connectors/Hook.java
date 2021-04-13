@@ -45,7 +45,6 @@ public class Hook {
             public void run() {
                 DriverFactory.removeDriver();
                 DriverFactory.storedDrivers.forEach(WebDriver::quit);
-
             }
         });
     }

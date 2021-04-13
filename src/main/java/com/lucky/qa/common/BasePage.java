@@ -117,5 +117,5 @@ public class BasePage {
                 .ignoring(Exception.class);
         wait.until(ExpectedConditions.visibilityOfAllElements(elements));
     }
-    // TODO separate wait class
+
 }

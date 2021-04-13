@@ -38,6 +38,9 @@ public class ContactUsPage extends BasePage {
     @FindBy(xpath = "//h2")
     private WebElement successMessage;
 
+    @FindBy(xpath = "//*[@class = 'success-img']")
+    private WebElement successImage;
+
     public ContactUsPage(WebDriver driver) {
         super(driver);
     }
@@ -61,12 +64,12 @@ public class ContactUsPage extends BasePage {
     }
 
     public void checkSuccessMessage(String errorMsg) {
-
+        waitVisibilityOfElement(successImage);
         Assert.assertEquals(errorMsg, successMessage.getText());
     }
 
     public void validationMessages(String nameErrorMsg, String mobileNumberErrorMsg, String subjecttErrorMsg, String tellUsMoreErrorMsg) {
-        waitVisibilityOfElement(nameFieldErrorMsg);
+        waitForTextToBeVisible(nameFieldErrorMsg);
         Assert.assertEquals(nameErrorMsg, nameFieldErrorMsg.getText());
         Assert.assertEquals(mobileNumberErrorMsg, mobileNumberFieldErrorMsg.getText());
         Assert.assertEquals(subjecttErrorMsg, subjectListErrorMsg.getText());
