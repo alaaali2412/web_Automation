@@ -1,6 +1,6 @@
 package com.lucky.qa.pages;
 
-import com.lucky.qa.base.BasePage;
+import com.lucky.qa.common.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -25,6 +25,9 @@ public class OnlineCashbackPage extends BasePage {
     @FindBy(xpath = "//div/div[2]/div/div[2]/div[1]/div")
     private List<WebElement> merchants;
 
+    @FindBy(xpath = "//footer/div[1]/span/img")
+    private WebElement moveToTheTopBtn;
+
     public OnlineCashbackPage(WebDriver driver) {
         super(driver);
     }
@@ -35,17 +38,15 @@ public class OnlineCashbackPage extends BasePage {
             WebElement selectedCheckbox = category.findElement(By.tagName("input"));
             if (selectedCheckbox.isSelected() == true) {
                 Assert.assertEquals(getText(category), selected);
-
             }
-
             break;
         }
-
     }
 
     public int getMerchantFilteredList() throws InterruptedException {
         scrollToEndOfScreen();
         Thread.sleep(1000);
+        waitForPageToLoad();
         return new ArrayList<>(merchants).size();
     }
 

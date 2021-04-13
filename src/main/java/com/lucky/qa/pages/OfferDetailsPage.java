@@ -1,6 +1,6 @@
 package com.lucky.qa.pages;
 
-import com.lucky.qa.base.BasePage;
+import com.lucky.qa.common.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -23,15 +23,11 @@ public class OfferDetailsPage extends BasePage {
     public void clickGetOffer() {
         waitVisibilityOfElement(getOfferBtn);
         clickButton(getOfferBtn);
-
     }
 
     public void closePopUP(String headerText) {
         waitVisibilityOfElement(popupHeader);
         Assert.assertEquals(getText(popupHeader), headerText);
         clickButton(popupCloseBtn);
-
-
     }
-
 }

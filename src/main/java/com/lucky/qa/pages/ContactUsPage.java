@@ -60,16 +60,16 @@ public class ContactUsPage extends BasePage {
         clickButton(sendBtn);
     }
 
-    public void checkSuccessMessage(String errorMsg) throws InterruptedException {
+    public void checkSuccessMessage() throws InterruptedException {
         Thread.sleep(4000);
-        Assert.assertEquals(errorMsg, successMessage.getText());
+        Assert.assertEquals("Your message was sent successfully", successMessage.getText());
     }
 
-    public void validationMessages(String nameErrorMsg, String mobileNumberErrorMsg, String subjecttErrorMsg, String tellUsMoreErrorMsg) {
+    public void validationMessages() {
         waitVisibilityOfElement(nameFieldErrorMsg);
-        Assert.assertEquals(nameErrorMsg, nameFieldErrorMsg.getText());
-        Assert.assertEquals(mobileNumberErrorMsg, mobileNumberFieldErrorMsg.getText());
-        Assert.assertEquals(subjecttErrorMsg, subjectListErrorMsg.getText());
-        Assert.assertEquals(tellUsMoreErrorMsg, tellUsMoreFieldErrorMsg.getText());
+        Assert.assertEquals(nameFieldErrorMsg.getText(), "Please enter a full name");
+        Assert.assertEquals(mobileNumberFieldErrorMsg.getText(), "Please enter a valid number");
+        Assert.assertEquals(subjectListErrorMsg.getText(), "Please enter a valid topic");
+        Assert.assertEquals(tellUsMoreFieldErrorMsg.getText(), "Please enter a valid message");
     }
 }
