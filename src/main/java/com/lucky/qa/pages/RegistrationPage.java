@@ -24,7 +24,7 @@ public class RegistrationPage extends BasePage {
     @FindBy(xpath = "//form/div[2]/button")
     private WebElement copyEmail;
 
-    @FindBy(xpath = "//*[text() = 'Register']")
+    @FindBy(xpath = "//*[@class='py-3']/button")
     private WebElement registerBtn;
 
     @FindBy(xpath = "//h1")
@@ -97,9 +97,9 @@ public class RegistrationPage extends BasePage {
         waitVisibilityOfElement(verificationHeader);
     }
 
-    public void checkUnverifiedMailErrorMessage() {
+    public void checkUnverifiedMailErrorMessage(String errorMsg) {
         waitForTextToBeVisible(errorMessage);
-        Assert.assertEquals("Please verify your email", errorMessage.getText());
+        Assert.assertEquals(errorMsg, errorMessage.getText());
     }
 
     public void openVerificationMail() {
@@ -124,22 +124,22 @@ public class RegistrationPage extends BasePage {
         deleteTextInField(nameField);
     }
 
-    public void checkInvalidNameErrorMessage() {
-        Assert.assertEquals("Please enter a valid name", nameFieldErrorMessage.getText());
+    public void checkInvalidNameErrorMessage(String errorMsg) {
+        Assert.assertEquals(errorMsg, nameFieldErrorMessage.getText());
     }
 
     public void registerWithInvalidEmailFormat() {
         addText(inputEmail, helper.generateRandomText(15) + "@.com");
     }
 
-    public void checkInvalidEmailErrorMessage() {
-        Assert.assertEquals("Please enter a valid email", invalidEmailErrorMessage.getText());
+    public void checkInvalidEmailErrorMessage(String errorMsg) {
+        Assert.assertEquals(errorMsg, invalidEmailErrorMessage.getText());
     }
 
-    public void registerWithPassLessThanSixCharacters() {
+    public void registerWithPassLessThanSixCharacters(String errorMsg) {
         addText(inputPassword, helper.generateRandomText(3));
         clickButton(repeatPassField);
-        Assert.assertEquals("Password should be at least 6 characters", invalidPassErrorMessage.getText());
+        Assert.assertEquals(errorMsg, invalidPassErrorMessage.getText());
     }
 
     public void registerWithInvalidPassFormat() {
@@ -147,15 +147,15 @@ public class RegistrationPage extends BasePage {
         clickButton(repeatPassField);
     }
 
-    public void checkInvalidPassErrorMessage() {
-        Assert.assertEquals("Password must contains a number or symbol", invalidPassErrorMessage.getText());
+    public void checkInvalidPassErrorMessage(String errorMsg) {
+        Assert.assertEquals(errorMsg, invalidPassErrorMessage.getText());
     }
 
     public void registerWithInvalidRepeatPass() {
         addText(repeatPassField, "aa");
     }
 
-    public void checkRepeatPassErrorMessage() {
-        Assert.assertEquals("Password confirm is required", confirmPassErrorMessage.getText());
+    public void checkRepeatPassErrorMessage(String errorMsg) {
+        Assert.assertEquals(errorMsg, confirmPassErrorMessage.getText());
     }
 }

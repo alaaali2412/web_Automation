@@ -4,8 +4,9 @@ package com.lucky.qa.APIs;
 import com.lucky.qa.APIs_payloads.Merchant_getAffiliateMerchants;
 import com.lucky.qa.utilities.Helper;
 import io.restassured.http.ContentType;
-import io.restassured.response.Response;
 import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -14,7 +15,6 @@ public class APIsRequestBuilder extends APIsActions {
 
     Helper helper = new Helper();
     public String getParamInJsonArray(JsonPath path, String ValueToValidate, String list) {
-
         List<HashMap<String, Object>> data = path.getList(list);
         for (HashMap<String, Object> singleObject : data) {
             if (singleObject.containsValue(ValueToValidate)) {

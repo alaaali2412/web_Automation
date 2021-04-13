@@ -2,7 +2,6 @@ package com.lucky.qa.pages;
 
 import com.lucky.qa.common.BasePage;
 import com.lucky.qa.utilities.Helper;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -53,8 +52,7 @@ public class ProfilePage extends BasePage {
     }
 
     public void changeName() {
-        nameField.sendKeys(Keys.COMMAND + "a");
-        nameField.sendKeys(Keys.DELETE);
+        deleteTextInField(nameField);
         addText(nameField, "QA " + helper.generateRandomText(5));
         clickButton(saveChangesBtn);
         waitVisibilityOfElement(toastMessage);

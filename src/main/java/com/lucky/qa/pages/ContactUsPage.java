@@ -68,11 +68,11 @@ public class ContactUsPage extends BasePage {
         Assert.assertEquals(errorMsg, successMessage.getText());
     }
 
-    public void validationMessages(String nameErrorMsg, String mobileNumberErrorMsg, String subjecttErrorMsg, String tellUsMoreErrorMsg) {
+    public void validationMessages(String nameErrorMsg, String mobileNumberErrorMsg, String subjectErrorMsg, String tellUsMoreErrorMsg) {
         waitForTextToBeVisible(nameFieldErrorMsg);
         Assert.assertEquals(nameErrorMsg, nameFieldErrorMsg.getText());
         Assert.assertEquals(mobileNumberErrorMsg, mobileNumberFieldErrorMsg.getText());
-        Assert.assertEquals(subjecttErrorMsg, subjectListErrorMsg.getText());
+        Assert.assertEquals(subjectErrorMsg, subjectListErrorMsg.getText());
         Assert.assertEquals(tellUsMoreErrorMsg, tellUsMoreFieldErrorMsg.getText());
     }
 }

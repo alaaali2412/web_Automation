@@ -17,10 +17,10 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//*[@class ='px-xl-3 px-lg-2 nav-link-item'][4]")
     private WebElement signInBtn;
 
-    @FindBy(xpath = "//div[2]/div/div[2]/button[2]")
+    @FindBy(xpath = "//div[2]/div/div[2]/button[2]/span")
     private WebElement facebookBtn;
 
-    @FindBy(xpath = "//div[2]/div/div[2]/button[1]")
+    @FindBy(xpath = "//div[2]/div/div[2]/button[1]/span")
     private WebElement googleBtn;
 
     @FindBy(xpath = "//div[2]/div/div[2]/a/span")

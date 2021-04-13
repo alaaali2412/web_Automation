@@ -6,10 +6,8 @@ import io.restassured.response.Response;
 public class ImplementAPIsMethods extends APIsRequestBuilder {
 
     public int getCategoryID(String category)  {
-
-        Response res = affiliateCategoryGetCategories( ServiceNames.affiliateCategory_GetCategories.getServiceName(),
-                "pageSize", 10, "pageIndex",
-                0);
+        Response res = affiliateCategoryGetCategories(ServiceNames.affiliateCategory_GetCategories.getServiceName(),
+                "pageSize", 10, "pageIndex", 0);
         String value = getParamInJsonArray(res.jsonPath(), category, "Data");
         return getIntValueFromArray(value, ", AffiliateCategoryName=", "AffiliateCategoryId=");
     }

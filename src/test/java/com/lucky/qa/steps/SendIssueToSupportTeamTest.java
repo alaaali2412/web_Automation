@@ -27,9 +27,9 @@ public class SendIssueToSupportTeamTest {
 
     @Then("Validation messages displayed at the mandatory fields")
     public void validationMessagesDisplayedAtTheMandatoryFields() {
-        PageGenerator.getInstance(ContactUsPage.class).validationMessages(lang.detectLanguage("ContacUsNameFieldErrorMsg"),
-                lang.detectLanguage("ContacUsMobileNumberFieldErrorMsg"), lang.detectLanguage("ContacUsSubjectListErrorMsg"),
-                lang.detectLanguage("ContacUsTellUsMoreFieldErrorMsg"));
+        PageGenerator.getInstance(ContactUsPage.class).validationMessages(lang.detectLanguage("ContactUsNameFieldErrorMsg"),
+                lang.detectLanguage("ContactUsMobileNumberFieldErrorMsg"), lang.detectLanguage("ContactUsSubjectListErrorMsg"),
+                lang.detectLanguage("ContactUsTellUsMoreFieldErrorMsg"));
     }
 
     @When("fill all the mandatory fields {string} , {string}, {string}")
@@ -44,7 +44,7 @@ public class SendIssueToSupportTeamTest {
     }
 
     @Then("user get successful message")
-    public void user_get_successful_message() throws InterruptedException {
-        PageGenerator.getInstance(ContactUsPage.class).checkSuccessMessage(lang.detectLanguage("ContacUsSuccessMsg"));
+    public void user_get_successful_message() {
+        PageGenerator.getInstance(ContactUsPage.class).checkSuccessMessage(lang.detectLanguage("ContactUsSuccessMsg"));
     }
 }

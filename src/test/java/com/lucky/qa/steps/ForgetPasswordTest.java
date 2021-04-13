@@ -3,24 +3,26 @@ package com.lucky.qa.steps;
 import com.lucky.qa.pages.HomePage;
 import com.lucky.qa.pages.LoginPage;
 import com.lucky.qa.pages.PageGenerator;
+import com.lucky.qa.utilities.LanguageReader;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class ForgetPasswordTest {
+    LanguageReader lang = new LanguageReader();
     @Given("user click login")
     public void user_click_login() {
         PageGenerator.getInstance(HomePage.class).clickSignInBtn();
     }
 
     @When("user add Email and wrong password and click login")
-    public void user_add_email_and_wrong_password_and_click_login() throws InterruptedException {
+    public void user_add_email_and_wrong_password_and_click_login() {
         PageGenerator.getInstance(LoginPage.class).loginWithInvalidPass();
     }
 
     @When("validation message displayed")
     public void validation_message_displayed() {
-        PageGenerator.getInstance(LoginPage.class).checkErrorMessageIsDisplayed();
+        PageGenerator.getInstance(LoginPage.class).checkErrorMessageIsDisplayed(lang.detectLanguage("InvalidPassErrorMsg"));
     }
 
     @When("click forget password")
@@ -34,7 +36,7 @@ public class ForgetPasswordTest {
     }
 
     @When("user will open his email account and open the received email")
-    public void user_will_open_his_email_account_and_open_the_received_email() throws InterruptedException {
+    public void user_will_open_his_email_account_and_open_the_received_email() {
         PageGenerator.getInstance(LoginPage.class).OpenGmail();
         PageGenerator.getInstance(LoginPage.class).checkTheUnreadEmails();
         PageGenerator.getInstance(LoginPage.class).openResetPassEmail();
