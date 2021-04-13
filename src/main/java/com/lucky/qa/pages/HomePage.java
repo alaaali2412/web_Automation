@@ -23,7 +23,7 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//button/*[text()='Google']")
     private WebElement googleBtn;
 
-    @FindBy(xpath = "//*[@class = 'box-body']/a")
+    @FindBy(xpath = "//a/*[text()='E-mail']")
     private WebElement emailBtn;
 
     @FindBy(xpath = "//div[1]/nav/div/div[2]")
@@ -88,7 +88,6 @@ public class HomePage extends BasePage {
     }
 
     public void clickSignupBtn() {
-        waitVisibilityOfElement(emailBtn);
         clickButton(emailBtn);
     }
 
@@ -103,7 +102,6 @@ public class HomePage extends BasePage {
     }
 
     public String clickOnlineCashback(String categorySelected) {
-        waitVisibilityOfElement(onlineCashbackBtn);
         clickButton(onlineCashbackBtn);
         for (WebElement category : onlineCashbackList) {
             if (getText(category).equals(categorySelected)) {
@@ -111,7 +109,6 @@ public class HomePage extends BasePage {
                 break;
             }
         }
-        waitForPageToLoad();
         return categorySelected;
     }
 

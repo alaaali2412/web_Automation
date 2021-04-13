@@ -40,7 +40,7 @@ public class SendIssueToSupportTeamTest {
     }
 
     @Then("user get successful message")
-    public void user_get_successful_message() {
+    public void user_get_successful_message() throws InterruptedException {
         PageGenerator.getInstance(ContactUsPage.class).checkSuccessMessage();
     }
 }
