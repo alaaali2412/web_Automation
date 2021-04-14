@@ -9,7 +9,6 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class EmailAndPasswordValidationTest {
-    LanguageReader lang = new LanguageReader();
     @Given("login page opened")
     public void login_page_opened() {
         PageGenerator.getInstance(HomePage.class).clickSignInBtn();
@@ -18,12 +17,12 @@ public class EmailAndPasswordValidationTest {
     @When("user add invalid email or password format")
     public void userAddInvalidEmailOrPasswordFormat() {
         PageGenerator.getInstance(LoginPage.class).addInvalidEmailFormat();
-        PageGenerator.getInstance(LoginPage.class).checkInvalidEmailErrorMessage(lang.detectLanguage("InValidEmailErrorMsg"));
+        PageGenerator.getInstance(LoginPage.class).checkInvalidEmailErrorMessage(LanguageReader.detectLanguage("InValidEmailErrorMsg"));
         PageGenerator.getInstance(LoginPage.class).loginWithInvalidPass();
     }
 
     @Then("error displayed")
     public void error_displayed() {
-        PageGenerator.getInstance(LoginPage.class).checkErrorMessageIsDisplayed(lang.detectLanguage("InvalidPassErrorMsg"));
+        PageGenerator.getInstance(LoginPage.class).checkErrorMessageIsDisplayed(LanguageReader.detectLanguage("InvalidPassErrorMsg"));
     }
 }

@@ -9,8 +9,6 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class SendIssueToSupportTeamTest {
-    LanguageReader lang = new LanguageReader();
-
     @Given("user open contact us screen")
     public void user_open_contact_us_screen() {
         PageGenerator.getInstance(HomePage.class).clickContactUsBtn();
@@ -27,9 +25,9 @@ public class SendIssueToSupportTeamTest {
 
     @Then("Validation messages displayed at the mandatory fields")
     public void validationMessagesDisplayedAtTheMandatoryFields() {
-        PageGenerator.getInstance(ContactUsPage.class).validationMessages(lang.detectLanguage("ContactUsNameFieldErrorMsg"),
-                lang.detectLanguage("ContactUsMobileNumberFieldErrorMsg"), lang.detectLanguage("ContactUsSubjectListErrorMsg"),
-                lang.detectLanguage("ContactUsTellUsMoreFieldErrorMsg"));
+        PageGenerator.getInstance(ContactUsPage.class).validationMessages(LanguageReader.detectLanguage("ContactUsNameFieldErrorMsg"),
+                LanguageReader.detectLanguage("ContactUsMobileNumberFieldErrorMsg"), LanguageReader.detectLanguage("ContactUsSubjectListErrorMsg"),
+                LanguageReader.detectLanguage("ContactUsTellUsMoreFieldErrorMsg"));
     }
 
     @When("fill all the mandatory fields {string} , {string}, {string}")
@@ -45,6 +43,6 @@ public class SendIssueToSupportTeamTest {
 
     @Then("user get successful message")
     public void user_get_successful_message() {
-        PageGenerator.getInstance(ContactUsPage.class).checkSuccessMessage(lang.detectLanguage("ContactUsSuccessMsg"));
+        PageGenerator.getInstance(ContactUsPage.class).checkSuccessMessage(LanguageReader.detectLanguage("ContactUsSuccessMsg"));
     }
 }

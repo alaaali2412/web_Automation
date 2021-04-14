@@ -60,12 +60,12 @@ public class ContactUsPage extends BasePage {
     }
 
     public void clickSendBtn() {
-        clickButton(sendBtn);
+        clickButton(successMessage);
     }
 
-    public void checkSuccessMessage(String errorMsg) {
+    public void checkSuccessMessage(String successMsg) {
         waitVisibilityOfElement(successImage);
-        Assert.assertEquals(errorMsg, successMessage.getText());
+        Assert.assertEquals(successMsg, successMessage.getText());
     }
 
     public void validationMessages(String nameErrorMsg, String mobileNumberErrorMsg, String subjectErrorMsg, String tellUsMoreErrorMsg) {

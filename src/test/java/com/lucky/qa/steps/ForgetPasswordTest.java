@@ -9,7 +9,6 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class ForgetPasswordTest {
-    LanguageReader lang = new LanguageReader();
     @Given("user click login")
     public void user_click_login() {
         PageGenerator.getInstance(HomePage.class).clickSignInBtn();
@@ -22,7 +21,7 @@ public class ForgetPasswordTest {
 
     @When("validation message displayed")
     public void validation_message_displayed() {
-        PageGenerator.getInstance(LoginPage.class).checkErrorMessageIsDisplayed(lang.detectLanguage("InvalidPassErrorMsg"));
+        PageGenerator.getInstance(LoginPage.class).checkErrorMessageIsDisplayed(LanguageReader.detectLanguage("InvalidPassErrorMsg"));
     }
 
     @When("click forget password")

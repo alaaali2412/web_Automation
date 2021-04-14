@@ -8,7 +8,6 @@ import io.cucumber.java.en.When;
 import org.testng.Assert;
 
 public class RegistrationTest {
-    LanguageReader lang = new LanguageReader();
     @Given("user click signup button")
     public void userClickSignupButton() {
         PageGenerator.getInstance(HomePage.class).clickSignupBtn();
@@ -36,7 +35,7 @@ public class RegistrationTest {
         PageGenerator.getInstance(LoginPage.class).login(
                 "RegistrationData.properties", "RegistrationEmail", "RegistrationPassword");
         PageGenerator.getInstance(RegistrationPage.class).checkUnverifiedMailErrorMessage
-                (lang.detectLanguage("UnverifiedEmailErrorMsg"));
+                (LanguageReader.detectLanguage("UnverifiedEmailErrorMsg"));
     }
 
     @When("user open his email account, open the received email from lucky")
