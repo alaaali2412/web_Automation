@@ -1,7 +1,7 @@
 package com.lucky.qa.steps;
 
+import com.lucky.qa.common.BasePage;
 import com.lucky.qa.pages.*;
-import com.lucky.qa.utilities.LanguageReader;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -35,7 +35,7 @@ public class RegistrationTest {
         PageGenerator.getInstance(LoginPage.class).login(
                 "RegistrationData.properties", "RegistrationEmail", "RegistrationPassword");
         PageGenerator.getInstance(RegistrationPage.class).checkUnverifiedMailErrorMessage
-                (LanguageReader.detectLanguage("UnverifiedEmailErrorMsg"));
+                (PageGenerator.getInstance(BasePage.class).detectLanguage("UnverifiedEmailErrorMsg"));
     }
 
     @When("user open his email account, open the received email from lucky")

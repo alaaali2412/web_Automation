@@ -1,10 +1,10 @@
 package com.lucky.qa.steps;
 
+import com.lucky.qa.common.BasePage;
 import com.lucky.qa.pages.HomePage;
 import com.lucky.qa.pages.LoginPage;
 import com.lucky.qa.pages.PageGenerator;
 import com.lucky.qa.pages.WalletPage;
-import com.lucky.qa.utilities.LanguageReader;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -46,8 +46,8 @@ public class PerformCashoutRequestTest {
 
     @When("User gets message that the Cashout done successfully")
     public void user_gets_message_that_the_cashout_done_successfully() {
-        PageGenerator.getInstance(WalletPage.class).checkCashoutSuccessMessage(LanguageReader.
-                detectLanguage("CashoutSuccessMessage"));
+        PageGenerator.getInstance(WalletPage.class).checkCashoutSuccessMessage(
+                PageGenerator.getInstance(BasePage.class).detectLanguage("CashoutSuccessMessage"));
         PageGenerator.getInstance(HomePage.class).clickWallet();
     }
 
@@ -61,8 +61,9 @@ public class PerformCashoutRequestTest {
 
     @Then("transaction reflect in wallet transaction list according to cashout {string}")
     public void transactionReflectInWalletTransactionListAccordingToCashout(String method) {
-        PageGenerator.getInstance(WalletPage.class).checkIfTransactionReflected(method, LanguageReader.detectLanguage("transactionNameLanguage"),
-                LanguageReader.detectLanguage("CashoutStatusLanguage"));
+        PageGenerator.getInstance(WalletPage.class).checkIfTransactionReflected(method,
+                PageGenerator.getInstance(BasePage.class).detectLanguage("transactionNameLanguage"),
+                PageGenerator.getInstance(BasePage.class).detectLanguage("CashoutStatusLanguage"));
         PageGenerator.getInstance(HomePage.class).clickLogOut();
     }
 }

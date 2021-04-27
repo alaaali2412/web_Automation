@@ -1,7 +1,7 @@
 package com.lucky.qa.steps;
 
+import com.lucky.qa.common.BasePage;
 import com.lucky.qa.pages.*;
-import com.lucky.qa.utilities.LanguageReader;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
@@ -30,6 +30,7 @@ public class GetInStoreOffersTest {
 
     @Then("popup displayed that userf should download lucky app")
     public void popup_displayed_that_userf_should_download_lucky_app() {
-        PageGenerator.getInstance(OfferDetailsPage.class).closePopUP(LanguageReader.detectLanguage("GetOfferPopUpHeader"));
+        PageGenerator.getInstance(OfferDetailsPage.class).closePopUP(
+                PageGenerator.getInstance(BasePage.class).detectLanguage("GetOfferPopUpHeader"));
     }
 }
