@@ -8,6 +8,5 @@ Feature: filter Online Cashback offers by category
     Then verify that user can filter
 
     Examples:
-      | category                    |
-      | Beauty / Health / Cosmetics |
-      | Fashion                     |
+      | category |
+      | الالعاب  |

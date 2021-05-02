@@ -36,7 +36,6 @@ public class Hook {
             DriverFactory.addDriver(driver);
             driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
             driver.navigate().to(helper.getValuesFromPropertiesFile("PortalUrl"));
-
         }
     }
 
@@ -46,7 +45,6 @@ public class Hook {
             public void run() {
                 DriverFactory.removeDriver();
                 DriverFactory.storedDrivers.forEach(WebDriver::quit);
-
             }
         });
     }

@@ -57,7 +57,7 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = " //*[@class='form-footer']//p[2]")
     private WebElement forgetPassLink;
 
-    @FindBy(xpath = "//button[text() ='Email me']")
+    @FindBy(xpath = "//*[@class='btn btn-block btn-primary']")
     private WebElement emailMeBtn;
 
     @FindBy(xpath = "//*[@class ='mailVerification-text']")
@@ -100,7 +100,7 @@ public class LoginPage extends BasePage {
     private WebElement invalidEmailErrorMessage;
 
     @FindBy(xpath = "//section[3]/div/div/div/div[1]/h2")
-    private WebElement newLetterheader;
+    private WebElement newsLetterheader;
 
     public LoginPage(WebDriver driver) {
         super(driver);
@@ -114,7 +114,7 @@ public class LoginPage extends BasePage {
         clearField(inputPassword);
         addText(inputPassword, helper.getValuesFromPropertiesFile(password));
         clickButton(loginBtn);
-        waitVisibilityOfElement(newLetterheader);
+        //waitVisibilityOfElement(newsLetterheader);
         return helper.getValuesFromPropertiesFile(email);
     }
 
@@ -170,9 +170,9 @@ public class LoginPage extends BasePage {
         clickButton(loginBtn);
     }
 
-    public void checkErrorMessageIsDisplayed() {
+    public void checkErrorMessageIsDisplayed(String errorMsg) {
         waitForTextToBeVisible(errorMessage);
-        Assert.assertEquals("Email or Password is incorrect", errorMessage.getText());
+        Assert.assertEquals(errorMsg, errorMessage.getText());
     }
 
     public void clickForgetPasswordLink() {
@@ -239,9 +239,9 @@ public class LoginPage extends BasePage {
         clickButton(inputPassword);
     }
 
-    public void checkInvalidEmailErrorMessage() {
+    public void checkInvalidEmailErrorMessage(String errorMsg) {
         waitForTextToBeVisible(invalidEmailErrorMessage);
-        Assert.assertEquals("Please enter a valid email", invalidEmailErrorMessage.getText());
+        Assert.assertEquals(errorMsg, invalidEmailErrorMessage.getText());
     }
 }
 

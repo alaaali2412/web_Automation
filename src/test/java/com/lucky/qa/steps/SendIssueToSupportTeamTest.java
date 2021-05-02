@@ -1,5 +1,6 @@
 package com.lucky.qa.steps;
 
+import com.lucky.qa.common.BasePage;
 import com.lucky.qa.pages.ContactUsPage;
 import com.lucky.qa.pages.HomePage;
 import com.lucky.qa.pages.PageGenerator;
@@ -8,7 +9,6 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class SendIssueToSupportTeamTest {
-
     @Given("user open contact us screen")
     public void user_open_contact_us_screen() {
         PageGenerator.getInstance(HomePage.class).clickContactUsBtn();
@@ -25,7 +25,11 @@ public class SendIssueToSupportTeamTest {
 
     @Then("Validation messages displayed at the mandatory fields")
     public void validationMessagesDisplayedAtTheMandatoryFields() {
-        PageGenerator.getInstance(ContactUsPage.class).validationMessages();
+        PageGenerator.getInstance(ContactUsPage.class).validationMessages(
+                PageGenerator.getInstance(BasePage.class).detectLanguage("ContactUsNameFieldErrorMsg"),
+                PageGenerator.getInstance(BasePage.class).detectLanguage("ContactUsMobileNumberFieldErrorMsg"),
+                PageGenerator.getInstance(BasePage.class).detectLanguage("ContactUsSubjectListErrorMsg"),
+                PageGenerator.getInstance(BasePage.class).detectLanguage("ContactUsTellUsMoreFieldErrorMsg"));
     }
 
     @When("fill all the mandatory fields {string} , {string}, {string}")
@@ -40,7 +44,9 @@ public class SendIssueToSupportTeamTest {
     }
 
     @Then("user get successful message")
-    public void user_get_successful_message() throws InterruptedException {
-        PageGenerator.getInstance(ContactUsPage.class).checkSuccessMessage();
+    public void user_get_successful_message() {
+        PageGenerator.getInstance(ContactUsPage.class).checkSuccessMessage(
+                PageGenerator.getInstance(BasePage.class).detectLanguage("ContactUsSuccessMsg"));
     }
+    //TODo (Alaa) maintain the scenario to match the new design
 }

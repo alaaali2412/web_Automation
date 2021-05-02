@@ -2,6 +2,7 @@ package com.lucky.qa.common;
 
 
 import com.lucky.qa.connectors.DriverFactory;
+import com.lucky.qa.utilities.Helper;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -13,12 +14,14 @@ import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class BasePage {
     public WebDriver driver;
     protected Actions actions;
+    private static ResourceBundle resource = null;
+    private static Locale locale = null;
+    private final Helper helper = new Helper();
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
@@ -117,5 +120,15 @@ public class BasePage {
                 .ignoring(Exception.class);
         wait.until(ExpectedConditions.visibilityOfAllElements(elements));
     }
-    // TODO separate wait class
+
+    public String language() {
+        helper.setPropertiesFileName("Languague.properties");
+        return helper.getValuesFromPropertiesFile("local.language");
+    }
+
+    public String detectLanguage(String message) {
+        locale = new Locale(language());
+        resource = PropertyResourceBundle.getBundle("LanguageTest", locale);
+        return resource.getString(message);
+    }
 }

@@ -8,5 +8,5 @@ Feature: filter In_store offers by it`s categories & Locations
     When combine between both filters then click apply
 
     Examples:
-      | mainCategory | mainSubCategory | subCategory             | Location   | subLocation |
-      | Fashion      | Women           | Jewellery & Accessories | Alexandria | San Stefano |
+      | mainCategory | mainSubCategory | subCategory    | Location | subLocation |
+      | موضة         | حريمي           | مجوهرات وساعات | الجيزة   | الزمالك     |

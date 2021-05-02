@@ -17,13 +17,13 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//*[@class ='px-xl-3 px-lg-2 nav-link-item'][4]")
     private WebElement signInBtn;
 
-    @FindBy(xpath = "//button/*[text()='Facebook']")
+    @FindBy(xpath = "//div[2]/div/div[2]/button[2]/span")
     private WebElement facebookBtn;
 
-    @FindBy(xpath = "//button/*[text()='Google']")
+    @FindBy(xpath = "//div[2]/div/div[2]/button[1]/span")
     private WebElement googleBtn;
 
-    @FindBy(xpath = "//a/*[text()='E-mail']")
+    @FindBy(xpath = "//div[2]/div/div[2]/a/span")
     private WebElement emailBtn;
 
     @FindBy(xpath = "//div[1]/nav/div/div[2]")
@@ -41,7 +41,7 @@ public class HomePage extends BasePage {
     @FindBy(id = "exampleForm.ControlInput1")
     private WebElement loggedInEmail;
 
-    @FindBy(xpath = "//*[@id='basic-nav-dropdown'][text()='Online Cashbacks']")
+    @FindBy(id = "basic-nav-dropdown")
     private WebElement onlineCashbackBtn;
 
     @FindBy(xpath = "//nav/div/div[1]/div/div/a")

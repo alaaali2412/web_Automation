@@ -1,5 +1,6 @@
 package com.lucky.qa.steps;
 
+import com.lucky.qa.common.BasePage;
 import com.lucky.qa.pages.*;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -13,7 +14,7 @@ public class RegistrationTest {
     }
 
     @When("user add all the mandatory fields of Registration")
-    public void userAddAllTheMandatoryFieldsOfRegistration() throws InterruptedException {
+    public void userAddAllTheMandatoryFieldsOfRegistration() {
         PageGenerator.getInstance(RegistrationPage.class).addRegistrationName();
         PageGenerator.getInstance(RegistrationPage.class).addRegistrationEmail();
         PageGenerator.getInstance(RegistrationPage.class).addRegistrationPasswords();
@@ -30,14 +31,15 @@ public class RegistrationTest {
     }
 
     @Then("user can not login without verifying the email")
-    public void userCanNotLoginWithoutVerifyingTheEmail() throws InterruptedException {
+    public void userCanNotLoginWithoutVerifyingTheEmail() {
         PageGenerator.getInstance(LoginPage.class).login(
                 "RegistrationData.properties", "RegistrationEmail", "RegistrationPassword");
-        PageGenerator.getInstance(RegistrationPage.class).checkUnverifiedMailErrorMessage();
+        PageGenerator.getInstance(RegistrationPage.class).checkUnverifiedMailErrorMessage
+                (PageGenerator.getInstance(BasePage.class).detectLanguage("UnverifiedEmailErrorMsg"));
     }
 
     @When("user open his email account, open the received email from lucky")
-    public void userOpenHisEmailAccountOpenTheReceivedEmailFromLucky() throws InterruptedException {
+    public void userOpenHisEmailAccountOpenTheReceivedEmailFromLucky() {
         PageGenerator.getInstance(RegistrationPage.class).openVerificationMail();
     }
 
