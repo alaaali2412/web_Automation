@@ -2,7 +2,6 @@ package com.lucky.qa.pages;
 
 import com.lucky.qa.common.BasePage;
 import com.lucky.qa.utilities.Helper;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -23,13 +22,13 @@ public class ProfilePage extends BasePage {
     @FindBy(id = "formBasicPassword")
     private WebElement passwordField;
 
-    @FindBy(xpath = "//button[text() ='Save Changes']")
+    @FindBy(xpath = "//*[@class = 'py-3 text-center']")
     private WebElement saveChangesBtn;
 
-    @FindBy(xpath = "//button[text() ='Log out']")
+    @FindBy(xpath = "//*[@class= 'modal-footer']/button[1]")
     private WebElement logoutPopup;
 
-    @FindBy(xpath = "//div/div/div[3]/button[1]")
+    @FindBy(xpath = "//*[@class = 'd-flex justify-content-between']//button")
     private WebElement logoutBtn;
 
     @FindBy(xpath = "//*[@class = 'react-toast-notifications__toast__content css-1ad3zal']")
@@ -53,8 +52,7 @@ public class ProfilePage extends BasePage {
     }
 
     public void changeName() {
-        nameField.sendKeys(Keys.COMMAND + "a");
-        nameField.sendKeys(Keys.DELETE);
+        deleteTextInField(nameField);
         addText(nameField, "QA " + helper.generateRandomText(5));
         clickButton(saveChangesBtn);
         waitVisibilityOfElement(toastMessage);
@@ -74,7 +72,7 @@ public class ProfilePage extends BasePage {
     }
 
     public void clickLogout() {
-        clickButton(logoutPopup);
         clickButton(logoutBtn);
+        clickButton(logoutPopup);
     }
 }

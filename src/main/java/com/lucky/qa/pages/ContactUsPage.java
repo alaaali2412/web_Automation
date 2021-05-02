@@ -60,19 +60,19 @@ public class ContactUsPage extends BasePage {
     }
 
     public void clickSendBtn() {
-        clickButton(sendBtn);
+        clickButton(successMessage);
     }
 
-    public void checkSuccessMessage() {
+    public void checkSuccessMessage(String successMsg) {
         waitVisibilityOfElement(successImage);
-        Assert.assertEquals("Your message was sent successfully", successMessage.getText());
+        Assert.assertEquals(successMsg, successMessage.getText());
     }
 
-    public void validationMessages() {
+    public void validationMessages(String nameErrorMsg, String mobileNumberErrorMsg, String subjectErrorMsg, String tellUsMoreErrorMsg) {
         waitForTextToBeVisible(nameFieldErrorMsg);
-        Assert.assertEquals(nameFieldErrorMsg.getText(), "Please enter a full name");
-        Assert.assertEquals(mobileNumberFieldErrorMsg.getText(), "Please enter a valid number");
-        Assert.assertEquals(subjectListErrorMsg.getText(), "Please enter a valid topic");
-        Assert.assertEquals(tellUsMoreFieldErrorMsg.getText(), "Please enter a valid message");
+        Assert.assertEquals(nameErrorMsg, nameFieldErrorMsg.getText());
+        Assert.assertEquals(mobileNumberErrorMsg, mobileNumberFieldErrorMsg.getText());
+        Assert.assertEquals(subjectErrorMsg, subjectListErrorMsg.getText());
+        Assert.assertEquals(tellUsMoreErrorMsg, tellUsMoreFieldErrorMsg.getText());
     }
 }

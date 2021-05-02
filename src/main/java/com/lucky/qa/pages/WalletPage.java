@@ -22,7 +22,7 @@ public class WalletPage extends BasePage {
     Helper helper = new Helper();
 
     @FindBy(className = "h2-text")
-    private WebElement userbalance;
+    private WebElement userBalance;
 
     @FindBy(xpath = "//section/div[1]/div/p[1]")
     private WebElement userCashbackBalance;
@@ -85,19 +85,18 @@ public class WalletPage extends BasePage {
     private WebElement lastTransactionStatus;
 
     public Double getUserTotalBalance() throws InterruptedException {
-        Thread.sleep(3000);
-        String[] balanceAsString = getText(userbalance).split("EGP ");
+        Thread.sleep(4000);
+        String[] balanceAsString = getText(userBalance).split(" ");
         return Double.parseDouble(balanceAsString[1]);
     }
 
     public Double getUserCashbackBalance() {
         waitVisibilityOfElement(transactionSection);
-        String[] amountInCashback = getText(userCashbackBalance).split("Including EGP ");
-        String[] balanceAsString = amountInCashback[1].split(" Cashback");
         DecimalFormat df = new DecimalFormat("0.00");
-        Assert.assertTrue(Double.parseDouble(df.format(Double.parseDouble(balanceAsString[0]))) >= 100
+        String[] amountInCashback = getText(userCashbackBalance).split(" ");
+        Assert.assertTrue(Double.parseDouble(df.format(Double.parseDouble(amountInCashback[2]))) >= 100
                 , "user does not have enough cashabck");
-        return Double.parseDouble(df.format(Double.parseDouble(balanceAsString[0])));
+        return Double.parseDouble(df.format(Double.parseDouble(amountInCashback[2])));
     }
 
     public void clickRequestCashoutBtn() {
@@ -142,11 +141,8 @@ public class WalletPage extends BasePage {
         waitVisibilityOfElement(successMessage);
     }
 
-    public String checkCashoutSuccessMessage() {
-        Assert.assertEquals("Cashout successful!", getText(successMessage));
-        String[] cashoutMessage = getText(cashoutConfirmationMessage).split("You just cashout EGP ");
-        String[] cashoutAmount = cashoutMessage[1].split(" succesfully");
-        return cashoutAmount[0];
+    public void checkCashoutSuccessMessage(String successMsg) {
+        Assert.assertEquals(successMsg, getText(successMessage));
     }
 
     public ArrayList<Double> userBalanceBeforeCashout() throws InterruptedException {
@@ -177,10 +173,10 @@ public class WalletPage extends BasePage {
         return dtf.format(now);
     }
 
-    public void checkIfTransactionReflected(String transactionMethod) {
-        Assert.assertEquals(lastTransactionType.getText(), "Cashout");
+    public void checkIfTransactionReflected(String transactionMethod, String transactionNameLanguage, String statusLanguage) {
+        Assert.assertEquals(lastTransactionType.getText(), transactionNameLanguage);
         Assert.assertEquals(lastTransactionDate.getText(), getCurrentDate());
-        Assert.assertEquals(lastTransactionStatus.getText(), "Pending");
+        Assert.assertEquals(lastTransactionStatus.getText(), statusLanguage);
         if (transactionMethod.equals("Aman")) {
             Assert.assertEquals(lastTransactionName.getText(), "Voucher");
         } else {

@@ -1,5 +1,6 @@
 package com.lucky.qa.steps;
 
+import com.lucky.qa.common.BasePage;
 import com.lucky.qa.pages.HomePage;
 import com.lucky.qa.pages.LoginPage;
 import com.lucky.qa.pages.PageGenerator;
@@ -38,14 +39,15 @@ public class PerformCashoutRequestTest {
     }
 
     @And("Choose the cashout {string} and add the {string}")
-    public void chooseTheCashoutAndAddThe(String method, String cashoutAmount) throws InterruptedException {
+    public void chooseTheCashoutAndAddThe(String method, String cashoutAmount) {
         PageGenerator.getInstance(WalletPage.class).cashoutMethod(method, cashoutAmount);
         PageGenerator.getInstance(WalletPage.class).clickContinueBtn();
     }
 
     @When("User gets message that the Cashout done successfully")
     public void user_gets_message_that_the_cashout_done_successfully() {
-        PageGenerator.getInstance(WalletPage.class).checkCashoutSuccessMessage();
+        PageGenerator.getInstance(WalletPage.class).checkCashoutSuccessMessage(
+                PageGenerator.getInstance(BasePage.class).detectLanguage("CashoutSuccessMessage"));
         PageGenerator.getInstance(HomePage.class).clickWallet();
     }
 
@@ -59,7 +61,9 @@ public class PerformCashoutRequestTest {
 
     @Then("transaction reflect in wallet transaction list according to cashout {string}")
     public void transactionReflectInWalletTransactionListAccordingToCashout(String method) {
-        PageGenerator.getInstance(WalletPage.class).checkIfTransactionReflected(method);
+        PageGenerator.getInstance(WalletPage.class).checkIfTransactionReflected(method,
+                PageGenerator.getInstance(BasePage.class).detectLanguage("transactionNameLanguage"),
+                PageGenerator.getInstance(BasePage.class).detectLanguage("CashoutStatusLanguage"));
         PageGenerator.getInstance(HomePage.class).clickLogOut();
     }
 }

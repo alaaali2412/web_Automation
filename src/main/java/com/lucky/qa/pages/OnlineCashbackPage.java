@@ -50,7 +50,7 @@ public class OnlineCashbackPage extends BasePage {
         return new ArrayList<>(merchants).size();
     }
 
-    public void searchOnlineCashabckOffers(String StoreName) {
+    public void searchOnlineCashabackOffers(String StoreName) {
         waitVisibilityOfElement(searchField);
         clearField(searchField);
         addText(searchField, StoreName);

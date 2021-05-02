@@ -1,11 +1,11 @@
 package com.lucky.qa.steps;
 
+import com.lucky.qa.common.BasePage;
 import com.lucky.qa.pages.*;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class GetInStoreOffersTest {
-
     @When("browser open,open portal, user login")
     public void browser_openopen_portal_user_login() {
         PageGenerator.getInstance(HomePage.class).clickSignInBtn();
@@ -30,6 +30,7 @@ public class GetInStoreOffersTest {
 
     @Then("popup displayed that userf should download lucky app")
     public void popup_displayed_that_userf_should_download_lucky_app() {
-        PageGenerator.getInstance(OfferDetailsPage.class).closePopUP();
+        PageGenerator.getInstance(OfferDetailsPage.class).closePopUP(
+                PageGenerator.getInstance(BasePage.class).detectLanguage("GetOfferPopUpHeader"));
     }
 }

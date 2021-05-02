@@ -19,7 +19,7 @@ public class SearchOnlineCashbackOffersTest {
 
     @When("add {string} in search field and click enter")
     public void add_in_search_field_and_click_enter(String keyword) {
-        PageGenerator.getInstance(OnlineCashbackPage.class).searchOnlineCashabckOffers(keyword);
+        PageGenerator.getInstance(OnlineCashbackPage.class).searchOnlineCashabackOffers(keyword);
         implementAPIsMethods = new ImplementAPIsMethods();
         APIresult = implementAPIsMethods.getCountOfAffiliateMerchants(keyword);
     }

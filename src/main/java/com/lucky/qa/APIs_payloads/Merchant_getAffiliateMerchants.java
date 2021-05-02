@@ -10,6 +10,6 @@ public class Merchant_getAffiliateMerchants {
     }
 
     public void setSearchKey(String SearchKey){
-        this.SearchKey=SearchKey;
+        this.SearchKey = SearchKey;
     }
 }
