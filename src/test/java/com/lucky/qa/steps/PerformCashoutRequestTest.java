@@ -20,7 +20,7 @@ public class PerformCashoutRequestTest {
     public void user_already_logged_in() {
         PageGenerator.getInstance(HomePage.class).clickSignInBtn();
         PageGenerator.getInstance(LoginPage.class).login("LoginData.properties"
-                , "Email", "password");
+                , "Email", "Password");
     }
 
     @When("Wallet page opens")

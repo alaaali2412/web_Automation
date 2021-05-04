@@ -144,6 +144,7 @@ public class InStoreOfferPage extends BasePage {
 
     public void clickClearBtn() {
         clickButton(clearBtn);
+        scrollToTopOfScreen();
     }
 
     public enum CategoryType {
