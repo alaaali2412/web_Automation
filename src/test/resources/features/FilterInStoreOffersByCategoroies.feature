@@ -9,3 +9,5 @@ Feature: filter In_store offers by it`s categories
     Examples:
       | mainCategory   | mainSubCategory | subCategory |
       | أغذية ومشروبات | الوجبات السريعة | بيتزا       |
+      | صحة و جمال     | صحة             | عيادات طبية |
+

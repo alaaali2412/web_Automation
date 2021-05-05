@@ -10,7 +10,7 @@ public class GetInStoreOffersTest {
     public void browser_openopen_portal_user_login() {
         PageGenerator.getInstance(HomePage.class).clickSignInBtn();
         PageGenerator.getInstance(LoginPage.class).login("LoginData.properties"
-                , "Email", "password");
+                , "Email", "Password");
     }
 
     @When("click on instore offers")

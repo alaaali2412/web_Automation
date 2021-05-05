@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+
 public class WalletPage extends BasePage {
     public WalletPage(WebDriver driver) {
         super(driver);
@@ -42,7 +43,7 @@ public class WalletPage extends BasePage {
     @FindBy(xpath = "//*[@id='cashoutMethod-tabpane-1']//form//input")
     private WebElement bankAccountAmountField;
 
-    @FindBy(xpath = "//footer/div/button")
+    @FindBy(xpath = "//footer//*[@type='submit']")
     private WebElement continueBtn;
 
     @FindBy(xpath = " //section/h2[1]")
@@ -84,6 +85,21 @@ public class WalletPage extends BasePage {
     @FindBy(xpath = "//div[2]/div[3]/div[2]/p[2]")
     private WebElement lastTransactionStatus;
 
+    @FindBy(id = "formGridZip")
+    private WebElement mobileNumberField;
+
+    @FindBy(className = "pincode-input-text")
+    private List<WebElement> otpFields;
+
+    @FindBy(xpath = "//*[@class= 'modal-footer']/button[1]")
+    private WebElement confirmBtn;
+
+    @FindBy(id = "root")
+    private WebElement pageContent;
+
+    @FindBy(xpath = "//*[@class = 'react-toast-notifications__toast__content css-1ad3zal']")
+    private WebElement toastMessage;
+
     public Double getUserTotalBalance() throws InterruptedException {
         Thread.sleep(4000);
         String[] balanceAsString = getText(userBalance).split(" ");
@@ -95,7 +111,7 @@ public class WalletPage extends BasePage {
         DecimalFormat df = new DecimalFormat("0.00");
         String[] amountInCashback = getText(userCashbackBalance).split(" ");
         Assert.assertTrue(Double.parseDouble(df.format(Double.parseDouble(amountInCashback[2]))) >= 100
-                , "user does not have enough cashabck");
+                , "user does not have enough cashback");
         return Double.parseDouble(df.format(Double.parseDouble(amountInCashback[2])));
     }
 
@@ -182,5 +198,41 @@ public class WalletPage extends BasePage {
         } else {
             Assert.assertEquals(lastTransactionName.getText(), "Banktransfer");
         }
+    }
+
+    public void addMobileNumber(String mobileNumber) throws InterruptedException {
+        addText(mobileNumberField, mobileNumber);
+        clickButton(continueBtn);
+        Thread.sleep(2000);
+        String value = pageContent.getAttribute("aria-hidden");
+        if (value != null) {
+            forceClickElement(confirmBtn);
+        }
+    }
+
+    public void addOTPCode(String email) {
+        helper.setPropertiesFileName("LoginData.properties");
+        Helper.setUpDBConnection();
+        String otp = Helper.getValueFromDatabase("SELECT CashOutMobileVerificationOtp from LuckyUser WHERE email = '" +
+                helper.getValuesFromPropertiesFile(email) + "'");
+        String[] otpDigits = otp.split("");
+        for (int i = 0; i < otpDigits.length; i++) {
+            addText(otpFields.get(i), otpDigits[i]);
+        }
+        clickButton(continueBtn);
+        waitVisibilityOfElement(toastMessage);
+        Helper.closeDBConnection();
+    }
+
+    public void checkThatSuccessDispalyed() {
+        Assert.assertTrue(toastMessage.isDisplayed());
+    }
+
+    public void resetMobileNumberInDataBase(String email) {
+        helper.setPropertiesFileName("LoginData.properties");
+        Helper.setUpDBConnection();
+        Helper.updateDatabaseValues("UPDATE LuckyUser SET IsMerged = '0', PhoneNumber = '" +
+                helper.generateRandomText(4) + "' WHERE email = '" + helper.getValuesFromPropertiesFile(email) + "'");
+        Helper.closeDBConnection();
     }
 }

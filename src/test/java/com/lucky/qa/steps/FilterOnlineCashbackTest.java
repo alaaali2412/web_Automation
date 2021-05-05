@@ -27,7 +27,7 @@ public class FilterOnlineCashbackTest {
     public void user_logged_in() {
         PageGenerator.getInstance(HomePage.class).clickSignInBtn();
         PageGenerator.getInstance(LoginPage.class).login("LoginData.properties",
-                "Email", "password");
+                "Email", "Password");
     }
     @When("user click OnlineCashback and select {string}")
     public void user_click_online_cashback_and_select(String category) {
