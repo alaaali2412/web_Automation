@@ -47,6 +47,10 @@ public class BasePage {
         ((JavascriptExecutor) DriverFactory.getDriver()).executeScript("window.scrollTo(0, document.body.scrollHeight)");
     }
 
+    public void scrollToTopOfScreen() {
+        ((JavascriptExecutor) DriverFactory.getDriver()).executeScript("window.scrollTo(0,document.body.scrollTop)");
+    }
+
     public void forceClickElement(WebElement element) {
         Actions actions = new Actions(DriverFactory.getDriver());
         actions.moveToElement(element).click(element).build().perform();

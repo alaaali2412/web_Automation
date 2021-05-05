@@ -11,6 +11,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.Properties;
 import java.util.Random;
 
@@ -91,5 +95,47 @@ public class Helper {
         }
     }
 
+    static Connection connection = null;
 
+    public static void setUpDBConnection() {
+        try {
+            connection = DriverManager.getConnection("jdbc:sqlserver://luckydbsrv.database.windows.net:1433;database=LuckyStaging;",
+                    "Azure_WriteLogin", "AzP@ss!ucky2");
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public static String getValueFromDatabase(String query) {
+        String res = null;
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet result = statement.executeQuery(query);
+            while (result.next())
+                res = result.getString(1);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return res;
+    }
+
+    public static String updateDatabaseValues(String query) {
+        String res = null;
+        try {
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(query);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return res;
+    }
+
+    public static void closeDBConnection() {
+        try {
+            connection.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
 }
