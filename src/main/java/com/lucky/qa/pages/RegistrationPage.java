@@ -69,8 +69,7 @@ public class RegistrationPage extends BasePage {
         addText(nameField, helper.getValuesFromPropertiesFile("Name"));
     }
 
-    public void addRegistrationEmail() {
-        helper.setPropertiesFileName("RegistrationData.properties");
+    public void addNewEmail() {
         clearDefaultValueOfCopy(inputEmail);
         openNewTab();
         moveToTab(1);
@@ -80,6 +79,10 @@ public class RegistrationPage extends BasePage {
         moveToTab(0);
         pasteTextInField(inputEmail);
         waitForTextInAttributeToBeExist(inputEmail.getAttribute("value"));
+    }
+
+    public void saveTheRegistrationEmail() {
+        helper.setPropertiesFileName("RegistrationData.properties");
         helper.updateValueInPropertiesFile("RegistrationEmail", inputEmail.getAttribute("value"));
     }
 
