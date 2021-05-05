@@ -17,7 +17,7 @@ public class ChangeNameAndPasswordInProfileTest {
     public void portal_and_browser_open_user_login() {
         PageGenerator.getInstance(HomePage.class).clickSignInBtn();
         PageGenerator.getInstance(LoginPage.class).login("LoginData.properties",
-                "Email", "password");
+                "Email", "Password");
     }
 
 
@@ -41,7 +41,7 @@ public class ChangeNameAndPasswordInProfileTest {
         PageGenerator.getInstance(ProfilePage.class).clickLogout();
         PageGenerator.getInstance(HomePage.class).clickSignInBtn();
         loggedInEmail = PageGenerator.getInstance(LoginPage.class).login("LoginData.properties",
-                "Email", "password");
+                "Email", "Password");
     }
 
     @Then("verify that data changed")

@@ -10,3 +10,4 @@ Feature: filter Online Cashback offers by category
     Examples:
       | category |
       | الالعاب  |
+      | ازياء    |

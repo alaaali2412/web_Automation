@@ -20,12 +20,14 @@ public class FilterInStoreOffersByLocationTest {
     }
 
     @When("select {string} if required")
-    public void select_if_required(String subLocation)  {
+    public void select_if_required(String subLocation) {
         PageGenerator.getInstance(InStoreOfferPage.class).selectSubLocation(subLocation);
         PageGenerator.getInstance(InStoreOfferPage.class).clickApplyBtn();
     }
+
     @Then("in-Store offers filtered according to the selected location")
     public void in_store_offers_filtered_according_to_the_selected_location() {
-        //verify this method with backend ,not ready yet
+        PageGenerator.getInstance(InStoreOfferPage.class).clickClearBtn();
+        // TODO verify result with backend
     }
 }

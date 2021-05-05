@@ -25,7 +25,7 @@ public class EmailLoginTest {
     @When("^login with valid email and pass$")
     public void login_with_valid_email_and_pass() {
         loggedEmail = PageGenerator.getInstance(LoginPage.class).login("LoginData.properties"
-                , "Email", "password");
+                , "Email", "Password");
     }
 
     @Then("verify the login")
