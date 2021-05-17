@@ -65,6 +65,9 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//*/ul/li[2]/a")
     private WebElement contactUsBtn;
 
+    @FindBy(xpath = "//*[@class ='px-xl-3 px-lg-2 nav-link-item'][3]")
+    private WebElement languageBtn;
+
     public void clickContactUsBtn() {
         clickButton(contactUsBtn);
     }
@@ -84,7 +87,7 @@ public class HomePage extends BasePage {
 
     public void googleLogin() {
         waitVisibilityOfElement(googleBtn);
-        clickButton(googleBtn);
+        forceClickElement(googleBtn);
     }
 
     public void clickSignupBtn() {
@@ -121,5 +124,13 @@ public class HomePage extends BasePage {
     public void clickLogOut() {
         clickButton(profileDropdown);
         clickButton(logOutBtn);
+    }
+
+    public void openPortalURL(String language) {
+        if (language.equals("Arabic")) {
+            driver.navigate().to("https://ocb.staging.web.thelucky.io");
+        } else {
+            clickButton(languageBtn);
+        }
     }
 }

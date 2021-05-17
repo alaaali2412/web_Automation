@@ -16,8 +16,9 @@ import java.util.ArrayList;
 public class PerformCashoutRequestTest {
     ArrayList<Double> valuesBeforeCashout;
 
-    @Given("user already logged in")
-    public void user_already_logged_in() {
+    @Given("portal open in  {string} user already logged in")
+    public void portalOpenInUserAlreadyLoggedIn(String language) {
+        PageGenerator.getInstance(HomePage.class).openPortalURL(language);
         PageGenerator.getInstance(HomePage.class).clickSignInBtn();
         PageGenerator.getInstance(LoginPage.class).login("LoginData.properties"
                 , "Email", "Password");

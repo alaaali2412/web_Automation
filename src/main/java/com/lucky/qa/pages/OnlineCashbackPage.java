@@ -28,6 +28,9 @@ public class OnlineCashbackPage extends BasePage {
     @FindBy(xpath = "//footer/div[1]/span/img")
     private WebElement moveToTheTopBtn;
 
+    @FindBy(xpath = "//*/div[1]/div/button[1]")
+    private WebElement clearBtn;
+
     public OnlineCashbackPage(WebDriver driver) {
         super(driver);
     }
@@ -56,5 +59,9 @@ public class OnlineCashbackPage extends BasePage {
         addText(searchField, StoreName);
         searchField.sendKeys(Keys.ENTER);
         waitVisibilityOfElement(onlineCashbackTitle);
+    }
+
+    public void clickClearBtn() {
+        clickButton(clearBtn);
     }
 }

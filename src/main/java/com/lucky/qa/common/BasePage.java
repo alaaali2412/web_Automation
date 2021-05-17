@@ -85,6 +85,11 @@ public class BasePage {
         element.sendKeys(Keys.DELETE);
     }
 
+    public void confirmAction(WebElement element) {
+        element.sendKeys(Keys.ENTER);
+    }
+
+
     public void refreshCurrentPage() {
         DriverFactory.getDriver().navigate().refresh();
     }
@@ -126,7 +131,7 @@ public class BasePage {
     }
 
     public String language() {
-        helper.setPropertiesFileName("Languague.properties");
+        helper.setPropertiesFileName("Language.properties");
         return helper.getValuesFromPropertiesFile("local.language");
     }
 
