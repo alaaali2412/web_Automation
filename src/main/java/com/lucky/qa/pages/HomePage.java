@@ -79,11 +79,18 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//h1")
     private WebElement headingText;
 
+    @FindBy(xpath = "//div[4]/div/div/div/section[1]/button")
+    private WebElement popupCloseBtn;
+
     Helper helper = new Helper();
 
     public void checkThatHomePageOpened() {
         Assert.assertTrue(luckyBrandLogo.isDisplayed());
         Assert.assertTrue(headingText.isDisplayed());
+    }
+
+    public void closePopup() {
+        clickButton(popupCloseBtn);
     }
 
     public void clickContactUsBtn() {

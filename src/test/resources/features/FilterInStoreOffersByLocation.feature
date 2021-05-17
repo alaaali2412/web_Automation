@@ -10,7 +10,7 @@ Feature: filter In_store offers by it`s Location
     Examples:
       | Location   | subLocation |
       | الإسكندرية | سان ستيفانو |
-      | الجيزة     | وسط البلد   |
+
 
 
 
