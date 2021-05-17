@@ -14,6 +14,7 @@ public class EmailLoginTest {
 
     @Given("browser open,navigate to portal")
     public void browser_open_navigate_to_portal() {
+        PageGenerator.getInstance(HomePage.class).checkThatHomePageOpened();
     }
 
     @When("close the pop up click on login button")

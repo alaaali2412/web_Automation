@@ -11,6 +11,7 @@ public class FacebookLoginTest {
 
     @Given("browser open,navigate to portal URl")
     public void browser_open_navigate_to_portal_u_rl() {
+        PageGenerator.getInstance(HomePage.class).checkThatHomePageOpened();
     }
 
     @When("close the pop up click login with facebook")

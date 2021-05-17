@@ -131,6 +131,17 @@ public class Helper {
         return res;
     }
 
+    public static String executeQuery(String query) {
+        String res = null;
+        try {
+            Statement statement = connection.createStatement();
+            statement.executeQuery(query);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return res;
+    }
+
     public static void closeDBConnection() {
         try {
             connection.close();

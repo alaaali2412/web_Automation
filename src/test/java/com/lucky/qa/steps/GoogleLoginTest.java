@@ -15,6 +15,7 @@ public class GoogleLoginTest {
 
     @Given("browser open,navigate to the portal")
     public void browser_open_navigate_to_the_portal() {
+        PageGenerator.getInstance(HomePage.class).checkThatHomePageOpened();
     }
 
     @When("close the pop up click login with google")
