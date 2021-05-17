@@ -21,6 +21,7 @@ public class FilterOnlineCashbackTest {
 
     @Given("browser opened,portal opened")
     public void browser_opened_portal_opened() {
+        PageGenerator.getInstance(HomePage.class).checkThatHomePageOpened();
     }
 
     @When("user logged in")

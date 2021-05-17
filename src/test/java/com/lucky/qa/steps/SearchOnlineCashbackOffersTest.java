@@ -1,6 +1,7 @@
 package com.lucky.qa.steps;
 
 import com.lucky.qa.APIs.ImplementAPIsMethods;
+import com.lucky.qa.pages.HomePage;
 import com.lucky.qa.pages.OnlineCashbackPage;
 import com.lucky.qa.pages.PageGenerator;
 import io.cucumber.java.en.Given;
@@ -14,7 +15,7 @@ public class SearchOnlineCashbackOffersTest {
 
     @Given("browser, portal opened")
     public void browser_portal_opened() {
-
+        PageGenerator.getInstance(HomePage.class).checkThatHomePageOpened();
     }
 
     @When("add {string} in search field and click enter")

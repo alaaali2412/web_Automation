@@ -1,6 +1,8 @@
 package com.lucky.qa.pages;
 
 import com.lucky.qa.common.BasePage;
+import com.lucky.qa.utilities.Helper;
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -47,8 +49,8 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//nav/div/div[1]/div/div/a")
     private List<WebElement> onlineCashbackList;
 
-    @FindBy(className = "//header/div[1]/nav//div/span")
-    private WebElement logoBtn;
+    @FindBy(css = "#__next > div > header > div:nth-child(1) > nav > div > span")
+    private WebElement luckyBrandLogo;
 
     @FindBy(xpath = "//*[@class = 'container-md']//div[3]")
     private WebElement walletBtn;
@@ -64,6 +66,25 @@ public class HomePage extends BasePage {
 
     @FindBy(xpath = "//*/ul/li[2]/a")
     private WebElement contactUsBtn;
+
+    @FindBy(id = "formEmail")
+    private WebElement newsLetterEmailField;
+
+    @FindBy(xpath = "//*[@class = 'row']//*[@type='submit']")
+    private WebElement subscribeBtn;
+
+    @FindBy(xpath = "//*[@class = 'success success-message']")
+    private WebElement successMessage;
+
+    @FindBy(xpath = "//h1")
+    private WebElement headingText;
+
+    Helper helper = new Helper();
+
+    public void checkThatHomePageOpened() {
+        Assert.assertTrue(luckyBrandLogo.isDisplayed());
+        Assert.assertTrue(headingText.isDisplayed());
+    }
 
     public void clickContactUsBtn() {
         clickButton(contactUsBtn);
@@ -121,5 +142,27 @@ public class HomePage extends BasePage {
     public void clickLogOut() {
         clickButton(profileDropdown);
         clickButton(logOutBtn);
+    }
+
+    public void addRegisteredNewsLetterEmail(String email) {
+        helper.setPropertiesFileName("LoginData.properties");
+        clearField(newsLetterEmailField);
+        addText(newsLetterEmailField, helper.getValuesFromPropertiesFile(email));
+    }
+
+    public void clickSubscribeBtn() {
+        clickButton(subscribeBtn);
+    }
+
+    public void checkNewsLetterSuccessMessage(String successMsg) {
+        Assert.assertEquals(successMessage.getText(), successMsg);
+    }
+
+    public void resetNewsLetterSubscription(String email) {
+        helper.setPropertiesFileName("LoginData.properties");
+        Helper.setUpDBConnection();
+        Helper.updateDatabaseValues("DELETE FROM AffiliateAnonymousSubscribedUsers WHERE Email = '" +
+                helper.getValuesFromPropertiesFile(email) + "'");
+        Helper.closeDBConnection();
     }
 }
