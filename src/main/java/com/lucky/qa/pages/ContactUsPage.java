@@ -5,38 +5,18 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.Select;
 
 public class ContactUsPage extends BasePage {
-    @FindBy(id = "validationCustom01")
-    private WebElement nameField;
 
-    @FindBy(xpath = "//*/form/div[1]/div")
-    private WebElement nameFieldErrorMsg;
-
-    @FindBy(id = "exampleForm.ControlInput1")
-    private WebElement mobileNumberField;
-
-    @FindBy(xpath = "//*/form/div[2]/div")
-    private WebElement mobileNumberFieldErrorMsg;
-
-    @FindBy(id = "exampleForm.ControlSelect1")
-    private WebElement subjectList;
-
-    @FindBy(xpath = "//*/form/div[3]/div")
-    private WebElement subjectListErrorMsg;
-
-    @FindBy(id = "exampleForm.ControlTextarea1")
-    private WebElement tellUsMoreField;
-
-    @FindBy(xpath = "//*/form/div[4]/div")
-    private WebElement tellUsMoreFieldErrorMsg;
-
-    @FindBy(xpath = "//*[@class= 'robot-row ']//button")
-    private WebElement sendBtn;
 
     @FindBy(xpath = "//h2")
-    private WebElement successMessage;
+    private WebElement title;
+
+    @FindBy(xpath = "//h4[1]")
+    private WebElement textMessage;
+
+    @FindBy(xpath = "//h4[2]")
+    private WebElement supportEmail;
 
     @FindBy(xpath = "//*[@class = 'success-img']")
     private WebElement successImage;
@@ -45,34 +25,10 @@ public class ContactUsPage extends BasePage {
         super(driver);
     }
 
-    public void addMandatoryFields(String name, String mobileNumber, String text) {
-        clearField(nameField);
-        addText(nameField, name);
-        clearField(mobileNumberField);
-        addText(mobileNumberField, mobileNumber);
-        clearField(tellUsMoreField);
-        addText(tellUsMoreField, text);
+    public void checkContactUsTexts(String titleTxt, String textMsg, String email) {
+        Assert.assertEquals(title.getText(), titleTxt);
+        Assert.assertEquals(textMessage.getText(), textMsg);
+        Assert.assertEquals(supportEmail.getText(), email);
     }
 
-    public void selectSubject(int subjectTitle) {
-        Select subject = new Select(subjectList);
-        subject.selectByIndex(subjectTitle);
-    }
-
-    public void clickSendBtn() {
-        clickButton(successMessage);
-    }
-
-    public void checkSuccessMessage(String successMsg) {
-        waitVisibilityOfElement(successImage);
-        Assert.assertEquals(successMsg, successMessage.getText());
-    }
-
-    public void validationMessages(String nameErrorMsg, String mobileNumberErrorMsg, String subjectErrorMsg, String tellUsMoreErrorMsg) {
-        waitForTextToBeVisible(nameFieldErrorMsg);
-        Assert.assertEquals(nameErrorMsg, nameFieldErrorMsg.getText());
-        Assert.assertEquals(mobileNumberErrorMsg, mobileNumberFieldErrorMsg.getText());
-        Assert.assertEquals(subjectErrorMsg, subjectListErrorMsg.getText());
-        Assert.assertEquals(tellUsMoreErrorMsg, tellUsMoreFieldErrorMsg.getText());
-    }
 }

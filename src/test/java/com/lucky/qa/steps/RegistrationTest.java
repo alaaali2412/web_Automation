@@ -16,7 +16,8 @@ public class RegistrationTest {
     @When("user add all the mandatory fields of Registration")
     public void userAddAllTheMandatoryFieldsOfRegistration() {
         PageGenerator.getInstance(RegistrationPage.class).addRegistrationName();
-        PageGenerator.getInstance(RegistrationPage.class).addRegistrationEmail();
+        PageGenerator.getInstance(RegistrationPage.class).addNewEmail();
+        PageGenerator.getInstance(RegistrationPage.class).saveTheRegistrationEmail();
         PageGenerator.getInstance(RegistrationPage.class).addRegistrationPasswords();
     }
 

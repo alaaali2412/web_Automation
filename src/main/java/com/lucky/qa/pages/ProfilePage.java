@@ -63,12 +63,12 @@ public class ProfilePage extends BasePage {
         clickButton(passwordField);
         waitVisibilityOfElement(newPassHeader);
         helper.setPropertiesFileName("LoginData.properties");
-        addText(oldPassField, helper.getValuesFromPropertiesFile("Password"));
+        addText(oldPassField, helper.getValuesFromPropertiesFile("password"));
         addText(newPassField, newPassword);
         addText(newConfirmPassField, newPassword);
         clickButton(saveChangesBtn);
         waitVisibilityOfElement(toastMessage);
-        helper.updateValueInPropertiesFile("Password", newPassword);
+        helper.updateValueInPropertiesFile("password", newPassword);
     }
 
     public void clickLogout() {
