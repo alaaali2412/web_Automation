@@ -2,11 +2,12 @@
 Feature: Adding Mobile Number To Cashout For The First Time
 
   Scenario Outline: user add mobile number for the first time while cashout
-    Given new user logged in
+    Given portal open in "<language>"new user logged in
     When Wallet page opens, click cashout button
     And add "<mobileNumber>" and click continue button
     And get the OTP from DB and add it
-    Then success message dispalyed
+    Then success message displayed
     Examples:
-      | mobileNumber |
-      | 01315525888  |
+      | language | mobileNumber |
+      | Arabic   | 01315525888  |
+      | English  | 01315525888  |

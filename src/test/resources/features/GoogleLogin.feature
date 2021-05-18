@@ -11,4 +11,3 @@ Feature: Login with user google account
     Examples:
       | language | gmail                     | pass       |
       | Arabic   | qatestlucky2021@gmail.com | LUcky@2123 |
-      | English  | qatestlucky2021@gmail.com | LUcky@2123 |

@@ -130,13 +130,17 @@ public class BasePage {
         wait.until(ExpectedConditions.visibilityOfAllElements(elements));
     }
 
-    public String language() {
-        helper.setPropertiesFileName("Language.properties");
-        return helper.getValuesFromPropertiesFile("local.language");
+    public String language(String language) {
+        String localLanguage;
+        if (language.equals("Arabic")) {
+            return localLanguage = "ar";
+        } else {
+            return localLanguage = "en";
+        }
     }
 
-    public String detectLanguage(String message) {
-        locale = new Locale(language());
+    public String detectLanguage(String language, String message) {
+        locale = new Locale(language(language));
         resource = PropertyResourceBundle.getBundle("LanguageTest", locale);
         return resource.getString(message);
     }

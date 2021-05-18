@@ -29,11 +29,9 @@ public class GoogleLoginTest {
     }
 
     @Then("verify that user login can login via google")
-    public void verify_that_user_login_can_login_via_google() throws InterruptedException {
+    public void verify_that_user_login_can_login_via_google() {
         PageGenerator.getInstance(HomePage.class).openProfilePage();
         Assert.assertTrue((loggedEmail.equalsIgnoreCase(PageGenerator.getInstance(ProfilePage.class).getLoggedInEmail())));
         PageGenerator.getInstance(ProfilePage.class).clickLogout();
-        PageGenerator.getInstance(LoginPage.class).resetBrowserSetting();
-        Thread.sleep(10000);
     }
 }

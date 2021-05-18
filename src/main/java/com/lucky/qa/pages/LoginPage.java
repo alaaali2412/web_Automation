@@ -6,9 +6,6 @@ import com.lucky.qa.utilities.Helper;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.devtools.DevTools;
-import org.openqa.selenium.devtools.network.Network;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
@@ -105,7 +102,7 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//section[3]/div/div/div/div[1]/h2")
     private WebElement newsLetterheader;
 
-    @FindBy(xpath = "//*[@id='gb']//div[1]/div[2]/div/a/img")
+    @FindBy(xpath = ".  //*[@id='gb']/div[2]/div[3]/div[1]/div[2]/div[2]/div/a/img")
     private WebElement googleProfileIcon;
 
     @FindBy(id = "gb_71")
@@ -123,6 +120,7 @@ public class LoginPage extends BasePage {
         waitVisibilityOfElement(inputPassword);
         clearField(inputEmail);
         addText(inputEmail, helper.getValuesFromPropertiesFile(email));
+        waitForTextInAttributeToBeExist("value");
         clearField(inputPassword);
         addText(inputPassword, helper.getValuesFromPropertiesFile(password));
         clickButton(loginBtn);
@@ -264,21 +262,11 @@ public class LoginPage extends BasePage {
         driver.close();
     }
 
-    public void resetBrowserSetting() {
-
-  /*      openNewTab();
-        moveToTab(1);*/
-     /*   driver.get("chrome://settings/clearBrowserData");
-        driver.switchTo().activeElement();
-        confirmAction(clearDataWindow);*/
-        //moveToTab(0);
+  /*  public void resetBrowserSetting() {
         DevTools devTools = ((ChromeDriver) driver).getDevTools();
         devTools.createSessionIfThereIsNotOne();
         devTools.send(Network.clearBrowserCache());
         devTools.send(Network.clearBrowserCookies());
-
-
-        refreshCurrentPage();
-    }
+    }*/
 }
 

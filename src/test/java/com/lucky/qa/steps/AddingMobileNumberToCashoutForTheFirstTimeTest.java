@@ -11,8 +11,9 @@ import io.cucumber.java.en.When;
 
 public class AddingMobileNumberToCashoutForTheFirstTimeTest {
 
-    @Given("new user logged in")
-    public void new_user_logged_in() {
+    @Given("portal open in {string}new user logged in")
+    public void portalOpenInNewUserLoggedIn(String language) {
+        PageGenerator.getInstance(HomePage.class).openPortalURL(language);
         PageGenerator.getInstance(HomePage.class).clickSignInBtn();
         PageGenerator.getInstance(LoginPage.class).login("LoginData.properties"
                 , "GoogleEmail", "NewPassword");
@@ -34,11 +35,13 @@ public class AddingMobileNumberToCashoutForTheFirstTimeTest {
         PageGenerator.getInstance(WalletPage.class).addOTPCode("GoogleEmail");
     }
 
-    @Then("success message dispalyed")
-    public void successMessageDispalyed() {
+    @Then("success message displayed")
+    public void successMessageDisplayed() {
         PageGenerator.getInstance(HomePage.class).clickWallet();
         PageGenerator.getInstance(WalletPage.class).clickRequestCashoutBtn();
-        PageGenerator.getInstance(WalletPage.class).checkThatSuccessDispalyed();
+        PageGenerator.getInstance(WalletPage.class).checkThatSuccessDisplayed();
         PageGenerator.getInstance(WalletPage.class).resetMobileNumberInDataBase("GoogleEmail");
+        PageGenerator.getInstance(HomePage.class).openHomeScreen();
+        PageGenerator.getInstance(HomePage.class).clickLogOut();
     }
 }
