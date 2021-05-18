@@ -1,5 +1,6 @@
 package com.lucky.qa.steps;
 
+import com.lucky.qa.common.BasePage;
 import com.lucky.qa.pages.HomePage;
 import com.lucky.qa.pages.LoginPage;
 import com.lucky.qa.pages.PageGenerator;
@@ -20,10 +21,10 @@ public class ForgetPasswordTest {
         PageGenerator.getInstance(LoginPage.class).loginWithInvalidPass();
     }
 
-    @When("validation message displayed")
-    public void validation_message_displayed() {
-     /*   PageGenerator.getInstance(LoginPage.class).checkErrorMessageIsDisplayed(PageGenerator
-                .getInstance(BasePage.class).detectLanguage("InvalidPassErrorMsg"));*/
+    @When("validation message displayed according to {string},")
+    public void validationMessageDisplayedAccordingTo(String language) {
+        PageGenerator.getInstance(LoginPage.class).checkErrorMessageIsDisplayed(PageGenerator
+                .getInstance(BasePage.class).detectLanguage(language, "InvalidPassErrorMsg"));
     }
 
     @When("click forget password")

@@ -7,9 +7,9 @@ Feature: perform cashback out request
     When Assert that user has cashback amount that allow im to cashout
     And Click cashback request button
     And Choose the cashout "<method>" and add the "<cashoutAmount>"
-    And User gets message that the Cashout done successfully
+    And User gets message "<language>" that the Cashout done successfully
     Then Verify that "<cashoutAmount>" deducted from total balance and cashback
-    Then transaction reflect in wallet transaction list according to cashout "<method>"
+    Then transaction reflect in wallet transaction list according to cashout "<method>" and "<language>"
 
     Examples:
       | language | method       | cashoutAmount |

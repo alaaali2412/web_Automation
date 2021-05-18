@@ -4,13 +4,16 @@ import com.lucky.qa.common.BasePage;
 import com.lucky.qa.pages.HomePage;
 import com.lucky.qa.pages.PageGenerator;
 import com.lucky.qa.pages.RegistrationPage;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 
 public class SubscribeToNewsLetterTest {
 
-    @Given("home page opened")
-    public void home_page_opened() {
+
+    @Given("home page opened in {string}")
+    public void homePageOpenedIn(String language) {
+        PageGenerator.getInstance(HomePage.class).openPortalURL(language);
     }
 
     @Given("user add registered email to subscribe news letter")
@@ -19,10 +22,10 @@ public class SubscribeToNewsLetterTest {
         PageGenerator.getInstance(HomePage.class).clickSubscribeBtn();
     }
 
-    @Then("success message will be displayed")
-    public void success_message_will_be_displayed() {
+    @And("success message will be displayed according to {string}")
+    public void successMessageWillBeDisplayedAccordingTo(String language) {
         PageGenerator.getInstance(HomePage.class).checkNewsLetterSuccessMessage(
-                PageGenerator.getInstance(BasePage.class).detectLanguage("NewsLetterSuccessMessage"));
+                PageGenerator.getInstance(BasePage.class).detectLanguage(language, "NewsLetterSuccessMessage"));
         PageGenerator.getInstance(HomePage.class).resetNewsLetterSubscription("Email");
     }
 
@@ -36,4 +39,6 @@ public class SubscribeToNewsLetterTest {
     public void user_get_successful_message_and_verification_email() {
         //TODO this step after fixing this bug https://lucky-app.atlassian.net/browse/LCK-3559
     }
+
+
 }

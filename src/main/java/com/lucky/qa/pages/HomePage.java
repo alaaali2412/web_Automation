@@ -1,6 +1,8 @@
 package com.lucky.qa.pages;
 
 import com.lucky.qa.common.BasePage;
+import com.lucky.qa.utilities.Helper;
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -65,6 +67,30 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//*/ul/li[2]/a")
     private WebElement contactUsBtn;
 
+    @FindBy(id = "formEmail")
+    private WebElement newsLetterEmailField;
+
+    @FindBy(xpath = "//*[@class = 'row']//*[@type='submit']")
+    private WebElement subscribeBtn;
+
+    @FindBy(xpath = "//*[@class = 'success success-message']")
+    private WebElement successMessage;
+
+    @FindBy(xpath = "//h1")
+    private WebElement headingText;
+
+    @FindBy(xpath = "//div[4]/div/div/div/section[1]/button")
+    private WebElement popupCloseBtn;
+
+    @FindBy(xpath = "//*[@class ='px-xl-3 px-lg-2 nav-link-item'][3]")
+    private WebElement languageBtn;
+
+    @FindBy(xpath = "//*[@class = 'container-md']//div[8]")
+    private WebElement registerBtn;
+
+    @FindBy(css = "#__next > div > header > div:nth-child(1) > nav > div > span")
+    private WebElement luckyBrandLogo;
+
     public void clickContactUsBtn() {
         clickButton(contactUsBtn);
     }
@@ -122,4 +148,47 @@ public class HomePage extends BasePage {
         clickButton(profileDropdown);
         clickButton(logOutBtn);
     }
+
+    Helper helper = new Helper();
+
+    public void checkThatHomePageOpened() {
+        Assert.assertTrue(luckyBrandLogo.isDisplayed());
+        Assert.assertTrue(headingText.isDisplayed());
+    }
+
+    public void closePopup() {
+        clickButton(popupCloseBtn);
+    }
+
+    public void addRegisteredNewsLetterEmail(String email) {
+        helper.setPropertiesFileName("LoginData.properties");
+        clearField(newsLetterEmailField);
+        addText(newsLetterEmailField, helper.getValuesFromPropertiesFile(email));
+    }
+
+    public void clickSubscribeBtn() {
+        clickButton(subscribeBtn);
+    }
+
+    public void checkNewsLetterSuccessMessage(String successMsg) {
+        Assert.assertEquals(successMessage.getText(), successMsg);
+    }
+
+    public void resetNewsLetterSubscription(String email) {
+        helper.setPropertiesFileName("LoginData.properties");
+        Helper.setUpDBConnection();
+        Helper.updateDatabaseValues("DELETE FROM AffiliateAnonymousSubscribedUsers WHERE Email = '" +
+                helper.getValuesFromPropertiesFile(email) + "'");
+        Helper.closeDBConnection();
+    }
+
+    public void openPortalURL(String language) {
+        if (language.equals("Arabic")) {
+            driver.navigate().to("https://ocb.staging.web.thelucky.io");
+        } else {
+            driver.navigate().to("https://ocb.staging.web.thelucky.io");
+            clickButton(languageBtn);
+        }
+    }
+
 }
