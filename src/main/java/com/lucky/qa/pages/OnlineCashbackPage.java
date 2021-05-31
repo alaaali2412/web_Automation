@@ -28,7 +28,7 @@ public class OnlineCashbackPage extends BasePage {
     @FindBy(xpath = "//footer/div[1]/span/img")
     private WebElement moveToTheTopBtn;
 
-    @FindBy(xpath = "//*/div[1]/div/button[1]")
+    @FindBy(xpath = "//*[@class = 'row filteration-buttons'][1]/button[1]")
     private WebElement clearBtn;
 
     public OnlineCashbackPage(WebDriver driver) {
@@ -62,6 +62,7 @@ public class OnlineCashbackPage extends BasePage {
     }
 
     public void clickClearBtn() {
+        scrollToTopOfScreen();
         clickButton(clearBtn);
     }
 }

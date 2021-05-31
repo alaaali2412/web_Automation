@@ -183,10 +183,8 @@ public class HomePage extends BasePage {
     }
 
     public void openPortalURL(String language) {
-        if (language.equals("Arabic")) {
-            driver.navigate().to("https://ocb.staging.web.thelucky.io");
-        } else {
-            driver.navigate().to("https://ocb.staging.web.thelucky.io");
+        driver.navigate().to("https://ocb.staging.web.thelucky.io");
+        if (language.equals("English")) {
             clickButton(languageBtn);
         }
     }

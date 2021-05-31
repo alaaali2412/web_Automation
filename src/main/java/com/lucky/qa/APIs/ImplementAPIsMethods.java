@@ -9,6 +9,16 @@ import io.restassured.response.Response;
 public class ImplementAPIsMethods extends APIsActions {
     Helper helper = new Helper();
 
+    public String languageValue(String language) {
+        String value = null;
+        if (language.equals("Arabic")) {
+            return value = "2";
+        } else if (language.equals("English")) {
+            return value = "1";
+        }
+        return value;
+    }
+
     public Response affiliateCategoryGetCategories(String LanguageValue) {
         helper.setPropertiesFileName("APIsLinks.properties");
         return prepareGetAPIsResponse(helper.getValuesFromPropertiesFile("Couponz.Lucky.Api.Staging"), RequestType.GET,

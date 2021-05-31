@@ -31,8 +31,10 @@ public class FilterOnlineCashbackTest {
     }
 
     @Then("verify filter with {string} with backend according to {string}")
-    public void verifyFilterWithWithBackendAccordingTo(String category, String languageValue) throws InterruptedException {
-        APIresult = implementMethodsObject.getAffiliateMerchantsByCategory(category, languageValue);
+    public void verifyFilterWithWithBackendAccordingTo(String category, String language) throws InterruptedException {
+     /*   String lang = APIsActions.languageValue(language);
+        System.out.println(lang);*/
+        APIresult = implementMethodsObject.getAffiliateMerchantsByCategory(category, implementMethodsObject.languageValue(language));
         int numberOfMerchant = PageGenerator.getInstance(OnlineCashbackPage.class).getMerchantFilteredList();
         Assert.assertEquals(numberOfMerchant, APIresult);
         PageGenerator.getInstance(OnlineCashbackPage.class).clickClearBtn();

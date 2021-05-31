@@ -134,6 +134,7 @@
             <artifactId>rest-assured</artifactId>
             <version>4.1.2</version>
         </dependency>
+        <!--  SQL dependencies -->
         <dependency>
             <groupId>com.microsoft.sqlserver</groupId>
             <artifactId>mssql-jdbc</artifactId>

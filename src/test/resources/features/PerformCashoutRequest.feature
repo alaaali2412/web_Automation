@@ -13,9 +13,6 @@ Feature: perform cashback out request
 
     Examples:
       | language | method       | cashoutAmount |
-      | Arabic   | Bank Account | 20            |
       | Arabic   | Aman         | 20            |
       | English  | Bank Account | 20            |
-      | English  | Aman         | 20            |
-
 

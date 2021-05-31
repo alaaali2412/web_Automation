@@ -27,8 +27,8 @@ public class SearchOnlineCashbackOffersTest {
     }
 
     @Then("verify result with {string} with the backend according to {string}")
-    public void verifyResultWithWithTheBackendAccordingTo(String keyword, String languageValue) throws InterruptedException {
-        APIresult = implementAPIsMethods.getCountOfAffiliateMerchants(keyword, languageValue);
+    public void verifyResultWithWithTheBackendAccordingTo(String keyword, String language) throws InterruptedException {
+        APIresult = implementAPIsMethods.getCountOfAffiliateMerchants(keyword, implementAPIsMethods.languageValue(language));
         Assert.assertEquals(APIresult, PageGenerator.getInstance(OnlineCashbackPage.class).getMerchantFilteredList());
     }
 }
