@@ -8,9 +8,9 @@ Feature: filter In_store offers by it`s Location
     Then in-Store offers filtered according to the selected location
 
     Examples:
-      | language | Location   | subLocation |
-      | Arabic   | الإسكندرية | سان ستيفانو |
-      | Arabic   | الجيزة     | وسط البلد   |
+      | language     | Location   | subLocation |
+      | Arabic_Egypt | الإسكندرية | سان ستيفانو |
+      | Arabic_Egypt | الجيزة     | وسط البلد   |
 
 
 

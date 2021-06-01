@@ -31,10 +31,10 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//div[1]/nav/div/div[2]")
     private WebElement inStoreBtn;
 
-    @FindBy(xpath = "//nav/div//div[7]/div/a")
+    @FindBy(xpath = "//*[@class ='px-xl-3 px-lg-2 nav-link-item']//*[@class='nav-link-item dropdown nav-item']")
     private WebElement profileDropdown;
 
-    @FindBy(xpath = "//div[7]/div/div/a[1]")
+    @FindBy(xpath = "//*[@href='/Profile']")
     private WebElement profileBtn;
 
     @FindBy(xpath = "//div[7]/div/div/a[2]")
@@ -82,7 +82,7 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//div[4]/div/div/div/section[1]/button")
     private WebElement popupCloseBtn;
 
-    @FindBy(xpath = "//*[@class ='px-xl-3 px-lg-2 nav-link-item'][3]")
+    @FindBy(xpath = "//*[@class ='px-xl-3 px-lg-2 nav-link-item']//*[@class='language-switcher']")
     private WebElement languageBtn;
 
     @FindBy(xpath = "//*[@class = 'container-md']//div[8]")
@@ -152,6 +152,7 @@ public class HomePage extends BasePage {
     Helper helper = new Helper();
 
     public void checkThatHomePageOpened() {
+        waitVisibilityOfElement(luckyBrandLogo);
         Assert.assertTrue(luckyBrandLogo.isDisplayed());
         Assert.assertTrue(headingText.isDisplayed());
     }
@@ -183,10 +184,23 @@ public class HomePage extends BasePage {
     }
 
     public void openPortalURL(String language) {
-        driver.navigate().to("https://ocb.staging.web.thelucky.io");
-        if (language.equals("English")) {
-            clickButton(languageBtn);
+        helper.setPropertiesFileName("PortalURLs.properties");
+
+        switch (language) {
+            case "Arabic_Egypt":
+                driver.navigate().to(helper.getValuesFromPropertiesFile("EgyptURL"));
+                break;
+            case "English":
+                driver.navigate().to(helper.getValuesFromPropertiesFile("EgyptURL"));
+                clickButton(languageBtn);
+                break;
+            case "Arabic_Morocco":
+                driver.navigate().to(helper.getValuesFromPropertiesFile("MoroccoURL"));
+                break;
+            case "French":
+                driver.navigate().to(helper.getValuesFromPropertiesFile("MoroccoURL"));
+                clickButton(languageBtn);
+                break;
         }
     }
-
 }

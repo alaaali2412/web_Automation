@@ -8,6 +8,6 @@ Feature: Adding Mobile Number To Cashout For The First Time
     And get the OTP from DB and add it
     Then success message displayed
     Examples:
-      | language | mobileNumber |
-      | Arabic   | 01315525888  |
-      | English  | 01315525888  |
+      | language     | mobileNumber |
+      | Arabic_Egypt | 01315525888  |
+      | English      | 01315535888  |

@@ -12,7 +12,7 @@ Feature: perform cashback out request
     Then transaction reflect in wallet transaction list according to cashout "<method>" and "<language>"
 
     Examples:
-      | language | method       | cashoutAmount |
-      | Arabic   | Aman         | 20            |
-      | English  | Bank Account | 20            |
+      | language     | method       | cashoutAmount |
+      | Arabic_Egypt | Aman         | 20            |
+      | English      | Bank Account | 20            |
 

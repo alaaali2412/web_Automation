@@ -132,11 +132,23 @@ public class BasePage {
 
     public String language(String language) {
         String localLanguage;
-        if (language.equals("Arabic")) {
-            return localLanguage = "ar";
-        } else {
-            return localLanguage = "en";
+        switch (language) {
+            case "Arabic_Egypt":
+                localLanguage = "ar_EG";
+                break;
+            case "English":
+                localLanguage = "en_EG";
+                break;
+            case "Arabic_Morocco":
+                localLanguage = "ar_MA";
+                break;
+            case "French":
+                localLanguage = "fr_MA";
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + language);
         }
+        return localLanguage;
     }
 
     public String detectLanguage(String language, String message) {

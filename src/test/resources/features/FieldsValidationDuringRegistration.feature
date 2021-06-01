@@ -7,7 +7,7 @@ Feature: Fields Validation During Registration
     When add invalid values "<Language>"in registration fields
     Then error messages displayed at the fields that contain invalid values according to "<Language>"
     Examples:
-      | Language |
-      | Arabic   |
-      | English  |
+      | Language     |
+      | Arabic_Egypt |
+      | English      |
 

@@ -8,6 +8,6 @@ Feature: Get in store offers
     And click get offer
     Then popup displayed in "<language>" that user should download lucky app
     Examples:
-      | language |
-      | Arabic   |
-      | English  |
+      | language     |
+      | Arabic_Egypt |
+      | English      |

@@ -7,6 +7,6 @@ Feature: Login with Email, password
     And login with valid email and pass
     Then verify the login
     Examples:
-      | language |
-      | Arabic   |
-      | English  |
+      | language     |
+      | Arabic_Egypt |
+      | English      |

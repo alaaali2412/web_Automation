@@ -11,9 +11,10 @@ public class ImplementAPIsMethods extends APIsActions {
 
     public String languageValue(String language) {
         String value = null;
-        if (language.equals("Arabic")) {
+        String baseUri = null;
+        if (language.contains("Arabic")) {
             return value = "2";
-        } else if (language.equals("English")) {
+        } else if (language.equals("English") || language.equals("French")) {
             return value = "1";
         }
         return value;
@@ -21,7 +22,7 @@ public class ImplementAPIsMethods extends APIsActions {
 
     public Response affiliateCategoryGetCategories(String LanguageValue) {
         helper.setPropertiesFileName("APIsLinks.properties");
-        return prepareGetAPIsResponse(helper.getValuesFromPropertiesFile("Couponz.Lucky.Api.Staging"), RequestType.GET,
+        return prepareGetAPIsResponse(helper.getValuesFromPropertiesFile("Egypt.Couponz.Lucky.Api.Staging"), RequestType.GET,
                 ServiceNames.affiliateCategory_GetCategories.getServiceName(), ContentType.JSON,
                 setQueryParams("pageSize", 10, "pageIndex", 0), setSessionHeaders("Language", LanguageValue));
     }
@@ -34,7 +35,7 @@ public class ImplementAPIsMethods extends APIsActions {
 
     public int getAffiliateMerchantsByCategory(String category, String LanguageValue) {
         helper.setPropertiesFileName("APIsLinks.properties");
-        Response response = prepareGetAPIsResponse(helper.getValuesFromPropertiesFile("Couponz.Lucky.Api.Staging"), RequestType.GET, ServiceNames.affiliateCategory_GetAffiliateMerchantsByCategory.getServiceName(),
+        Response response = prepareGetAPIsResponse(helper.getValuesFromPropertiesFile("Egypt.Couponz.Lucky.Api.Staging"), RequestType.GET, ServiceNames.affiliateCategory_GetAffiliateMerchantsByCategory.getServiceName(),
                 ContentType.JSON, setQueryParams("categoryId", getCategoryID(category, LanguageValue), "pageSize", 20, "pageIndex", 0), setSessionHeaders("Language", LanguageValue));
         return validateValueInResponse(response, "Data.TotalCount");
     }
@@ -43,7 +44,7 @@ public class ImplementAPIsMethods extends APIsActions {
         helper.setPropertiesFileName("APIsLinks.properties");
         Merchant_getAffiliateMerchants getAffiliateMerchants = new Merchant_getAffiliateMerchants();
         getAffiliateMerchants.setSearchKey(keyword);
-        Response response = preparePostAPIsResponse(helper.getValuesFromPropertiesFile("Couponz.Lucky.Api.Staging"), RequestType.POST,
+        Response response = preparePostAPIsResponse(helper.getValuesFromPropertiesFile("Egypt.Couponz.Lucky.Api.Staging"), RequestType.POST,
                 ServiceNames.Merchant_POSTMerchantGetAffiliateMerchants.serviceName, ContentType.JSON, getAffiliateMerchants,
                 setSessionHeaders("Language", LanguageValue));
         return validateValueInResponse(response, "Data.TotalCount");

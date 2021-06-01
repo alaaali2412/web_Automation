@@ -9,5 +9,6 @@ Feature: Login with user google account
     Then verify that user login can login via google
 
     Examples:
-      | language | gmail                     | pass        |
-      | Arabic   | qatestlucky2021@gmail.com | hdf@hdf@567 |
+      | language       | gmail                     | pass      |
+      | Arabic_Egypt   | qatestlucky2021@gmail.com | LUCky@abc |
+      | Arabic_Morocco | qatestlucky2021@gmail.com | LUCky@abc |

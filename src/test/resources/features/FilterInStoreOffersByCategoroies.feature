@@ -7,7 +7,7 @@ Feature: filter In_store offers by it`s categories
     Then in-Store offers filtered according to the selected category
 
     Examples:
-      | language | mainCategory   | mainSubCategory | subCategory |
-      | Arabic   | أغذية ومشروبات | الوجبات السريعة | بيتزا       |
-      | Arabic   | صحة و جمال     | صحة             | عيادات طبية |
+      | language     | mainCategory   | mainSubCategory | subCategory |
+      | Arabic_Egypt | أغذية ومشروبات | الوجبات السريعة | بيتزا       |
+      | Arabic_Egypt | صحة و جمال     | صحة             | عيادات طبية |
 
