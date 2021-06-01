@@ -110,8 +110,8 @@ public class WalletPage extends BasePage {
         waitVisibilityOfElement(transactionSection);
         DecimalFormat df = new DecimalFormat("0.00");
         String[] amountInCashback = getText(userCashbackBalance).split(" ");
-        /*Assert.assertTrue(Double.parseDouble(df.format(Double.parseDouble(amountInCashback[2]))) >= 100
-                , "user does not have enough cashback");*/
+        Assert.assertTrue(Double.parseDouble(df.format(Double.parseDouble(amountInCashback[2]))) >= 100
+                , "user does not have enough cashback");
         return Double.parseDouble(df.format(Double.parseDouble(amountInCashback[2])));
     }
 

@@ -11,7 +11,6 @@ public class ImplementAPIsMethods extends APIsActions {
 
     public String languageValue(String language) {
         String value = null;
-        String baseUri = null;
         if (language.contains("Arabic")) {
             return value = "2";
         } else if (language.equals("English") || language.equals("French")) {
