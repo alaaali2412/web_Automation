@@ -3,10 +3,7 @@ package com.lucky.qa.common;
 
 import com.lucky.qa.connectors.DriverFactory;
 import com.lucky.qa.utilities.Helper;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -155,5 +152,14 @@ public class BasePage {
         locale = new Locale(language(language));
         resource = PropertyResourceBundle.getBundle("LanguageTest", locale);
         return resource.getString(message);
+    }
+
+    public boolean isAlertPresent() {
+        try {
+            driver.switchTo().alert();
+            return true;
+        } catch (NoAlertPresentException Ex) {
+            return false;
+        }
     }
 }

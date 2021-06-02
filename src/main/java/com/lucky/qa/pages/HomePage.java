@@ -16,7 +16,7 @@ public class HomePage extends BasePage {
     }
 
 
-    @FindBy(xpath = "//*[@class ='px-xl-3 px-lg-2 nav-link-item'][4]")
+    @FindBy(xpath = "//*[@class ='px-xl-3 px-lg-2 nav-link-item']//*[@href='/SignIn']")
     private WebElement signInBtn;
 
     @FindBy(xpath = "//div[2]/div/div[2]/button[2]/span")
@@ -25,7 +25,7 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//div[2]/div/div[2]/button[1]/span")
     private WebElement googleBtn;
 
-    @FindBy(xpath = "//div[2]/div/div[2]/a/span")
+    @FindBy(xpath = "//*[@href='/SignUp']")
     private WebElement emailBtn;
 
     @FindBy(xpath = "//div[1]/nav/div/div[2]")
@@ -37,7 +37,7 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//*[@href='/Profile']")
     private WebElement profileBtn;
 
-    @FindBy(xpath = "//div[7]/div/div/a[2]")
+    @FindBy(xpath = "//*[@class='dropdown-item'][2]")
     private WebElement logOutBtn;
 
     @FindBy(id = "exampleForm.ControlInput1")
@@ -52,7 +52,7 @@ public class HomePage extends BasePage {
     @FindBy(className = "//header/div[1]/nav//div/span")
     private WebElement logoBtn;
 
-    @FindBy(xpath = "//*[@class = 'container-md']//div[3]")
+    @FindBy(xpath = "//*[@class ='px-xl-3 px-lg-2 nav-link-item']//*[@href='/Wallet']")
     private WebElement walletBtn;
 
     @FindBy(className = "wallet-body")
@@ -114,10 +114,12 @@ public class HomePage extends BasePage {
     }
 
     public void clickSignupBtn() {
+        waitVisibilityOfElement(emailBtn);
         clickButton(emailBtn);
     }
 
     public void clkInStoreBtn() {
+        waitVisibilityOfElement(inStoreBtn);
         clickButton(inStoreBtn);
     }
 
@@ -128,6 +130,7 @@ public class HomePage extends BasePage {
     }
 
     public String clickOnlineCashback(String categorySelected) {
+        waitVisibilityOfElement(onlineCashbackBtn);
         clickButton(onlineCashbackBtn);
         for (WebElement category : onlineCashbackList) {
             if (getText(category).equals(categorySelected)) {

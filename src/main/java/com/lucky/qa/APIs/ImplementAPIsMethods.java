@@ -13,7 +13,7 @@ public class ImplementAPIsMethods extends APIsActions {
         String value = null;
         if (language.contains("Arabic")) {
             return value = "2";
-        } else if (language.equals("English") || language.equals("French")) {
+        } else if (language.equals("English")) {
             return value = "1";
         }
         return value;
