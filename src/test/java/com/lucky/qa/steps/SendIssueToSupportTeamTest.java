@@ -9,8 +9,10 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class SendIssueToSupportTeamTest {
-    @Given("home page open")
-    public void home_page_open() {
+
+    @Given("home page open in {string}")
+    public void homePageOpenIn(String language) {
+        PageGenerator.getInstance(HomePage.class).openPortalURL(language);
         PageGenerator.getInstance(HomePage.class).checkThatHomePageOpened();
     }
 
@@ -20,13 +22,11 @@ public class SendIssueToSupportTeamTest {
 
     }
 
-    @Then("user can text message that explain to user how to contact support team")
-    public void user_can_text_message_that_explain_to_user_how_to_contact_support_team() {
+    @Then("user can text message according to {string}that explain to user how to contact support team")
+    public void userCanTextMessageAccordingToThatExplainToUserHowToContactSupportTeam(String language) {
         PageGenerator.getInstance(ContactUsPage.class).checkContactUsTexts(
-                PageGenerator.getInstance(BasePage.class).detectLanguage("ContactUsTitle"),
-                PageGenerator.getInstance(BasePage.class).detectLanguage("ContactUsTextMessage"),
-                PageGenerator.getInstance(BasePage.class).detectLanguage("ContactEmail"));
+                PageGenerator.getInstance(BasePage.class).detectLanguage(language, "ContactUsTitle"),
+                PageGenerator.getInstance(BasePage.class).detectLanguage(language, "ContactUsTextMessage"),
+                PageGenerator.getInstance(BasePage.class).detectLanguage(language, "ContactEmail"));
     }
-
-
 }

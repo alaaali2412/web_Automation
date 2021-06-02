@@ -31,10 +31,10 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//div[1]/nav/div/div[2]")
     private WebElement inStoreBtn;
 
-    @FindBy(xpath = "//nav/div//div[7]/div/a")
+    @FindBy(xpath = "//*[@class ='px-xl-3 px-lg-2 nav-link-item']//*[@class='nav-link-item dropdown nav-item']")
     private WebElement profileDropdown;
 
-    @FindBy(xpath = "//div[7]/div/div/a[1]")
+    @FindBy(xpath = "//*[@href='/Profile']")
     private WebElement profileBtn;
 
     @FindBy(xpath = "//div[7]/div/div/a[2]")
@@ -49,8 +49,8 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//nav/div/div[1]/div/div/a")
     private List<WebElement> onlineCashbackList;
 
-    @FindBy(css = "#__next > div > header > div:nth-child(1) > nav > div > span")
-    private WebElement luckyBrandLogo;
+    @FindBy(className = "//header/div[1]/nav//div/span")
+    private WebElement logoBtn;
 
     @FindBy(xpath = "//*[@class = 'container-md']//div[3]")
     private WebElement walletBtn;
@@ -79,12 +79,17 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//h1")
     private WebElement headingText;
 
-    Helper helper = new Helper();
+    @FindBy(xpath = "//div[4]/div/div/div/section[1]/button")
+    private WebElement popupCloseBtn;
 
-    public void checkThatHomePageOpened() {
-        Assert.assertTrue(luckyBrandLogo.isDisplayed());
-        Assert.assertTrue(headingText.isDisplayed());
-    }
+    @FindBy(xpath = "//*[@class ='px-xl-3 px-lg-2 nav-link-item']//*[@class='language-switcher']")
+    private WebElement languageBtn;
+
+    @FindBy(xpath = "//*[@class = 'container-md']//div[8]")
+    private WebElement registerBtn;
+
+    @FindBy(css = "#__next > div > header > div:nth-child(1) > nav > div > span")
+    private WebElement luckyBrandLogo;
 
     public void clickContactUsBtn() {
         clickButton(contactUsBtn);
@@ -144,6 +149,18 @@ public class HomePage extends BasePage {
         clickButton(logOutBtn);
     }
 
+    Helper helper = new Helper();
+
+    public void checkThatHomePageOpened() {
+        waitVisibilityOfElement(luckyBrandLogo);
+        Assert.assertTrue(luckyBrandLogo.isDisplayed());
+        Assert.assertTrue(headingText.isDisplayed());
+    }
+
+    public void closePopup() {
+        clickButton(popupCloseBtn);
+    }
+
     public void addRegisteredNewsLetterEmail(String email) {
         helper.setPropertiesFileName("LoginData.properties");
         clearField(newsLetterEmailField);
@@ -164,5 +181,26 @@ public class HomePage extends BasePage {
         Helper.updateDatabaseValues("DELETE FROM AffiliateAnonymousSubscribedUsers WHERE Email = '" +
                 helper.getValuesFromPropertiesFile(email) + "'");
         Helper.closeDBConnection();
+    }
+
+    public void openPortalURL(String language) {
+        helper.setPropertiesFileName("PortalURLs.properties");
+
+        switch (language) {
+            case "Arabic_Egypt":
+                driver.navigate().to(helper.getValuesFromPropertiesFile("EgyptURL"));
+                break;
+            case "English":
+                driver.navigate().to(helper.getValuesFromPropertiesFile("EgyptURL"));
+                clickButton(languageBtn);
+                break;
+            case "Arabic_Morocco":
+                driver.navigate().to(helper.getValuesFromPropertiesFile("MoroccoURL"));
+                break;
+            case "French":
+                driver.navigate().to(helper.getValuesFromPropertiesFile("MoroccoURL"));
+                clickButton(languageBtn);
+                break;
+        }
     }
 }

@@ -102,6 +102,15 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//section[3]/div/div/div/div[1]/h2")
     private WebElement newsLetterheader;
 
+    @FindBy(xpath = ".  //*[@id='gb']/div[2]/div[3]/div[1]/div[2]/div[2]/div/a/img")
+    private WebElement googleProfileIcon;
+
+    @FindBy(id = "gb_71")
+    private WebElement googleLogoutBtn;
+
+    @FindBy(xpath = "//settings-ui")
+    private WebElement clearDataWindow;
+
     public LoginPage(WebDriver driver) {
         super(driver);
     }
@@ -111,10 +120,10 @@ public class LoginPage extends BasePage {
         waitVisibilityOfElement(inputPassword);
         clearField(inputEmail);
         addText(inputEmail, helper.getValuesFromPropertiesFile(email));
+        waitForTextInAttributeToBeExist("value");
         clearField(inputPassword);
         addText(inputPassword, helper.getValuesFromPropertiesFile(password));
         clickButton(loginBtn);
-        //waitVisibilityOfElement(newsLetterheader);
         return helper.getValuesFromPropertiesFile(email);
     }
 
@@ -243,5 +252,21 @@ public class LoginPage extends BasePage {
         waitForTextToBeVisible(invalidEmailErrorMessage);
         Assert.assertEquals(errorMsg, invalidEmailErrorMessage.getText());
     }
+
+    public void logOutGmail() {
+        openNewTab();
+        moveToTab(1);
+        driver.navigate().to("https://mail.google.com/");
+        clickButton(googleProfileIcon);
+        clickButton(googleLogoutBtn);
+        driver.close();
+    }
+
+  /*  public void resetBrowserSetting() {
+        DevTools devTools = ((ChromeDriver) driver).getDevTools();
+        devTools.createSessionIfThereIsNotOne();
+        devTools.send(Network.clearBrowserCache());
+        devTools.send(Network.clearBrowserCookies());
+    }*/
 }
 

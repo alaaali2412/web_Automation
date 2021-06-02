@@ -77,6 +77,7 @@ public class RegistrationPage extends BasePage {
         waitForPageToLoad();
         clickButton(copyEmail);
         moveToTab(0);
+        deleteTextInField(inputEmail);
         pasteTextInField(inputEmail);
         waitForTextInAttributeToBeExist(inputEmail.getAttribute("value"));
     }

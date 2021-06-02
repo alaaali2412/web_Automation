@@ -12,15 +12,15 @@ import org.testng.Assert;
 public class EmailLoginTest {
     public String loggedEmail;
 
-    @Given("browser open,navigate to portal")
-    public void browser_open_navigate_to_portal() {
-        PageGenerator.getInstance(HomePage.class).checkThatHomePageOpened();
+    @Given("browser open {string},navigate to portal")
+    public void browserOpenNavigateToPortal(String language) {
+        PageGenerator.getInstance(HomePage.class).openPortalURL(language);
+        PageGenerator.getInstance(HomePage.class).clickSignInBtn();
     }
 
     @When("close the pop up click on login button")
     public void close_the_pop_up_click_on_login_button() {
         //PageGenerator.getInstance(HomePage.class).closePopUp();
-        PageGenerator.getInstance(HomePage.class).clickSignInBtn();
     }
 
     @When("^login with valid email and pass$")
@@ -34,8 +34,9 @@ public class EmailLoginTest {
         //PageGenerator.getInstance(HomePage.class,driver).closePopUp();
         PageGenerator.getInstance(HomePage.class).openProfilePage();
         Assert.assertEquals(loggedEmail, PageGenerator.getInstance(ProfilePage.class).getLoggedInEmail());
-
-
+        PageGenerator.getInstance(HomePage.class).openHomeScreen();
+        PageGenerator.getInstance(HomePage.class).clickLogOut();
     }
+
 }
 

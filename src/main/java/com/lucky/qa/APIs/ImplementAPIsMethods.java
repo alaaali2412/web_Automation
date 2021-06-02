@@ -9,34 +9,43 @@ import io.restassured.response.Response;
 public class ImplementAPIsMethods extends APIsActions {
     Helper helper = new Helper();
 
-    public Response affiliateCategoryGetCategories() {
-        helper.setPropertiesFileName("APIsLinks.properties");
-        return prepareGetAPIsResponse(helper.getValuesFromPropertiesFile("Couponz.Lucky.Api.Staging"), RequestType.GET,
-                ServiceNames.affiliateCategory_GetCategories.getServiceName(), ContentType.JSON,
-                setQueryParams("pageSize", 10, "pageIndex", 0), setSessionHeaders("Language", "2"));
+    public String languageValue(String language) {
+        String value = null;
+        if (language.contains("Arabic")) {
+            return value = "2";
+        } else if (language.equals("English") || language.equals("French")) {
+            return value = "1";
+        }
+        return value;
     }
 
-    public int getCategoryID(String category) {
-        Response res = affiliateCategoryGetCategories();
+    public Response affiliateCategoryGetCategories(String LanguageValue) {
+        helper.setPropertiesFileName("APIsLinks.properties");
+        return prepareGetAPIsResponse(helper.getValuesFromPropertiesFile("Egypt.Couponz.Lucky.Api.Staging"), RequestType.GET,
+                ServiceNames.affiliateCategory_GetCategories.getServiceName(), ContentType.JSON,
+                setQueryParams("pageSize", 10, "pageIndex", 0), setSessionHeaders("Language", LanguageValue));
+    }
+
+    public int getCategoryID(String category, String LanguageValue) {
+        Response res = affiliateCategoryGetCategories(LanguageValue);
         String value = getParamInJsonArray(res.jsonPath(), category, "Data");
         return getIntValueFromArray(value, ", AffiliateCategoryName=", "AffiliateCategoryId=");
     }
 
-    public int getAffiliateMerchantsByCategory(String category) {
+    public int getAffiliateMerchantsByCategory(String category, String LanguageValue) {
         helper.setPropertiesFileName("APIsLinks.properties");
-        Response response = prepareGetAPIsResponse(helper.getValuesFromPropertiesFile("Couponz.Lucky.Api.Staging"), RequestType.GET, ServiceNames.affiliateCategory_GetAffiliateMerchantsByCategory.getServiceName(),
-                ContentType.JSON, setQueryParams("categoryId", getCategoryID(category), "pageSize", 20, "pageIndex", 0), setSessionHeaders("Language", "2"));
+        Response response = prepareGetAPIsResponse(helper.getValuesFromPropertiesFile("Egypt.Couponz.Lucky.Api.Staging"), RequestType.GET, ServiceNames.affiliateCategory_GetAffiliateMerchantsByCategory.getServiceName(),
+                ContentType.JSON, setQueryParams("categoryId", getCategoryID(category, LanguageValue), "pageSize", 20, "pageIndex", 0), setSessionHeaders("Language", LanguageValue));
         return validateValueInResponse(response, "Data.TotalCount");
     }
 
-    public int getCountOfAffiliateMerchants(String keyword) {
+    public int getCountOfAffiliateMerchants(String keyword, String LanguageValue) {
         helper.setPropertiesFileName("APIsLinks.properties");
         Merchant_getAffiliateMerchants getAffiliateMerchants = new Merchant_getAffiliateMerchants();
         getAffiliateMerchants.setSearchKey(keyword);
-        Response response = preparePostAPIsResponse(helper.getValuesFromPropertiesFile("Couponz.Lucky.Api.Staging"), RequestType.POST,
+        Response response = preparePostAPIsResponse(helper.getValuesFromPropertiesFile("Egypt.Couponz.Lucky.Api.Staging"), RequestType.POST,
                 ServiceNames.Merchant_POSTMerchantGetAffiliateMerchants.serviceName, ContentType.JSON, getAffiliateMerchants,
-                setSessionHeaders("Language", "2"));
-        //getAffiliateMerchants(ServiceNames.Merchant_POSTMerchantGetAffiliateMerchants.serviceName,  keyword, setSessionHeaders("Language", "2"));
+                setSessionHeaders("Language", LanguageValue));
         return validateValueInResponse(response, "Data.TotalCount");
     }
 }

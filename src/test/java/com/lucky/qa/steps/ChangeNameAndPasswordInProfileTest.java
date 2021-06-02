@@ -13,13 +13,13 @@ import org.testng.Assert;
 public class ChangeNameAndPasswordInProfileTest {
     String loggedInEmail;
 
-    @Given("portal and browser open, user login")
-    public void portal_and_browser_open_user_login() {
+    @Given("portal and browser open in {string}, user login")
+    public void portalAndBrowserOpenInUserLogin(String language) {
+        PageGenerator.getInstance(HomePage.class).openPortalURL(language);
         PageGenerator.getInstance(HomePage.class).clickSignInBtn();
         PageGenerator.getInstance(LoginPage.class).login("LoginData.properties",
                 "Email", "Password");
     }
-
 
     @When("open profile screen")
     public void open_profile_screen() {
@@ -48,7 +48,7 @@ public class ChangeNameAndPasswordInProfileTest {
     public void verify_that_data_changed() {
         PageGenerator.getInstance(HomePage.class).openProfilePage();
         Assert.assertEquals(loggedInEmail, PageGenerator.getInstance(ProfilePage.class).getLoggedInEmail());
-
+        PageGenerator.getInstance(HomePage.class).openHomeScreen();
+        PageGenerator.getInstance(HomePage.class).clickLogOut();
     }
-
 }

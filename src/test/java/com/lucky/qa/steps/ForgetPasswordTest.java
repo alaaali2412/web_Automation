@@ -9,8 +9,10 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class ForgetPasswordTest {
-    @Given("user click login")
-    public void user_click_login() {
+
+    @Given("portal {string}, user click login")
+    public void portalUserClickLogin(String language) {
+        PageGenerator.getInstance(HomePage.class).openPortalURL(language);
         PageGenerator.getInstance(HomePage.class).clickSignInBtn();
     }
 
@@ -19,10 +21,10 @@ public class ForgetPasswordTest {
         PageGenerator.getInstance(LoginPage.class).loginWithInvalidPass();
     }
 
-    @When("validation message displayed")
-    public void validation_message_displayed() {
+    @When("validation message displayed according to {string},")
+    public void validationMessageDisplayedAccordingTo(String language) {
         PageGenerator.getInstance(LoginPage.class).checkErrorMessageIsDisplayed(PageGenerator
-                .getInstance(BasePage.class).detectLanguage("InvalidPassErrorMsg"));
+                .getInstance(BasePage.class).detectLanguage(language, "InvalidPassErrorMsg"));
     }
 
     @When("click forget password")
@@ -52,5 +54,4 @@ public class ForgetPasswordTest {
         PageGenerator.getInstance(LoginPage.class).login("LoginData.properties",
                 "GoogleEmail", "NewPassword");
     }
-
 }

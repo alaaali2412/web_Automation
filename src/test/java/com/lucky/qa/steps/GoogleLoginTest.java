@@ -13,9 +13,9 @@ public class GoogleLoginTest {
 
     String loggedEmail;
 
-    @Given("browser open,navigate to the portal")
-    public void browser_open_navigate_to_the_portal() {
-        PageGenerator.getInstance(HomePage.class).checkThatHomePageOpened();
+    @Given("browser open in {string},navigate to the portal")
+    public void browserOpenInNavigateToThePortal(String language) {
+        PageGenerator.getInstance(HomePage.class).openPortalURL(language);
     }
 
     @When("close the pop up click login with google")
@@ -32,5 +32,6 @@ public class GoogleLoginTest {
     public void verify_that_user_login_can_login_via_google() {
         PageGenerator.getInstance(HomePage.class).openProfilePage();
         Assert.assertTrue((loggedEmail.equalsIgnoreCase(PageGenerator.getInstance(ProfilePage.class).getLoggedInEmail())));
+        PageGenerator.getInstance(ProfilePage.class).clickLogout();
     }
 }

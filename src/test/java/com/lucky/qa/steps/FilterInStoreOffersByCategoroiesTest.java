@@ -9,8 +9,9 @@ import io.cucumber.java.en.When;
 
 public class FilterInStoreOffersByCategoroiesTest {
 
-    @Given("browser open,portal,open In_store offer screen")
-    public void browser_open_portal_open_in_store_offer_screen() {
+    @Given("browser open,portal,open {string} In_store offer screen")
+    public void browserOpenPortalOpenIn_storeOfferScreen(String language) {
+        PageGenerator.getInstance(HomePage.class).openPortalURL(language);
         PageGenerator.getInstance(HomePage.class).clkInStoreBtn();
     }
 
@@ -19,6 +20,7 @@ public class FilterInStoreOffersByCategoroiesTest {
         PageGenerator.getInstance(InStoreOfferPage.class).designPattern(InStoreOfferPage.CategoryType.SubCategory,
                 mainCategory, mainSubCategory, subCategory);
     }
+
     @Then("in-Store offers filtered according to the selected category")
     public void in_store_offers_filtered_according_to_the_selected_category() {
         PageGenerator.getInstance(InStoreOfferPage.class).clickApplyBtn();

@@ -16,8 +16,9 @@ import java.util.ArrayList;
 public class PerformCashoutRequestTest {
     ArrayList<Double> valuesBeforeCashout;
 
-    @Given("user already logged in")
-    public void user_already_logged_in() {
+    @Given("portal open in  {string} user already logged in")
+    public void portalOpenInUserAlreadyLoggedIn(String language) {
+        PageGenerator.getInstance(HomePage.class).openPortalURL(language);
         PageGenerator.getInstance(HomePage.class).clickSignInBtn();
         PageGenerator.getInstance(LoginPage.class).login("LoginData.properties"
                 , "Email", "Password");
@@ -44,10 +45,10 @@ public class PerformCashoutRequestTest {
         PageGenerator.getInstance(WalletPage.class).clickContinueBtn();
     }
 
-    @When("User gets message that the Cashout done successfully")
-    public void user_gets_message_that_the_cashout_done_successfully() {
+    @And("User gets message {string} that the Cashout done successfully")
+    public void userGetsMessageThatTheCashoutDoneSuccessfully(String language) {
         PageGenerator.getInstance(WalletPage.class).checkCashoutSuccessMessage(
-                PageGenerator.getInstance(BasePage.class).detectLanguage("CashoutSuccessMessage"));
+                PageGenerator.getInstance(BasePage.class).detectLanguage(language, "CashoutSuccessMessage"));
         PageGenerator.getInstance(HomePage.class).clickWallet();
     }
 
@@ -59,11 +60,11 @@ public class PerformCashoutRequestTest {
         Assert.assertEquals(PageGenerator.getInstance(WalletPage.class).getUserCashbackBalance(), totalCashbackAfter);
     }
 
-    @Then("transaction reflect in wallet transaction list according to cashout {string}")
-    public void transactionReflectInWalletTransactionListAccordingToCashout(String method) {
+    @Then("transaction reflect in wallet transaction list according to cashout {string} and {string}")
+    public void transactionReflectInWalletTransactionListAccordingToCashoutAnd(String method, String language) {
         PageGenerator.getInstance(WalletPage.class).checkIfTransactionReflected(method,
-                PageGenerator.getInstance(BasePage.class).detectLanguage("transactionNameLanguage"),
-                PageGenerator.getInstance(BasePage.class).detectLanguage("CashoutStatusLanguage"));
+                PageGenerator.getInstance(BasePage.class).detectLanguage(language, "transactionNameLanguage"),
+                PageGenerator.getInstance(BasePage.class).detectLanguage(language, "CashoutStatusLanguage"));
         PageGenerator.getInstance(HomePage.class).clickLogOut();
     }
 }

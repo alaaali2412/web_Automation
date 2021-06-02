@@ -30,4 +30,10 @@ public class FilterInStoreOffersByLocationTest {
         PageGenerator.getInstance(InStoreOfferPage.class).clickClearBtn();
         // TODO verify result with backend
     }
+
+    @Given("browser open,portal in {string},open In_store offer")
+    public void browserOpenPortalInOpenIn_storeOffer(String language) {
+        PageGenerator.getInstance(HomePage.class).openPortalURL(language);
+        PageGenerator.getInstance(HomePage.class).clkInStoreBtn();
+    }
 }

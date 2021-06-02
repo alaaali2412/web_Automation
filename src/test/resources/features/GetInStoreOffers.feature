@@ -1,9 +1,13 @@
 @GetInStoreOffers
 Feature: Get in store offers
 
-  Scenario: User try to get in store offers
-    Given browser open,open portal, user login
+  Scenario Outline: User try to get in store offers
+    Given browser open,open portal in "<language>", user login
     When click on instore offers
     And select an offer and click it
     And click get offer
-    Then popup displayed that userf should download lucky app
+    Then popup displayed in "<language>" that user should download lucky app
+    Examples:
+      | language     |
+      | Arabic_Egypt |
+      | English      |

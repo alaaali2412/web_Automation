@@ -224,7 +224,7 @@ public class WalletPage extends BasePage {
         Helper.closeDBConnection();
     }
 
-    public void checkThatSuccessDispalyed() {
+    public void checkThatSuccessDisplayed() {
         Assert.assertTrue(toastMessage.isDisplayed());
     }
 

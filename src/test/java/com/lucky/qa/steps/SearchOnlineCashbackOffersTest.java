@@ -13,21 +13,22 @@ public class SearchOnlineCashbackOffersTest {
     ImplementAPIsMethods implementAPIsMethods;
     int APIresult;
 
-    @Given("browser, portal opened")
-    public void browser_portal_opened() {
-        PageGenerator.getInstance(HomePage.class).checkThatHomePageOpened();
+    @Given("browser, portal opened in {string}")
+    public void browserPortalOpenedIn(String language) {
+        PageGenerator.getInstance(HomePage.class).openPortalURL(language);
+
     }
 
     @When("add {string} in search field and click enter")
     public void add_in_search_field_and_click_enter(String keyword) {
         PageGenerator.getInstance(OnlineCashbackPage.class).searchOnlineCashabackOffers(keyword);
         implementAPIsMethods = new ImplementAPIsMethods();
-        APIresult = implementAPIsMethods.getCountOfAffiliateMerchants(keyword);
+
     }
 
-    @Then("verify the search result with the backend")
-    public void verify_the_search_result_with_the_backend() throws InterruptedException {
+    @Then("verify result with {string} with the backend according to {string}")
+    public void verifyResultWithWithTheBackendAccordingTo(String keyword, String language) throws InterruptedException {
+        APIresult = implementAPIsMethods.getCountOfAffiliateMerchants(keyword, implementAPIsMethods.languageValue(language));
         Assert.assertEquals(APIresult, PageGenerator.getInstance(OnlineCashbackPage.class).getMerchantFilteredList());
     }
-
 }

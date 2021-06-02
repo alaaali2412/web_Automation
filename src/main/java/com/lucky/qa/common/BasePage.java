@@ -85,6 +85,11 @@ public class BasePage {
         element.sendKeys(Keys.DELETE);
     }
 
+    public void confirmAction(WebElement element) {
+        element.sendKeys(Keys.ENTER);
+    }
+
+
     public void refreshCurrentPage() {
         DriverFactory.getDriver().navigate().refresh();
     }
@@ -125,13 +130,29 @@ public class BasePage {
         wait.until(ExpectedConditions.visibilityOfAllElements(elements));
     }
 
-    public String language() {
-        helper.setPropertiesFileName("Languague.properties");
-        return helper.getValuesFromPropertiesFile("local.language");
+    public String language(String language) {
+        String localLanguage;
+        switch (language) {
+            case "Arabic_Egypt":
+                localLanguage = "ar_EG";
+                break;
+            case "English":
+                localLanguage = "en_EG";
+                break;
+            case "Arabic_Morocco":
+                localLanguage = "ar_MA";
+                break;
+            case "French":
+                localLanguage = "fr_MA";
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + language);
+        }
+        return localLanguage;
     }
 
-    public String detectLanguage(String message) {
-        locale = new Locale(language());
+    public String detectLanguage(String language, String message) {
+        locale = new Locale(language(language));
         resource = PropertyResourceBundle.getBundle("LanguageTest", locale);
         return resource.getString(message);
     }
