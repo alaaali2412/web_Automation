@@ -12,7 +12,7 @@ public class FilterInStoreOffersByCategoroiesTest {
     @Given("browser open,portal,open {string} In_store offer screen")
     public void browserOpenPortalOpenIn_storeOfferScreen(String language) {
         PageGenerator.getInstance(HomePage.class).openPortalURL(language);
-        PageGenerator.getInstance(HomePage.class).clkInStoreBtn();
+        PageGenerator.getInstance(HomePage.class).clickInStoreBtn();
     }
 
     @When("user choose specfic {string} from right menu, choose {string}, {string} if required")

@@ -11,7 +11,7 @@ public class FilterInStoreOffersByLocationTest {
 
     @Given("browser open,portal,open In_store offer")
     public void browser_open_portal_open_in_store_offer() {
-        PageGenerator.getInstance(HomePage.class).clkInStoreBtn();
+        PageGenerator.getInstance(HomePage.class).clickInStoreBtn();
     }
 
     @When("user choose specfic {string} from the right menu")
@@ -34,6 +34,6 @@ public class FilterInStoreOffersByLocationTest {
     @Given("browser open,portal in {string},open In_store offer")
     public void browserOpenPortalInOpenIn_storeOffer(String language) {
         PageGenerator.getInstance(HomePage.class).openPortalURL(language);
-        PageGenerator.getInstance(HomePage.class).clkInStoreBtn();
+        PageGenerator.getInstance(HomePage.class).clickInStoreBtn();
     }
 }

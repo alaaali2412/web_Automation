@@ -14,4 +14,3 @@ Feature: New user create new account on affiliate
     Examples:
       | language     |
       | Arabic_Egypt |
-      | English      |
