@@ -7,6 +7,11 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 
 public class FilterInStoreOffersByCombinedFiltersTest {
+    @Given("browser & portal opened in {string},  open In_store offer screen")
+    public void browserPortalOpenedInOpenIn_storeOfferScreen(String language) {
+        PageGenerator.getInstance(HomePage.class).openPortalURL(language);
+        PageGenerator.getInstance(HomePage.class).clkInStoreBtn();
+    }
 
     @When("user filter by location location {string}, {string}")
     public void user_filter_by_location_location(String Location, String subLocation) {
@@ -23,11 +28,5 @@ public class FilterInStoreOffersByCombinedFiltersTest {
     @When("combine between both filters then click apply")
     public void combine_between_both_filters_then_click_apply() {
         PageGenerator.getInstance(InStoreOfferPage.class).clickApplyBtn();
-    }
-
-    @Given("browser & portal opened in {string},  open In_store offer screen")
-    public void browserPortalOpenedInOpenIn_storeOfferScreen(String Arabic) {
-        PageGenerator.getInstance(HomePage.class).openPortalURL(Arabic);
-        PageGenerator.getInstance(HomePage.class).clkInStoreBtn();
     }
 }

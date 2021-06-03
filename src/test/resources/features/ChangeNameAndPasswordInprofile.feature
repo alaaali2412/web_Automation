@@ -11,4 +11,3 @@ Feature: Change in user profile date
     Examples:
       | language     |
       | Arabic_Egypt |
-      | English      |

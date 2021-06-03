@@ -7,5 +7,6 @@ Feature: search Online Cashback Offers
     Then verify result with "<keyword>" with the backend according to "<language>"
 
     Examples:
-      | language     | keyword |
-      | Arabic_Egypt | سوق     |
+      | language       | keyword |
+      | Arabic_Egypt   | سوق     |
+      | Arabic_Morocco | jumia   |

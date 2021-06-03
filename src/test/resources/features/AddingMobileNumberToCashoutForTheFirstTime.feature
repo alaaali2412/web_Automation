@@ -10,4 +10,3 @@ Feature: Adding Mobile Number To Cashout For The First Time
     Examples:
       | language     | mobileNumber |
       | Arabic_Egypt | 01315525888  |
-      | English      | 01315535888  |

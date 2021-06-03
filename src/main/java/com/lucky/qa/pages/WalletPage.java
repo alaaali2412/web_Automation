@@ -117,6 +117,9 @@ public class WalletPage extends BasePage {
 
     public void clickRequestCashoutBtn() {
         clickButton(requestCashoutBtn);
+        if (isAlertPresent()) {
+            driver.switchTo().alert().accept();
+        }
     }
 
     public void clickAman() {
