@@ -7,7 +7,8 @@ Feature: filter Online Cashback offers by category
     Then verify filter with "<category>" with backend according to "<language>"
 
     Examples:
-      | language     | category         |
-      | Arabic_Egypt | الالعاب          |
-      | Arabic_Egypt | السفر و الرفاهية |
-      | English      | Automotive       |
+      | language       | category         |
+      | Arabic_Egypt   | السفر و الرفاهية |
+      | Arabic_Morocco | مودا             |
+      | English        | Automotive       |
+      | French         | Mode             |

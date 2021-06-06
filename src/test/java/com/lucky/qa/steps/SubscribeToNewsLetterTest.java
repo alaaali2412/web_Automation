@@ -26,7 +26,7 @@ public class SubscribeToNewsLetterTest {
     public void successMessageWillBeDisplayedAccordingTo(String language) {
         PageGenerator.getInstance(HomePage.class).checkNewsLetterSuccessMessage(
                 PageGenerator.getInstance(BasePage.class).detectLanguage(language, "NewsLetterSuccessMessage"));
-        PageGenerator.getInstance(HomePage.class).resetNewsLetterSubscription("Email");
+        PageGenerator.getInstance(HomePage.class).resetNewsLetterSubscription("Email", language);
     }
 
     @Given("user add anonymous email to subscribe news letter")

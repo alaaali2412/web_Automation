@@ -1,6 +1,7 @@
 package com.lucky.qa.pages;
 
 import com.lucky.qa.common.BasePage;
+import com.lucky.qa.utilities.DatabaseHelper;
 import com.lucky.qa.utilities.Helper;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -213,10 +214,10 @@ public class WalletPage extends BasePage {
         }
     }
 
-    public void addOTPCode(String email) {
+    public void addOTPCode(String email, String language) {
         helper.setPropertiesFileName("LoginData.properties");
-        Helper.setUpDBConnection();
-        String otp = Helper.getValueFromDatabase("SELECT CashOutMobileVerificationOtp from LuckyUser WHERE email = '" +
+        DatabaseHelper.setUpDBConnection(language);
+        String otp = DatabaseHelper.getValueFromDatabase("SELECT CashOutMobileVerificationOtp from LuckyUser WHERE email = '" +
                 helper.getValuesFromPropertiesFile(email) + "'");
         String[] otpDigits = otp.split("");
         for (int i = 0; i < otpDigits.length; i++) {
@@ -224,18 +225,18 @@ public class WalletPage extends BasePage {
         }
         clickButton(continueBtn);
         waitVisibilityOfElement(toastMessage);
-        Helper.closeDBConnection();
+        DatabaseHelper.closeDBConnection();
     }
 
     public void checkThatSuccessDisplayed() {
         Assert.assertTrue(toastMessage.isDisplayed());
     }
 
-    public void resetMobileNumberInDataBase(String email) {
+    public void resetMobileNumberInDataBase(String email, String language) {
         helper.setPropertiesFileName("LoginData.properties");
-        Helper.setUpDBConnection();
-        Helper.updateDatabaseValues("UPDATE LuckyUser SET IsMerged = '0', PhoneNumber = '" +
+        DatabaseHelper.setUpDBConnection(language);
+        DatabaseHelper.updateDatabaseValues("UPDATE LuckyUser SET IsMerged = '0', PhoneNumber = '" +
                 helper.generateRandomText(4) + "' WHERE email = '" + helper.getValuesFromPropertiesFile(email) + "'");
-        Helper.closeDBConnection();
+        DatabaseHelper.closeDBConnection();
     }
 }

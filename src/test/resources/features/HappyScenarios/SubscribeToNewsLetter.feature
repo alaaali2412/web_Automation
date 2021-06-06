@@ -11,5 +11,3 @@ Feature: user can subscribe to news letter to receive emails with new offer
       | language       |
       | Arabic_Egypt   |
       | Arabic_Morocco |
-      | English        |
-      | French         |

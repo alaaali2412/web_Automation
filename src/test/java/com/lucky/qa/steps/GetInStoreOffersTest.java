@@ -18,7 +18,7 @@ public class GetInStoreOffersTest {
 
     @When("click on instore offers")
     public void click_on_instore_offers() {
-        PageGenerator.getInstance(HomePage.class).clkInStoreBtn();
+        PageGenerator.getInstance(HomePage.class).clickInStoreBtn();
     }
 
     @When("select an offer and click it")

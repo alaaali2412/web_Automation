@@ -30,17 +30,17 @@ public class AddingMobileNumberToCashoutForTheFirstTimeTest {
         PageGenerator.getInstance(WalletPage.class).addMobileNumber(mobileNumber);
     }
 
-    @And("get the OTP from DB and add it")
-    public void getTheOTPFromDBAndAddIt() {
-        PageGenerator.getInstance(WalletPage.class).addOTPCode("GoogleEmail");
+    @When("get the OTP from DB according to {string} then and add it")
+    public void get_the_otp_from_db_according_to_then_and_add_it(String language) {
+        PageGenerator.getInstance(WalletPage.class).addOTPCode("GoogleEmail", language);
     }
 
-    @Then("success message displayed")
-    public void successMessageDisplayed() {
+    @Then("success message displayed according to portal {string}")
+    public void success_message_displayed_according_to_portal(String language) {
         PageGenerator.getInstance(HomePage.class).clickWallet();
         PageGenerator.getInstance(WalletPage.class).clickRequestCashoutBtn();
         PageGenerator.getInstance(WalletPage.class).checkThatSuccessDisplayed();
-        PageGenerator.getInstance(WalletPage.class).resetMobileNumberInDataBase("GoogleEmail");
+        PageGenerator.getInstance(WalletPage.class).resetMobileNumberInDataBase("GoogleEmail", language);
         PageGenerator.getInstance(HomePage.class).openHomeScreen();
         PageGenerator.getInstance(HomePage.class).clickLogOut();
     }

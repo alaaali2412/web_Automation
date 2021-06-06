@@ -1,6 +1,7 @@
 package com.lucky.qa.pages;
 
 import com.lucky.qa.common.BasePage;
+import com.lucky.qa.utilities.DatabaseHelper;
 import com.lucky.qa.utilities.Helper;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
@@ -118,7 +119,7 @@ public class HomePage extends BasePage {
         clickButton(emailBtn);
     }
 
-    public void clkInStoreBtn() {
+    public void clickInStoreBtn() {
         waitVisibilityOfElement(inStoreBtn);
         clickButton(inStoreBtn);
     }
@@ -178,12 +179,12 @@ public class HomePage extends BasePage {
         Assert.assertEquals(successMessage.getText(), successMsg);
     }
 
-    public void resetNewsLetterSubscription(String email) {
+    public void resetNewsLetterSubscription(String email, String language) {
         helper.setPropertiesFileName("LoginData.properties");
-        Helper.setUpDBConnection();
-        Helper.updateDatabaseValues("DELETE FROM AffiliateAnonymousSubscribedUsers WHERE Email = '" +
+        DatabaseHelper.setUpDBConnection(language);
+        DatabaseHelper.updateDatabaseValues("DELETE FROM AffiliateAnonymousSubscribedUsers WHERE Email = '" +
                 helper.getValuesFromPropertiesFile(email) + "'");
-        Helper.closeDBConnection();
+        DatabaseHelper.closeDBConnection();
     }
 
     public void openPortalURL(String language) {
