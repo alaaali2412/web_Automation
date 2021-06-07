@@ -9,4 +9,4 @@ Feature: add wrong OTP when verifying mobile number in cashout
     Then error message displayed according to portal "<language>"
     Examples:
       | language     | MobileNumber |
-      | Arabic_Egypt | 01315525888  |
+      | Arabic_Egypt | 01323246781  |

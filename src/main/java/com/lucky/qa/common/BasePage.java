@@ -107,6 +107,14 @@ public class BasePage {
         wait.until(t -> value.length() != 0);
     }
 
+    public void waitUntilTextEqual(String value, WebElement element) {
+        FluentWait<String> wait = new FluentWait<>(value)
+                .pollingEvery(Duration.ofSeconds(5))
+                .withTimeout(Duration.ofSeconds(30))
+                .ignoring(Exception.class);
+        wait.until(t -> element.getText().equals(value));
+    }
+
     public void waitForPageToLoad() {
         WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 30);
         wait.until(webDriver -> ((JavascriptExecutor) DriverFactory.getDriver())).
