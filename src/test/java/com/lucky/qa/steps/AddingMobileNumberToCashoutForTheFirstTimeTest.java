@@ -13,6 +13,7 @@ public class AddingMobileNumberToCashoutForTheFirstTimeTest {
 
     @Given("portal open in {string}new user logged in")
     public void portalOpenInNewUserLoggedIn(String language) {
+        PageGenerator.getInstance(WalletPage.class).resetMobileNumberInDataBase("GoogleEmail", language);
         PageGenerator.getInstance(HomePage.class).openPortalURL(language);
         PageGenerator.getInstance(HomePage.class).clickSignInBtn();
         PageGenerator.getInstance(LoginPage.class).login("LoginData.properties"
@@ -40,7 +41,6 @@ public class AddingMobileNumberToCashoutForTheFirstTimeTest {
         PageGenerator.getInstance(HomePage.class).clickWallet();
         PageGenerator.getInstance(WalletPage.class).clickRequestCashoutBtn();
         PageGenerator.getInstance(WalletPage.class).checkThatSuccessDisplayed();
-        PageGenerator.getInstance(WalletPage.class).resetMobileNumberInDataBase("GoogleEmail", language);
         PageGenerator.getInstance(HomePage.class).openHomeScreen();
         PageGenerator.getInstance(HomePage.class).clickLogOut();
     }

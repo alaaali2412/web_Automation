@@ -9,6 +9,4 @@ Feature: search Online Cashback Offers
     Examples:
       | language       | keyword |
       | Arabic_Egypt   | سوق     |
-      | Arabic_Morocco | NewChic |
       | English        | souq    |
-      | French         | jumia   |

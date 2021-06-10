@@ -23,7 +23,7 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//div[2]/div/div[2]/button[2]/span")
     private WebElement facebookBtn;
 
-    @FindBy(xpath = "//div[2]/div/div[2]/button[1]/span")
+    @FindBy(xpath = "//*/div[2]//div[2]/button[1]")
     private WebElement googleBtn;
 
     @FindBy(xpath = "//*[@href='/SignUp']")
@@ -135,6 +135,7 @@ public class HomePage extends BasePage {
         clickButton(onlineCashbackBtn);
         for (WebElement category : onlineCashbackList) {
             if (getText(category).equals(categorySelected)) {
+                waitVisibilityOfElement(category);
                 clickButton(category);
                 break;
             }

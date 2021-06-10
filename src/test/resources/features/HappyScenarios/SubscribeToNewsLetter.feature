@@ -1,6 +1,6 @@
 @SubscribeToNewsLetter
 Feature: user can subscribe to news letter to receive emails with new offer
-
+  @SmokeTest
   Scenario Outline: user can subscribe to news letter by adding registered and anonymous email
     Given home page opened in "<language>"
     When user add registered email to subscribe news letter
@@ -10,4 +10,4 @@ Feature: user can subscribe to news letter to receive emails with new offer
     Examples:
       | language       |
       | Arabic_Egypt   |
-      | Arabic_Morocco |
+

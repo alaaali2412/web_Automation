@@ -10,5 +10,3 @@ Feature: Login with Email, password
       | language       |
       | Arabic_Egypt   |
       | English        |
-      | Arabic_Morocco |
-      | French         |
