@@ -1,5 +1,6 @@
 package com.lucky.qa.steps;
 
+import com.lucky.qa.common.BasePage;
 import com.lucky.qa.pages.*;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -31,12 +32,12 @@ public class RegistrationTest {
         PageGenerator.getInstance(HomePage.class).clickSignInBtn();
     }
 
-    @Then("user can not login without verifying the email")
-    public void userCanNotLoginWithoutVerifyingTheEmail() {
+    @Then("user can not login without verifying the email {string}")
+    public void user_can_not_login_without_verifying_the_email(String language) {
         PageGenerator.getInstance(LoginPage.class).login(
                 "RegistrationData.properties", "RegistrationEmail", "RegistrationPassword");
-      /*  PageGenerator.getInstance(RegistrationPage.class).checkUnverifiedMailErrorMessage
-                (PageGenerator.getInstance(BasePage.class).detectLanguage("UnverifiedEmailErrorMsg"));*/
+        PageGenerator.getInstance(RegistrationPage.class).checkUnverifiedMailErrorMessage
+                (PageGenerator.getInstance(BasePage.class).detectLanguage(language, "UnverifiedEmailErrorMsg"));
     }
 
     @When("user open his email account, open the received email from lucky")

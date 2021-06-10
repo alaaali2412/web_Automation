@@ -9,4 +9,4 @@ Feature: Adding Mobile Number To Cashout For The First Time
     Then success message displayed according to portal "<language>"
     Examples:
       | language     | mobileNumber |
-      | Arabic_Egypt | 01315525888  |
+      | Arabic_Egypt | 01324236781  |

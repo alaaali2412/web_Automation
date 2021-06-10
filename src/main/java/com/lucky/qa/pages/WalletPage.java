@@ -62,7 +62,7 @@ public class WalletPage extends BasePage {
     @FindBy(className = "wallet-body")
     private WebElement transactionSection;
 
-    @FindBy(className = "error error-message text-center")
+    @FindBy(xpath = "//*[@class = 'error error-message text-center'][1]")
     private WebElement errorMessage;
 
     @FindBy(xpath = "//div/nav/div/a/span")
@@ -226,6 +226,21 @@ public class WalletPage extends BasePage {
         clickButton(continueBtn);
         waitVisibilityOfElement(toastMessage);
         DatabaseHelper.closeDBConnection();
+    }
+
+    public void addWrongOTP() {
+        String otp = "123456";
+        String[] otpDigits = otp.split("");
+        for (int i = 0; i < otpDigits.length; i++) {
+            addText(otpFields.get(i), otpDigits[i]);
+        }
+        clickButton(continueBtn);
+    }
+
+    public void assertOtpErrorMessage(String errorMsg) {
+        waitVisibilityOfElement(errorMessage);
+        Assert.assertTrue(errorMessage.isDisplayed());
+        Assert.assertEquals(errorMessage.getText(), errorMsg);
     }
 
     public void checkThatSuccessDisplayed() {

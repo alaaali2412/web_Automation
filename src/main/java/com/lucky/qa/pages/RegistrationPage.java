@@ -21,8 +21,11 @@ public class RegistrationPage extends BasePage {
     @FindBy(id = "formRepeatPassword")
     private WebElement repeatPassField;
 
-    @FindBy(xpath = "//form/div[2]/button")
+    @FindBy(xpath = "//*[@id='copy_address']/span")
     private WebElement copyEmail;
+
+    @FindBy(xpath = "//*[@id='counter_sec_one']/span")
+    private WebElement secondCounter;
 
     @FindBy(xpath = "//*[@class='py-3']/button")
     private WebElement registerBtn;
@@ -39,10 +42,10 @@ public class RegistrationPage extends BasePage {
     @FindBy(xpath = "//section/div/div/div/a")
     private WebElement loginBtnAfterMailVerification;
 
-    @FindBy(xpath = "//*[@class='inbox-dataList']//li[2]")
+    @FindBy(xpath = "//*[@class='message_top']")
     private WebElement emailList;
 
-    @FindBy(xpath = "//*[@class='inbox-dataList']//li[2]/div")
+    @FindBy(xpath = "//*[@class='small_subject']")
     private WebElement emailLink;
 
     @FindBy(xpath = "//p[1]/a")
@@ -73,9 +76,10 @@ public class RegistrationPage extends BasePage {
         clearDefaultValueOfCopy(inputEmail);
         openNewTab();
         moveToTab(1);
-        driver.get("https://10minemail.com/");
+        driver.get("https://10minutemail.com/");
         waitForPageToLoad();
-        clickButton(copyEmail);
+        waitUntilTextEqual("5", secondCounter);
+        forceClickElement(copyEmail);
         moveToTab(0);
         deleteTextInField(inputEmail);
         pasteTextInField(inputEmail);
