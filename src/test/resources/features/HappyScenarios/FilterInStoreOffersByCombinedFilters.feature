@@ -1,6 +1,6 @@
 @FilterInStoreOffersByCombinedFilters
 Feature: filter In_store offers by it`s categories & Locations
-
+  @SmokeTest
   Scenario Outline: filtering In Store offers by location and category at the same time
     Given browser & portal opened in "<language>",  open In_store offer screen
     When user filter by location location "<Location>", "<subLocation>"

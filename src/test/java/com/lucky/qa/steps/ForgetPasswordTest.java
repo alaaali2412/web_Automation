@@ -4,6 +4,7 @@ import com.lucky.qa.common.BasePage;
 import com.lucky.qa.pages.HomePage;
 import com.lucky.qa.pages.LoginPage;
 import com.lucky.qa.pages.PageGenerator;
+import com.lucky.qa.pages.ProfilePage;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -53,5 +54,7 @@ public class ForgetPasswordTest {
     public void user_can_log_with_the_new_password() {
         PageGenerator.getInstance(LoginPage.class).login("LoginData.properties",
                 "GoogleEmail", "NewPassword");
+        PageGenerator.getInstance(HomePage.class).openProfilePage();
+        PageGenerator.getInstance(ProfilePage.class).resetPasswordToDefaultValue("NewPassword");
     }
 }

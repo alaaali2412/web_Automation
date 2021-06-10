@@ -1,6 +1,7 @@
 @ChangeNameAndPasswordInprofile
 Feature: Change in user profile date
 
+  @SmokeTest
   Scenario Outline: changing name and password in user profile
     Given portal and browser open in "<language>", user login
     When open profile screen

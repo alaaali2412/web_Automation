@@ -1,7 +1,7 @@
 @GoogleLogin
 
 Feature: Login with user google account
-
+  @SmokeTest
   Scenario Outline: User try to login via google
     Given browser open in "<language>",navigate to the portal
     When close the pop up click login with google

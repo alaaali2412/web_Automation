@@ -1,6 +1,7 @@
 @ForgetPassword
 Feature: User can login with wrong credentials, so he will reset his password
 
+  @SmokeTest
   Scenario Outline: user can reset his password
     Given portal "<language>", user click login
     When user add Email and wrong password and click login

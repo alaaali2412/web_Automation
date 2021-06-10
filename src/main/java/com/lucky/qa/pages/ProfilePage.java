@@ -75,4 +75,16 @@ public class ProfilePage extends BasePage {
         clickButton(logoutBtn);
         clickButton(logoutPopup);
     }
+
+    public void resetPasswordToDefaultValue(String password) {
+        helper.setPropertiesFileName("LoginData.properties");
+        clickButton(passwordField);
+        waitVisibilityOfElement(newPassHeader);
+        addText(oldPassField, helper.getValuesFromPropertiesFile(password));
+        addText(newPassField, "QA1234567");
+        addText(newConfirmPassField, "QA1234567");
+        clickButton(saveChangesBtn);
+        waitVisibilityOfElement(toastMessage);
+        helper.updateValueInPropertiesFile(password, "QA1234567");
+    }
 }

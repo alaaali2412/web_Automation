@@ -1,6 +1,6 @@
 @SearchOnlineCashbackOffers
 Feature: search Online Cashback Offers
-
+  @SmokeTest
   Scenario Outline: search Online Cashback Offers by store name
     Given browser, portal opened in "<language>"
     When add "<keyword>" in search field and click enter

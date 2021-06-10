@@ -48,6 +48,7 @@ public class ChangeNameAndPasswordInProfileTest {
     public void verify_that_data_changed() {
         PageGenerator.getInstance(HomePage.class).openProfilePage();
         Assert.assertEquals(loggedInEmail, PageGenerator.getInstance(ProfilePage.class).getLoggedInEmail());
+        PageGenerator.getInstance(ProfilePage.class).resetPasswordToDefaultValue("Password");
         PageGenerator.getInstance(HomePage.class).openHomeScreen();
         PageGenerator.getInstance(HomePage.class).clickLogOut();
     }

@@ -229,7 +229,7 @@ public class WalletPage extends BasePage {
     }
 
     public void addWrongOTP() {
-        String otp = "123456";
+        String otp = Helper.generateRandomPassword(6);
         String[] otpDigits = otp.split("");
         for (int i = 0; i < otpDigits.length; i++) {
             addText(otpFields.get(i), otpDigits[i]);
