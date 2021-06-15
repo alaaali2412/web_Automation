@@ -172,6 +172,12 @@ public class HomePage extends BasePage {
         addText(newsLetterEmailField, helper.getValuesFromPropertiesFile(email));
     }
 
+    public void addNewEmail() {
+        String email = helper.generateRandomText(7) + "@mail.com";
+        clearField(newsLetterEmailField);
+        addText(newsLetterEmailField, email);
+    }
+
     public void clickSubscribeBtn() {
         clickButton(subscribeBtn);
     }

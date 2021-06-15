@@ -24,9 +24,9 @@ public class AddWrongOtpWhenVerifyingMobileNumberInCashoutTest {
         PageGenerator.getInstance(WalletPage.class).clickRequestCashoutBtn();
     }
 
-    @When("add {string} , click continue button")
-    public void add_click_continue_button(String MobileNumber) throws InterruptedException {
-        PageGenerator.getInstance(WalletPage.class).addMobileNumber(MobileNumber);
+    @When("add mobile number, click continue button")
+    public void add_mobile_number_click_continue_button() {
+        PageGenerator.getInstance(WalletPage.class).addMobileNumber();
     }
 
     @When("add wrong OTP then click continue")

@@ -49,6 +49,18 @@ public class Helper {
         return sb.toString();
     }
 
+    //Method to generate random Number.
+    public String generateRandomNumber(int length) {
+        char[] chars = "0123456789".toCharArray();
+        StringBuilder sb = new StringBuilder();
+        Random random = new Random();
+        for (int i = 0; i < length; i++) {
+            char c = chars[random.nextInt(chars.length)];
+            sb.append(c);
+        }
+        return sb.toString();
+    }
+
     public String updateValueInPropertiesFile(String key, String value) {
         Properties properties = new Properties();
         FileInputStream fileIn;
