@@ -10,6 +10,7 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 
 public class LoginPage extends BasePage {
@@ -114,7 +115,6 @@ public class LoginPage extends BasePage {
     public LoginPage(WebDriver driver) {
         super(driver);
     }
-
     public String login(String fileName, String email, String password) {
         helper.setPropertiesFileName(fileName);
         waitVisibilityOfElement(inputPassword);
@@ -154,18 +154,21 @@ public class LoginPage extends BasePage {
         clickButton(passNextBtn);
     }
 
-    public String loginGoogle(String email, String password) throws InterruptedException {
-        String parentWindow = driver.getWindowHandle();
-        Set<String> allWindow = driver.getWindowHandles();
+    public String loginGoogle(String email, String password) {
+        String parentWindow = DriverFactory.getDriver().getWindowHandle();
+        Set<String> allWindow = DriverFactory.getDriver().getWindowHandles();
         for (String child : allWindow) {
             if (!parentWindow.equalsIgnoreCase(child)) {
-                driver.switchTo().window(child);
-                addGmailCredentials(email, password);
+                DriverFactory.getDriver().switchTo().window(child);
+                forceAddText(googleEmail, email);
+                clickButton(emailNextBtn);
+                DriverFactory.getDriver().switchTo().window(child);
+                waitVisibilityOfElement(googlePassword);
+                forceAddText(googlePassword, password);
+                clickButton(passNextBtn);
             }
         }
         driver.switchTo().window(parentWindow);
-        Thread.sleep(9000);
-        refreshCurrentPage();
         return email;
     }
 
@@ -208,23 +211,25 @@ public class LoginPage extends BasePage {
     }
 
     public void checkTheUnreadEmails() {
+        moveToTab(1);
         waitVisibilityOfAllElements(unreadEmails);
         for (WebElement email : unreadEmails) {
-            if (emailTitle.getAttribute("name").equals("Lucky") &&
-                    emailSubject.getText().contains("Password Reset Link")) {
-                waitVisibilityOfElement(emailSubject);
-                forceClickElement(email);
-                break;
+            while (!emailTitle.getAttribute("name").equals("Lucky") &&
+                    !emailSubject.getText().contains("Password Reset Link")) {
+                driverWait(30);
+                refreshCurrentPage();
             }
+            forceClickElement(email);
+            break;
         }
     }
 
     public void openResetPassEmail() {
         waitForPageToLoad();
-        waitVisibilityOfElement(resetPassLink);
         if (!resetPassLink.isDisplayed()) {
             waitVisibilityOfElement(expandEmailBtn);
             forceClickElement(expandEmailBtn);
+            moveToTab(1);
             waitVisibilityOfElement(resetPassLink);
             forceClickElement(resetPassLink);
         } else {
@@ -251,6 +256,7 @@ public class LoginPage extends BasePage {
     }
 
     public void checkInvalidEmailErrorMessage(String errorMsg) {
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         waitForTextToBeVisible(invalidEmailErrorMessage);
         Assert.assertEquals(errorMsg, invalidEmailErrorMessage.getText());
     }

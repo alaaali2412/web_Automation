@@ -10,5 +10,3 @@ Feature: Fields Validation During Registration
       | Language       |
       | Arabic_Egypt   |
       | English        |
-      | Arabic_Morocco |
-      | French         |

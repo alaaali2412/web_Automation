@@ -7,6 +7,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 
 public class FilterInStoreOffersByCombinedFiltersTest {
+
     @Given("browser & portal opened in {string},  open In_store offer screen")
     public void browserPortalOpenedInOpenIn_storeOfferScreen(String language) {
         PageGenerator.getInstance(HomePage.class).openPortalURL(language);

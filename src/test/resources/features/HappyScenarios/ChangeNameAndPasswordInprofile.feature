@@ -10,5 +10,5 @@ Feature: Change in user profile date
     When user log out and login again
     Then verify that data changed
     Examples:
-      | language     |
-      | Arabic_Egypt |
+      | language |
+      | English  |

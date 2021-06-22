@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
 public class WalletPage extends BasePage {
     public WalletPage(WebDriver driver) {
         super(driver);
@@ -100,6 +99,9 @@ public class WalletPage extends BasePage {
 
     @FindBy(xpath = "//*[@class = 'react-toast-notifications__toast__content css-1ad3zal']")
     private WebElement toastMessage;
+
+    @FindBy(xpath = "  //*[@class='link-text']")
+    private WebElement otpCounter;
 
     public Double getUserTotalBalance() throws InterruptedException {
         Thread.sleep(4000);
@@ -208,6 +210,7 @@ public class WalletPage extends BasePage {
         String mobileNumber = "013" + helper.generateRandomNumber(8);
         addText(mobileNumberField, mobileNumber);
         clickButton(continueBtn);
+        waitVisibilityOfElement(otpCounter);
         String value = pageContent.getAttribute("aria-hidden");
         if (value != null) {
             forceClickElement(confirmBtn);
@@ -215,10 +218,11 @@ public class WalletPage extends BasePage {
     }
 
     public void addOTPCode(String email, String language) {
-        helper.setPropertiesFileName("LoginData.properties");
+        helper.setPropertiesFileName("RegistrationData.properties");
         DatabaseHelper.setUpDBConnection(language);
         String otp = DatabaseHelper.getValueFromDatabase("SELECT CashOutMobileVerificationOtp from LuckyUser WHERE email = '" +
                 helper.getValuesFromPropertiesFile(email) + "'");
+        System.out.println("sdfgfdsfg" + otp);
         String[] otpDigits = otp.split("");
         for (int i = 0; i < otpDigits.length; i++) {
             addText(otpFields.get(i), otpDigits[i]);
@@ -250,10 +254,15 @@ public class WalletPage extends BasePage {
     }
 
     public void resetMobileNumberInDataBase(String email, String language) {
-        helper.setPropertiesFileName("LoginData.properties");
+        helper.setPropertiesFileName("RegistrationData.properties");
         DatabaseHelper.setUpDBConnection(language);
         DatabaseHelper.updateDatabaseValues("UPDATE LuckyUser SET IsMerged = '0', PhoneNumber = '" +
                 helper.generateRandomText(4) + "' WHERE email = '" + helper.getValuesFromPropertiesFile(email) + "'");
         DatabaseHelper.closeDBConnection();
+    }
+
+    public void checkWelcomeBonus(String transactionNameLanguage, String statusLanguage) {
+        Assert.assertEquals(lastTransactionType.getText(), transactionNameLanguage);
+        Assert.assertEquals(lastTransactionStatus.getText(), statusLanguage);
     }
 }

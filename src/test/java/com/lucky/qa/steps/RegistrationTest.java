@@ -8,6 +8,7 @@ import io.cucumber.java.en.When;
 import org.testng.Assert;
 
 public class RegistrationTest {
+
     @Given("portal open in {string} user click signup button")
     public void portalOpenInUserClickSignupButton(String language) {
         PageGenerator.getInstance(HomePage.class).openPortalURL(language);

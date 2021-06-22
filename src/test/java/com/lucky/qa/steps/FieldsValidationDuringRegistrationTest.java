@@ -9,6 +9,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class FieldsValidationDuringRegistrationTest {
+
     @Given("portal {string} Registration page opened")
     public void portalRegistrationPageOpened(String language) {
         PageGenerator.getInstance(HomePage.class).openPortalURL(language);

@@ -1,6 +1,6 @@
 @GetInStoreOffers
 Feature: Get in store offers
-
+  @SmokeTest
   Scenario Outline: User try to get in store offers
     Given browser open,open portal in "<language>", user login
     When click on instore offers
@@ -9,5 +9,4 @@ Feature: Get in store offers
     Then popup displayed in "<language>" that user should download lucky app
     Examples:
       | language     |
-      | Arabic_Egypt |
       | English      |

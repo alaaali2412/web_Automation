@@ -9,7 +9,6 @@ import io.cucumber.java.en.Then;
 
 public class SubscribeToNewsLetterTest {
 
-
     @Given("home page opened in {string}")
     public void homePageOpenedIn(String language) {
         PageGenerator.getInstance(HomePage.class).resetNewsLetterSubscription("Email", language);
