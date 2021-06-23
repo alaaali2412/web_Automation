@@ -76,8 +76,8 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//*[@class='y6']//span[1]")
     private WebElement emailSubject;
 
-    @FindBy(xpath = "//*[@class='ajV']//div")
-    private WebElement expandEmailBtn;
+    @FindBy(xpath = "//*[@src= '//ssl.gstatic.com/ui/v1/icons/mail/images/cleardot.gif']")
+    private List<WebElement> expandEmailBtn;
 
     @FindBy(xpath = "//table//table/tbody/tr[5]/td/a/table/tbody/tr/td")
     private WebElement resetPassLink;
@@ -227,8 +227,8 @@ public class LoginPage extends BasePage {
     public void openResetPassEmail() {
         waitForPageToLoad();
         if (!resetPassLink.isDisplayed()) {
-            waitVisibilityOfElement(expandEmailBtn);
-            forceClickElement(expandEmailBtn);
+            waitVisibilityOfAllElements(expandEmailBtn);
+            clickButton(expandEmailBtn.get(expandEmailBtn.size() - 1));
             moveToTab(1);
             waitVisibilityOfElement(resetPassLink);
             forceClickElement(resetPassLink);
@@ -268,6 +268,10 @@ public class LoginPage extends BasePage {
         clickButton(googleProfileIcon);
         clickButton(googleLogoutBtn);
         driver.close();
+    }
+
+    public void deleteGmailEmails() {
+
     }
 
   /*  public void resetBrowserSetting() {

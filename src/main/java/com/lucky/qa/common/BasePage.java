@@ -114,20 +114,20 @@ public class BasePage {
     }
 
     public void waitForPageToLoad() {
-        WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 30);
+        WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 60);
         wait.until((ExpectedCondition<Boolean>) webDriver -> ((JavascriptExecutor) DriverFactory.getDriver()).
                 executeScript("return document.readyState").equals("complete"));
     }
 
     protected void waitVisibilityOfElement(WebElement element) {
-        Wait<WebDriver> wait = new FluentWait<>(DriverFactory.getDriver()).withTimeout(Duration.ofSeconds(30))
+        Wait<WebDriver> wait = new FluentWait<>(DriverFactory.getDriver()).withTimeout(Duration.ofSeconds(60))
                 .pollingEvery(Duration.ofSeconds(3))
                 .ignoring(Exception.class);
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
     protected void waitVisibilityOfAllElements(List<WebElement> elements) {
-        Wait<WebDriver> wait = new FluentWait<>(DriverFactory.getDriver()).withTimeout(Duration.ofSeconds(30))
+        Wait<WebDriver> wait = new FluentWait<>(DriverFactory.getDriver()).withTimeout(Duration.ofSeconds(60))
                 .pollingEvery(Duration.ofSeconds(3))
                 .ignoring(Exception.class);
         wait.until(ExpectedConditions.visibilityOfAllElements(elements));

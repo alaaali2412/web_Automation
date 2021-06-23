@@ -234,11 +234,9 @@ public class WalletPage extends BasePage {
 
     public void addWrongOTP() {
         String otp = helper.generateRandomNumber(6);
-        System.out.println("otooooot" + otp);
         String[] otpDigits = otp.split("");
         for (int i = 0; i < otpDigits.length; i++) {
             addText(otpFields.get(i), otpDigits[i]);
-            System.out.println(otpDigits[i]);
         }
         clickButton(continueBtn);
     }
