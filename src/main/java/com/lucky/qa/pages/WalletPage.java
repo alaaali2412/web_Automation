@@ -83,7 +83,7 @@ public class WalletPage extends BasePage {
     @FindBy(xpath = "//*[@class ='transaction-row'][1]/div[1]/div[1]/p")
     private WebElement lastTransactionType;
 
-    @FindBy(xpath = "//div[2]/div[3]/div[2]/p[2]")
+    @FindBy(xpath = "//*[@class ='transaction-row'][1]/div[2]/p[2]")
     private WebElement lastTransactionStatus;
 
     @FindBy(id = "formGridZip")
@@ -204,10 +204,10 @@ public class WalletPage extends BasePage {
         }
     }
 
-    public void addMobileNumber(String mobileNumber) throws InterruptedException {
+    public void addMobileNumber() {
+        String mobileNumber = "013" + helper.generateRandomNumber(8);
         addText(mobileNumberField, mobileNumber);
         clickButton(continueBtn);
-        Thread.sleep(2000);
         String value = pageContent.getAttribute("aria-hidden");
         if (value != null) {
             forceClickElement(confirmBtn);
@@ -229,10 +229,12 @@ public class WalletPage extends BasePage {
     }
 
     public void addWrongOTP() {
-        String otp = "123456";
+        String otp = helper.generateRandomNumber(6);
+        System.out.println("otooooot" + otp);
         String[] otpDigits = otp.split("");
         for (int i = 0; i < otpDigits.length; i++) {
             addText(otpFields.get(i), otpDigits[i]);
+            System.out.println(otpDigits[i]);
         }
         clickButton(continueBtn);
     }

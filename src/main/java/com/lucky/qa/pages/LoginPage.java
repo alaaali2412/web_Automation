@@ -212,6 +212,7 @@ public class LoginPage extends BasePage {
         for (WebElement email : unreadEmails) {
             if (emailTitle.getAttribute("name").equals("Lucky") &&
                     emailSubject.getText().contains("Password Reset Link")) {
+                waitVisibilityOfElement(emailSubject);
                 forceClickElement(email);
                 break;
             }
@@ -220,6 +221,7 @@ public class LoginPage extends BasePage {
 
     public void openResetPassEmail() {
         waitForPageToLoad();
+        waitVisibilityOfElement(resetPassLink);
         if (!resetPassLink.isDisplayed()) {
             waitVisibilityOfElement(expandEmailBtn);
             forceClickElement(expandEmailBtn);

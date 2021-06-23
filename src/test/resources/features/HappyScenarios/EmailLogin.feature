@@ -1,6 +1,6 @@
 @EmailLogin
 Feature: Login with Email, password
-
+  @SmokeTest
   Scenario Outline: User try to login via Email,Password
     Given browser open "<language>",navigate to portal
     When close the pop up click on login button
@@ -10,5 +10,3 @@ Feature: Login with Email, password
       | language       |
       | Arabic_Egypt   |
       | English        |
-      | Arabic_Morocco |
-      | French         |

@@ -9,7 +9,7 @@ import org.testng.annotations.DataProvider;
         features = {"src/test/resources/features"},
         glue = {"com.lucky.qa.steps", "com.lucky.qa.connectors"},
         plugin = {"pretty", "html:target/site/cucumber-pretty"},
-        tags = "not @ignore",
+        tags = "@SmokeTest",
         monochrome = true,
         publish = true
 )

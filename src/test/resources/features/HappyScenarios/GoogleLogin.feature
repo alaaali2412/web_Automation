@@ -1,7 +1,7 @@
 @GoogleLogin
 
 Feature: Login with user google account
-
+  @SmokeTest
   Scenario Outline: User try to login via google
     Given browser open in "<language>",navigate to the portal
     When close the pop up click login with google
@@ -11,4 +11,3 @@ Feature: Login with user google account
     Examples:
       | language       | gmail                     | pass      |
       | Arabic_Egypt   | qatestlucky2021@gmail.com | LUCky@abc |
-      | Arabic_Morocco | qatestlucky2021@gmail.com | LUCky@abc |
