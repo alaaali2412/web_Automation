@@ -7,16 +7,16 @@ import java.util.List;
 
 public class DriverFactory {
     // to create separate driver for each chrome session
-    private static final ThreadLocal<WebDriver> drivers = new ThreadLocal<>();
+    static private final ThreadLocal<WebDriver> drivers = new ThreadLocal<>();
 
-    private DriverFactory() {
+    DriverFactory() {
     }
 
     // To quit the drivers and browsers at the end only.
     public static List<WebDriver> storedDrivers = new ArrayList<>();
 
     // to get the driver and used for any other class
-    public static WebDriver getDriver() {
+    public static synchronized WebDriver getDriver() {
         return drivers.get();
     }
 

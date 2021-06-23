@@ -113,7 +113,6 @@ public class RegistrationPage extends BasePage {
     public void openVerificationMail() {
         moveToTab(1);
         while (!emailList.getText().contains("Email Confirmation")) {
-            System.out.println("the text before " + emailList.getText());
             refreshCurrentPage();
         }
         clickButton(emailLink);

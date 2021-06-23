@@ -7,7 +7,4 @@ Feature: user can send the issue he face to the support team
     Then user can text message according to "<language>"that explain to user how to contact support team
     Examples:
       | language       |
-      | Arabic_Egypt   |
       | English        |
-      | Arabic_Morocco |
-      | French         |

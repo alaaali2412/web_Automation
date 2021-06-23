@@ -64,7 +64,7 @@ public class PerformCashoutRequestTest {
     public void transactionReflectInWalletTransactionListAccordingToCashoutAnd(String method, String language) {
         PageGenerator.getInstance(WalletPage.class).checkIfTransactionReflected(method,
                 PageGenerator.getInstance(BasePage.class).detectLanguage(language, "transactionNameLanguage"),
-                PageGenerator.getInstance(BasePage.class).detectLanguage(language, "CashoutStatusLanguage"));
+                PageGenerator.getInstance(BasePage.class).detectLanguage(language, "TransactionStatusLanguage"));
         PageGenerator.getInstance(HomePage.class).clickLogOut();
     }
 }

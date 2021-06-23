@@ -11,12 +11,13 @@ import io.cucumber.java.en.When;
 public class AddingMobileNumberToCashoutForTheFirstTimeTest {
 
     @Given("portal open in {string}new user logged in")
-    public void portalOpenInNewUserLoggedIn(String language) {
-        PageGenerator.getInstance(WalletPage.class).resetMobileNumberInDataBase("GoogleEmail", language);
+    public void portalOpenInNewUserLoggedIn(String language) throws InterruptedException {
+        PageGenerator.getInstance(WalletPage.class).resetMobileNumberInDataBase("RegistrationEmail", language);
+        Thread.sleep(5000);
         PageGenerator.getInstance(HomePage.class).openPortalURL(language);
         PageGenerator.getInstance(HomePage.class).clickSignInBtn();
-        PageGenerator.getInstance(LoginPage.class).login("LoginData.properties"
-                , "GoogleEmail", "NewPassword");
+        PageGenerator.getInstance(LoginPage.class).login("RegistrationData.properties"
+                , "RegistrationEmail", "RegistrationPassword");
     }
 
     @When("Wallet page opens, click cashout button")
@@ -26,13 +27,14 @@ public class AddingMobileNumberToCashoutForTheFirstTimeTest {
     }
 
     @When("add mobile Number and click continue button")
-    public void add_mobile_number_and_click_continue_button() {
+    public void add_mobile_number_and_click_continue_button() throws InterruptedException {
         PageGenerator.getInstance(WalletPage.class).addMobileNumber();
+        Thread.sleep(5000);
     }
 
     @When("get the OTP from DB according to {string} then and add it")
     public void get_the_otp_from_db_according_to_then_and_add_it(String language) {
-        PageGenerator.getInstance(WalletPage.class).addOTPCode("GoogleEmail", language);
+        PageGenerator.getInstance(WalletPage.class).addOTPCode("RegistrationEmail", language);
     }
 
     @Then("success message displayed according to portal {string}")
@@ -42,5 +44,6 @@ public class AddingMobileNumberToCashoutForTheFirstTimeTest {
         PageGenerator.getInstance(WalletPage.class).checkThatSuccessDisplayed();
         PageGenerator.getInstance(HomePage.class).openHomeScreen();
         PageGenerator.getInstance(HomePage.class).clickLogOut();
+        PageGenerator.getInstance(WalletPage.class).resetMobileNumberInDataBase("RegistrationEmail", language);
     }
 }

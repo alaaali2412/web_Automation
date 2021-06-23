@@ -10,6 +10,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class AddWrongOtpWhenVerifyingMobileNumberInCashoutTest {
+
     @Given("portal opens in {string},user logged in")
     public void portal_opens_in_user_logged_in(String language) {
         PageGenerator.getInstance(HomePage.class).openPortalURL(language);

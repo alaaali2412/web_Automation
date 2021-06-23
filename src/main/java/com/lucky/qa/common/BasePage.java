@@ -2,23 +2,17 @@ package com.lucky.qa.common;
 
 
 import com.lucky.qa.connectors.DriverFactory;
-import com.lucky.qa.utilities.Helper;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.FluentWait;
-import org.openqa.selenium.support.ui.Wait;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.*;
 
 import java.time.Duration;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 public class BasePage {
     public WebDriver driver;
     protected Actions actions;
-    private static ResourceBundle resource = null;
-    private static Locale locale = null;
-    private final Helper helper = new Helper();
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
@@ -59,12 +53,12 @@ public class BasePage {
     }
 
     public void openNewTab() {
-        ((JavascriptExecutor) driver).executeScript("window.open()");
+        ((JavascriptExecutor) DriverFactory.getDriver()).executeScript("window.open()");
     }
 
     public void moveToTab(int tab) {
-        ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
-        driver.switchTo().window(tabs.get(tab));
+        ArrayList<String> tabs = new ArrayList<>(DriverFactory.getDriver().getWindowHandles());
+        DriverFactory.getDriver().switchTo().window(tabs.get(tab));
     }
 
     public void clearDefaultValueOfCopy(WebElement element) {
@@ -89,6 +83,10 @@ public class BasePage {
 
     public void refreshCurrentPage() {
         DriverFactory.getDriver().navigate().refresh();
+    }
+
+    public void driverWait(int timeInSeconds) {
+        DriverFactory.getDriver().manage().timeouts().implicitlyWait(timeInSeconds, TimeUnit.SECONDS);
     }
 
     public void waitForTextToBeVisible(WebElement element) {
@@ -116,9 +114,9 @@ public class BasePage {
     }
 
     public void waitForPageToLoad() {
-        WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 30);
-        wait.until(webDriver -> ((JavascriptExecutor) DriverFactory.getDriver())).
-                executeScript("return document.readyState").toString().equals("complete");
+        WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 60);
+        wait.until((ExpectedCondition<Boolean>) webDriver -> ((JavascriptExecutor) DriverFactory.getDriver()).
+                executeScript("return document.readyState").equals("complete"));
     }
 
     protected void waitVisibilityOfElement(WebElement element) {
@@ -157,8 +155,8 @@ public class BasePage {
     }
 
     public String detectLanguage(String language, String message) {
-        locale = new Locale(language(language));
-        resource = PropertyResourceBundle.getBundle("LanguageTest", locale);
+        Locale locale = new Locale(language(language));
+        ResourceBundle resource = PropertyResourceBundle.getBundle("LanguageTest", locale);
         return resource.getString(message);
     }
 

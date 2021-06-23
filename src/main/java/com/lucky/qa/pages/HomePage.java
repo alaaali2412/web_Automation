@@ -94,6 +94,8 @@ public class HomePage extends BasePage {
 
     public void clickContactUsBtn() {
         clickButton(contactUsBtn);
+        driverWait(30);
+        refreshCurrentPage();
     }
 
     public void openHomeScreen() {
@@ -111,12 +113,13 @@ public class HomePage extends BasePage {
 
     public void googleLogin() {
         waitVisibilityOfElement(googleBtn);
-        clickButton(googleBtn);
+        forceClickElement(googleBtn);
     }
 
     public void clickSignupBtn() {
         waitVisibilityOfElement(emailBtn);
         clickButton(emailBtn);
+        waitForPageToLoad();
     }
 
     public void clickInStoreBtn() {
@@ -140,6 +143,7 @@ public class HomePage extends BasePage {
                 break;
             }
         }
+        waitForPageToLoad();
         return categorySelected;
     }
 
@@ -152,6 +156,13 @@ public class HomePage extends BasePage {
     public void clickLogOut() {
         clickButton(profileDropdown);
         clickButton(logOutBtn);
+    }
+
+    public void waitUntilGoogleMailAuthenticated() {
+        while (!profileDropdown.isDisplayed()) {
+            driverWait(60);
+            refreshCurrentPage();
+        }
     }
 
     Helper helper = new Helper();
@@ -174,7 +185,7 @@ public class HomePage extends BasePage {
 
     public void addNewEmail() {
         String email = helper.generateRandomText(7) + "@mail.com";
-        clearField(newsLetterEmailField);
+        deleteTextInField(newsLetterEmailField);
         addText(newsLetterEmailField, email);
     }
 
@@ -196,21 +207,24 @@ public class HomePage extends BasePage {
 
     public void openPortalURL(String language) {
         helper.setPropertiesFileName("PortalURLs.properties");
-
         switch (language) {
             case "Arabic_Egypt":
                 driver.navigate().to(helper.getValuesFromPropertiesFile("EgyptURL"));
+                waitForPageToLoad();
                 break;
             case "English":
                 driver.navigate().to(helper.getValuesFromPropertiesFile("EgyptURL"));
                 clickButton(languageBtn);
+                waitForPageToLoad();
                 break;
             case "Arabic_Morocco":
                 driver.navigate().to(helper.getValuesFromPropertiesFile("MoroccoURL"));
+                clickButton(languageBtn);
+                waitForPageToLoad();
                 break;
             case "French":
                 driver.navigate().to(helper.getValuesFromPropertiesFile("MoroccoURL"));
-                clickButton(languageBtn);
+                waitForPageToLoad();
                 break;
         }
     }

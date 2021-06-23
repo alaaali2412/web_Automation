@@ -9,8 +9,9 @@ import io.cucumber.java.en.When;
 
 public class FacebookLoginTest {
 
-    @Given("browser open,navigate to portal URl")
-    public void browser_open_navigate_to_portal_u_rl() {
+    @Given("browser open,navigate to portal URl {string}")
+    public void browser_open_navigate_to_portal_u_rl(String language) {
+        PageGenerator.getInstance(HomePage.class).openPortalURL(language);
         PageGenerator.getInstance(HomePage.class).checkThatHomePageOpened();
     }
 

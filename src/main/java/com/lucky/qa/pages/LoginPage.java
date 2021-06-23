@@ -10,6 +10,7 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 
 public class LoginPage extends BasePage {
@@ -75,8 +76,8 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//*[@class='y6']//span[1]")
     private WebElement emailSubject;
 
-    @FindBy(xpath = "//*[@class='ajV']//div")
-    private WebElement expandEmailBtn;
+    @FindBy(xpath = "//*[@src= '//ssl.gstatic.com/ui/v1/icons/mail/images/cleardot.gif']")
+    private List<WebElement> expandEmailBtn;
 
     @FindBy(xpath = "//table//table/tbody/tr[5]/td/a/table/tbody/tr/td")
     private WebElement resetPassLink;
@@ -114,7 +115,6 @@ public class LoginPage extends BasePage {
     public LoginPage(WebDriver driver) {
         super(driver);
     }
-
     public String login(String fileName, String email, String password) {
         helper.setPropertiesFileName(fileName);
         waitVisibilityOfElement(inputPassword);
@@ -154,18 +154,21 @@ public class LoginPage extends BasePage {
         clickButton(passNextBtn);
     }
 
-    public String loginGoogle(String email, String password) throws InterruptedException {
-        String parentWindow = driver.getWindowHandle();
-        Set<String> allWindow = driver.getWindowHandles();
+    public String loginGoogle(String email, String password) {
+        String parentWindow = DriverFactory.getDriver().getWindowHandle();
+        Set<String> allWindow = DriverFactory.getDriver().getWindowHandles();
         for (String child : allWindow) {
             if (!parentWindow.equalsIgnoreCase(child)) {
-                driver.switchTo().window(child);
-                addGmailCredentials(email, password);
+                DriverFactory.getDriver().switchTo().window(child);
+                forceAddText(googleEmail, email);
+                clickButton(emailNextBtn);
+                DriverFactory.getDriver().switchTo().window(child);
+                waitVisibilityOfElement(googlePassword);
+                forceAddText(googlePassword, password);
+                clickButton(passNextBtn);
             }
         }
         driver.switchTo().window(parentWindow);
-        Thread.sleep(9000);
-        refreshCurrentPage();
         return email;
     }
 
@@ -208,23 +211,25 @@ public class LoginPage extends BasePage {
     }
 
     public void checkTheUnreadEmails() {
+        moveToTab(1);
         waitVisibilityOfAllElements(unreadEmails);
         for (WebElement email : unreadEmails) {
-            if (emailTitle.getAttribute("name").equals("Lucky") &&
-                    emailSubject.getText().contains("Password Reset Link")) {
-                waitVisibilityOfElement(emailSubject);
-                forceClickElement(email);
-                break;
+            while (!emailTitle.getAttribute("name").equals("Lucky") &&
+                    !emailSubject.getText().contains("Password Reset Link")) {
+                driverWait(30);
+                refreshCurrentPage();
             }
+            forceClickElement(email);
+            break;
         }
     }
 
     public void openResetPassEmail() {
         waitForPageToLoad();
-        waitVisibilityOfElement(resetPassLink);
         if (!resetPassLink.isDisplayed()) {
-            waitVisibilityOfElement(expandEmailBtn);
-            forceClickElement(expandEmailBtn);
+            waitVisibilityOfAllElements(expandEmailBtn);
+            clickButton(expandEmailBtn.get(expandEmailBtn.size() - 1));
+            moveToTab(1);
             waitVisibilityOfElement(resetPassLink);
             forceClickElement(resetPassLink);
         } else {
@@ -251,6 +256,7 @@ public class LoginPage extends BasePage {
     }
 
     public void checkInvalidEmailErrorMessage(String errorMsg) {
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         waitForTextToBeVisible(invalidEmailErrorMessage);
         Assert.assertEquals(errorMsg, invalidEmailErrorMessage.getText());
     }
@@ -262,6 +268,10 @@ public class LoginPage extends BasePage {
         clickButton(googleProfileIcon);
         clickButton(googleLogoutBtn);
         driver.close();
+    }
+
+    public void deleteGmailEmails() {
+
     }
 
   /*  public void resetBrowserSetting() {

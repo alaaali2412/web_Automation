@@ -39,11 +39,11 @@
                     <properties>
                         <property>
                             <name>parallel</name>
-                            <value>methods</value>
+                            <value>classes</value>
                         </property>
                         <property>
                             <name>dataproviderthreadcount</name>
-                            <value>30</value>
+                            <value>50</value>
                         </property>
                     </properties>
                 </configuration>
