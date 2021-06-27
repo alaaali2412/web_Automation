@@ -4,6 +4,7 @@ import com.lucky.qa.pages.HomePage;
 import com.lucky.qa.pages.LoginPage;
 import com.lucky.qa.pages.PageGenerator;
 import com.lucky.qa.pages.WalletPage;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -26,10 +27,9 @@ public class AddingMobileNumberToCashoutForTheFirstTimeTest {
         PageGenerator.getInstance(WalletPage.class).clickRequestCashoutBtn();
     }
 
-    @When("add mobile Number and click continue button")
-    public void add_mobile_number_and_click_continue_button() throws InterruptedException {
+    @And("add new mobile Number and click continue button")
+    public void addNewMobileNumberAndClickContinueButton() {
         PageGenerator.getInstance(WalletPage.class).addMobileNumber();
-        Thread.sleep(5000);
     }
 
     @When("get the OTP from DB according to {string} then and add it")
@@ -46,4 +46,5 @@ public class AddingMobileNumberToCashoutForTheFirstTimeTest {
         PageGenerator.getInstance(HomePage.class).clickLogOut();
         PageGenerator.getInstance(WalletPage.class).resetMobileNumberInDataBase("RegistrationEmail", language);
     }
+
 }
