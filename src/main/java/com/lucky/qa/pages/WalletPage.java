@@ -263,4 +263,17 @@ public class WalletPage extends BasePage {
         Assert.assertEquals(lastTransactionType.getText(), transactionNameLanguage);
         Assert.assertEquals(lastTransactionStatus.getText(), statusLanguage);
     }
+
+    public void approveTheCashoutTransaction(String language, String email) {
+        helper.setPropertiesFileName("LoginData.properties");
+        DatabaseHelper.setUpDBConnection(language);
+        DatabaseHelper.updateDatabaseValues("UPDATE AffiliateCashout SET StatusId= '2' WHERE id =(SELECT top 1 id from AffiliateCashout" +
+                " WHERE CreatedBy In (SELECT id from LuckyUser WHERE email = '" + helper.getValuesFromPropertiesFile(email) + "') order by id desc ) ");
+        DatabaseHelper.closeDBConnection();
+    }
+
+    public void checkTheCashoutTransactionApproved(String status) {
+        refreshCurrentPage();
+        Assert.assertEquals(lastTransactionStatus.getText(), status);
+    }
 }

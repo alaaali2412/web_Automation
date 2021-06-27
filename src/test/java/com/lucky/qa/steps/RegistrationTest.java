@@ -19,7 +19,6 @@ public class RegistrationTest {
     public void userAddAllTheMandatoryFieldsOfRegistration() {
         PageGenerator.getInstance(RegistrationPage.class).addRegistrationName();
         PageGenerator.getInstance(RegistrationPage.class).addNewEmail();
-        PageGenerator.getInstance(RegistrationPage.class).saveTheRegistrationEmail();
         PageGenerator.getInstance(RegistrationPage.class).addRegistrationPasswords();
     }
 
@@ -35,8 +34,7 @@ public class RegistrationTest {
 
     @Then("user can not login without verifying the email {string}")
     public void user_can_not_login_without_verifying_the_email(String language) {
-        PageGenerator.getInstance(LoginPage.class).login(
-                "RegistrationData.properties", "RegistrationEmail", "RegistrationPassword");
+        PageGenerator.getInstance(RegistrationPage.class).loginWithUnregisteredEmail();
         PageGenerator.getInstance(RegistrationPage.class).checkUnverifiedMailErrorMessage
                 (PageGenerator.getInstance(BasePage.class).detectLanguage(language, "UnverifiedEmailErrorMsg"));
     }
@@ -57,5 +55,6 @@ public class RegistrationTest {
                 "RegistrationData.properties", "RegistrationEmail", "RegistrationPassword");
         PageGenerator.getInstance(HomePage.class).openProfilePage();
         Assert.assertEquals(loggedEmail, PageGenerator.getInstance(ProfilePage.class).getLoggedInEmail());
+        PageGenerator.getInstance(RegistrationPage.class).saveTheRegistrationDetails();
     }
 }

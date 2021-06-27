@@ -65,6 +65,13 @@ public class PerformCashoutRequestTest {
         PageGenerator.getInstance(WalletPage.class).checkIfTransactionReflected(method,
                 PageGenerator.getInstance(BasePage.class).detectLanguage(language, "transactionNameLanguage"),
                 PageGenerator.getInstance(BasePage.class).detectLanguage(language, "TransactionStatusLanguage"));
+    }
+
+    @And("transaction status {string} changed after approved")
+    public void transactionStatusChangedAfterApproved(String language) {
+        PageGenerator.getInstance(WalletPage.class).approveTheCashoutTransaction(language, "Email");
+        PageGenerator.getInstance(WalletPage.class).checkTheCashoutTransactionApproved(
+                PageGenerator.getInstance(BasePage.class).detectLanguage(language, "ApprovedCashoutTransactionstatus"));
         PageGenerator.getInstance(HomePage.class).clickLogOut();
     }
 }

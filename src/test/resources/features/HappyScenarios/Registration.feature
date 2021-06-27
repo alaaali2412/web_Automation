@@ -1,5 +1,6 @@
 @Registration
 Feature: New user create new account on affiliate
+
   @SmokeTest
   Scenario Outline: user can not login until verify the newly registered email
     Given portal open in "<language>" user click signup button
@@ -12,5 +13,5 @@ Feature: New user create new account on affiliate
     Then user can login with the new email
 
     Examples:
-      | language     |
+      | language |
       | English  |
