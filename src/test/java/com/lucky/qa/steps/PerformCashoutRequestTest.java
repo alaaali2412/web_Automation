@@ -22,6 +22,7 @@ public class PerformCashoutRequestTest {
         PageGenerator.getInstance(HomePage.class).clickSignInBtn();
         PageGenerator.getInstance(LoginPage.class).login("LoginData.properties"
                 , "Email", "Password");
+        PageGenerator.getInstance(WalletPage.class).clearCashoutTransactionsInDB(language, "Email");
     }
 
     @When("Wallet page opens")

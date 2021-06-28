@@ -276,4 +276,11 @@ public class WalletPage extends BasePage {
         refreshCurrentPage();
         Assert.assertEquals(lastTransactionStatus.getText(), status);
     }
+
+    public void clearCashoutTransactionsInDB(String language, String email) {
+        helper.setPropertiesFileName("LoginData.properties");
+        DatabaseHelper.setUpDBConnection(language);
+        DatabaseHelper.executeQuery("DELETE from  AffiliateCashout WHERE CreatedBy In (SELECT id from LuckyUser WHERE email = '"
+                + helper.getValuesFromPropertiesFile(email) + "')");
+    }
 }
