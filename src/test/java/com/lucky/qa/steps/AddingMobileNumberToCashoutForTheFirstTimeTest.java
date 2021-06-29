@@ -27,7 +27,7 @@ public class AddingMobileNumberToCashoutForTheFirstTimeTest {
         PageGenerator.getInstance(WalletPage.class).clickRequestCashoutBtn();
     }
 
-    @And("add new mobile Number and click continue button")
+    @And("add new mobile number and click continue button")
     public void addNewMobileNumberAndClickContinueButton() {
         PageGenerator.getInstance(WalletPage.class).addMobileNumber();
     }

@@ -61,15 +61,15 @@ public class PerformCashoutRequestTest {
         Assert.assertEquals(PageGenerator.getInstance(WalletPage.class).getUserCashbackBalance(), totalCashbackAfter);
     }
 
-    @Then("transaction reflect in wallet transaction list according to cashout {string} and {string}")
-    public void transactionReflectInWalletTransactionListAccordingToCashoutAnd(String method, String language) {
+    @Then("Transaction reflect in wallet transaction list according to cashout {string} and {string}")
+    public void TransactionReflectInWalletTransactionListAccordingToCashoutAnd(String method, String language) {
         PageGenerator.getInstance(WalletPage.class).checkIfTransactionReflected(method,
                 PageGenerator.getInstance(BasePage.class).detectLanguage(language, "transactionNameLanguage"),
                 PageGenerator.getInstance(BasePage.class).detectLanguage(language, "TransactionStatusLanguage"));
     }
 
-    @And("transaction status {string} changed after approved")
-    public void transactionStatusChangedAfterApproved(String language) {
+    @And("Transaction status {string} changed after approved")
+    public void TransactionStatusChangedAfterApproved(String language) {
         PageGenerator.getInstance(WalletPage.class).approveTheCashoutTransaction(language, "Email");
         PageGenerator.getInstance(WalletPage.class).checkTheCashoutTransactionApproved(
                 PageGenerator.getInstance(BasePage.class).detectLanguage(language, "ApprovedCashoutTransactionstatus"));

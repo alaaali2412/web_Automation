@@ -283,4 +283,6 @@ public class WalletPage extends BasePage {
         DatabaseHelper.executeQuery("DELETE from  AffiliateCashout WHERE CreatedBy In (SELECT id from LuckyUser WHERE email = '"
                 + helper.getValuesFromPropertiesFile(email) + "')");
     }
+
+
 }
