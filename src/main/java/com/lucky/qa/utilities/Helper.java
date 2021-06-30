@@ -112,5 +112,16 @@ public class Helper {
         }
     }
 
+    public String generateRandomArabicText(int length) {
+        String[] letters = {"أ", "ب", "ت", "ث", "ج", "ح", "خ", "د", "ذ", "ر", "ز",
+                "س", "ش", "ص", "ض", "ط", "ظ", "ع", "غ", "ف", "ق", "ك", "ل", "م", "ن", "ه", "و", "ي"};
+        StringBuilder sb = new StringBuilder();
+        Random random = new Random();
+        for (int i = 0; i < length; i++) {
+            String c = letters[random.nextInt(letters.length)];
+            sb.append(c);
+        }
+        return sb.toString();
+    }
 
 }
