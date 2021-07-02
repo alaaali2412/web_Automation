@@ -21,7 +21,7 @@ public class AddingMobileNumberToCashoutForTheFirstTimeTest {
                 , "RegistrationEmail", "RegistrationPassword");
     }
 
-    @When("Wallet page opens, click cashout button")
+    @When("wallet page opens, click cashout button")
     public void wallet_page_opens_click_cashout_button() {
         PageGenerator.getInstance(HomePage.class).clickWallet();
         PageGenerator.getInstance(WalletPage.class).clickRequestCashoutBtn();
