@@ -1,8 +1,8 @@
-@PerformCashoutRequest
+@BankAccountFieldsValidation
 Feature: perform cashback out request
 
   @SmokeTest
-  Scenario Outline: logged in user should be able to Cashout if cashback > 100 EGP
+  Scenario: logged in user should be able to Cashout if cashback > 100 EGP
     Given portal open in  "<language>" user already logged in
     When wallet page opens
     And assert that user has cashback amount that allow im to cashout
@@ -12,9 +12,3 @@ Feature: perform cashback out request
     Then verify that "<cashoutAmount>" deducted from total balance and cashback
     And transaction reflect in wallet transaction list according to cashout "<method>" and "<language>"
     And transaction status "<language>" changed after approved
-
-    Examples:
-      | language | method | cashoutAmount |
-      | English  | Aman   | 20            |
-
-

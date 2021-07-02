@@ -8,6 +8,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class RegistrationPage extends BasePage {
+    static String newPassword;
+    static String newEmail;
     Helper helper = new Helper();
     @FindBy(id = "formName")
     private WebElement nameField;
@@ -63,6 +65,9 @@ public class RegistrationPage extends BasePage {
     @FindBy(xpath = "//*[@id= 'formName']/following-sibling::div")
     private WebElement nameFieldErrorMessage;
 
+    @FindBy(xpath = "//div[3]/button")
+    private WebElement loginBtn;
+
     public RegistrationPage(WebDriver driver) {
         super(driver);
     }
@@ -84,20 +89,31 @@ public class RegistrationPage extends BasePage {
         deleteTextInField(inputEmail);
         pasteTextInField(inputEmail);
         waitForTextInAttributeToBeExist(inputEmail.getAttribute("value"));
+        newEmail = inputEmail.getAttribute("value");
     }
 
-    public void saveTheRegistrationEmail() {
+    public void loginWithUnregisteredEmail() {
+        waitVisibilityOfElement(inputPassword);
+        clearField(inputEmail);
+        addText(inputEmail, newEmail);
+        waitForTextInAttributeToBeExist("value");
+        clearField(inputPassword);
+        addText(inputPassword, newPassword);
+        clickButton(loginBtn);
+    }
+
+    public void saveTheRegistrationDetails() {
         helper.setPropertiesFileName("RegistrationData.properties");
-        helper.updateValueInPropertiesFile("RegistrationEmail", inputEmail.getAttribute("value"));
+        helper.updateValueInPropertiesFile("RegistrationEmail", newEmail);
+        helper.updateValueInPropertiesFile("RegistrationPassword", newPassword);
+        helper.updateValueInPropertiesFile("RepeatPassword", newPassword);
     }
 
     public void addRegistrationPasswords() {
         helper.setPropertiesFileName("RegistrationData.properties");
-        String newPassword = Helper.generateRandomPassword(12);
+        newPassword = Helper.generateRandomPassword(12);
         addText(inputPassword, newPassword);
         addText(repeatPassField, newPassword);
-        helper.updateValueInPropertiesFile("RegistrationPassword", newPassword);
-        helper.updateValueInPropertiesFile("RepeatPassword", newPassword);
     }
 
     public void clickRegisterBtn() {

@@ -22,37 +22,38 @@ public class PerformCashoutRequestTest {
         PageGenerator.getInstance(HomePage.class).clickSignInBtn();
         PageGenerator.getInstance(LoginPage.class).login("LoginData.properties"
                 , "Email", "Password");
+        PageGenerator.getInstance(WalletPage.class).clearCashoutTransactionsInDB(language, "Email");
     }
 
-    @When("Wallet page opens")
+    @When("wallet page opens")
     public void Wallet_page_opens() {
         PageGenerator.getInstance(HomePage.class).clickWallet();
     }
 
-    @When("Assert that user has cashback amount that allow im to cashout")
+    @When("assert that user has cashback amount that allow im to cashout")
     public void assertThatUserHasCashbackAmountThatAllowImToCashout() throws InterruptedException {
         valuesBeforeCashout = PageGenerator.getInstance(WalletPage.class).userBalanceBeforeCashout();
     }
 
-    @When("Click cashback request button")
+    @When("click cashback request button")
     public void click_cashback_request_button() {
         PageGenerator.getInstance(WalletPage.class).clickRequestCashoutBtn();
     }
 
-    @And("Choose the cashout {string} and add the {string}")
+    @And("choose the cashout {string} and add the {string}")
     public void chooseTheCashoutAndAddThe(String method, String cashoutAmount) {
         PageGenerator.getInstance(WalletPage.class).cashoutMethod(method, cashoutAmount);
         PageGenerator.getInstance(WalletPage.class).clickContinueBtn();
     }
 
-    @And("User gets message {string} that the Cashout done successfully")
+    @And("user gets message {string} that the Cashout done successfully")
     public void userGetsMessageThatTheCashoutDoneSuccessfully(String language) {
         PageGenerator.getInstance(WalletPage.class).checkCashoutSuccessMessage(
                 PageGenerator.getInstance(BasePage.class).detectLanguage(language, "CashoutSuccessMessage"));
         PageGenerator.getInstance(HomePage.class).clickWallet();
     }
 
-    @Then("Verify that {string} deducted from total balance and cashback")
+    @Then("verify that {string} deducted from total balance and cashback")
     public void verifyThatDeductedFromTotalBalanceAndCashback(String cashoutAmount) throws InterruptedException {
         Double totalBalanceAfter = valuesBeforeCashout.get(0) - Double.parseDouble(cashoutAmount);
         Double totalCashbackAfter = valuesBeforeCashout.get(1) - Double.parseDouble(cashoutAmount);
@@ -61,10 +62,17 @@ public class PerformCashoutRequestTest {
     }
 
     @Then("transaction reflect in wallet transaction list according to cashout {string} and {string}")
-    public void transactionReflectInWalletTransactionListAccordingToCashoutAnd(String method, String language) {
+    public void TransactionReflectInWalletTransactionListAccordingToCashoutAnd(String method, String language) {
         PageGenerator.getInstance(WalletPage.class).checkIfTransactionReflected(method,
                 PageGenerator.getInstance(BasePage.class).detectLanguage(language, "transactionNameLanguage"),
                 PageGenerator.getInstance(BasePage.class).detectLanguage(language, "TransactionStatusLanguage"));
+    }
+
+    @And("transaction status {string} changed after approved")
+    public void TransactionStatusChangedAfterApproved(String language) {
+        PageGenerator.getInstance(WalletPage.class).approveTheCashoutTransaction(language, "Email");
+        PageGenerator.getInstance(WalletPage.class).checkTheCashoutTransactionApproved(
+                PageGenerator.getInstance(BasePage.class).detectLanguage(language, "ApprovedCashoutTransactionstatus"));
         PageGenerator.getInstance(HomePage.class).clickLogOut();
     }
 }

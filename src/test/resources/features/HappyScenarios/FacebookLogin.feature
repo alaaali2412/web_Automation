@@ -2,7 +2,7 @@
 Feature: Login with user facebook account
 
   @ignore
-  Scenario Outline: User try to login via facebook
+  Scenario Outline: user try to login via facebook
     Given browser open,navigate to portal URl "<language>"
     When close the pop up click login with facebook
     And in the opened popup add facebook "<email>" and "<pass>", click login
