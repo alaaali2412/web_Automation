@@ -104,7 +104,7 @@ public class WalletPage extends BasePage {
     private WebElement otpCounter;
 
     @FindBy(xpath = "//*[@class= 'invalid-feedback']")
-    private List<WebElement> BankFieldsEmptyerrorMessages;
+    private List<WebElement> BankFieldsErrorMessages;
 
     public Double getUserTotalBalance() throws InterruptedException {
         Thread.sleep(4000);
@@ -163,7 +163,6 @@ public class WalletPage extends BasePage {
 
     public void clickContinueBtn() {
         clickButton(continueBtn);
-
     }
 
     public void checkCashoutSuccessMessage(String successMsg) {
@@ -289,26 +288,21 @@ public class WalletPage extends BasePage {
     }
 
     public void checkBankAccountFieldsValidationMessages(String name, String bankName, String address, String branchName,
-                                                         String bankAddress, String AccountNumber, String swiftCode, String IBAN) {
-        Assert.assertEquals(BankFieldsEmptyerrorMessages.get(0).getText(), name);
-        Assert.assertEquals(BankFieldsEmptyerrorMessages.get(1).getText(), bankName);
-        Assert.assertEquals(BankFieldsEmptyerrorMessages.get(2).getText(), address);
-        Assert.assertEquals(BankFieldsEmptyerrorMessages.get(3).getText(), branchName);
-        Assert.assertEquals(BankFieldsEmptyerrorMessages.get(4).getText(), bankAddress);
-        Assert.assertEquals(BankFieldsEmptyerrorMessages.get(5).getText(), AccountNumber);
-        Assert.assertEquals(BankFieldsEmptyerrorMessages.get(6).getText(), swiftCode);
-        Assert.assertEquals(BankFieldsEmptyerrorMessages.get(7).getText(), IBAN);
+                                                         String bankAddress, String accountNumber, String swiftCode, String iban) {
+        Assert.assertEquals(BankFieldsErrorMessages.get(0).getText(), name);
+        Assert.assertEquals(BankFieldsErrorMessages.get(1).getText(), bankName);
+        Assert.assertEquals(BankFieldsErrorMessages.get(2).getText(), address);
+        Assert.assertEquals(BankFieldsErrorMessages.get(3).getText(), branchName);
+        Assert.assertEquals(BankFieldsErrorMessages.get(4).getText(), bankAddress);
+        Assert.assertEquals(BankFieldsErrorMessages.get(5).getText(), accountNumber);
+        Assert.assertEquals(BankFieldsErrorMessages.get(6).getText(), swiftCode);
+        Assert.assertEquals(BankFieldsErrorMessages.get(7).getText(), iban);
     }
 
     public void addArabicValuesOnBankAccountFields() {
-        addText(inputFields.get(0), helper.generateRandomArabicText(5));
-        addText(inputFields.get(1), helper.generateRandomArabicText(5));
-        addText(inputFields.get(2), helper.generateRandomArabicText(5));
-        addText(inputFields.get(3), helper.generateRandomArabicText(5));
-        addText(inputFields.get(4), helper.generateRandomArabicText(5));
-        addText(inputFields.get(5), helper.generateRandomArabicText(5));
-        addText(inputFields.get(6), helper.generateRandomArabicText(5));
-        addText(inputFields.get(7), helper.generateRandomArabicText(5));
+        for (WebElement inputField : inputFields) {
+            addText(inputField, helper.generateRandomArabicText(5));
+        }
     }
 
     public void addInvalidIBANFormat() {
@@ -317,6 +311,6 @@ public class WalletPage extends BasePage {
     }
 
     public void checkIBANInvalidFormatErrorMessage(String errorMessage) {
-        Assert.assertEquals(BankFieldsEmptyerrorMessages.get(7).getText(), errorMessage);
+        Assert.assertEquals(BankFieldsErrorMessages.get(7).getText(), errorMessage);
     }
 }

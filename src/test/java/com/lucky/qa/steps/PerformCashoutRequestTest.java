@@ -30,8 +30,8 @@ public class PerformCashoutRequestTest {
         PageGenerator.getInstance(HomePage.class).clickWallet();
     }
 
-    @When("Assert that user has cashback amount that allow im to cashout")
-    public void assertThatUserHasCashbackAmountThatAllowImToCashout() throws InterruptedException {
+    @When("Assert that user has cashback amount that allow him to cashout")
+    public void assertThatUserHasCashbackAmountThatAllowHimToCashout() throws InterruptedException {
         valuesBeforeCashout = PageGenerator.getInstance(WalletPage.class).userBalanceBeforeCashout();
     }
 

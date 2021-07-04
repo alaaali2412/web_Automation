@@ -9,6 +9,10 @@ import org.openqa.selenium.support.FindBy;
 
 public class RegistrationPage extends BasePage {
     Helper helper = new Helper();
+
+    static String newPassword;
+    static String newEmail;
+
     @FindBy(id = "formName")
     private WebElement nameField;
 
@@ -75,9 +79,6 @@ public class RegistrationPage extends BasePage {
         addText(nameField, helper.getValuesFromPropertiesFile("Name"));
     }
 
-    static String newPassword;
-    static String newEmail;
-
     public void addNewEmail() {
         clearDefaultValueOfCopy(inputEmail);
         openNewTab();
@@ -112,7 +113,7 @@ public class RegistrationPage extends BasePage {
 
     public void addRegistrationPasswords() {
         helper.setPropertiesFileName("RegistrationData.properties");
-        newPassword = Helper.generateRandomPassword(12);
+        newPassword = helper.generateRandomPassword(12);
         addText(inputPassword, newPassword);
         addText(repeatPassField, newPassword);
     }
