@@ -80,8 +80,8 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//h1")
     private WebElement headingText;
 
-    @FindBy(xpath = "//div[4]/div/div/div/section[1]/button")
-    private WebElement popupCloseBtn;
+    @FindBy(xpath = "//*[@class='close-modal']")
+    private List<WebElement> popupCloseBtn;
 
     @FindBy(xpath = "//*[@class ='px-xl-3 px-lg-2 nav-link-item']//*[@class='language-switcher']")
     private WebElement languageBtn;
@@ -100,6 +100,7 @@ public class HomePage extends BasePage {
 
     public void openHomeScreen() {
         clickButton(homeScreenBtn);
+        checkIfPopUpExist();
     }
 
     public void clickSignInBtn() {
@@ -173,10 +174,6 @@ public class HomePage extends BasePage {
         Assert.assertTrue(headingText.isDisplayed());
     }
 
-    public void closePopup() {
-        clickButton(popupCloseBtn);
-    }
-
     public void addRegisteredNewsLetterEmail(String email) {
         helper.setPropertiesFileName("LoginData.properties");
         clearField(newsLetterEmailField);
@@ -203,6 +200,12 @@ public class HomePage extends BasePage {
         DatabaseHelper.updateDatabaseValues("DELETE FROM AffiliateAnonymousSubscribedUsers WHERE Email = '" +
                 helper.getValuesFromPropertiesFile(email) + "'");
         DatabaseHelper.closeDBConnection();
+    }
+
+    public void checkIfPopUpExist() {
+        if (popupCloseBtn.size() > 0) {
+            clickButton(popupCloseBtn.get(0));
+        }
     }
 
     public void openPortalURL(String language) {

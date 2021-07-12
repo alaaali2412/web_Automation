@@ -14,11 +14,12 @@ public class AddingMobileNumberToCashoutForTheFirstTimeTest {
     @Given("portal open in {string}new user logged in")
     public void portalOpenInNewUserLoggedIn(String language) throws InterruptedException {
         PageGenerator.getInstance(WalletPage.class).resetMobileNumberInDataBase("RegistrationEmail", language);
-        Thread.sleep(5000);
         PageGenerator.getInstance(HomePage.class).openPortalURL(language);
+        PageGenerator.getInstance(HomePage.class).checkIfPopUpExist();
         PageGenerator.getInstance(HomePage.class).clickSignInBtn();
         PageGenerator.getInstance(LoginPage.class).login("RegistrationData.properties"
                 , "RegistrationEmail", "RegistrationPassword");
+        PageGenerator.getInstance(HomePage.class).checkIfPopUpExist();
     }
 
     @When("Wallet page opens, click cashout button")
