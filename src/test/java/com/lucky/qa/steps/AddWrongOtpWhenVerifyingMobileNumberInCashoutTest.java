@@ -14,9 +14,11 @@ public class AddWrongOtpWhenVerifyingMobileNumberInCashoutTest {
     @Given("portal opens in {string},user logged in")
     public void portal_opens_in_user_logged_in(String language) {
         PageGenerator.getInstance(HomePage.class).openPortalURL(language);
+        PageGenerator.getInstance(HomePage.class).checkIfPopUpExist();
         PageGenerator.getInstance(HomePage.class).clickSignInBtn();
         PageGenerator.getInstance(LoginPage.class).login("LoginData.properties"
                 , "GoogleEmail", "NewPassword");
+        PageGenerator.getInstance(HomePage.class).checkIfPopUpExist();
     }
 
     @When("open wallet screen, click cashout button")
@@ -39,6 +41,9 @@ public class AddWrongOtpWhenVerifyingMobileNumberInCashoutTest {
     public void error_message_displayed_according_to_portal(String language) {
         PageGenerator.getInstance(WalletPage.class).assertOtpErrorMessage(
                 PageGenerator.getInstance(BasePage.class).detectLanguage(language, "OTPErrorMessage"));
+        PageGenerator.getInstance(HomePage.class).openHomeScreen();
+        PageGenerator.getInstance(HomePage.class).clickLogOut();
+        PageGenerator.getInstance(WalletPage.class).resetMobileNumberInDataBase("RegistrationEmail", language);
     }
 
 }
