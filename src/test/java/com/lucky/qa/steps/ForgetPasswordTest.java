@@ -54,7 +54,10 @@ public class ForgetPasswordTest {
     public void user_can_log_with_the_new_password() {
         PageGenerator.getInstance(LoginPage.class).login("LoginData.properties",
                 "GoogleEmail", "NewPassword");
+        PageGenerator.getInstance(HomePage.class).checkIfPopUpExist();
         PageGenerator.getInstance(HomePage.class).openProfilePage();
         PageGenerator.getInstance(ProfilePage.class).resetPasswordToDefaultValue("NewPassword");
+        PageGenerator.getInstance(HomePage.class).openHomeScreen();
+        PageGenerator.getInstance(HomePage.class).clickLogOut();
     }
 }

@@ -17,6 +17,7 @@ public class CheckThatNewUserGetWelcomeBonusTest {
         PageGenerator.getInstance(HomePage.class).clickSignInBtn();
         PageGenerator.getInstance(LoginPage.class).login("RegistrationData.properties"
                 , "RegistrationEmail", "RegistrationPassword");
+        PageGenerator.getInstance(HomePage.class).checkIfPopUpExist();
     }
 
     @When("open the wallet screen")

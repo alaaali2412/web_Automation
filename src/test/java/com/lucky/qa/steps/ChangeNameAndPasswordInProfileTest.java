@@ -16,7 +16,6 @@ public class ChangeNameAndPasswordInProfileTest {
     @Given("portal and browser open in {string}, user login")
     public void portalAndBrowserOpenInUserLogin(String language) {
         PageGenerator.getInstance(HomePage.class).openPortalURL(language);
-        PageGenerator.getInstance(HomePage.class).checkIfPopUpExist();
         PageGenerator.getInstance(HomePage.class).clickSignInBtn();
         PageGenerator.getInstance(LoginPage.class).login("LoginData.properties",
                 "Email", "Password");

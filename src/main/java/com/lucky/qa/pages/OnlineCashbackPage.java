@@ -28,6 +28,9 @@ public class OnlineCashbackPage extends BasePage {
     @FindBy(xpath = "//footer/div[1]/span/img")
     private WebElement moveToTheTopBtn;
 
+    @FindBy(xpath = "//*[@class='close-modal']")
+    private WebElement popupCloseBtn;
+
     @FindBy(xpath = "//*[@class = 'row filteration-buttons'][1]/button[1]")
     private WebElement clearBtn;
 
@@ -53,8 +56,9 @@ public class OnlineCashbackPage extends BasePage {
         return new ArrayList<>(merchants).size();
     }
 
-    public void searchOnlineCashabackOffers(String StoreName) {
-        waitVisibilityOfElement(searchField);
+    public void searchOnlineCashabackOffers(String StoreName) throws InterruptedException {
+        waitForPageToLoad();
+        Thread.sleep(1000);
         clearField(searchField);
         addText(searchField, StoreName);
         searchField.sendKeys(Keys.ENTER);

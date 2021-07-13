@@ -12,9 +12,6 @@ public class RegistrationPage extends BasePage {
     static String newEmail;
     Helper helper = new Helper();
 
-    static String newPassword;
-    static String newEmail;
-
     @FindBy(id = "formName")
     private WebElement nameField;
 

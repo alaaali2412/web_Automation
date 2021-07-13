@@ -12,10 +12,9 @@ import io.cucumber.java.en.When;
 public class AddingMobileNumberToCashoutForTheFirstTimeTest {
 
     @Given("portal open in {string}new user logged in")
-    public void portalOpenInNewUserLoggedIn(String language) throws InterruptedException {
+    public void portalOpenInNewUserLoggedIn(String language) {
         PageGenerator.getInstance(WalletPage.class).resetMobileNumberInDataBase("RegistrationEmail", language);
         PageGenerator.getInstance(HomePage.class).openPortalURL(language);
-        PageGenerator.getInstance(HomePage.class).checkIfPopUpExist();
         PageGenerator.getInstance(HomePage.class).clickSignInBtn();
         PageGenerator.getInstance(LoginPage.class).login("RegistrationData.properties"
                 , "RegistrationEmail", "RegistrationPassword");

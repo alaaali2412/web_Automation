@@ -13,6 +13,7 @@ public class FieldsValidationDuringRegistrationTest {
     @Given("portal {string} Registration page opened")
     public void portalRegistrationPageOpened(String language) {
         PageGenerator.getInstance(HomePage.class).openPortalURL(language);
+        PageGenerator.getInstance(HomePage.class).checkIfPopUpExist();
         PageGenerator.getInstance(HomePage.class).clickSignupBtn();
     }
 

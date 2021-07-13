@@ -156,6 +156,7 @@ public class HomePage extends BasePage {
 
     public void clickLogOut() {
         clickButton(profileDropdown);
+        waitVisibilityOfElement(logOutBtn);
         clickButton(logOutBtn);
     }
 
@@ -164,6 +165,7 @@ public class HomePage extends BasePage {
             driverWait(60);
             refreshCurrentPage();
         }
+        checkIfPopUpExist();
     }
 
     Helper helper = new Helper();
@@ -213,11 +215,14 @@ public class HomePage extends BasePage {
         switch (language) {
             case "Arabic_Egypt":
                 driver.navigate().to(helper.getValuesFromPropertiesFile("EgyptURL"));
+                checkIfPopUpExist();
                 waitForPageToLoad();
                 break;
             case "English":
                 driver.navigate().to(helper.getValuesFromPropertiesFile("EgyptURL"));
+                checkIfPopUpExist();
                 clickButton(languageBtn);
+                checkIfPopUpExist();
                 waitForPageToLoad();
                 break;
             case "Arabic_Morocco":
