@@ -1,4 +1,4 @@
-@GoogleLogin
+@LoginByEmail
 Feature: Login with Email and password
 
   @SmokeTest
