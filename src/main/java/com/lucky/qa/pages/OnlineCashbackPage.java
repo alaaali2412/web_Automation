@@ -57,7 +57,6 @@ public class OnlineCashbackPage extends BasePage {
     }
 
     public void searchOnlineCashabackOffers(String StoreName) throws InterruptedException {
-        waitForPageToLoad();
         Thread.sleep(1000);
         clearField(searchField);
         addText(searchField, StoreName);
