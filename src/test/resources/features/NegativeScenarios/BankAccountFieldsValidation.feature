@@ -1,7 +1,7 @@
 @CheckBankAccountFieldsValidations
 Feature: check that error message will be displayed in case user add incorrect values
 
-  Scenario Outline: user add invalid valued in while adding bank account detials
+  Scenario Outline: user add invalid values in while adding bank account details
     Given portal open in  "<language>" user already logged in
     When open wallet screen, click cashout button
     And choose bank account as cashout method

@@ -103,8 +103,8 @@ public class Helper {
         StringBuilder sb = new StringBuilder();
         Random random = new Random();
         for (int i = 0; i < length; i++) {
-            String c = letters[random.nextInt(letters.length)];
-            sb.append(c);
+            String characters = letters[random.nextInt(letters.length)];
+            sb.append(characters);
         }
         return sb.toString();
     }
