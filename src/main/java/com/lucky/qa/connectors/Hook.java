@@ -25,6 +25,7 @@ public class Hook {
         ChromeOptions options = new ChromeOptions();
         Map<String, Object> chromePrefs = new HashMap<>();
         chromePrefs.put("profile.managed_default_content_settings.ads", 1);
+        //options.addArguments("--incognito");
         options.setExperimentalOption("prefs", chromePrefs);
         return options;
     }

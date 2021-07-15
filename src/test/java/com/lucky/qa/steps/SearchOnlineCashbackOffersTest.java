@@ -20,7 +20,7 @@ public class SearchOnlineCashbackOffersTest {
     }
 
     @When("add {string} in search field and click enter")
-    public void add_in_search_field_and_click_enter(String keyword) {
+    public void add_in_search_field_and_click_enter(String keyword) throws InterruptedException {
         PageGenerator.getInstance(OnlineCashbackPage.class).searchOnlineCashabackOffers(keyword);
         implementAPIsMethods = new ImplementAPIsMethods();
 

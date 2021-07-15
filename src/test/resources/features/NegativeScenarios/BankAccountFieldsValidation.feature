@@ -1,14 +1,16 @@
-@BankAccountFieldsValidation
-Feature: perform cashback out request
+@CheckBankAccountFieldsValidations
+Feature: check that error message will be displayed in case user add incorrect values
 
-  @SmokeTest
-  Scenario: logged in user should be able to Cashout if cashback > 100 EGP
+  Scenario Outline: user add invalid values in while adding bank account details
     Given portal open in  "<language>" user already logged in
-    When wallet page opens
-    And assert that user has cashback amount that allow im to cashout
-    And click cashback request button
-    And choose the cashout "<method>" and add the "<cashoutAmount>"
-    And user gets message "<language>" that the Cashout done successfully
-    Then verify that "<cashoutAmount>" deducted from total balance and cashback
-    And transaction reflect in wallet transaction list according to cashout "<method>" and "<language>"
-    And transaction status "<language>" changed after approved
+    When open wallet screen, click cashout button
+    And choose bank account as cashout method
+    Then bank account Fields displayed, add the amount
+    But user can not leave fields empty, error message displayed "<language>"
+    But user can not add arabic values, error message displayed "<language>"
+    But user must add IBAN in the correct format otherwise, error message displayed "<language>"
+
+    Examples:
+      | language     |
+      | English      |
+      | Arabic_Egypt |

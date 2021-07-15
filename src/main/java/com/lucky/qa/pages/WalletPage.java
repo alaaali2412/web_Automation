@@ -103,6 +103,9 @@ public class WalletPage extends BasePage {
     @FindBy(xpath = "  //*[@class='link-text']")
     private WebElement otpCounter;
 
+    @FindBy(xpath = "//*[@class= 'invalid-feedback']")
+    private List<WebElement> BankFieldsErrorMessages;
+
     public Double getUserTotalBalance() throws InterruptedException {
         Thread.sleep(4000);
         String[] balanceAsString = getText(userBalance).split(" ");
@@ -160,10 +163,10 @@ public class WalletPage extends BasePage {
 
     public void clickContinueBtn() {
         clickButton(continueBtn);
-        waitVisibilityOfElement(successMessage);
     }
 
     public void checkCashoutSuccessMessage(String successMsg) {
+        waitVisibilityOfElement(successMessage);
         Assert.assertEquals(successMsg, getText(successMessage));
     }
 
@@ -284,5 +287,30 @@ public class WalletPage extends BasePage {
                 + helper.getValuesFromPropertiesFile(email) + "')");
     }
 
+    public void checkBankAccountFieldsValidationMessages(String name, String bankName, String address, String branchName,
+                                                         String bankAddress, String accountNumber, String swiftCode, String iban) {
+        Assert.assertEquals(BankFieldsErrorMessages.get(0).getText(), name);
+        Assert.assertEquals(BankFieldsErrorMessages.get(1).getText(), bankName);
+        Assert.assertEquals(BankFieldsErrorMessages.get(2).getText(), address);
+        Assert.assertEquals(BankFieldsErrorMessages.get(3).getText(), branchName);
+        Assert.assertEquals(BankFieldsErrorMessages.get(4).getText(), bankAddress);
+        Assert.assertEquals(BankFieldsErrorMessages.get(5).getText(), accountNumber);
+        Assert.assertEquals(BankFieldsErrorMessages.get(6).getText(), swiftCode);
+        Assert.assertEquals(BankFieldsErrorMessages.get(7).getText(), iban);
+    }
 
+    public void addArabicValuesOnBankAccountFields() {
+        for (WebElement inputField : inputFields) {
+            addText(inputField, helper.generateRandomArabicText(5));
+        }
+    }
+
+    public void addInvalidIBANFormat() {
+        deleteTextInField(inputFields.get(7));
+        addText(inputFields.get(7), helper.generateRandomNumber(10));
+    }
+
+    public void checkIBANInvalidFormatErrorMessage(String errorMessage) {
+        Assert.assertEquals(BankFieldsErrorMessages.get(7).getText(), errorMessage);
+    }
 }

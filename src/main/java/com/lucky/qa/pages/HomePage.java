@@ -80,8 +80,8 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//h1")
     private WebElement headingText;
 
-    @FindBy(xpath = "//div[4]/div/div/div/section[1]/button")
-    private WebElement popupCloseBtn;
+    @FindBy(xpath = "//*[@class='close-modal']")
+    private List<WebElement> popupCloseBtn;
 
     @FindBy(xpath = "//*[@class ='px-xl-3 px-lg-2 nav-link-item']//*[@class='language-switcher']")
     private WebElement languageBtn;
@@ -100,6 +100,7 @@ public class HomePage extends BasePage {
 
     public void openHomeScreen() {
         clickButton(homeScreenBtn);
+        checkIfPopUpExist();
     }
 
     public void clickSignInBtn() {
@@ -155,6 +156,7 @@ public class HomePage extends BasePage {
 
     public void clickLogOut() {
         clickButton(profileDropdown);
+        waitVisibilityOfElement(logOutBtn);
         clickButton(logOutBtn);
     }
 
@@ -163,6 +165,7 @@ public class HomePage extends BasePage {
             driverWait(60);
             refreshCurrentPage();
         }
+        checkIfPopUpExist();
     }
 
     Helper helper = new Helper();
@@ -171,10 +174,6 @@ public class HomePage extends BasePage {
         waitVisibilityOfElement(luckyBrandLogo);
         Assert.assertTrue(luckyBrandLogo.isDisplayed());
         Assert.assertTrue(headingText.isDisplayed());
-    }
-
-    public void closePopup() {
-        clickButton(popupCloseBtn);
     }
 
     public void addRegisteredNewsLetterEmail(String email) {
@@ -205,16 +204,25 @@ public class HomePage extends BasePage {
         DatabaseHelper.closeDBConnection();
     }
 
+    public void checkIfPopUpExist() {
+        if (popupCloseBtn.size() > 0) {
+            clickButton(popupCloseBtn.get(0));
+        }
+    }
+
     public void openPortalURL(String language) {
         helper.setPropertiesFileName("PortalURLs.properties");
         switch (language) {
             case "Arabic_Egypt":
                 driver.navigate().to(helper.getValuesFromPropertiesFile("EgyptURL"));
+                checkIfPopUpExist();
                 waitForPageToLoad();
                 break;
             case "English":
                 driver.navigate().to(helper.getValuesFromPropertiesFile("EgyptURL"));
+                checkIfPopUpExist();
                 clickButton(languageBtn);
+                checkIfPopUpExist();
                 waitForPageToLoad();
                 break;
             case "Arabic_Morocco":

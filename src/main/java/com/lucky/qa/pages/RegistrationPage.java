@@ -11,6 +11,7 @@ public class RegistrationPage extends BasePage {
     static String newPassword;
     static String newEmail;
     Helper helper = new Helper();
+
     @FindBy(id = "formName")
     private WebElement nameField;
 
@@ -111,7 +112,7 @@ public class RegistrationPage extends BasePage {
 
     public void addRegistrationPasswords() {
         helper.setPropertiesFileName("RegistrationData.properties");
-        newPassword = Helper.generateRandomPassword(12);
+        newPassword = helper.generateRandomPassword(12);
         addText(inputPassword, newPassword);
         addText(repeatPassField, newPassword);
     }

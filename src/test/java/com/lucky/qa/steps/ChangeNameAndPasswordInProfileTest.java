@@ -19,6 +19,7 @@ public class ChangeNameAndPasswordInProfileTest {
         PageGenerator.getInstance(HomePage.class).clickSignInBtn();
         PageGenerator.getInstance(LoginPage.class).login("LoginData.properties",
                 "Email", "Password");
+        PageGenerator.getInstance(HomePage.class).checkIfPopUpExist();
     }
 
     @When("open profile screen")
@@ -42,6 +43,7 @@ public class ChangeNameAndPasswordInProfileTest {
         PageGenerator.getInstance(HomePage.class).clickSignInBtn();
         loggedInEmail = PageGenerator.getInstance(LoginPage.class).login("LoginData.properties",
                 "Email", "Password");
+        PageGenerator.getInstance(HomePage.class).checkIfPopUpExist();
     }
 
     @Then("verify that data changed")

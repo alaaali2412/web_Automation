@@ -19,9 +19,11 @@ public class PerformCashoutRequestTest {
     @Given("portal open in  {string} user already logged in")
     public void portalOpenInUserAlreadyLoggedIn(String language) {
         PageGenerator.getInstance(HomePage.class).openPortalURL(language);
+
         PageGenerator.getInstance(HomePage.class).clickSignInBtn();
         PageGenerator.getInstance(LoginPage.class).login("LoginData.properties"
                 , "Email", "Password");
+        PageGenerator.getInstance(HomePage.class).checkIfPopUpExist();
         PageGenerator.getInstance(WalletPage.class).clearCashoutTransactionsInDB(language, "Email");
     }
 

@@ -13,6 +13,7 @@ public class EmailAndPasswordValidationTest {
     @Given("portal {string},  login page opened")
     public void portalLoginPageOpened(String language) {
         PageGenerator.getInstance(HomePage.class).openPortalURL(language);
+        PageGenerator.getInstance(HomePage.class).checkIfPopUpExist();
         PageGenerator.getInstance(HomePage.class).clickSignInBtn();
     }
 

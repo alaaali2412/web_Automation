@@ -1,15 +1,10 @@
 package com.lucky.qa.utilities;
 
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
+
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Properties;
 import java.util.Random;
 
@@ -79,38 +74,39 @@ public class Helper {
         return properties.getProperty(value);
     }
 
-    //Method to generate random Number.
-    public static String generateRandomPassword(int length) {
-        String capitalCaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        String lowerCaseLetters = "abcdefghijklmnopqrstuvwxyz";
-        String specialCharacters = "!@#$";
-        String numbers = "1234567890";
-        String combinedChars = capitalCaseLetters + lowerCaseLetters + specialCharacters + numbers;
+    public char generateRandomCharacters() {
+        int random = (int) (Math.random() * 62);
+        if (random <= 9) {
+            int number = random + 48;
+            return (char) (number);
+        } else if (random <= 35) {
+            int uppercase = random + 55;
+            return (char) (uppercase);
+        } else {
+            int lowercase = random + 61;
+            return (char) (lowercase);
+        }
+    }
+
+    public String generateRandomPassword(int length) {
+        StringBuilder randomPassword = new StringBuilder();
+        for (int j = 0; j < length; j++) {
+            randomPassword.append(generateRandomCharacters());
+        }
+        return randomPassword.toString();
+    }
+
+
+    public String generateRandomArabicText(int length) {
+        String[] letters = {"أ", "ب", "ت", "ث", "ج", "ح", "خ", "د", "ذ", "ر", "ز",
+                "س", "ش", "ص", "ض", "ط", "ظ", "ع", "غ", "ف", "ق", "ك", "ل", "م", "ن", "ه", "و", "ي"};
+        StringBuilder sb = new StringBuilder();
         Random random = new Random();
-        char[] password = new char[length];
-        password[0] = lowerCaseLetters.charAt(random.nextInt(lowerCaseLetters.length()));
-        password[1] = capitalCaseLetters.charAt(random.nextInt(capitalCaseLetters.length()));
-        password[2] = specialCharacters.charAt(random.nextInt(specialCharacters.length()));
-        password[3] = numbers.charAt(random.nextInt(numbers.length()));
-        for (int i = 4; i < length; i++) {
-            password[i] = combinedChars.charAt(random.nextInt(combinedChars.length()));
+        for (int i = 0; i < length; i++) {
+            String characters = letters[random.nextInt(letters.length)];
+            sb.append(characters);
         }
-        return String.valueOf(password);
+        return sb.toString();
     }
-
-    //Method to take screenshot the test case fail
-    public static void captureScreenShot(WebDriver driver, String screenshotname) {
-        Path dest = Paths.get("./Screenshots", screenshotname + ".png");
-        try {
-            Files.createDirectories(dest.getParent());
-            FileOutputStream out = new FileOutputStream(dest.toString());
-            out.write(((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES));
-            out.close();
-
-        } catch (IOException e) {
-            System.out.println("Exception while taking screenshot" + e.getMessage());
-        }
-    }
-
 
 }

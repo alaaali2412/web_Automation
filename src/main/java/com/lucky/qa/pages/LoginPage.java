@@ -240,7 +240,7 @@ public class LoginPage extends BasePage {
 
     public void addNewPass() {
         helper.setPropertiesFileName("LoginData.properties");
-        String newPassword = Helper.generateRandomPassword(9);
+        String newPassword = helper.generateRandomPassword(9);
         moveToTab(2);
         forceAddText(newPassField, newPassword);
         forceAddText(confirmNewPassField, newPassword);

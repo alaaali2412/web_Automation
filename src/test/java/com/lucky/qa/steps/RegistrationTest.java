@@ -12,6 +12,7 @@ public class RegistrationTest {
     @Given("portal open in {string} user click signup button")
     public void portalOpenInUserClickSignupButton(String language) {
         PageGenerator.getInstance(HomePage.class).openPortalURL(language);
+        PageGenerator.getInstance(HomePage.class).checkIfPopUpExist();
         PageGenerator.getInstance(HomePage.class).clickSignupBtn();
     }
 
@@ -53,8 +54,10 @@ public class RegistrationTest {
     public void userCanLoginWithTheNewEmail() {
         String loggedEmail = PageGenerator.getInstance(LoginPage.class).login(
                 "RegistrationData.properties", "RegistrationEmail", "RegistrationPassword");
+        PageGenerator.getInstance(HomePage.class).checkIfPopUpExist();
         PageGenerator.getInstance(HomePage.class).openProfilePage();
         Assert.assertEquals(loggedEmail, PageGenerator.getInstance(ProfilePage.class).getLoggedInEmail());
         PageGenerator.getInstance(RegistrationPage.class).saveTheRegistrationDetails();
+        PageGenerator.getInstance(HomePage.class).clickLogOut();
     }
 }
