@@ -1,7 +1,7 @@
 @AddingMobileNumberToCashoutForTheFirstTime
 Feature: Adding Mobile Number To Cashout For The First Time
 
-  @SmokeTest
+
   Scenario Outline: user add mobile number for the first time while cashout
     Given portal open in "<language>"new user logged in
     When wallet page opens, click cashout button

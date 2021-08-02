@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 
 public class HomePage extends BasePage {
@@ -113,6 +114,7 @@ public class HomePage extends BasePage {
     }
 
     public void googleLogin() {
+        driver.manage().deleteAllCookies();
         waitVisibilityOfElement(googleBtn);
         forceClickElement(googleBtn);
     }
@@ -125,13 +127,13 @@ public class HomePage extends BasePage {
 
     public void clickInStoreBtn() {
         waitVisibilityOfElement(inStoreBtn);
-        clickButton(inStoreBtn);
+        forceClickElement(inStoreBtn);
     }
 
     public void openProfilePage() {
         waitVisibilityOfElement(profileDropdown);
-        clickButton(profileDropdown);
-        clickButton(profileBtn);
+        forceClickElement(profileDropdown);
+        forceClickElement(profileBtn);
     }
 
     public String clickOnlineCashback(String categorySelected) {
@@ -158,6 +160,7 @@ public class HomePage extends BasePage {
         clickButton(profileDropdown);
         waitVisibilityOfElement(logOutBtn);
         clickButton(logOutBtn);
+        checkIfPopUpExist();
     }
 
     public void waitUntilGoogleMailAuthenticated() {
@@ -207,6 +210,7 @@ public class HomePage extends BasePage {
     public void checkIfPopUpExist() {
         if (popupCloseBtn.size() > 0) {
             clickButton(popupCloseBtn.get(0));
+            driverWait(30);
         }
     }
 
@@ -215,11 +219,13 @@ public class HomePage extends BasePage {
         switch (language) {
             case "Arabic_Egypt":
                 driver.navigate().to(helper.getValuesFromPropertiesFile("EgyptURL"));
+                refreshCurrentPage();
                 checkIfPopUpExist();
                 waitForPageToLoad();
                 break;
             case "English":
                 driver.navigate().to(helper.getValuesFromPropertiesFile("EgyptURL"));
+                refreshCurrentPage();
                 checkIfPopUpExist();
                 clickButton(languageBtn);
                 checkIfPopUpExist();

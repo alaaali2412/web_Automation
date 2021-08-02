@@ -92,6 +92,7 @@ public class Helper {
         StringBuilder randomPassword = new StringBuilder();
         for (int j = 0; j < length; j++) {
             randomPassword.append(generateRandomCharacters());
+            randomPassword.append("@$*");
         }
         return randomPassword.toString();
     }

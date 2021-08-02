@@ -42,6 +42,10 @@ public class BasePage {
         ((JavascriptExecutor) DriverFactory.getDriver()).executeScript("window.scrollTo(0,document.body.scrollTop)");
     }
 
+    public void scrollToViewElement(WebElement element) {
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+    }
+
     public void forceClickElement(WebElement element) {
         Actions actions = new Actions(DriverFactory.getDriver());
         actions.moveToElement(element).click(element).build().perform();
@@ -92,7 +96,7 @@ public class BasePage {
     public void waitForTextToBeVisible(WebElement element) {
         FluentWait<String> wait = new FluentWait<>(element.getText())
                 .pollingEvery(Duration.ofSeconds(5))
-                .withTimeout(Duration.ofSeconds(30))
+                .withTimeout(Duration.ofSeconds(60))
                 .ignoring(Exception.class);
         wait.until(t -> element.getText().length() != 0);
     }
@@ -100,7 +104,7 @@ public class BasePage {
     public void waitForTextInAttributeToBeExist(String value) {
         FluentWait<String> wait = new FluentWait<>(value)
                 .pollingEvery(Duration.ofSeconds(5))
-                .withTimeout(Duration.ofSeconds(30))
+                .withTimeout(Duration.ofSeconds(60))
                 .ignoring(Exception.class);
         wait.until(t -> value.length() != 0);
     }
@@ -108,7 +112,7 @@ public class BasePage {
     public void waitUntilTextEqual(String value, WebElement element) {
         FluentWait<String> wait = new FluentWait<>(value)
                 .pollingEvery(Duration.ofSeconds(5))
-                .withTimeout(Duration.ofSeconds(30))
+                .withTimeout(Duration.ofSeconds(60))
                 .ignoring(Exception.class);
         wait.until(t -> element.getText().equals(value));
     }
@@ -124,6 +128,13 @@ public class BasePage {
                 .pollingEvery(Duration.ofSeconds(3))
                 .ignoring(Exception.class);
         wait.until(ExpectedConditions.visibilityOf(element));
+    }
+
+    protected void waitInvisibilityOfElement(WebElement element) {
+        Wait<WebDriver> wait = new FluentWait<>(DriverFactory.getDriver()).withTimeout(Duration.ofSeconds(60))
+                .pollingEvery(Duration.ofSeconds(3))
+                .ignoring(Exception.class);
+        wait.until(ExpectedConditions.invisibilityOf(element));
     }
 
     protected void waitVisibilityOfAllElements(List<WebElement> elements) {

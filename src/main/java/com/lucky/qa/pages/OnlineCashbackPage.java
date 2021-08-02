@@ -34,6 +34,9 @@ public class OnlineCashbackPage extends BasePage {
     @FindBy(xpath = "//*[@class = 'row filteration-buttons'][1]/button[1]")
     private WebElement clearBtn;
 
+    @FindBy(xpath = "//*[@class='text-red text-center']\n")
+    private WebElement loadingFlag;
+
     public OnlineCashbackPage(WebDriver driver) {
         super(driver);
     }
@@ -42,7 +45,7 @@ public class OnlineCashbackPage extends BasePage {
         waitVisibilityOfElement(onlineCashbackTitle);
         for (WebElement category : filterList) {
             WebElement selectedCheckbox = category.findElement(By.tagName("input"));
-            if (selectedCheckbox.isSelected() == true) {
+            if (selectedCheckbox.isSelected()) {
                 Assert.assertEquals(getText(category), selected);
             }
             break;
@@ -51,7 +54,7 @@ public class OnlineCashbackPage extends BasePage {
 
     public int getMerchantFilteredList() throws InterruptedException {
         scrollToEndOfScreen();
-        Thread.sleep(1000);
+        Thread.sleep(3000);
         waitForPageToLoad();
         return new ArrayList<>(merchants).size();
     }

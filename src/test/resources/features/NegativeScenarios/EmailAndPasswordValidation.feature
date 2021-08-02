@@ -1,5 +1,6 @@
 @EmailAndPasswordValidation
 Feature: Wrong Email And Password Format
+  @SmokeTest
 
   Scenario Outline: user can not login or register with invalid Email or password
     Given portal "<language>",  login page opened
@@ -7,7 +8,5 @@ Feature: Wrong Email And Password Format
     Then error displayed according to "<language>"
     Examples:
       | language       |
-      | Arabic_Egypt   |
-      | Arabic_Morocco |
       | English        |
-      | French         |
+

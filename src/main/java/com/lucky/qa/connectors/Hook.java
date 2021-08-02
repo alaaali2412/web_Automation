@@ -13,6 +13,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.sql.Connection;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -25,7 +26,6 @@ public class Hook {
         ChromeOptions options = new ChromeOptions();
         Map<String, Object> chromePrefs = new HashMap<>();
         chromePrefs.put("profile.managed_default_content_settings.ads", 1);
-        //options.addArguments("--incognito");
         options.setExperimentalOption("prefs", chromePrefs);
         return options;
     }
@@ -35,6 +35,7 @@ public class Hook {
         if (DriverFactory.getDriver() == null) {
             WebDriverManager.chromedriver().setup();
             driver = new ChromeDriver(chromeOption());
+            driver.manage().deleteAllCookies();
             driver.manage().window().maximize();
             DriverFactory.addDriver(driver);
             driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
@@ -55,7 +56,7 @@ public class Hook {
     public void embedScreenshot(Scenario scenario) {
         if (scenario.isFailed()) {
             try {
-                byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+                byte[] screenshot = ((TakesScreenshot) DriverFactory.getDriver()).getScreenshotAs(OutputType.BYTES);
                 scenario.attach(screenshot, "image/png", scenario.getName());
             } catch (WebDriverException wde) {
                 System.err.println(wde.getMessage());

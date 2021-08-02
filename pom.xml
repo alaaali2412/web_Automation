@@ -43,7 +43,12 @@
                         </property>
                         <property>
                             <name>dataproviderthreadcount</name>
-                            <value>50</value>
+                            <perCoreThreadCount>true</perCoreThreadCount>
+                            <runorder>alphabetical</runorder>
+                            <value>10</value>
+                            <forkCount>15</forkCount>
+                            <forkMode>perthread</forkMode>
+                            <reuseForks>false</reuseForks>
                         </property>
                     </properties>
                 </configuration>
@@ -89,7 +94,8 @@
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-picocontainer</artifactId>
-            <version>6.6.1</version>
+            <version>
+                6.6.1</version>
             <scope>test</scope>
         </dependency>
         <dependency>
