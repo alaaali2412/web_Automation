@@ -1,6 +1,5 @@
 @EmailAndPasswordValidation
 Feature: Wrong Email And Password Format
-  @SmokeTest
 
   Scenario Outline: user can not login or register with invalid Email or password
     Given portal "<language>",  login page opened

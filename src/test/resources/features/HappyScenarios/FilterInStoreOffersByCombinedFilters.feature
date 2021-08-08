@@ -9,5 +9,4 @@ Feature: filter In_store offers by it`s categories & Locations
 
     Examples:
       | language     | mainCategory | mainSubCategory | subCategory             | Location | subLocation |
-      | Arabic_Egypt | موضة         | حريمي           | مجوهرات وساعات          | الجيزة   | الزمالك     |
       | English      | Electronics  | Electronics     | Computers & Accessories | Cairo    | Heliopolis  |

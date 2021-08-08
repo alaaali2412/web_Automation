@@ -1,6 +1,6 @@
 @GetInStoreOffers
 Feature: Get in store offers
-  @SmokeTest
+
   Scenario Outline: user try to get in store offers
     Given browser open,open portal in "<language>", user login
     When click on instore offers

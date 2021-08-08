@@ -1,7 +1,7 @@
 @FieldsValidationDuringRegistration
 
 Feature: Fields Validation During Registration
-  @SmokeTest
+
   Scenario Outline: user can not register with invalid values
     Given portal "<Language>" Registration page opened
     When add invalid values "<Language>"in registration fields

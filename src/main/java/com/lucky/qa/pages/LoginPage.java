@@ -224,7 +224,7 @@ public class LoginPage extends BasePage {
                 driverWait(30);
                 refreshCurrentPage();
             }
-            forceClickElement(email);
+            forceClickElement(unreadEmails.get(0));
             driverWait(30);
             break;
         }

@@ -1,7 +1,7 @@
 @PerformCashoutRequest
 Feature: perform cashback out request
 
-  @SmokeTest
+
   Scenario Outline: logged in user should be able to Cashout if cashback > 100 EGP
     Given portal open in  "<language>" user already logged in
     When wallet page opens
