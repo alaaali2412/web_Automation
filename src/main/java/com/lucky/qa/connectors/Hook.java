@@ -23,7 +23,7 @@ public class Hook {
         ChromeOptions options = new ChromeOptions();
         Map<String, Object> chromePrefs = new HashMap<>();
         chromePrefs.put("profile.managed_default_content_settings.ads", 1);
-        options.setPageLoadStrategy(PageLoadStrategy.EAGER);
+        options.setPageLoadStrategy(PageLoadStrategy.NORMAL);
         options.setExperimentalOption("prefs", chromePrefs);
         return options;
     }
