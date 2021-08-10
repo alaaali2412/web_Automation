@@ -8,5 +8,4 @@ Feature: Fields Validation During Registration
     Then error messages displayed at the fields that contain invalid values according to "<Language>"
     Examples:
       | Language       |
-      | Arabic_Egypt   |
       | English        |

@@ -7,7 +7,5 @@ Feature: Wrong Email And Password Format
     Then error displayed according to "<language>"
     Examples:
       | language       |
-      | Arabic_Egypt   |
-      | Arabic_Morocco |
       | English        |
-      | French         |
+

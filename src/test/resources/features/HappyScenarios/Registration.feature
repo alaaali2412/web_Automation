@@ -1,7 +1,6 @@
 @Registration
 Feature: New user create new account on affiliate
 
-  @SmokeTest
   Scenario Outline: user can not login until verify the newly registered email
     Given portal open in "<language>" user click signup button
     When user add all the mandatory fields of Registration

@@ -51,7 +51,7 @@ public class ForgetPasswordTest {
     }
 
     @Then("user can log with the new password")
-    public void user_can_log_with_the_new_password() {
+    public void user_can_log_with_the_new_password()  {
         PageGenerator.getInstance(LoginPage.class).login("LoginData.properties",
                 "GoogleEmail", "NewPassword");
         PageGenerator.getInstance(HomePage.class).checkIfPopUpExist();
@@ -59,5 +59,7 @@ public class ForgetPasswordTest {
         PageGenerator.getInstance(ProfilePage.class).resetPasswordToDefaultValue("NewPassword");
         PageGenerator.getInstance(HomePage.class).openHomeScreen();
         PageGenerator.getInstance(HomePage.class).clickLogOut();
+        PageGenerator.getInstance(LoginPage.class).logOutGmail();
+
     }
 }

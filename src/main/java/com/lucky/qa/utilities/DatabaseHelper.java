@@ -21,7 +21,7 @@ public class DatabaseHelper {
     public static void setUpDBConnection(String portalLanguage) {
         try {
             connection = DriverManager.getConnection("jdbc:sqlserver://luckydbsrv.database.windows.net:1433;database=" +
-                    databaseName(portalLanguage) + ";", "Azure_WriteLogin", "AzP@ss!ucky2");
+                    databaseName(portalLanguage) + ";", "Azure_WriteLogin", "N3wLuc$$@2");
 
         } catch (Exception e) {
             System.out.println(e);

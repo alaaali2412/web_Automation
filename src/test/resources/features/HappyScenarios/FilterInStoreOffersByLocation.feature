@@ -11,7 +11,7 @@ Feature: filter In_store offers by it`s Location
       | language     | Location   | subLocation |
       | Arabic_Egypt | الإسكندرية | ستانلي      |
       | English      | Suez       | Suez        |
-      | Arabic_Egypt | الجيزة     | وسط البلد   |
+
 
 
 

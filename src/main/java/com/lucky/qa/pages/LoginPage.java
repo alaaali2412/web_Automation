@@ -80,7 +80,7 @@ public class LoginPage extends BasePage {
     private List<WebElement> expandEmailBtn;
 
     @FindBy(xpath = "//table//table/tbody/tr[5]/td/a/table/tbody/tr/td")
-    private WebElement resetPassLink;
+    private List<WebElement> resetPassLinks;
 
     @FindBy(id = "formBasicPassword1")
     private WebElement newPassField;
@@ -103,18 +103,23 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//section[3]/div/div/div/div[1]/h2")
     private WebElement newsLetterheader;
 
-    @FindBy(xpath = ".  //*[@id='gb']/div[2]/div[3]/div[1]/div[2]/div[2]/div/a/img")
+    @FindBy(xpath = "//*[@class='gb_Ca gbii']")
     private WebElement googleProfileIcon;
 
     @FindBy(id = "gb_71")
     private WebElement googleLogoutBtn;
 
+    @FindBy(xpath = "//section//div/ul/li[3]/div")
+    private WebElement googleRemoveAccountBtn;
+
     @FindBy(xpath = "//settings-ui")
     private WebElement clearDataWindow;
+
 
     public LoginPage(WebDriver driver) {
         super(driver);
     }
+
     public String login(String fileName, String email, String password) {
         helper.setPropertiesFileName(fileName);
         waitVisibilityOfElement(inputPassword);
@@ -219,23 +224,27 @@ public class LoginPage extends BasePage {
                 driverWait(30);
                 refreshCurrentPage();
             }
-            forceClickElement(email);
+            forceClickElement(unreadEmails.get(0));
+            driverWait(30);
             break;
         }
     }
 
     public void openResetPassEmail() {
         waitForPageToLoad();
-        if (!resetPassLink.isDisplayed()) {
-            waitVisibilityOfAllElements(expandEmailBtn);
-            clickButton(expandEmailBtn.get(expandEmailBtn.size() - 1));
-            moveToTab(1);
-            waitVisibilityOfElement(resetPassLink);
-            forceClickElement(resetPassLink);
-        } else {
-            waitVisibilityOfElement(resetPassLink);
-            forceClickElement(resetPassLink);
+        for (int i = 0 ; i<resetPassLinks.size(); i++){
+            if (!resetPassLinks.get(resetPassLinks.size()-1).isDisplayed()) {
+                waitVisibilityOfAllElements(expandEmailBtn);
+                clickButton(expandEmailBtn.get(expandEmailBtn.size() - 1));
+                moveToTab(1);
+                waitVisibilityOfElement(resetPassLinks.get(resetPassLinks.size()-1));
+                forceClickElement(resetPassLinks.get(resetPassLinks.size()-1));
+            } else {
+                waitVisibilityOfElement(resetPassLinks.get(resetPassLinks.size()-1));
+                forceClickElement(resetPassLinks.get(resetPassLinks.size()-1));
+            }
         }
+
     }
 
     public void addNewPass() {
@@ -247,6 +256,17 @@ public class LoginPage extends BasePage {
         clickButton(saveChangesBtn);
         waitVisibilityOfElement(toastMessage);
         helper.updateValueInPropertiesFile("NewPassword", newPassword);
+    }
+
+    public void logOutGmail()  {
+        driver.close();
+        moveToTab(1);
+        forceClickElement(googleProfileIcon);
+        forceClickElement(googleLogoutBtn);
+        waitForPageToLoad();
+        forceClickElement(googleRemoveAccountBtn);
+        driver.close();
+        moveToTab(0);
     }
 
     public void addInvalidEmailFormat() {
@@ -261,24 +281,5 @@ public class LoginPage extends BasePage {
         Assert.assertEquals(errorMsg, invalidEmailErrorMessage.getText());
     }
 
-    public void logOutGmail() {
-        openNewTab();
-        moveToTab(1);
-        driver.navigate().to("https://mail.google.com/");
-        clickButton(googleProfileIcon);
-        clickButton(googleLogoutBtn);
-        driver.close();
-    }
-
-    public void deleteGmailEmails() {
-
-    }
-
-  /*  public void resetBrowserSetting() {
-        DevTools devTools = ((ChromeDriver) driver).getDevTools();
-        devTools.createSessionIfThereIsNotOne();
-        devTools.send(Network.clearBrowserCache());
-        devTools.send(Network.clearBrowserCookies());
-    }*/
 }
 
