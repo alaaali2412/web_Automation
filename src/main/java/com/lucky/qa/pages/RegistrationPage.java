@@ -30,19 +30,19 @@ public class RegistrationPage extends BasePage {
     @FindBy(xpath = "//*[@id='counter_sec_one']/span")
     private WebElement secondCounter;
 
-    @FindBy(xpath = "//*[@class='py-3']/button")
+    @FindBy(css = ".btn.btn-block.btn-primary")
     private WebElement registerBtn;
 
-    @FindBy(xpath = "//h1")
+    @FindBy(css = ".mailVerification-title")
     private WebElement verificationHeader;
 
-    @FindBy(xpath = "//*[@class='py-3']/div")
+    @FindBy(css = ".error.error-message.text-center")
     private WebElement errorMessage;
 
-    @FindBy(xpath = "//tbody//tbody/tr[2]/td/table/tbody//tbody/tr/td/a")
+    @FindBy(css = "tr:nth-child(2)>td>table>tbody>tr>td>table>tbody>tr>td>a")
     private WebElement verifyEmailLink;
 
-    @FindBy(xpath = "//section/div/div/div/a")
+    @FindBy(css = ".btn.btn-primary.btn-block")
     private WebElement loginBtnAfterMailVerification;
 
     @FindBy(xpath = "//*[@class='message_top']")
@@ -51,22 +51,19 @@ public class RegistrationPage extends BasePage {
     @FindBy(xpath = "//*[@class='small_subject']")
     private WebElement emailLink;
 
-    @FindBy(xpath = "//p[1]/a")
-    private WebElement registerLink;
-
-    @FindBy(xpath = "//*[@id= 'formEmail']/following-sibling::div")
+    @FindBy(css = ".form-group:nth-child(2)>.invalid-feedback")
     private WebElement invalidEmailErrorMessage;
 
-    @FindBy(xpath = "//*[@id= 'formPassword']/following-sibling::div")
+    @FindBy(css = ".form-group:nth-child(3)>.invalid-feedback")
     private WebElement invalidPassErrorMessage;
 
-    @FindBy(xpath = "//*[@id= 'formRepeatPassword']/following-sibling::div")
+    @FindBy(css = ".form-group:nth-child(4)>.invalid-feedback")
     private WebElement confirmPassErrorMessage;
 
-    @FindBy(xpath = "//*[@id= 'formName']/following-sibling::div")
+    @FindBy(css = ".form-group:nth-child(1)>.invalid-feedback")
     private WebElement nameFieldErrorMessage;
 
-    @FindBy(xpath = "//div[3]/button")
+    @FindBy(css = ".btn.btn-block.btn-primary")
     private WebElement loginBtn;
 
     public RegistrationPage(WebDriver driver) {

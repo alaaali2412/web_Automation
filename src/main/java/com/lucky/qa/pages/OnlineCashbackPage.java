@@ -1,41 +1,35 @@
 package com.lucky.qa.pages;
 
 import com.lucky.qa.common.BasePage;
+import com.lucky.qa.connectors.DriverFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class OnlineCashbackPage extends BasePage {
-    @FindBy(xpath = "//*[@id='responsive-navbar-nav']//input")
+    @FindBy(css = "#responsive-navbar-nav input")
     private WebElement searchField;
 
-    @FindBy(xpath = "//div/div[2]/div/div[1]/div/h3")
+    @FindBy(css = ".col-md-12")
     private WebElement onlineCashbackTitle;
 
-    @FindBy(xpath = "//div[1]/form/div/div")
+    @FindBy(css = ".custom-control.custom-radio")
     private List<WebElement> filterList;
 
-    @FindBy(xpath = "//div/div[2]/div/div[2]/div[1]/div")
+    @FindBy(css = ".col-6.col-lg-4.cashback-card")
     private List<WebElement> merchants;
 
-    @FindBy(xpath = "//footer/div[1]/span/img")
-    private WebElement moveToTheTopBtn;
-
-    @FindBy(xpath = "//*[@class='close-modal']")
-    private WebElement popupCloseBtn;
-
-    @FindBy(xpath = "//*[@class = 'row filteration-buttons'][1]/button[1]")
+    @FindBy(css = ".filteration .btn.btn-outline-primary.col")
     private WebElement clearBtn;
 
-    @FindBy(xpath = "//*[@class='text-red text-center']\n")
-    private WebElement loadingFlag;
 
     public OnlineCashbackPage(WebDriver driver) {
         super(driver);
@@ -71,4 +65,5 @@ public class OnlineCashbackPage extends BasePage {
         scrollToTopOfScreen();
         clickButton(clearBtn);
     }
+
 }

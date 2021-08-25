@@ -12,40 +12,34 @@ import java.util.List;
 
 public class InStoreOfferPage extends BasePage {
 
-    @FindBy(xpath = "//*/div/div[2]/div/div[3]/div[1]/div")
+    @FindBy(css = "div.col-12.col-md-6.col-lg-4 ")
     private List<WebElement> inStoreItems;
 
-    @FindBy(xpath = "//div[2]/button")
+    @FindBy(css = "button.btn.btn-primary")
     private WebElement getOfferBtn;
 
-    @FindBy(xpath = "//section/div/div[1]/div[1]/div[1]/div")
+    @FindBy(css = "div.inStoreFilteration.filteration > div:nth-child(2)>div")
     private List<WebElement> locations;
 
-    @FindBy(xpath = "//*[@class ='collapse show']//form/div/div")
+    @FindBy(css = ".collapse.show>div>form>div>div")
     private List<WebElement> subLocations;
 
-    @FindBy(xpath = "//section/div/div[1]/div[1]/div[2]/div")
+    @FindBy(css = ".inStoreFilteration.filteration > div:nth-child(4)> div")
     private List<WebElement> mainCategories;
 
-    @FindBy(xpath = "//div[1]/div[2]/div/div/div/div/form/div/div")
+    @FindBy(css = ".collapse.show>div>form>.mb-3>.accordion")
     private List<WebElement> mainSubCategoriesList;
 
-    @FindBy(xpath = "//div[1]/div[1]/div[2]/div/div/div[2]/div/form/div/div/div/label")
-    private List<WebElement> mainSubCategories;
+    @FindBy(css = ".collapse.show>div>form>div>div>div>label")
+    private List<WebElement> subCategoriesList;
 
-    @FindBy(xpath = "//*[@class = 'collapse show']//form/div/div/div/label")
-    private List<WebElement> categoriesCheckbox;
-
-    @FindBy(xpath = "//*[@class = 'collapse show']//label")
-    private List<WebElement> subCategories;
-
-    @FindBy(xpath = "//div[1]/div[3]/button[2]")
+    @FindBy(css = ".inStoreFilteration.filteration .btn.btn-primary.col")
     private WebElement applyBtn;
 
-    @FindBy(xpath = "//div[1]/div[3]/button[1]")
+    @FindBy(css = ".inStoreFilteration.filteration .btn.btn-outline-primary.col")
     private WebElement clearBtn;
 
-    @FindBy(xpath = "//*[@class = 'collapse show']")
+    @FindBy(css = ".collapse.show")
     private WebElement expandedMenu;
 
     public InStoreOfferPage(WebDriver driver) {
@@ -61,7 +55,6 @@ public class InStoreOfferPage extends BasePage {
     }
 
     public void filterByLocation(String filterLocation) {
-        //waitVisibilityOfElement(expandedMenu);
         for (WebElement location : locations) {
             if (getText(location).equals(filterLocation)) {
                 clickButton(location);
@@ -102,7 +95,7 @@ public class InStoreOfferPage extends BasePage {
     }
 
     public void clickMainSubCategory(String Category) {
-        for (WebElement mainSubCategory : categoriesCheckbox) {
+        for (WebElement mainSubCategory : subCategoriesList) {
             if (getText(mainSubCategory).equals(Category)) {
                 forceClickElement(mainSubCategory);
                 break;
@@ -111,7 +104,7 @@ public class InStoreOfferPage extends BasePage {
     }
 
     public void clickSubCategory(String Category) {
-        for (WebElement subCategory : categoriesCheckbox) {
+        for (WebElement subCategory : subCategoriesList) {
             if (getText(subCategory).equals(Category)) {
                 forceClickElement(subCategory);
                 break;

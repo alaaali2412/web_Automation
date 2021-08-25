@@ -33,7 +33,7 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//div[1]/nav/div/div[2]")
     private WebElement inStoreBtn;
 
-    @FindBy(xpath = "//*[@class ='px-xl-3 px-lg-2 nav-link-item']//*[@class='nav-link-item dropdown nav-item']")
+    @FindBy(css = ".px-xl-3.px-lg-2.nav-link-item #basic-nav-dropdown")
     private WebElement profileDropdown;
 
     @FindBy(xpath = "//*[@href='/Profile']")
@@ -106,7 +106,7 @@ public class HomePage extends BasePage {
 
     public void clickSignInBtn() {
         waitVisibilityOfElement(signInBtn);
-        clickButton(signInBtn);
+        forceClickElement(signInBtn);
     }
 
     public void facebookLogin() {
@@ -208,7 +208,7 @@ public class HomePage extends BasePage {
     }
 
     public void checkIfPopUpExist() {
-        if (popupCloseBtn.size() > 0) {
+        if (popupCloseBtn.size() != 0) {
             clickButton(popupCloseBtn.get(0));
             driverWait(30);
         }
@@ -233,11 +233,16 @@ public class HomePage extends BasePage {
                 break;
             case "Arabic_Morocco":
                 driver.navigate().to(helper.getValuesFromPropertiesFile("MoroccoURL"));
+                refreshCurrentPage();
+                checkIfPopUpExist();
                 clickButton(languageBtn);
+                checkIfPopUpExist();
                 waitForPageToLoad();
                 break;
             case "French":
                 driver.navigate().to(helper.getValuesFromPropertiesFile("MoroccoURL"));
+                refreshCurrentPage();
+                checkIfPopUpExist();
                 waitForPageToLoad();
                 break;
         }

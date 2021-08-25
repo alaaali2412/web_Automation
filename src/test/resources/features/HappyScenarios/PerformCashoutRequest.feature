@@ -1,7 +1,7 @@
 @PerformCashoutRequest
 Feature: perform cashback out request
 
-
+  @EgyptSmokeTest
   Scenario Outline: logged in user should be able to Cashout if cashback > 100 EGP
     Given portal open in  "<language>" user already logged in
     When wallet page opens
@@ -14,7 +14,7 @@ Feature: perform cashback out request
     And transaction status "<language>" changed after approved
 
     Examples:
-      | language | method | cashoutAmount |
-      | English  | Aman   | 20            |
+      | language     | method | cashoutAmount |
+      | Arabic_Egypt | Aman   | 20            |
 
 

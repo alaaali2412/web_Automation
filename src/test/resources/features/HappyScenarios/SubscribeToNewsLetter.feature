@@ -1,7 +1,8 @@
 @SubscribeToNewsLetter
 Feature: user can subscribe to news letter to receive emails with new offer
 
-  @SmokeTest
+  @EgyptSmokeTest
+    @MoroccoSmokeTest
   Scenario Outline: user can subscribe to news letter by adding registered and anonymous email
     Given home page opened in "<language>"
     When user add registered email to subscribe news letter
@@ -9,6 +10,7 @@ Feature: user can subscribe to news letter to receive emails with new offer
     When user add anonymous email to subscribe news letter
     Then user get successful message and verification email
     Examples:
-      | language |
-      | English  |
+      | language       |
+      | Arabic_Morocco |
+
 

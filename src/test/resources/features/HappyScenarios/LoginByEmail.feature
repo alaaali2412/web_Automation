@@ -1,7 +1,8 @@
 @LoginByEmail
 Feature: Login with Email and password
 
-  @SmokeTest
+    @EgyptSmokeTest
+    @MoroccoSmokeTest
   Scenario Outline: user try to login via google
     Given browser open in "<language>",navigate to the portal
     When close the pop up then click login
@@ -9,5 +10,5 @@ Feature: Login with Email and password
     Then verify that user login
 
     Examples:
-      | language |
-      | English  |
+      | language     |
+      | Arabic_Egypt |
