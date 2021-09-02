@@ -208,10 +208,10 @@ public class HomePage extends BasePage {
     }
 
     public void checkIfPopUpExist() {
-     /*   if (popupCloseBtn.size() != 0) {
+        if (popupCloseBtn.size() != 0) {
             clickButton(popupCloseBtn.get(0));
             driverWait(30);
-        }*/
+        }
     }
 
     public void openPortalURL(String language) {
