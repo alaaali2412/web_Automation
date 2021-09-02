@@ -43,7 +43,7 @@ public class WalletPage extends BasePage {
     @FindBy(css = "#cashoutMethod-tabpane-1 #formGridZip")
     private WebElement bankAccountAmountField;
 
-    @FindBy(css = ".item3.ml-auto > button")
+    @FindBy(css = ".stepper__content__actions [type = 'submit']")
     private WebElement continueBtn;
 
     @FindBy(css = ".h2-text")
