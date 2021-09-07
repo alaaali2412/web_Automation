@@ -25,10 +25,10 @@ public class WalletPage extends BasePage {
     @FindBy(className = "h2-text")
     private WebElement userBalance;
 
-    @FindBy(xpath = "//section/div[1]/div/p[1]")
+    @FindBy(css = ".wallet-cash_ballance> p:nth-child(3)")
     private WebElement userCashbackBalance;
 
-    @FindBy(xpath = "//*[@class = 'btn btn-primary']")
+    @FindBy(css = ".btn.btn-primary")
     private WebElement requestCashoutBtn;
 
     @FindBy(id = "cashoutMethod-tab-2")
@@ -37,52 +37,40 @@ public class WalletPage extends BasePage {
     @FindBy(id = "cashoutMethod-tab-1")
     private WebElement bankAccountBtn;
 
-    @FindBy(xpath = "//*[@id='cashoutMethod-tabpane-2']//form//input")
+    @FindBy(css = "#cashoutMethod-tabpane-2 #formGridZip")
     private WebElement amanAmountField;
 
-    @FindBy(xpath = "//*[@id='cashoutMethod-tabpane-1']//form//input")
+    @FindBy(css = "#cashoutMethod-tabpane-1 #formGridZip")
     private WebElement bankAccountAmountField;
 
-    @FindBy(xpath = "//footer//*[@type='submit']")
+    @FindBy(css = ".stepper__content__actions [type = 'submit']")
     private WebElement continueBtn;
 
-    @FindBy(xpath = " //section/h2[1]")
+    @FindBy(css = ".h2-text")
     private WebElement successMessage;
 
-    @FindBy(xpath = "//section/h2[2]")
+    @FindBy(css = ".h2-text.text-normal")
     private WebElement cashoutConfirmationMessage;
 
-    @FindBy(xpath = "//div[3]/a/button")
-    private WebElement continueShoppingBtn;
-
-    @FindBy(xpath = "//*[@id='cashoutMethod-tabpane-1']//div[2]/form/div/input")
+    @FindBy(css = "#cashoutMethod-tabpane-1 form .form-control:nth-child(2)")
     private List<WebElement> inputFields;
 
     @FindBy(className = "wallet-body")
     private WebElement transactionSection;
 
-    @FindBy(xpath = "//*[@class = 'error error-message text-center'][1]")
+    @FindBy(css = ".error.error-message.text-center")
     private WebElement errorMessage;
 
-    @FindBy(xpath = "//div/nav/div/a/span")
-    private WebElement luckyLogo;
-
-    @FindBy(xpath = "//div//table//table/tbody/tr[5]")
-    private WebElement arabicText;
-
-    @FindBy(xpath = "//div//table//table/tbody/tr[4]/td/b/b/text()")
-    private WebElement englishText;
-
-    @FindBy(xpath = "//*[@class ='transaction-row'][1]/div[1]/div[2]/p[1]")
+    @FindBy(css = ".transaction-row:nth-child(1)  .flex-div:nth-child(1)  p:nth-child(1)")
     private WebElement lastTransactionName;
 
-    @FindBy(xpath = "//*[@class ='transaction-row'][1]/div[1]/div[2]/p[2]")
+    @FindBy(css = "div:nth-child(1) >.flex-div .text-muted")
     private WebElement lastTransactionDate;
 
-    @FindBy(xpath = "//*[@class ='transaction-row'][1]/div[1]/div[1]/p")
+    @FindBy(css = "div:nth-child(1) > .flex-div > .img-div > p")
     private WebElement lastTransactionType;
 
-    @FindBy(xpath = "//*[@class ='transaction-row'][1]/div[2]/p[2]")
+    @FindBy(css = ".transaction-row:nth-child(1) .text-right  p:nth-child(2)")
     private WebElement lastTransactionStatus;
 
     @FindBy(id = "formGridZip")
@@ -97,13 +85,13 @@ public class WalletPage extends BasePage {
     @FindBy(id = "root")
     private WebElement pageContent;
 
-    @FindBy(xpath = "//*[@class = 'react-toast-notifications__toast__content css-1ad3zal']")
+    @FindBy(css = ".react-toast-notifications__toast__content.css-1ad3zal")
     private WebElement toastMessage;
 
-    @FindBy(xpath = "  //*[@class='link-text']")
+    @FindBy(css = ".link-text")
     private WebElement otpCounter;
 
-    @FindBy(xpath = "//*[@class= 'invalid-feedback']")
+    @FindBy(className = "invalid-feedback")
     private List<WebElement> BankFieldsErrorMessages;
 
     public Double getUserTotalBalance() throws InterruptedException {

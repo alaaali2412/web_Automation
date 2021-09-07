@@ -12,5 +12,5 @@ Feature: New user create new account on affiliate
     Then user can login with the new email
 
     Examples:
-      | language |
-      | English  |
+      | language     |
+      | Arabic_Egypt |

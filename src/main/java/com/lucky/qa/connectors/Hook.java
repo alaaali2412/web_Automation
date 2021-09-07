@@ -44,8 +44,8 @@ public class Hook {
     public void tearsDown() {
         Runtime.getRuntime().addShutdownHook(new Thread() {
             public void run() {
-                DriverFactory.removeDriver();
                 DriverFactory.storedDrivers.forEach(WebDriver::quit);
+                DriverFactory.removeDriver();
             }
         });
     }

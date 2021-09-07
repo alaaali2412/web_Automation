@@ -130,11 +130,11 @@ public class BasePage {
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
-    protected void waitUntilElementIsClickable(WebElement element) {
+    protected void waitUntilElementIsInvisible(WebElement element) {
         Wait<WebDriver> wait = new FluentWait<>(DriverFactory.getDriver()).withTimeout(Duration.ofSeconds(60))
                 .pollingEvery(Duration.ofSeconds(3))
                 .ignoring(Exception.class);
-        wait.until(ExpectedConditions.elementToBeClickable(element));
+        wait.until(ExpectedConditions.invisibilityOfAllElements(element));
     }
 
     protected void waitVisibilityOfAllElements(List<WebElement> elements) {
@@ -180,5 +180,8 @@ public class BasePage {
         }
     }
 
+    public void MoveTOPreviousPage() {
+        DriverFactory.getDriver().navigate().back();
+    }
 
 }

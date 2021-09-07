@@ -8,18 +8,14 @@ import org.openqa.selenium.support.FindBy;
 
 public class ContactUsPage extends BasePage {
 
-
-    @FindBy(xpath = "//h2")
+    @FindBy(css = "h2.h2-text")
     private WebElement title;
 
-    @FindBy(xpath = "//h4[1]")
+    @FindBy(css = "h4.h4-text:nth-child(2)")
     private WebElement textMessage;
 
-    @FindBy(xpath = "//h4[2]")
+    @FindBy(css = "h4.h4-text:nth-child(3)")
     private WebElement supportEmail;
-
-    @FindBy(xpath = "//*[@class = 'success-img']")
-    private WebElement successImage;
 
     public ContactUsPage(WebDriver driver) {
         super(driver);
@@ -30,5 +26,4 @@ public class ContactUsPage extends BasePage {
         Assert.assertEquals(textMessage.getText(), textMsg);
         Assert.assertEquals(supportEmail.getText(), email);
     }
-
 }

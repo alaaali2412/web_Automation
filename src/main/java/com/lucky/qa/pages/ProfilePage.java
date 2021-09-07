@@ -22,16 +22,16 @@ public class ProfilePage extends BasePage {
     @FindBy(id = "formBasicPassword")
     private WebElement passwordField;
 
-    @FindBy(xpath = "//*[@class = 'py-3 text-center']")
+    @FindBy(css = ".py-3.text-center")
     private WebElement saveChangesBtn;
 
-    @FindBy(xpath = "//*[@class= 'modal-footer']/button[1]")
-    private WebElement logoutPopup;
+    @FindBy(css = ".col-md-7.col-12.btn.btn-primary")
+    private WebElement popupLogoutBtn;
 
-    @FindBy(xpath = "//*[@class = 'd-flex justify-content-between']//button")
+    @FindBy(css = ".btn.btn-link.link-red.p-0.m-0")
     private WebElement logoutBtn;
 
-    @FindBy(xpath = "//*[@class = 'react-toast-notifications__toast__content css-1ad3zal']")
+    @FindBy(css = ".react-toast-notifications__toast__content.css-1ad3zal")
     private WebElement toastMessage;
 
     @FindBy(id = "formBasicPassword0")
@@ -73,7 +73,7 @@ public class ProfilePage extends BasePage {
 
     public void clickLogout() {
         clickButton(logoutBtn);
-        clickButton(logoutPopup);
+        clickButton(popupLogoutBtn);
     }
 
     public void resetPasswordToDefaultValue(String password) {

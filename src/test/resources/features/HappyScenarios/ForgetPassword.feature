@@ -1,7 +1,8 @@
 @ForgetPassword
 Feature: User can login with wrong credentials, so he will reset his password
 
-  @SmokeTest
+  @EgyptSmokeTest
+    @MoroccoSmokeTest
   Scenario Outline: user can reset his password
     Given portal "<language>", user click login
     When user add Email and wrong password and click login
@@ -12,5 +13,5 @@ Feature: User can login with wrong credentials, so he will reset his password
     When user click reset password and add the new password and confirm password
     Then user can log with the new password
     Examples:
-      | language |
-      | English  |
+      | language       |
+      | Arabic_Egypt |

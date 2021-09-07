@@ -1,6 +1,7 @@
 @CheckBankAccountFieldsValidations
 Feature: check that error message will be displayed in case user add incorrect values
 
+  @EgyptSmokeTest
   Scenario Outline: user add invalid values in while adding bank account details
     Given portal open in  "<language>" user already logged in
     When open wallet screen, click cashout button
@@ -12,5 +13,4 @@ Feature: check that error message will be displayed in case user add incorrect v
 
     Examples:
       | language     |
-      | English      |
       | Arabic_Egypt |

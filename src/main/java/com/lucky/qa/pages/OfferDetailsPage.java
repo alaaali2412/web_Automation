@@ -11,13 +11,13 @@ public class OfferDetailsPage extends BasePage {
         super(driver);
     }
 
-    @FindBy(xpath = "//div[2]/button")
+    @FindBy(css = ".btn.btn-primary")
     private WebElement getOfferBtn;
 
-    @FindBy(xpath = "//div[2]/div[1]/h3")
+    @FindBy(css = ".col-lg-7 > div:nth-child(1) > h3")
     private WebElement popupHeader;
 
-    @FindBy(xpath = "//*[@type = 'button']")
+    @FindBy(css = ".close")
     private WebElement popupCloseBtn;
 
     public void clickGetOffer() {

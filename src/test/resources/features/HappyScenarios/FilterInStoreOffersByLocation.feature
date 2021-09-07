@@ -10,7 +10,7 @@ Feature: filter In_store offers by it`s Location
     Examples:
       | language     | Location   | subLocation |
       | Arabic_Egypt | الإسكندرية | ستانلي      |
-      | English      | Suez       | Suez        |
+
 
 
 

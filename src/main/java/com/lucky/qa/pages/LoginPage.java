@@ -28,14 +28,11 @@ public class LoginPage extends BasePage {
     @FindBy(id = "pass")
     private WebElement inputPasswordFb;
 
-    @FindBy(xpath = "//*[@id='u_0_0']")
-    private WebElement loginBtnFb;
+    @FindBy(id = "buttons")
+    private WebElement facebookLoginBtn;
 
-    @FindBy(xpath = "//div[3]/button")
+    @FindBy(css = ".btn.btn-block.btn-primary")
     private WebElement loginBtn;
-
-    @FindBy(xpath = "//*[text() = 'Register']")
-    private WebElement registerBtn;
 
     @FindBy(id = "identifierId")
     private WebElement googleEmail;
@@ -49,37 +46,37 @@ public class LoginPage extends BasePage {
     @FindBy(id = "passwordNext")
     private WebElement passNextBtn;
 
-    @FindBy(xpath = "//div/header/div[1]/nav/div/div[7]/a")
+    @FindBy(css = ".container-md a[href='/SignIn']")
     private WebElement signInBtn;
 
-    @FindBy(xpath = "//*[@class='py-3']/div")
+    @FindBy(css = ".error.error-message.text-center")
     private WebElement errorMessage;
 
-    @FindBy(xpath = " //*[@class='form-footer']//p[2]")
+    @FindBy(css = "a[href='/ForgotPassword']")
     private WebElement forgetPassLink;
 
-    @FindBy(xpath = "//*[@class='btn btn-block btn-primary']")
+    @FindBy(css = ".btn.btn-block.btn-primary")
     private WebElement emailMeBtn;
 
-    @FindBy(xpath = "//*[@class ='mailVerification-text']")
+    @FindBy(css = ".mailVerification-text")
     private WebElement mailVerificationText;
 
-    @FindBy(xpath = "//div[4]/ul[2]/li[3]/a")
+    @FindBy(css = "li:nth-child(3)>.h-c-button.h-c-header__nav-li-link")
     private WebElement googleSignIn;
 
-    @FindBy(xpath = "//*[@class='y6']//*[@class='bqe']")
+    @FindBy(css = ".y6 > .bog>.bqe")
     private List<WebElement> unreadEmails;
 
-    @FindBy(xpath = "//*[@class='bA4']//span[1]")
+    @FindBy(css = ".yW>.bA4>.zF")
     private WebElement emailTitle;
 
-    @FindBy(xpath = "//*[@class='y6']//span[1]")
+    @FindBy(css = ".bog>.bqe")
     private WebElement emailSubject;
 
-    @FindBy(xpath = "//*[@src= '//ssl.gstatic.com/ui/v1/icons/mail/images/cleardot.gif']")
+    @FindBy(css = ".ajR>.ajT")
     private List<WebElement> expandEmailBtn;
 
-    @FindBy(xpath = "//table//table/tbody/tr[5]/td/a/table/tbody/tr/td")
+    @FindBy(css = "td > a > table > tbody > tr > td")
     private List<WebElement> resetPassLinks;
 
     @FindBy(id = "formBasicPassword1")
@@ -88,22 +85,16 @@ public class LoginPage extends BasePage {
     @FindBy(id = "formBasicPassword2")
     private WebElement confirmNewPassField;
 
-    @FindBy(xpath = "//div[3]/button")
+    @FindBy(css = ".col-md-6.btn.btn-primary")
     private WebElement saveChangesBtn;
 
-    @FindBy(xpath = "//*[@class = 'react-toast-notifications__toast__content css-1ad3zal']")
+    @FindBy(css = ".react-toast-notifications__toast__content.css-1ad3zal")
     private WebElement toastMessage;
 
-    @FindBy(xpath = "//h1")
-    private WebElement verificationHeader;
-
-    @FindBy(xpath = "//*[@id= 'formEmail']/following-sibling::div")
+    @FindBy(css = ".form-group>.error.error-message")
     private WebElement invalidEmailErrorMessage;
 
-    @FindBy(xpath = "//section[3]/div/div/div/div[1]/h2")
-    private WebElement newsLetterheader;
-
-    @FindBy(xpath = "//*[@class='gb_Ca gbii']")
+    @FindBy(css = ".gb_Ca.gbii")
     private WebElement googleProfileIcon;
 
     @FindBy(id = "gb_71")
@@ -112,8 +103,6 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//section//div/ul/li[3]/div")
     private WebElement googleRemoveAccountBtn;
 
-    @FindBy(xpath = "//settings-ui")
-    private WebElement clearDataWindow;
 
 
     public LoginPage(WebDriver driver) {
@@ -143,7 +132,7 @@ public class LoginPage extends BasePage {
                 clearField(inputPasswordFb);
                 addText(inputPasswordFb, password);
                 waitVisibilityOfElement(loginBtn);
-                clickButton(loginBtnFb);
+                clickButton(facebookLoginBtn);
                 waitForPageToLoad();
             }
         }
