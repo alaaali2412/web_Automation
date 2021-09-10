@@ -8,6 +8,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class ProfilePage extends BasePage {
     public ProfilePage(WebDriver driver) {
+
         super(driver);
     }
 
