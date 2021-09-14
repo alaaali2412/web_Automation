@@ -31,6 +31,8 @@ public class Hook {
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--whitelisted-ips");
         options.addArguments("--disable-gpu ");
+        options.addArguments("--user-agent='Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36'");
+
         return options;
     }
 
@@ -42,7 +44,7 @@ public class Hook {
             driver.manage().deleteAllCookies();
             driver.manage().window().maximize();
             DriverFactory.addDriver(driver);
-            driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
+            driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
         }
     }
 

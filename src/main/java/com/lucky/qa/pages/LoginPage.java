@@ -73,8 +73,8 @@ public class LoginPage extends BasePage {
     @FindBy(css = ".bog>.bqe")
     private WebElement emailSubject;
 
-    @FindBy(css = ".ajR>.ajT")
-    private List<WebElement> expandEmailBtn;
+    @FindBy(css = "[aria-label='Show trimmed content']")
+    private WebElement expandEmailBtn;
 
     @FindBy(css = "td > a > table > tbody > tr > td")
     private List<WebElement> resetPassLinks;
@@ -103,6 +103,8 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//section//div/ul/li[3]/div")
     private WebElement googleRemoveAccountBtn;
 
+    @FindBy(css = ".ha > h2")
+    private WebElement emailHeader;
 
 
     public LoginPage(WebDriver driver) {
@@ -209,9 +211,9 @@ public class LoginPage extends BasePage {
         waitVisibilityOfAllElements(unreadEmails);
         for (WebElement email : unreadEmails) {
             while (!emailTitle.getAttribute("name").equals("Lucky") &&
-                    !emailSubject.getText().contains("Password Reset Link")) {
-                driverWait(30);
+                    !email.getText().contains("Password Reset Link")) {
                 refreshCurrentPage();
+                driverWait(30);
             }
             forceClickElement(unreadEmails.get(0));
             driverWait(30);
@@ -223,8 +225,8 @@ public class LoginPage extends BasePage {
         waitForPageToLoad();
         for (int i = 0 ; i<resetPassLinks.size(); i++){
             if (!resetPassLinks.get(resetPassLinks.size()-1).isDisplayed()) {
-                waitVisibilityOfAllElements(expandEmailBtn);
-                clickButton(expandEmailBtn.get(expandEmailBtn.size() - 1));
+                waitVisibilityOfElement(emailHeader);
+                clickButton(expandEmailBtn);
                 moveToTab(1);
                 waitVisibilityOfElement(resetPassLinks.get(resetPassLinks.size()-1));
                 forceClickElement(resetPassLinks.get(resetPassLinks.size()-1));
