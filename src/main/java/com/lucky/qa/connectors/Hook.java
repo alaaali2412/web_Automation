@@ -25,6 +25,7 @@ public class Hook {
         chromePrefs.put("profile.managed_default_content_settings.ads", 1);
         options.setPageLoadStrategy(PageLoadStrategy.NORMAL);
         options.setExperimentalOption("prefs", chromePrefs);
+        options.addArguments("--headless");
         return options;
     }
 
