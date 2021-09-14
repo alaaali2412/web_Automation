@@ -26,6 +26,8 @@ public class Hook {
         options.setPageLoadStrategy(PageLoadStrategy.NORMAL);
         options.setExperimentalOption("prefs", chromePrefs);
         options.addArguments("--headless");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
         return options;
     }
 
