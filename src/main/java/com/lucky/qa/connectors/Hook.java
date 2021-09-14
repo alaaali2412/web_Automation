@@ -26,8 +26,11 @@ public class Hook {
         options.setPageLoadStrategy(PageLoadStrategy.NORMAL);
         options.setExperimentalOption("prefs", chromePrefs);
         options.addArguments("--headless");
+        options.addArguments("--window-size=1920,1080");
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--whitelisted-ips");
+        options.addArguments("--disable-gpu ");
         return options;
     }
 
