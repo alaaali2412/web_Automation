@@ -6,6 +6,9 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.*;
 
+import java.io.File;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.time.Duration;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
@@ -148,16 +151,16 @@ public class BasePage {
         String localLanguage;
         switch (language) {
             case "Arabic_Egypt":
-                localLanguage = "ar_EG";
+                localLanguage = "ar-EG";
                 break;
             case "English":
-                localLanguage = "en_EG";
+                localLanguage = "en-EG";
                 break;
             case "Arabic_Morocco":
-                localLanguage = "ar_MA";
+                localLanguage = "ar-MA";
                 break;
             case "French":
-                localLanguage = "fr_MA";
+                localLanguage = "fr-MA";
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + language);

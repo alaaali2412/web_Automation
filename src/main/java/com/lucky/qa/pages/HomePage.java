@@ -164,11 +164,11 @@ public class HomePage extends BasePage {
     }
 
     public void waitUntilGoogleMailAuthenticated() {
-        while (!profileDropdown.isDisplayed()) {
-            driverWait(60);
+  /*      while (!profileDropdown.isDisplayed()) {
             refreshCurrentPage();
+            driverWait(60);
         }
-        checkIfPopUpExist();
+        checkIfPopUpExist();*/
     }
 
     Helper helper = new Helper();
