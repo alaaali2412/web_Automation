@@ -219,13 +219,11 @@ public class HomePage extends BasePage {
         switch (language) {
             case "Arabic_Egypt":
                 driver.navigate().to(helper.getValuesFromPropertiesFile("EgyptURL"));
-                refreshCurrentPage();
                 checkIfPopUpExist();
                 waitForPageToLoad();
                 break;
             case "English":
                 driver.navigate().to(helper.getValuesFromPropertiesFile("EgyptURL"));
-                refreshCurrentPage();
                 checkIfPopUpExist();
                 clickButton(languageBtn);
                 checkIfPopUpExist();
@@ -233,7 +231,6 @@ public class HomePage extends BasePage {
                 break;
             case "Arabic_Morocco":
                 driver.navigate().to(helper.getValuesFromPropertiesFile("MoroccoURL"));
-                refreshCurrentPage();
                 checkIfPopUpExist();
                 clickButton(languageBtn);
                 checkIfPopUpExist();
@@ -241,7 +238,6 @@ public class HomePage extends BasePage {
                 break;
             case "French":
                 driver.navigate().to(helper.getValuesFromPropertiesFile("MoroccoURL"));
-                refreshCurrentPage();
                 checkIfPopUpExist();
                 waitForPageToLoad();
                 break;
