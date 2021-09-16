@@ -10,4 +10,5 @@ Feature: Fields Validation During Registration
     Examples:
       | Language     |
       | Arabic_Egypt |
+      | English      |
 

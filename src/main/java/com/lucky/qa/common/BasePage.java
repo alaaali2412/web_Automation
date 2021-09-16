@@ -154,16 +154,16 @@ public class BasePage {
         String localLanguage;
         switch (language) {
             case "Arabic_Egypt":
-                localLanguage = "ar-EG";
+                localLanguage = "ar_EG";
                 break;
             case "English":
-                localLanguage = "en-EG";
+                localLanguage = "en_EG";
                 break;
             case "Arabic_Morocco":
-                localLanguage = "ar-MA";
+                localLanguage = "ar_MA";
                 break;
             case "French":
-                localLanguage = "fr-MA";
+                localLanguage = "fr_MA";
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + language);
