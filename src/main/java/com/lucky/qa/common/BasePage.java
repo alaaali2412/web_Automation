@@ -172,27 +172,22 @@ public class BasePage {
     }
 
 
-
-    private  ResourceBundle fromClassLoader(String language) {
+    private ResourceBundle fromClassLoader(String language) {
         Locale locale = new Locale(language(language));
-
         ClassLoader loader = null;
         try {
-          File file = new File(System.getProperty("user.dir") + "src/test/resources/");
-          URL[] urls = {file.toURI().toURL()};
-           loader = new URLClassLoader(urls);
-          // Properties file name = test.properties. The .properties extension is appended to bundle name
-
-      }catch (Exception e){
-
-      }
+            File file = new File(System.getProperty("user.dir") + "src/test/resources/");
+            URL[] urls = {file.toURI().toURL()};
+            loader = new URLClassLoader(urls);
+        } catch (Exception e) {
+        }
         return ResourceBundle.getBundle("LanguageTest", locale, loader);
     }
 
 
     public String detectLanguage(String language, String message) {
-        Locale locale = new Locale(language(language));
-      //  ResourceBundle resource = PropertyResourceBundle.getBundle("LanguageTest", locale);
+    /*    Locale locale = new Locale(language(language));
+        ResourceBundle resource = PropertyResourceBundle.getBundle("LanguageTest", locale);*/
         return fromClassLoader(language).getString(message);
     }
 
