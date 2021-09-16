@@ -7,6 +7,9 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.*;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.time.Duration;
@@ -168,10 +171,29 @@ public class BasePage {
         return localLanguage;
     }
 
+
+
+    private  ResourceBundle fromClassLoader(String language) {
+        Locale locale = new Locale(language(language));
+
+        ClassLoader loader = null;
+        try {
+          File file = new File(System.getProperty("user.dir") + "src/test/resources/");
+          URL[] urls = {file.toURI().toURL()};
+           loader = new URLClassLoader(urls);
+          // Properties file name = test.properties. The .properties extension is appended to bundle name
+
+      }catch (Exception e){
+
+      }
+        return ResourceBundle.getBundle("LanguageTest", locale, loader);
+    }
+
+
     public String detectLanguage(String language, String message) {
         Locale locale = new Locale(language(language));
-        ResourceBundle resource = PropertyResourceBundle.getBundle("LanguageTest", locale);
-        return resource.getString(message);
+      //  ResourceBundle resource = PropertyResourceBundle.getBundle("LanguageTest", locale);
+        return fromClassLoader(language).getString(message);
     }
 
     public boolean isAlertPresent() {
