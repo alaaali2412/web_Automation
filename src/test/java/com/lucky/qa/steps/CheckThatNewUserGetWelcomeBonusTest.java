@@ -11,7 +11,7 @@ import io.cucumber.java.en.When;
 
 public class CheckThatNewUserGetWelcomeBonusTest {
 
-    @Given("portal open in {string}, login with new user")
+/*    @Given("portal open in {string}, login with new user")
     public void portal_open_in_login_with_new_user(String language) {
         PageGenerator.getInstance(HomePage.class).openPortalURL(language);
         PageGenerator.getInstance(HomePage.class).clickSignInBtn();
@@ -32,5 +32,5 @@ public class CheckThatNewUserGetWelcomeBonusTest {
                 PageGenerator.getInstance(BasePage.class).detectLanguage(language, "TransactionStatusLanguage"));
         PageGenerator.getInstance(HomePage.class).openHomeScreen();
         PageGenerator.getInstance(HomePage.class).clickLogOut();
-    }
+    }*/
 }

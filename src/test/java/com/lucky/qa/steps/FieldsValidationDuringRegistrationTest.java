@@ -4,12 +4,13 @@ import com.lucky.qa.common.BasePage;
 import com.lucky.qa.pages.HomePage;
 import com.lucky.qa.pages.PageGenerator;
 import com.lucky.qa.pages.RegistrationPage;
+import com.lucky.qa.test;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class FieldsValidationDuringRegistrationTest {
-
+test t = new test();
     @Given("portal {string} Registration page opened")
     public void portalRegistrationPageOpened(String language) {
         PageGenerator.getInstance(HomePage.class).openPortalURL(language);
@@ -22,7 +23,7 @@ public class FieldsValidationDuringRegistrationTest {
         PageGenerator.getInstance(RegistrationPage.class).addInvalidName();
         PageGenerator.getInstance(RegistrationPage.class).registerWithInvalidEmailFormat();
         PageGenerator.getInstance(RegistrationPage.class).registerWithPassLessThanSixCharacters
-                (PageGenerator.getInstance(BasePage.class).detectLanguage(Language, "PasswordLessThanSixErrorMsg"));
+                (t.detectLanguage(Language, "PasswordLessThanSixErrorMsg"));
         PageGenerator.getInstance(RegistrationPage.class).registerWithInvalidPassFormat();
         PageGenerator.getInstance(RegistrationPage.class).registerWithInvalidRepeatPass();
     }
@@ -30,12 +31,12 @@ public class FieldsValidationDuringRegistrationTest {
     @Then("error messages displayed at the fields that contain invalid values according to {string}")
     public void errorMessagesDisplayedAtTheFieldsThatContainInvalidValuesAccordingTo(String Language) {
         PageGenerator.getInstance(RegistrationPage.class).checkInvalidNameErrorMessage
-                (PageGenerator.getInstance(BasePage.class).detectLanguage(Language, "NameRegistrationErrorMsg"));
+                (t.detectLanguage(Language, "NameRegistrationErrorMsg"));
         PageGenerator.getInstance(RegistrationPage.class).checkInvalidEmailErrorMessage
-                (PageGenerator.getInstance(BasePage.class).detectLanguage(Language, "InValidEmailErrorMsg"));
+                (t.detectLanguage(Language, "InValidEmailErrorMsg"));
         PageGenerator.getInstance(RegistrationPage.class).checkInvalidPassErrorMessage
-                (PageGenerator.getInstance(BasePage.class).detectLanguage(Language, "ComplexPassErrorMessage"));
+                (t.detectLanguage(Language, "ComplexPassErrorMessage"));
         PageGenerator.getInstance(RegistrationPage.class).checkRepeatPassErrorMessage
-                (PageGenerator.getInstance(BasePage.class).detectLanguage(Language, "RepeatPassErrorMessage"));
+                (t.detectLanguage(Language, "RepeatPassErrorMessage"));
     }
 }

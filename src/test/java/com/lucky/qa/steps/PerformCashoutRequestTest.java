@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class PerformCashoutRequestTest {
     ArrayList<Double> valuesBeforeCashout;
 
-    @Given("portal open in  {string} user already logged in")
+    /*@Given("portal open in  {string} user already logged in")
     public void portalOpenInUserAlreadyLoggedIn(String language) {
         PageGenerator.getInstance(HomePage.class).openPortalURL(language);
 
@@ -76,5 +76,5 @@ public class PerformCashoutRequestTest {
         PageGenerator.getInstance(WalletPage.class).checkTheCashoutTransactionApproved(
                 PageGenerator.getInstance(BasePage.class).detectLanguage(language, "ApprovedCashoutTransactionstatus"));
         PageGenerator.getInstance(HomePage.class).clickLogOut();
-    }
+    }*/
 }

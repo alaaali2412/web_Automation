@@ -11,7 +11,7 @@ import io.cucumber.java.en.When;
 
 public class ForgetPasswordTest {
 
-    @Given("portal {string}, user click login")
+   /* @Given("portal {string}, user click login")
     public void portalUserClickLogin(String language) {
         PageGenerator.getInstance(HomePage.class).openPortalURL(language);
         PageGenerator.getInstance(HomePage.class).clickSignInBtn();
@@ -61,5 +61,5 @@ public class ForgetPasswordTest {
         PageGenerator.getInstance(HomePage.class).clickLogOut();
         PageGenerator.getInstance(LoginPage.class).logOutGmail();
 
-    }
+    }*/
 }

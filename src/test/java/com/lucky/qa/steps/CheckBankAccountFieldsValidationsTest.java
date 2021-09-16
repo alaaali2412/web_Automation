@@ -9,7 +9,7 @@ import io.cucumber.java.en.When;
 
 public class CheckBankAccountFieldsValidationsTest {
 
-    @When("choose bank account as cashout method")
+   /* @When("choose bank account as cashout method")
     public void choose_bank_account_as_cashout_method() {
         PageGenerator.getInstance(WalletPage.class).clickBankAccountBtn();
     }
@@ -57,5 +57,5 @@ public class CheckBankAccountFieldsValidationsTest {
         PageGenerator.getInstance(WalletPage.class).checkIBANInvalidFormatErrorMessage(
                 PageGenerator.getInstance(BasePage.class).detectLanguage(language, "BankAccountIBANInvalidFormat"));
         PageGenerator.getInstance(HomePage.class).clickLogOut();
-    }
+    }*/
 }

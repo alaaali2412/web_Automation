@@ -16,6 +16,7 @@ import java.time.Duration;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
+
 public class BasePage {
     public WebDriver driver;
     protected Actions actions;
@@ -150,7 +151,7 @@ public class BasePage {
         wait.until(ExpectedConditions.visibilityOfAllElements(elements));
     }
 
-    public String language(String language) {
+   /* public String language(String language) {
         String localLanguage;
         switch (language) {
             case "Arabic_Egypt":
@@ -184,13 +185,14 @@ public class BasePage {
         }
         return ResourceBundle.getBundle("LanguageTest", locale, loader);
     }
+*/
 
-
-    public String detectLanguage(String language, String message) {
-    /*    Locale locale = new Locale(language(language));
-        ResourceBundle resource = PropertyResourceBundle.getBundle("LanguageTest", locale);*/
+/*    public String detectLanguage(String language, String message) {
+        test t = new test ();
+    *//*    Locale locale = new Locale(language(language));
+        ResourceBundle resource = PropertyResourceBundle.getBundle("LanguageTest", locale);*//*
         return fromClassLoader(language).getString(message);
-    }
+    }*/
 
     public boolean isAlertPresent() {
         try {
