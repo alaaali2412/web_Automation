@@ -11,7 +11,7 @@ import io.cucumber.java.en.When;
 
 public class AddWrongOtpWhenVerifyingMobileNumberInCashoutTest {
 
-   /* @Given("portal opens in {string},user logged in")
+    @Given("portal opens in {string},user logged in")
     public void portal_opens_in_user_logged_in(String language) {
         PageGenerator.getInstance(HomePage.class).openPortalURL(language);
         PageGenerator.getInstance(HomePage.class).checkIfPopUpExist();
@@ -45,5 +45,5 @@ public class AddWrongOtpWhenVerifyingMobileNumberInCashoutTest {
         PageGenerator.getInstance(HomePage.class).clickLogOut();
         PageGenerator.getInstance(WalletPage.class).resetMobileNumberInDataBase("RegistrationEmail", language);
     }
-*/
+
 }

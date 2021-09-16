@@ -10,7 +10,7 @@ import io.cucumber.java.en.When;
 
 public class SendIssueToSupportTeamTest {
 
-   /* @Given("home page open in {string}")
+    @Given("home page open in {string}")
     public void homePageOpenIn(String language) {
         PageGenerator.getInstance(HomePage.class).openPortalURL(language);
         PageGenerator.getInstance(HomePage.class).checkThatHomePageOpened();
@@ -28,5 +28,5 @@ public class SendIssueToSupportTeamTest {
                 PageGenerator.getInstance(BasePage.class).detectLanguage(language, "ContactUsTitle"),
                 PageGenerator.getInstance(BasePage.class).detectLanguage(language, "ContactUsTextMessage"),
                 PageGenerator.getInstance(BasePage.class).detectLanguage(language, "ContactEmail"));
-    }*/
+    }
 }

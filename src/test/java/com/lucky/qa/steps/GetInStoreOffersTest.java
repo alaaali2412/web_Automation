@@ -8,7 +8,7 @@ import io.cucumber.java.en.When;
 
 public class GetInStoreOffersTest {
 
-   /* @Given("browser open,open portal in {string}, user login")
+    @Given("browser open,open portal in {string}, user login")
     public void browserOpenOpenPortalInUserLogin(String language) {
         PageGenerator.getInstance(HomePage.class).openPortalURL(language);
         PageGenerator.getInstance(HomePage.class).clickSignInBtn();
@@ -36,5 +36,5 @@ public class GetInStoreOffersTest {
         PageGenerator.getInstance(OfferDetailsPage.class).closePopUP(
                 PageGenerator.getInstance(BasePage.class).detectLanguage(language, "GetOfferPopUpHeader"));
         PageGenerator.getInstance(HomePage.class).clickLogOut();
-    }*/
+    }
 }

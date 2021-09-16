@@ -9,7 +9,7 @@ import io.cucumber.java.en.Then;
 
 public class SubscribeToNewsLetterTest {
 
-   /* @Given("home page opened in {string}")
+    @Given("home page opened in {string}")
     public void homePageOpenedIn(String language) {
         PageGenerator.getInstance(HomePage.class).resetNewsLetterSubscription("Email", language);
         PageGenerator.getInstance(HomePage.class).openPortalURL(language);
@@ -37,5 +37,4 @@ public class SubscribeToNewsLetterTest {
     public void user_get_successful_message_and_verification_email() {
         //TODO this step after fixing this bug https://lucky-app.atlassian.net/browse/LCK-3559
     }
-*/
 }

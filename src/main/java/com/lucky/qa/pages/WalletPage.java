@@ -213,7 +213,6 @@ public class WalletPage extends BasePage {
         DatabaseHelper.setUpDBConnection(language);
         String otp = DatabaseHelper.getValueFromDatabase("SELECT CashOutMobileVerificationOtp from LuckyUser WHERE email = '" +
                 helper.getValuesFromPropertiesFile(email) + "'");
-        System.out.println("sdfgfdsfg" + otp);
         String[] otpDigits = otp.split("");
         for (int i = 0; i < otpDigits.length; i++) {
             addText(otpFields.get(i), otpDigits[i]);

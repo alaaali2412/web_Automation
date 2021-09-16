@@ -10,7 +10,7 @@ import io.cucumber.java.en.When;
 
 public class EmailAndPasswordValidationTest {
 
-  /*  @Given("portal {string},  login page opened")
+    @Given("portal {string},  login page opened")
     public void portalLoginPageOpened(String language) {
         PageGenerator.getInstance(HomePage.class).openPortalURL(language);
         PageGenerator.getInstance(HomePage.class).checkIfPopUpExist();
@@ -29,5 +29,5 @@ public class EmailAndPasswordValidationTest {
     public void errorDisplayedAccordingTo(String language) {
         PageGenerator.getInstance(LoginPage.class).checkErrorMessageIsDisplayed(PageGenerator.
                 getInstance(BasePage.class).detectLanguage(language, "InvalidPassErrorMsg"));
-    }*/
+    }
 }
