@@ -176,11 +176,9 @@ public class BasePage {
         Locale locale = new Locale(language(language));
         ClassLoader loader = null;
         try {
-            File file = new File(System.getProperty("user.dir") + "src/main/resources/");
-            System.out.println(System.getProperty("user.dir") + "/src/main/resources");
+            File file = new File(System.getProperty("user.dir") + "src/test/resources/");
             URL[] urls = {file.toURI().toURL()};
             loader = new URLClassLoader(urls);
-            loader.getResource("LanguageTest");
         } catch (Exception e) {
         }
         return ResourceBundle.getBundle("LanguageTest", locale, loader);
