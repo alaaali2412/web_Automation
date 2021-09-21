@@ -18,28 +18,28 @@ public class HomePage extends BasePage {
     }
 
 
-    @FindBy(xpath = "//*[@class ='px-xl-3 px-lg-2 nav-link-item']//*[@href='/SignIn']")
+    @FindBy(css = ".container-md [href='/SignIn']")
     private WebElement signInBtn;
 
-    @FindBy(xpath = "//div[2]/div/div[2]/button[2]/span")
+    @FindBy(css = ".container .box-body button:nth-child(3) ")
     private WebElement facebookBtn;
 
-    @FindBy(xpath = "//*/div[2]//div[2]/button[1]")
+    @FindBy(css = ".container .box-body button:nth-child(2) ")
     private WebElement googleBtn;
 
-    @FindBy(xpath = "//*[@href='/SignUp']")
+    @FindBy(css = ".container [href='/SignUp']")
     private WebElement emailBtn;
 
-    @FindBy(xpath = "//div[1]/nav/div/div[2]")
+    @FindBy(css = ".container-md [href='/InStoreOffers']")
     private WebElement inStoreBtn;
 
-    @FindBy(css = ".px-xl-3.px-lg-2.nav-link-item #basic-nav-dropdown")
+    @FindBy(css = ".container-md div:nth-child(8)")
     private WebElement profileDropdown;
 
-    @FindBy(xpath = "//*[@href='/Profile']")
+    @FindBy(css = "[href='/Profile']")
     private WebElement profileBtn;
 
-    @FindBy(xpath = "//*[@class='dropdown-item'][2]")
+    @FindBy(css = ".dropdown-menu.show [href='#']")
     private WebElement logOutBtn;
 
     @FindBy(id = "exampleForm.ControlInput1")
@@ -48,13 +48,13 @@ public class HomePage extends BasePage {
     @FindBy(id = "basic-nav-dropdown")
     private WebElement onlineCashbackBtn;
 
-    @FindBy(xpath = "//nav/div/div[1]/div/div/a")
+    @FindBy(css = ".dropdown-item")
     private List<WebElement> onlineCashbackList;
 
     @FindBy(className = "//header/div[1]/nav//div/span")
     private WebElement logoBtn;
 
-    @FindBy(xpath = "//*[@class ='px-xl-3 px-lg-2 nav-link-item']//*[@href='/Wallet']")
+    @FindBy(css = ".container-md [href='/Wallet']")
     private WebElement walletBtn;
 
     @FindBy(className = "wallet-body")
@@ -63,31 +63,31 @@ public class HomePage extends BasePage {
     @FindBy(className = "hero-banner")
     private WebElement homeBanner;
 
-    @FindBy(xpath = "//*[@class = 'container-md']/a")
+    @FindBy(css = ".container-md [href='/ar']")
     private WebElement homeScreenBtn;
 
-    @FindBy(xpath = "//*/ul/li[2]/a")
+    @FindBy(css = ".footer-links:nth-child(1)  [href='../../ContactUs']")
     private WebElement contactUsBtn;
 
     @FindBy(id = "formEmail")
     private WebElement newsLetterEmailField;
 
-    @FindBy(xpath = "//*[@class = 'row']//*[@type='submit']")
+    @FindBy(css = "[class = 'row'] [type='submit']")
     private WebElement subscribeBtn;
 
-    @FindBy(xpath = "//*[@class = 'success success-message']")
+    @FindBy(css = ".success.success-message")
     private WebElement successMessage;
 
-    @FindBy(xpath = "//h1")
+    @FindBy(css = ".container:nth-child(2) .heading-text")
     private WebElement headingText;
 
-    @FindBy(xpath = "//*[@class='close-modal']")
+    @FindBy(css = ".close-modal")
     private List<WebElement> popupCloseBtn;
 
-    @FindBy(xpath = "//*[@class ='px-xl-3 px-lg-2 nav-link-item']//*[@class='language-switcher']")
+    @FindBy(css = ".container-md .language-switcher")
     private WebElement languageBtn;
 
-    @FindBy(xpath = "//*[@class = 'container-md']//div[8]")
+    @FindBy(css = ".container-md [href='/SignUp']")
     private WebElement registerBtn;
 
     @FindBy(css = "#__next > div > header > div:nth-child(1) > nav > div > span")
@@ -208,10 +208,10 @@ public class HomePage extends BasePage {
     }
 
     public void checkIfPopUpExist() {
-   /*     if (popupCloseBtn.size() != 0) {
+        if (popupCloseBtn.size() != 0) {
             clickButton(popupCloseBtn.get(0));
             driverWait(30);
-        }*/
+        }
     }
 
     public void openPortalURL(String language) {
