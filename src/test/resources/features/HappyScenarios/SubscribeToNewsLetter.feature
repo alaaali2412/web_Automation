@@ -10,7 +10,7 @@ Feature: user can subscribe to news letter to receive emails with new offer
     When user add anonymous email to subscribe news letter
     Then user get successful message and verification email
     Examples:
-      | language       |
-      | Arabic_Morocco |
+      | language     |
+      | Arabic_Egypt |
 
 
