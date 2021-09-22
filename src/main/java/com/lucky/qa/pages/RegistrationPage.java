@@ -24,7 +24,7 @@ public class RegistrationPage extends BasePage {
     @FindBy(id = "formRepeatPassword")
     private WebElement repeatPassField;
 
-    @FindBy(xpath = "//*[@id='copy_address']/span")
+    @FindBy(css = ".input-box-col.hidden-xs-sm")
     private WebElement copyEmail;
 
     @FindBy(xpath = "//*[@id='counter_sec_one']/span")
@@ -45,7 +45,7 @@ public class RegistrationPage extends BasePage {
     @FindBy(css = ".btn.btn-primary.btn-block")
     private WebElement loginBtnAfterMailVerification;
 
-    @FindBy(xpath = "//*[@class='message_top']")
+    @FindBy(css = " ul > li:nth-child(2)  div.col-box.hidden-xs-sm ")
     private WebElement emailList;
 
     @FindBy(xpath = "//*[@class='small_subject']")
@@ -79,9 +79,8 @@ public class RegistrationPage extends BasePage {
         clearDefaultValueOfCopy(inputEmail);
         openNewTab();
         moveToTab(1);
-        driver.get("https://10minutemail.com/");
+        driver.get("https://10minemail.com/");
         waitForPageToLoad();
-        waitUntilTextEqual("5", secondCounter);
         forceClickElement(copyEmail);
         moveToTab(0);
         deleteTextInField(inputEmail);
@@ -127,6 +126,7 @@ public class RegistrationPage extends BasePage {
     public void openVerificationMail() {
         moveToTab(1);
         while (!emailList.getText().contains("Email Confirmation")) {
+            driverWait(60);
             refreshCurrentPage();
         }
         clickButton(emailLink);

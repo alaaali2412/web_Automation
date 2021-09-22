@@ -5,11 +5,7 @@ import com.lucky.qa.connectors.DriverFactory;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.*;
-
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.time.Duration;
@@ -171,7 +167,6 @@ public class BasePage {
         return localLanguage;
     }
 
-
     private ResourceBundle fromClassLoader(String language) {
         Locale locale = new Locale(language(language));
         ClassLoader loader = null;
@@ -184,10 +179,7 @@ public class BasePage {
         return ResourceBundle.getBundle("LanguageTest", locale, loader);
     }
 
-
     public String detectLanguage(String language, String message) {
-      /* Locale locale = new Locale(language(language));
-        ResourceBundle resource = PropertyResourceBundle.getBundle("LanguageTest", locale);*/
         return fromClassLoader(language).getString(message);
     }
 

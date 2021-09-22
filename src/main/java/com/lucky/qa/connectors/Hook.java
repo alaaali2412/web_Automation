@@ -25,7 +25,7 @@ public class Hook {
         chromePrefs.put("profile.managed_default_content_settings.ads", 1);
         options.setPageLoadStrategy(PageLoadStrategy.NORMAL);
         options.setExperimentalOption("prefs", chromePrefs);
-        options.addArguments("--headless");
+       // options.addArguments("--headless");
         options.addArguments("--window-size=1920,1080");
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
