@@ -171,7 +171,7 @@ public class BasePage {
         Locale locale = new Locale(language(language));
         ClassLoader loader = null;
         try {
-            File file = new File(System.getProperty("user.dir") + "src/main/resources/");
+            File file = new File(System.getProperty("user.dir") + "src/main/resources/LanguageTest");
             URL[] urls = {file.toURI().toURL()};
             loader = new URLClassLoader(urls);
         } catch (Exception e) {
