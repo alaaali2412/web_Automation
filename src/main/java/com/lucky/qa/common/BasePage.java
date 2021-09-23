@@ -167,21 +167,21 @@ public class BasePage {
         return localLanguage;
     }
 
-    private ResourceBundle fromClassLoader(String language) {
+    public String detectLanguage(String language, String message) {
         Locale locale = new Locale(language(language));
         ClassLoader loader = null;
         try {
-            File file = new File(System.getProperty("user.dir") + "src/test/resources/");
+            File file = new File(System.getProperty("user.dir") + "src/main/resources/");
             URL[] urls = {file.toURI().toURL()};
             loader = new URLClassLoader(urls);
         } catch (Exception e) {
         }
-        return ResourceBundle.getBundle("LanguageTest", locale, loader);
+      return   ResourceBundle.getBundle("LanguageTest", locale, loader).getString(message);
     }
 
-    public String detectLanguage(String language, String message) {
+   /* public String detectLanguage(String language, String message) {
         return fromClassLoader(language).getString(message);
-    }
+    }*/
 
     public boolean isAlertPresent() {
         try {
