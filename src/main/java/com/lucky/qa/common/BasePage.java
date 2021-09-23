@@ -6,6 +6,8 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.*;
 import java.io.File;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.time.Duration;
@@ -181,6 +183,8 @@ public class BasePage {
             File file = new File(System.getProperty("user.dir") + "src/main/resources/");
             URL[] urls = {file.toURI().toURL()};
             loader = new URLClassLoader(urls);
+            InputStream stream = loader.getResourceAsStream("resName");
+
         } catch (Exception e) {
         }
       return   ResourceBundle.getBundle("LanguageTest",locale , loader).getString(message);
