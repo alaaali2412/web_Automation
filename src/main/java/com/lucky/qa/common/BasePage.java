@@ -168,7 +168,7 @@ public class BasePage {
     }
 
     public String detectLanguage(String language, String message) {
-        Locale locale = new Locale(language(language));
+        Locale locale = new Locale(language(language),"EG");
         ClassLoader loader = null;
         try {
             File file = new File(System.getProperty("user.dir") + "src/main/resources/LanguageTest");
