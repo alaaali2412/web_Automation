@@ -66,7 +66,7 @@ public class HomePage extends BasePage {
     @FindBy(css = ".container-md [href='/ar']")
     private WebElement homeScreenBtn;
 
-    @FindBy(css = ".footer-links:nth-child(1)  [href='../../ContactUs']")
+    @FindBy(css = " .footer [href$='ContactUs']")
     private WebElement contactUsBtn;
 
     @FindBy(id = "formEmail")
