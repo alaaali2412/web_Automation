@@ -61,7 +61,7 @@ public class LoginPage extends BasePage {
     @FindBy(css = ".mailVerification-text")
     private WebElement mailVerificationText;
 
-    @FindBy(css = "li:nth-child(3)>.h-c-button.h-c-header__nav-li-link")
+    @FindBy(css = ".h-c-header__cta-list.header__nav--rtl [data-action= 'sign in']")
     private WebElement googleSignIn;
 
     @FindBy(css = ".y6 > .bog>.bqe")
