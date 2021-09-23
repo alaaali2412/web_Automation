@@ -153,7 +153,7 @@ public class BasePage {
                 localLanguage = "ar";
                 break;
             case "English":
-                localLanguage = "en_EG";
+                localLanguage = "en";
                 break;
             case "Arabic_Morocco":
                 localLanguage = "ar_MA";
