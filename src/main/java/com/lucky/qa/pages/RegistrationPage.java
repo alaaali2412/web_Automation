@@ -141,8 +141,7 @@ public class RegistrationPage extends BasePage {
     }
 
     public void addInvalidName() {
-        addText(nameField, "aa");
-        deleteTextInField(nameField);
+        confirmAction(nameField);
     }
 
     public void checkInvalidNameErrorMessage(String errorMsg) {
