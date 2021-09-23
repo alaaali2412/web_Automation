@@ -150,7 +150,7 @@ public class BasePage {
         String localLanguage;
         switch (language) {
             case "Arabic_Egypt":
-                localLanguage = "ar_EG";
+                localLanguage = "ar";
                 break;
             case "English":
                 localLanguage = "en_EG";

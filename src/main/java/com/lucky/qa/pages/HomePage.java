@@ -3,7 +3,7 @@ package com.lucky.qa.pages;
 import com.lucky.qa.common.BasePage;
 import com.lucky.qa.utilities.DatabaseHelper;
 import com.lucky.qa.utilities.Helper;
-import org.junit.Assert;
+import org.testng.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -196,7 +196,7 @@ public class HomePage extends BasePage {
     }
 
     public void checkNewsLetterSuccessMessage(String successMsg) {
-        Assert.assertEquals(successMessage.getText(), successMsg);
+        Assert.assertEquals( successMessage.getText(),successMsg);
     }
 
     public void resetNewsLetterSubscription(String email, String language) {

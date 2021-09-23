@@ -2,10 +2,10 @@ package com.lucky.qa.pages;
 
 import com.lucky.qa.common.BasePage;
 import com.lucky.qa.utilities.Helper;
-import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
 
 public class RegistrationPage extends BasePage {
     static String newPassword;
@@ -120,7 +120,7 @@ public class RegistrationPage extends BasePage {
 
     public void checkUnverifiedMailErrorMessage(String errorMsg) {
         waitForTextToBeVisible(errorMessage);
-        Assert.assertEquals(errorMsg, errorMessage.getText());
+        Assert.assertEquals( errorMessage.getText(), errorMsg);
     }
 
     public void openVerificationMail() {
@@ -146,7 +146,7 @@ public class RegistrationPage extends BasePage {
     }
 
     public void checkInvalidNameErrorMessage(String errorMsg) {
-        Assert.assertEquals(errorMsg, nameFieldErrorMessage.getText());
+        Assert.assertEquals( nameFieldErrorMessage.getText(), errorMsg);
     }
 
     public void registerWithInvalidEmailFormat() {
@@ -154,13 +154,13 @@ public class RegistrationPage extends BasePage {
     }
 
     public void checkInvalidEmailErrorMessage(String errorMsg) {
-        Assert.assertEquals(errorMsg, invalidEmailErrorMessage.getText());
+        Assert.assertEquals( invalidEmailErrorMessage.getText(),errorMsg);
     }
 
     public void registerWithPassLessThanSixCharacters(String errorMsg) {
         addText(inputPassword, helper.generateRandomText(3));
         clickButton(repeatPassField);
-        Assert.assertEquals(errorMsg, invalidPassErrorMessage.getText());
+        Assert.assertEquals( invalidPassErrorMessage.getText(),errorMsg);
     }
 
     public void registerWithInvalidPassFormat() {
@@ -169,7 +169,7 @@ public class RegistrationPage extends BasePage {
     }
 
     public void checkInvalidPassErrorMessage(String errorMsg) {
-        Assert.assertEquals(errorMsg, invalidPassErrorMessage.getText());
+        Assert.assertEquals( invalidPassErrorMessage.getText(),errorMsg);
     }
 
     public void registerWithInvalidRepeatPass() {
@@ -177,6 +177,6 @@ public class RegistrationPage extends BasePage {
     }
 
     public void checkRepeatPassErrorMessage(String errorMsg) {
-        Assert.assertEquals(errorMsg, confirmPassErrorMessage.getText());
+        Assert.assertEquals( confirmPassErrorMessage.getText(),errorMsg);
     }
 }

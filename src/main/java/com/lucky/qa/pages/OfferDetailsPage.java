@@ -27,7 +27,7 @@ public class OfferDetailsPage extends BasePage {
 
     public void closePopUP(String headerText) {
         waitVisibilityOfElement(popupHeader);
-        Assert.assertEquals(getText(popupHeader), headerText);
+        Assert.assertEquals(getText(popupHeader),headerText);
         clickButton(popupCloseBtn);
     }
 }

@@ -1,15 +1,12 @@
 package com.lucky.qa.pages;
 
 import com.lucky.qa.common.BasePage;
-import com.lucky.qa.connectors.DriverFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
-import org.testng.asserts.SoftAssert;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,7 +37,7 @@ public class OnlineCashbackPage extends BasePage {
         for (WebElement category : filterList) {
             WebElement selectedCheckbox = category.findElement(By.tagName("input"));
             if (selectedCheckbox.isSelected()) {
-                Assert.assertEquals(getText(category), selected);
+                Assert.assertEquals(getText(category),selected);
             }
             break;
         }

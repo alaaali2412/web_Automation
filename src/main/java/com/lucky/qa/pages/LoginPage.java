@@ -3,7 +3,7 @@ package com.lucky.qa.pages;
 import com.lucky.qa.common.BasePage;
 import com.lucky.qa.connectors.DriverFactory;
 import com.lucky.qa.utilities.Helper;
-import org.junit.Assert;
+import org.testng.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -180,7 +180,7 @@ public class LoginPage extends BasePage {
 
     public void checkErrorMessageIsDisplayed(String errorMsg) {
         waitForTextToBeVisible(errorMessage);
-        Assert.assertEquals(errorMsg, errorMessage.getText());
+        Assert.assertEquals(errorMessage.getText(),errorMsg);
     }
 
     public void clickForgetPasswordLink() {
@@ -269,7 +269,7 @@ public class LoginPage extends BasePage {
     public void checkInvalidEmailErrorMessage(String errorMsg) {
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         waitForTextToBeVisible(invalidEmailErrorMessage);
-        Assert.assertEquals(errorMsg, invalidEmailErrorMessage.getText());
+        Assert.assertEquals(invalidEmailErrorMessage.getText(),errorMsg);
     }
 
 }

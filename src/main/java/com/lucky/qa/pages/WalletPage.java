@@ -155,7 +155,7 @@ public class WalletPage extends BasePage {
 
     public void checkCashoutSuccessMessage(String successMsg) {
         waitVisibilityOfElement(successMessage);
-        Assert.assertEquals(successMsg, getText(successMessage));
+        Assert.assertEquals( getText(successMessage), successMsg);
     }
 
     public ArrayList<Double> userBalanceBeforeCashout() throws InterruptedException {
@@ -234,7 +234,7 @@ public class WalletPage extends BasePage {
     public void assertOtpErrorMessage(String errorMsg) {
         waitVisibilityOfElement(errorMessage);
         Assert.assertTrue(errorMessage.isDisplayed());
-        Assert.assertEquals(errorMessage.getText(), errorMsg);
+        Assert.assertEquals( errorMessage.getText(),  errorMsg);
     }
 
     public void checkThatSuccessDisplayed() {
@@ -250,7 +250,7 @@ public class WalletPage extends BasePage {
     }
 
     public void checkWelcomeBonus(String transactionNameLanguage, String statusLanguage) {
-        Assert.assertEquals(lastTransactionType.getText(), transactionNameLanguage);
+        Assert.assertEquals( lastTransactionType.getText(), transactionNameLanguage);
         Assert.assertEquals(lastTransactionStatus.getText(), statusLanguage);
     }
 
@@ -264,7 +264,7 @@ public class WalletPage extends BasePage {
 
     public void checkTheCashoutTransactionApproved(String status) {
         refreshCurrentPage();
-        Assert.assertEquals(lastTransactionStatus.getText(), status);
+        Assert.assertEquals( lastTransactionStatus.getText(), status);
     }
 
     public void clearCashoutTransactionsInDB(String language, String email) {
@@ -276,8 +276,8 @@ public class WalletPage extends BasePage {
 
     public void checkBankAccountFieldsValidationMessages(String name, String bankName, String address, String branchName,
                                                          String bankAddress, String accountNumber, String swiftCode, String iban) {
-        Assert.assertEquals(BankFieldsErrorMessages.get(0).getText(), name);
-        Assert.assertEquals(BankFieldsErrorMessages.get(1).getText(), bankName);
+        Assert.assertEquals( BankFieldsErrorMessages.get(0).getText(),name);
+        Assert.assertEquals( BankFieldsErrorMessages.get(1).getText(), bankName);
         Assert.assertEquals(BankFieldsErrorMessages.get(2).getText(), address);
         Assert.assertEquals(BankFieldsErrorMessages.get(3).getText(), branchName);
         Assert.assertEquals(BankFieldsErrorMessages.get(4).getText(), bankAddress);
