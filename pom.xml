@@ -68,6 +68,7 @@
                             <goal>copy-resources</goal>
                         </goals>
                         <configuration>
+                            <encoding>${project.build.sourceEncoding}</encoding>
                             <outputDirectory>${basedir}/target/extra-resources</outputDirectory>
                             <resources>
                                 <resource>

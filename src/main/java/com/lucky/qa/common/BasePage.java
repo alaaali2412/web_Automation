@@ -146,7 +146,7 @@ public class BasePage {
         wait.until(ExpectedConditions.visibilityOfAllElements(elements));
     }
 
-    public String language(String language) {
+    public String currentPortalLanguage(String language) {
         String localLanguage;
         switch (language) {
             case "Arabic_Egypt":
@@ -159,7 +159,7 @@ public class BasePage {
                 localLanguage = "ar_MA";
                 break;
             case "French":
-                localLanguage = "fr_MA";
+                localLanguage = "fr";
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + language);
@@ -167,16 +167,23 @@ public class BasePage {
         return localLanguage;
     }
 
+   /* public Locale CountryLanguage(String language){
+        if (language.equals("ar") ||language.equals("en")){
+           Locale  locale = new Locale(currentPortalLanguage(language),"EG");
+        }
+        return locale;
+    }*/
+
     public String detectLanguage(String language, String message) {
-        Locale locale = new Locale(language(language),"EG");
+        Locale locale = new Locale(currentPortalLanguage(language),"EG");
         ClassLoader loader = null;
         try {
-            File file = new File(System.getProperty("user.dir") + "src/main/resources/LanguageTest");
+            File file = new File(System.getProperty("user.dir") + "src/main/resources/");
             URL[] urls = {file.toURI().toURL()};
             loader = new URLClassLoader(urls);
         } catch (Exception e) {
         }
-      return   ResourceBundle.getBundle("LanguageTest", locale, loader).getString(message);
+      return   ResourceBundle.getBundle("LanguageTest",locale , loader).getString(message);
     }
 
    /* public String detectLanguage(String language, String message) {
