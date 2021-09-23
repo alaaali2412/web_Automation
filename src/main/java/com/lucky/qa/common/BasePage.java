@@ -183,8 +183,6 @@ public class BasePage {
             File file = new File(System.getProperty("user.dir") + "src/main/resources/");
             URL[] urls = {file.toURI().toURL()};
             loader = new URLClassLoader(urls);
-            InputStream stream = loader.getResourceAsStream("resName");
-
         } catch (Exception e) {
         }
       return   ResourceBundle.getBundle("LanguageTest",locale , loader).getString(message);
