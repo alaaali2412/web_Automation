@@ -58,6 +58,7 @@ public class RegistrationTest {
         PageGenerator.getInstance(HomePage.class).openProfilePage();
         Assert.assertEquals(loggedEmail, PageGenerator.getInstance(ProfilePage.class).getLoggedInEmail());
         PageGenerator.getInstance(RegistrationPage.class).saveTheRegistrationDetails();
+        PageGenerator.getInstance(HomePage.class).openHomeScreen();
         PageGenerator.getInstance(HomePage.class).clickLogOut();
     }
 }

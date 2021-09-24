@@ -33,7 +33,7 @@ public class HomePage extends BasePage {
     @FindBy(css = ".container-md [href='/InStoreOffers']")
     private WebElement inStoreBtn;
 
-    @FindBy(css = ".container-md div:nth-child(8)")
+    @FindBy(css = ".container-md div:nth-child(7)")
     private WebElement profileDropdown;
 
     @FindBy(css = "[href='/Profile']")
@@ -152,6 +152,7 @@ public class HomePage extends BasePage {
 
     public void clickWallet() {
         waitVisibilityOfElement(profileDropdown);
+        clickButton(profileDropdown);
         clickButton(walletBtn);
         waitVisibilityOfElement(transactionSection);
     }

@@ -148,36 +148,36 @@ public class BasePage {
         wait.until(ExpectedConditions.visibilityOfAllElements(elements));
     }
 
-    public String currentPortalLanguage(String language) {
-        String localLanguage;
+    public String [] currentPortalLanguage(String language) {
+        String localLanguage = null;
+        String country = null;
+        String [] locales = {localLanguage, country};
         switch (language) {
             case "Arabic_Egypt":
-                localLanguage = "ar";
+                locales[0] = "ar";
+                locales[1] = "EG";
                 break;
             case "English":
-                localLanguage = "en";
+                locales[0] = "en";
+                locales[1] = "EG";
                 break;
             case "Arabic_Morocco":
-                localLanguage = "ar_MA";
+                locales[0] = "ar";
+                locales[1] = "MA";
                 break;
             case "French":
-                localLanguage = "fr";
+                locales[0] = "fr";
+                locales[1] = "MA";
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + language);
         }
-        return localLanguage;
+
+        return locales ;
     }
 
-   /* public Locale CountryLanguage(String language){
-        if (language.equals("ar") ||language.equals("en")){
-           Locale  locale = new Locale(currentPortalLanguage(language),"EG");
-        }
-        return locale;
-    }*/
-
     public String detectLanguage(String language, String message) {
-        Locale locale = new Locale(currentPortalLanguage(language),"EG");
+        Locale locale = new Locale(currentPortalLanguage(language)[0], currentPortalLanguage(language)[1]);
         ClassLoader loader = null;
         try {
             File file = new File(System.getProperty("user.dir") + "src/main/resources/");
@@ -187,10 +187,6 @@ public class BasePage {
         }
       return   ResourceBundle.getBundle("LanguageTest",locale , loader).getString(message);
     }
-
-   /* public String detectLanguage(String language, String message) {
-        return fromClassLoader(language).getString(message);
-    }*/
 
     public boolean isAlertPresent() {
         try {

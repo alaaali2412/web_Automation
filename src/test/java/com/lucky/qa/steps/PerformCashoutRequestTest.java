@@ -75,6 +75,7 @@ public class PerformCashoutRequestTest {
         PageGenerator.getInstance(WalletPage.class).approveTheCashoutTransaction(language, "Email");
         PageGenerator.getInstance(WalletPage.class).checkTheCashoutTransactionApproved(
                 PageGenerator.getInstance(BasePage.class).detectLanguage(language, "ApprovedCashoutTransactionstatus"));
+        PageGenerator.getInstance(HomePage.class).openHomeScreen();
         PageGenerator.getInstance(HomePage.class).clickLogOut();
     }
 }

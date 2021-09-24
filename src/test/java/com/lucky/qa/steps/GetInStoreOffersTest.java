@@ -35,6 +35,7 @@ public class GetInStoreOffersTest {
     public void popupDisplayedInThatUserShouldDownloadLuckyApp(String language) {
         PageGenerator.getInstance(OfferDetailsPage.class).closePopUP(
                 PageGenerator.getInstance(BasePage.class).detectLanguage(language, "GetOfferPopUpHeader"));
+        PageGenerator.getInstance(HomePage.class).openHomeScreen();
         PageGenerator.getInstance(HomePage.class).clickLogOut();
     }
 }

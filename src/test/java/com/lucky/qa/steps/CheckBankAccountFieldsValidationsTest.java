@@ -56,6 +56,7 @@ public class CheckBankAccountFieldsValidationsTest {
         PageGenerator.getInstance(WalletPage.class).clickContinueBtn();
         PageGenerator.getInstance(WalletPage.class).checkIBANInvalidFormatErrorMessage(
                 PageGenerator.getInstance(BasePage.class).detectLanguage(language, "BankAccountIBANInvalidFormat"));
+        PageGenerator.getInstance(HomePage.class).openHomeScreen();
         PageGenerator.getInstance(HomePage.class).clickLogOut();
     }
 }
