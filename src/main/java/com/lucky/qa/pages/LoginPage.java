@@ -208,7 +208,7 @@ public class LoginPage extends BasePage {
 
     public void checkTheUnreadEmails() {
         moveToTab(1);
-        waitVisibilityOfAllElements(unreadEmails);
+        waitUntilTextEqual("Lucky",emailTitle);
         for (WebElement email : unreadEmails) {
             while (!emailTitle.getAttribute("name").equals("Lucky") &&
                     !email.getText().contains("Password Reset Link")) {

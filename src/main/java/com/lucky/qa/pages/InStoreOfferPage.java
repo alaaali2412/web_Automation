@@ -132,6 +132,7 @@ public class InStoreOfferPage extends BasePage {
     }
 
     public void clickApplyBtn() {
+        scrollToViewElement(applyBtn);
         clickButton(applyBtn);
     }
 

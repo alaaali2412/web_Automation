@@ -52,6 +52,7 @@ public class PerformCashoutRequestTest {
     public void userGetsMessageThatTheCashoutDoneSuccessfully(String language) {
         PageGenerator.getInstance(WalletPage.class).checkCashoutSuccessMessage(
                 PageGenerator.getInstance(BasePage.class).detectLanguage(language, "CashoutSuccessMessage"));
+        PageGenerator.getInstance(HomePage.class).openHomeScreen();
         PageGenerator.getInstance(HomePage.class).clickWallet();
     }
 

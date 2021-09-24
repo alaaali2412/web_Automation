@@ -14,4 +14,3 @@ Feature: check that error message will be displayed in case user add incorrect v
     Examples:
       | language     |
       | Arabic_Egypt |
-      | English      |

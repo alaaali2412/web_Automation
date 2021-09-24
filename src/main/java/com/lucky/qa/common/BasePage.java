@@ -117,7 +117,7 @@ public class BasePage {
                 .pollingEvery(Duration.ofSeconds(5))
                 .withTimeout(Duration.ofSeconds(60))
                 .ignoring(Exception.class);
-        wait.until(t -> element.getText().equals(value));
+        wait.until(t -> element.getText().contains(value));
     }
 
     public void waitForPageToLoad() {
@@ -131,13 +131,6 @@ public class BasePage {
                 .pollingEvery(Duration.ofSeconds(3))
                 .ignoring(Exception.class);
         wait.until(ExpectedConditions.visibilityOf(element));
-    }
-
-    protected void waitUntilElementIsInvisible(WebElement element) {
-        Wait<WebDriver> wait = new FluentWait<>(DriverFactory.getDriver()).withTimeout(Duration.ofSeconds(60))
-                .pollingEvery(Duration.ofSeconds(3))
-                .ignoring(Exception.class);
-        wait.until(ExpectedConditions.invisibilityOfAllElements(element));
     }
 
     protected void waitVisibilityOfAllElements(List<WebElement> elements) {
