@@ -78,9 +78,6 @@ public class HomePage extends BasePage {
     @FindBy(css = ".success.success-message")
     private WebElement successMessage;
 
-    @FindBy(css = ".container:nth-child(2) .heading-text")
-    private WebElement headingText;
-
     @FindBy(css = ".close-modal")
     private List<WebElement> popupCloseBtn;
 
@@ -177,7 +174,6 @@ public class HomePage extends BasePage {
     public void checkThatHomePageOpened() {
         waitVisibilityOfElement(luckyBrandLogo);
         Assert.assertTrue(luckyBrandLogo.isDisplayed());
-        Assert.assertTrue(headingText.isDisplayed());
     }
 
     public void addRegisteredNewsLetterEmail(String email) {

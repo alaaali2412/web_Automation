@@ -48,8 +48,8 @@
                             <name>dataproviderthreadcount</name>
                             <perCoreThreadCount>true</perCoreThreadCount>
                             <runorder>alphabetical</runorder>
-                            <value>30</value>
-                            <forkCount>30</forkCount>
+                            <value>3</value>
+                            <forkCount>3</forkCount>
                             <forkMode>perthread</forkMode>
                             <reuseForks>false</reuseForks>
                         </property>
