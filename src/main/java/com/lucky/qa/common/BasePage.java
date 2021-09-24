@@ -5,7 +5,6 @@ import com.lucky.qa.connectors.DriverFactory;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.*;
-
 import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -149,10 +148,10 @@ public class BasePage {
         wait.until(ExpectedConditions.visibilityOfAllElements(elements));
     }
 
-    public String[] currentPortalLanguage(String language) {
+    public String [] currentPortalLanguage(String language) {
         String localLanguage = null;
         String country = null;
-        String[] locales = {localLanguage, country};
+        String [] locales = {localLanguage, country};
         switch (language) {
             case "Arabic_Egypt":
                 locales[0] = "ar";
@@ -174,24 +173,19 @@ public class BasePage {
                 throw new IllegalStateException("Unexpected value: " + language);
         }
 
-        return locales;
+        return locales ;
     }
 
-
-    private ResourceBundle fromClassLoader(String language) {
-        Locale locale = new Locale(currentPortalLanguage(language)[0]);
+    public String detectLanguage(String language, String message) {
+        Locale locale = new Locale(currentPortalLanguage(language)[0], currentPortalLanguage(language)[1]);
         ClassLoader loader = null;
         try {
-            File file = new File(System.getProperty("user.dir") + "/src/test/resources/");
+            File file = new File(System.getProperty("user.dir") + "src/main/resources/");
             URL[] urls = {file.toURI().toURL()};
             loader = new URLClassLoader(urls);
         } catch (Exception e) {
         }
-        return ResourceBundle.getBundle("LanguageTest", locale, loader);
-    }
-
-    public String detectLanguage(String language, String message) {
-        return fromClassLoader(language).getString(message);
+      return   ResourceBundle.getBundle("LanguageTest",locale , loader).getString(message);
     }
 
     public boolean isAlertPresent() {
