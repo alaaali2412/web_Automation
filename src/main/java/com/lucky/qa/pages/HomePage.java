@@ -39,7 +39,7 @@ public class HomePage extends BasePage {
     @FindBy(css = "[href='/Profile']")
     private WebElement profileBtn;
 
-    @FindBy(css = ".dropdown-menu.show [href='#']")
+    @FindBy(css = " div:nth-child(7) a:nth-child(4)")
     private WebElement logOutBtn;
 
     @FindBy(id = "exampleForm.ControlInput1")
@@ -63,7 +63,7 @@ public class HomePage extends BasePage {
     @FindBy(className = "hero-banner")
     private WebElement homeBanner;
 
-    @FindBy(css = ".container-md [href='/ar']")
+    @FindBy(css = ".container-md .navbar-brand")
     private WebElement homeScreenBtn;
 
     @FindBy(css = " .footer [href$='ContactUs']")
@@ -158,8 +158,8 @@ public class HomePage extends BasePage {
     }
 
     public void clickLogOut() {
+        waitVisibilityOfElement(profileDropdown);
         clickButton(profileDropdown);
-        waitVisibilityOfElement(logOutBtn);
         clickButton(logOutBtn);
         checkIfPopUpExist();
     }

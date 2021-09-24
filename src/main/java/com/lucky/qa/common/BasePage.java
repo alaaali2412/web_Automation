@@ -47,7 +47,7 @@ public class BasePage {
     }
 
     public void scrollToViewElement(WebElement element) {
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+        ((JavascriptExecutor) DriverFactory.getDriver()).executeScript("arguments[0].scrollIntoView(true);", element);
     }
 
     public void forceClickElement(WebElement element) {
@@ -76,12 +76,11 @@ public class BasePage {
     }
 
     public void pasteTextInField(WebElement element) {
-        element.sendKeys(Keys.COMMAND + "v");
+        element.sendKeys(Keys.SHIFT, Keys.INSERT);
     }
 
     public void deleteTextInField(WebElement element) {
-        element.sendKeys(Keys.COMMAND + "a");
-        element.sendKeys(Keys.DELETE);
+        ((JavascriptExecutor) DriverFactory.getDriver()).executeScript("arguments[0].value = '';", element);
     }
 
     public void confirmAction(WebElement element) {
