@@ -1,6 +1,7 @@
 package com.lucky.qa.pages;
 
 import com.lucky.qa.common.BasePage;
+import com.lucky.qa.connectors.DriverFactory;
 import com.lucky.qa.utilities.DatabaseHelper;
 import com.lucky.qa.utilities.Helper;
 import org.testng.Assert;
@@ -215,26 +216,30 @@ public class HomePage extends BasePage {
         helper.setPropertiesFileName("PortalURLs.properties");
         switch (language) {
             case "Arabic_Egypt":
-                driver.navigate().to(helper.getValuesFromPropertiesFile("EgyptURL"));
+                DriverFactory.getDriver().navigate().
+                        to(helper.getValuesFromPropertiesFile("EgyptURL"));
                 checkIfPopUpExist();
                 waitForPageToLoad();
                 break;
             case "English":
-                driver.navigate().to(helper.getValuesFromPropertiesFile("EgyptURL"));
+                DriverFactory.getDriver().navigate().
+                        to(helper.getValuesFromPropertiesFile("EgyptURL"));
                 checkIfPopUpExist();
                 clickButton(languageBtn);
                 checkIfPopUpExist();
                 waitForPageToLoad();
                 break;
             case "Arabic_Morocco":
-                driver.navigate().to(helper.getValuesFromPropertiesFile("MoroccoURL"));
+                DriverFactory.getDriver().navigate().
+                        to(helper.getValuesFromPropertiesFile("MoroccoURL"));
                 checkIfPopUpExist();
                 clickButton(languageBtn);
                 checkIfPopUpExist();
                 waitForPageToLoad();
                 break;
             case "French":
-                driver.navigate().to(helper.getValuesFromPropertiesFile("MoroccoURL"));
+                DriverFactory.getDriver().navigate()
+                        .to(helper.getValuesFromPropertiesFile("MoroccoURL"));
                 checkIfPopUpExist();
                 waitForPageToLoad();
                 break;

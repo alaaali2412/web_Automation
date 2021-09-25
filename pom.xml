@@ -42,14 +42,14 @@
                     <properties>
                         <property>
                             <name>parallel</name>
-                            <value>classes</value>
+                            <value>methods</value>
                         </property>
                         <property>
                             <name>dataproviderthreadcount</name>
                             <perCoreThreadCount>true</perCoreThreadCount>
                             <runorder>alphabetical</runorder>
-                            <value>3</value>
-                            <forkCount>3</forkCount>
+                            <value>30</value>
+                            <forkCount>30</forkCount>
                             <forkMode>perthread</forkMode>
                             <reuseForks>false</reuseForks>
                         </property>

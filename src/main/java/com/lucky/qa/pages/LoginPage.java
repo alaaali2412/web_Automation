@@ -61,7 +61,7 @@ public class LoginPage extends BasePage {
     @FindBy(css = ".mailVerification-text")
     private WebElement mailVerificationText;
 
-    @FindBy(css = ".h-c-header__cta-list.header__nav--rtl [data-action= 'sign in']")
+    @FindBy(css = "[data-action= 'sign in']")
     private WebElement googleSignIn;
 
     @FindBy(css = ".y6 > .bog>.bqe")
@@ -197,17 +197,15 @@ public class LoginPage extends BasePage {
 
     public void OpenGmail() {
         helper.setPropertiesFileName("LoginData.properties");
-        driver.navigate().to("https://mail.google.com/");
+        driver.navigate().to("https://www.google.com/intl/en/gmail/about/#");
         waitForPageToLoad();
         clickButton(googleSignIn);
-        moveToTab(1);
         addGmailCredentials(helper.getValuesFromPropertiesFile("GoogleEmail"),
                 helper.getValuesFromPropertiesFile("GoogleEmailPassword"));
         waitForPageToLoad();
     }
 
     public void checkTheUnreadEmails() {
-        moveToTab(1);
         waitUntilTextEqual("Lucky",emailTitle);
         for (WebElement email : unreadEmails) {
             while (!emailTitle.getAttribute("name").equals("Lucky") &&
@@ -226,8 +224,8 @@ public class LoginPage extends BasePage {
         for (int i = 0 ; i<resetPassLinks.size(); i++){
             if (!resetPassLinks.get(resetPassLinks.size()-1).isDisplayed()) {
                 waitVisibilityOfElement(emailHeader);
+                scrollToEndOfScreen();
                 clickButton(expandEmailBtn);
-                moveToTab(1);
                 waitVisibilityOfElement(resetPassLinks.get(resetPassLinks.size()-1));
                 forceClickElement(resetPassLinks.get(resetPassLinks.size()-1));
             } else {
@@ -241,7 +239,7 @@ public class LoginPage extends BasePage {
     public void addNewPass() {
         helper.setPropertiesFileName("LoginData.properties");
         String newPassword = helper.generateRandomPassword(9);
-        moveToTab(2);
+        moveToTab(1);
         forceAddText(newPassField, newPassword);
         forceAddText(confirmNewPassField, newPassword);
         clickButton(saveChangesBtn);
@@ -251,13 +249,12 @@ public class LoginPage extends BasePage {
 
     public void logOutGmail()  {
         driver.close();
-        moveToTab(1);
+        moveToTab(0);
         forceClickElement(googleProfileIcon);
         forceClickElement(googleLogoutBtn);
         waitForPageToLoad();
         forceClickElement(googleRemoveAccountBtn);
         driver.close();
-        moveToTab(0);
     }
 
     public void addInvalidEmailFormat() {

@@ -2,19 +2,22 @@ package com.lucky.qa.connectors;
 
 
 import io.cucumber.java.After;
+import io.cucumber.java.AfterStep;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import java.sql.Connection;
+
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+import java.io.File;
+import org.apache.commons.io.FileUtils;
 
 public class Hook {
-    static Connection connection = null;
     private WebDriver driver;
 
     public static ChromeOptions chromeOption() {
@@ -49,21 +52,20 @@ public class Hook {
     }
 
     @After(order = 1)
-    public void tearsDown() {
-        Runtime.getRuntime().addShutdownHook(new Thread() {
-            public void run() {
-                DriverFactory.storedDrivers.forEach(WebDriver::quit);
-                DriverFactory.removeDriver();
-            }
-        });
+    public void tearsDown(Scenario scenario) {
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            DriverFactory.storedDrivers.forEach(WebDriver::quit);
+            DriverFactory.removeDriver();
+        }));
     }
 
-    @After(order = 0)
+    @AfterStep(order = 0)
     public void embedScreenshot(Scenario scenario) {
         if (scenario.isFailed()) {
             try {
                 byte[] screenshot = ((TakesScreenshot) DriverFactory.getDriver()).getScreenshotAs(OutputType.BYTES);
-                scenario.attach(screenshot, "image/png", scenario.getName());
+
+                scenario.attach(screenshot, "image/png", scenario.getName() + scenario.getId());
             } catch (WebDriverException wde) {
                 System.err.println(wde.getMessage());
             } catch (ClassCastException cce) {
