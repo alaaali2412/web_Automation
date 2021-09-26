@@ -115,7 +115,7 @@ public class BasePage {
     public void waitUntilTextEqual(String value, WebElement element) {
         FluentWait<String> wait = new FluentWait<>(value)
                 .pollingEvery(Duration.ofSeconds(5))
-                .withTimeout(Duration.ofSeconds(60))
+                .withTimeout(Duration.ofSeconds(120))
                 .ignoring(Exception.class);
         wait.until(t -> element.getText().contains(value));
     }

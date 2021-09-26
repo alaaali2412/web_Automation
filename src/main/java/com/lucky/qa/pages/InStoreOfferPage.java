@@ -57,7 +57,7 @@ public class InStoreOfferPage extends BasePage {
     public void filterByLocation(String filterLocation) {
         for (WebElement location : locations) {
             if (getText(location).equals(filterLocation)) {
-                clickButton(location);
+                forceClickElement(location);
                 break;
             }
         }
